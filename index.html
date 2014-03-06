@@ -16,7 +16,7 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/icarus-sim/icarus/">View on GitHub</a>
+          <a id="forkme_banner" href="https://github.com/icarus-sim">View on GitHub</a>
 
           <h1 id="project_title">Icarus</h1>
           <h2 id="project_tagline">Caching Simulator for Information Centric Networking (ICN)</h2>
@@ -27,12 +27,161 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p>Icarus is a Python-based simulator for evaluating the performance of caches in Information Centric Networking (ICN).</p>
+        <p>Icarus is a Python-based simulator for evaluating caching performance in Information Centric Networking (ICN).</p>
 
 <p>Icarus has been designed to be easy to use and very extensible.</p>
 
 <h3>
 <a name="download" class="anchor" href="#download"><span class="octicon octicon-link"></span></a>Download</h3>
+
+<p>You can download a stable release in a zip or tar.gz format using the links below.</p>
+
+<p><strong>Latest version:</strong></p>
+
+<ul>
+<li>Version 0.2.1: <a href="https://github.com/icarus-sim/icarus/archive/v0.2.1.zip">[zip]</a> <a href="https://github.com/icarus-sim/icarus/archive/v0.2.1.tar.gz">[tar.gz]</a>
+</li>
+</ul><p><strong>Older versions:</strong></p>
+
+<ul>
+<li>Version 0.2: <a href="https://github.com/icarus-sim/icarus/archive/v0.2.zip">[zip]</a> <a href="https://github.com/icarus-sim/icarus/archive/v0.2.tar.gz">[tar.gz]</a>
+</li>
+<li>Version 0.1.1: <a href="https://github.com/icarus-sim/icarus/archive/v0.1.1.zip">[zip]</a> <a href="https://github.com/icarus-sim/icarus/archive/v0.1.1.tar.gz">[tar.gz]</a>
+</li>
+<li>Version 0.1.0: <a href="https://github.com/icarus-sim/icarus/archive/v0.1.zip">[zip]</a> <a href="https://github.com/icarus-sim/icarus/archive/v0.1.tar.gz">[tar.gz]</a>
+</li>
+</ul><p>You can also get the development branch from the Github repository using Git. Just open a shell, <code>cd</code> to the directory where you want to download the simulator and type:</p>
+
+<pre><code>$ git clone https://github.com/icarus-sim/icarus.git
+</code></pre>
+
+<h3>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h3>
+
+<p>Before using the simulator, you need to install all required dependencies.</p>
+
+<p>If you use Ubuntu (version 13.10+) you can run the script <code>ubuntusetup.sh</code>
+located in the <code>scripts</code> folder which will take of installing all the
+dependencies. To run it, executes the following commands</p>
+
+<pre><code>$ cd &lt;YOUR ICARUS FOLDER&gt;
+$ cd scripts
+$ sh ubuntusetup.sh
+</code></pre>
+
+<p>The script, after being launched, will ask you for superuser password.</p>
+
+<p>Otherwise, have a look at the <code>README.md</code> file, which explains how to configure your machine and install all required dependencies.</p>
+
+<h3>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<h4>
+<a name="run-simulations" class="anchor" href="#run-simulations"><span class="octicon octicon-link"></span></a>Run simulations</h4>
+
+<p>To use Icarus with the currently implemented topologies and models of caching policies
+and strategies you need to do the following.</p>
+
+<p>First, Create a configuration file with all the desired parameters of your simulation. You can modify the file <code>config.py</code>, which is a well documented example configuration. You can even use the configuration file as it is just to get started.</p>
+
+<p>Second, run Icarus by running the script <code>icarus.py</code> using the following syntax</p>
+
+<pre><code>$ python icarus.py --results RESULTS_FILE [--plots PLOTS_DIR] CONF_FILE
+</code></pre>
+
+<p>where:</p>
+
+<ul>
+<li>
+<code>RESULTS_FILE</code> is the <a href="http://docs.python.org/3/library/pickle.html">pickle</a> file in which results will be saved,</li>
+<li>
+<code>PLOT_DIR</code> is the directory where graphs plotting the results will be saved. If the folder does not exist, it will be created. This parameter is optional. If omitted, graphs will not be plotted. Results can be plotted at a later stage anyway.</li>
+<li>
+<code>CONF_FILE</code> is the configuration file</li>
+</ul><p>Example usage could be:</p>
+
+<pre><code>$ python icarus.py --output results.pickle --plots graphs config.py
+</code></pre>
+
+<p>By executing the steps illustrated above it is possible to run simulation using the
+topologies, cache policies, strategies and result collectors readily available on
+Icarus. Icarus makes it easy to implement new models to use in simulations.</p>
+
+<p>To implement new models, please refer to the description of the simulator 
+provided in this paper:</p>
+
+<p>L.Saino, I. Psaras and G. Pavlou, Icarus: a Caching Simulator for Information Centric
+Networking (ICN), in Proc. of SIMUTOOLS'14, Lisbon, Portugal, March 2014.
+<a href="http://www.ee.ucl.ac.uk/%7Elsaino/publications/icarus-simutools14.pdf">[PDF]</a>,
+<a href="http://www.ee.ucl.ac.uk/%7Elsaino/publications/icarus-simutools14.bib">[BibTex]</a></p>
+
+<p>Otherwise, please browse the source code. It is very well documented and easy to
+understand.</p>
+
+<h4>
+<a name="modelling-tools" class="anchor" href="#modelling-tools"><span class="octicon octicon-link"></span></a>Modelling tools</h4>
+
+<p>In addition. Icarus provides utilities for modelling the performance of caches and
+work with traffic traces. The code is included in the <a href="http://icarus-sim.github.io/doc/apidoc/icarus.tools.html"><code>icarus.tools</code></a> package.
+These tools are described in detail in <a href="http://www.ee.ucl.ac.uk/%7Elsaino/publications/icarus-simutools14.pdf">this paper</a>.</p>
+
+<h3>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h3>
+
+<p>If you desire further information about Icarus, you can find it in the following places:</p>
+
+<ul>
+<li>In <a href="http://www.ee.ucl.ac.uk/%7Elsaino/publications/icarus-simutools14.pdf">this paper</a>, which describes the overall architecture of the Icarus simulator,
+the motivations for its design, the models implemented and shows some snippets of codes on how to use the modelling tools.</li>
+<li>In the <a href="http://icarus-sim.github.io/doc/">API reference</a>, which documents all packages, modules, classes, methods
+and functions included in the Icarus simulator.</li>
+<li>In the <a href="https://www.github.com/icarus-sim/icarus">source code</a>, which is well organized and throughly documented.</li>
+</ul><h3>
+<a name="citing" class="anchor" href="#citing"><span class="octicon octicon-link"></span></a>Citing</h3>
+
+<p>If you use Icarus for your paper, please refer to the following publication:</p>
+
+<pre><code>@inproceedings{icarus-simutools14,
+   author = {Saino, Lorenzo and Psaras, Ioannis and Pavlou, George},
+   title = {Icarus: a Caching Simulator for Information Centric Networking (ICN)},
+   booktitle = {Proceedings of the 7th International ICST Conference on Simulation Tools and Techniques},
+   series = {SIMUTOOLS '14},
+   year = {2014},
+   location = {Lisbon, Portugal},
+   numpages = {10},
+   publisher = {ICST},
+   address = {ICST, Brussels, Belgium, Belgium},
+}
+</code></pre>
+
+<h3>
+<a name="reproduce-hash-routing-results" class="anchor" href="#reproduce-hash-routing-results"><span class="octicon octicon-link"></span></a>Reproduce hash-routing results</h3>
+
+<p>This repository contains the code and configuration to reproduce the results and plot the graphs presented
+in the paper:</p>
+
+<p>L.Saino, I. Psaras and G. Pavlou, Hash-routing Schemes for Information Centric Networking,
+in <em>Proc. of the 3rd ACM SIGCOMM workshop on Information Centric Networking (ICN'13)</em>, Hong Kong, China, August 2013.
+<a href="http://www.ee.ucl.ac.uk/%7Elsaino/publications/hashrouting-icn13.pdf">[PDF]</a>,
+<a href="http://www.ee.ucl.ac.uk/%7Elsaino/publications/hashrouting-icn13.bib">[BibTex]</a></p>
+
+<p>To reproduce results and plot the graph, simply go to the folder <code>./reproduce-results/hashrouting-icn13</code> and run the script <code>reproduce_results.sh</code>. </p>
+
+<pre><code>$ cd &lt;YOUR ICARUS FOLDER&gt;
+$ cd reproduce-results/hashrouting-icn13
+$ sh reproduce_results.sh
+</code></pre>
+
+<p>This script has been tested only on Ubuntu 12.04, but should work fine on any more recent versions.</p>
+
+<p>This script will run all simulations automatically, save all log files and plot all graphs.</p>
+
+<p>The logs will be saved in the <code>logs</code> directory, while the graphs will be saved in the <code>graphs</code> directory.Icarus is a Python-based simulator for evaluating the performance of caches in Information Centric Networking (ICN).</p>
+
+<p>Icarus has been designed to be easy to use and very extensible.</p>
+
+<h3>
+<a name="download-1" class="anchor" href="#download-1"><span class="octicon octicon-link"></span></a>Download</h3>
 
 <p>You can download a stable release in a zip or tar.gz format using the links below.</p>
 
@@ -53,7 +202,7 @@
 <p><code>git clone https://github.com/lorenzosaino/icarus.git</code></p>
 
 <h3>
-<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h3>
+<a name="configuration-1" class="anchor" href="#configuration-1"><span class="octicon octicon-link"></span></a>Configuration</h3>
 
 <p>Before using the simulator, you need to install all required dependencies.
 If you use Ubuntu (version 13.10+) you can run the script <code>ubuntusetup.sh</code> located in the <code>scripts</code> folder which will take care of installing all the required dependencies.</p>
@@ -61,10 +210,10 @@ If you use Ubuntu (version 13.10+) you can run the script <code>ubuntusetup.sh</
 <p>Otherwise, have a look at the <code>README.md</code> file, which explains how to configure your machine and install all required dependencies.</p>
 
 <h3>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
+<a name="usage-1" class="anchor" href="#usage-1"><span class="octicon octicon-link"></span></a>Usage</h3>
 
 <h4>
-<a name="run-simulations" class="anchor" href="#run-simulations"><span class="octicon octicon-link"></span></a>Run simulations</h4>
+<a name="run-simulations-1" class="anchor" href="#run-simulations-1"><span class="octicon octicon-link"></span></a>Run simulations</h4>
 
 <p>To use Icarus with the currently implemented topologies and models of caching policies
 and strategies you need to do the following.</p>
@@ -109,14 +258,14 @@ Networking (ICN), in Proc. of SIMUTOOLS'14, Lisbon, Portugal, March 2014.
 understand.</p>
 
 <h4>
-<a name="modelling-tools" class="anchor" href="#modelling-tools"><span class="octicon octicon-link"></span></a>Modelling tools</h4>
+<a name="modelling-tools-1" class="anchor" href="#modelling-tools-1"><span class="octicon octicon-link"></span></a>Modelling tools</h4>
 
 <p>In addition. Icarus provides utilities for modelling the performance of caches and
 work with traffic traces. The code is included in the <code>icarus.tools</code> package.
 These tools are described in detail in <a href="http://www.ee.ucl.ac.uk/%7Elsaino/publications/icarus-simutools14.pdf">this paper</a>.</p>
 
 <h3>
-<a name="citing" class="anchor" href="#citing"><span class="octicon octicon-link"></span></a>Citing</h3>
+<a name="citing-1" class="anchor" href="#citing-1"><span class="octicon octicon-link"></span></a>Citing</h3>
 
 <p>If you use Icarus for your paper, please refer to the following publication:</p>
 
@@ -134,7 +283,7 @@ These tools are described in detail in <a href="http://www.ee.ucl.ac.uk/%7Elsain
 </code></pre>
 
 <h3>
-<a name="reproduce-hash-routing-results" class="anchor" href="#reproduce-hash-routing-results"><span class="octicon octicon-link"></span></a>Reproduce hash-routing results</h3>
+<a name="reproduce-hash-routing-results-1" class="anchor" href="#reproduce-hash-routing-results-1"><span class="octicon octicon-link"></span></a>Reproduce hash-routing results</h3>
 
 <p>This repository contains the code and configuration to reproduce the results and plot the graphs presented
 in the paper:</p>
@@ -157,6 +306,17 @@ in <em>Proc. of the 3rd ACM SIGCOMM workshop on Information Centric Networking (
 
 <h3>
 <a name="contacts" class="anchor" href="#contacts"><span class="octicon octicon-link"></span></a>Contacts</h3>
+
+<p>For further information about the Icarus simulator, please contact
+<a href="http://www.ee.ucl.ac.uk/%7Elsaino">Lorenzo Saino</a></p>
+
+<h3>
+<a name="license-1" class="anchor" href="#license-1"><span class="octicon octicon-link"></span></a>License</h3>
+
+<p>Icarus is licensed under the terms of the <a href="http://www.gnu.org/licenses/gpl-2.0.html">GNU GPLv2 license</a>.</p>
+
+<h3>
+<a name="contacts-1" class="anchor" href="#contacts-1"><span class="octicon octicon-link"></span></a>Contacts</h3>
 
 <p>For further information about the Icarus simulator, please contact
 <a href="http://www.ee.ucl.ac.uk/%7Elsaino">Lorenzo Saino</a></p>
