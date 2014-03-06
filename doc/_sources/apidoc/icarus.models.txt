@@ -1,0 +1,27 @@
+models Package
+==============
+
+:mod:`models` Package
+---------------------
+
+.. automodule:: icarus.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`cache` Module
+-------------------
+
+.. automodule:: icarus.models.cache
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`strategy` Module
+----------------------
+
+.. automodule:: icarus.models.strategy
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

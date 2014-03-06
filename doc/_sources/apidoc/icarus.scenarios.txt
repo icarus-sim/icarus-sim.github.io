@@ -1,0 +1,43 @@
+scenarios Package
+=================
+
+:mod:`scenarios` Package
+------------------------
+
+.. automodule:: icarus.scenarios
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`cacheplacement` Module
+----------------------------
+
+.. automodule:: icarus.scenarios.cacheplacement
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`contentplacement` Module
+------------------------------
+
+.. automodule:: icarus.scenarios.contentplacement
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`topology` Module
+----------------------
+
+.. automodule:: icarus.scenarios.topology
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`workload` Module
+----------------------
+
+.. automodule:: icarus.scenarios.workload
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

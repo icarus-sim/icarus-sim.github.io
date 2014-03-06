@@ -1,0 +1,54 @@
+icarus Package
+==============
+
+:mod:`icarus` Package
+---------------------
+
+.. automodule:: icarus.__init__
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`orchestration` Module
+---------------------------
+
+.. automodule:: icarus.orchestration
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`registry` Module
+----------------------
+
+.. automodule:: icarus.registry
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`run` Module
+-----------------
+
+.. automodule:: icarus.run
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`util` Module
+------------------
+
+.. automodule:: icarus.util
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    icarus.execution
+    icarus.models
+    icarus.results
+    icarus.scenarios
+    icarus.tools
+

@@ -1,0 +1,1594 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>models Package &mdash; Icarus 0.2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Icarus 0.2.1 documentation" href="../index.html" />
+    <link rel="up" title="icarus Package" href="icarus.html" />
+    <link rel="next" title="results Package" href="icarus.results.html" />
+    <link rel="prev" title="execution Package" href="icarus.execution.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="icarus.results.html" title="results Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="icarus.execution.html" title="execution Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="icarus.html" accesskey="U">icarus Package</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">models Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">models</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-icarus.models.cache"><tt class="docutils literal"><span class="pre">cache</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-icarus.models.strategy"><tt class="docutils literal"><span class="pre">strategy</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="icarus.execution.html"
+                        title="previous chapter">execution Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="icarus.results.html"
+                        title="next chapter">results Package</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="models-package">
+<h1>models Package<a class="headerlink" href="#models-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">models</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-icarus.models"></span><p>This package contains implementations of models of cache replacement
+policies and caching and routing strategies.</p>
+</div>
+<div class="section" id="module-icarus.models.cache">
+<span id="cache-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">cache</span></tt> Module<a class="headerlink" href="#module-icarus.models.cache" title="Permalink to this headline">¶</a></h2>
+<p>Cache replacement policies implementations</p>
+<p>This module contains the implementations of all the cache replacement policies
+provided by Icarus.</p>
+<dl class="class">
+<dt id="icarus.models.cache.Node">
+<em class="property">class </em><tt class="descname">Node</tt><big>(</big><em>down</em>, <em>val</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Node of a linked list</p>
+<p>This class is used for implementing cache eviction policies relying on
+doubly-linked lists for their implementation.</p>
+<p>This class is used for example by the LRU replacement policy.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.cache.Cache">
+<em class="property">class </em><tt class="descname">Cache</tt><big>(</big><em>maxlen</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#Cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.Cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Base implementation of a cache object</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.models.cache.Cache.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#Cache.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.Cache.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Empty the cache</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.Cache.dump">
+<tt class="descname">dump</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#Cache.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.Cache.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dump of all the elements currently in the cache possibly
+sorted according to the eviction policy.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.Cache.get">
+<tt class="descname">get</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#Cache.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.Cache.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves an item from the cache. Differently from <em>has(k)</em>,
+calling this method may change the internal state of the caching
+object depending on the specific cache implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the requested item is in the cache
+or <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.Cache.has">
+<tt class="descname">has</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#Cache.has"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.Cache.has" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if an item is in the cache without changing the internal
+state of the caching object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the requested item is in the cache
+or <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.models.cache.Cache.maxlen">
+<tt class="descname">maxlen</tt><a class="reference internal" href="../_modules/icarus/models/cache.html#Cache.maxlen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.Cache.maxlen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the maximum number of items the cache can store</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.Cache.put">
+<tt class="descname">put</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#Cache.put"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.Cache.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert an item in the cache if not already inserted.</p>
+<p>If the element is already present in the cache, it will not be inserted
+again but the internal state of the cache object may change.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item to be inserted</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.cache.NullCache">
+<em class="property">class </em><tt class="descname">NullCache</tt><big>(</big><em>maxlen=0</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#NullCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.NullCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.cache.Cache" title="icarus.models.cache.Cache"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.cache.Cache</span></tt></a></p>
+<p>Implementation of a null cache.</p>
+<p>This is a dummy cache which never stores anything. It is functionally
+identical to a cache with max size equal to 0.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.models.cache.NullCache.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#NullCache.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.NullCache.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Empty the cache</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.NullCache.dump">
+<tt class="descname">dump</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#NullCache.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.NullCache.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of all the elements currently in the cache.</p>
+<p>In this case it is always an empty list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.NullCache.get">
+<tt class="descname">get</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#NullCache.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.NullCache.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves an item from the cache.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the requested item is in the cache
+or <em>False</em> otherwise. It always returns False</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.NullCache.has">
+<tt class="descname">has</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#NullCache.has"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.NullCache.has" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if an item is in the cache without changing the internal
+state of the caching object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the requested item is in the cache
+or <em>False</em> otherwise. It alwasy returns <em>False</em></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.models.cache.NullCache.maxlen">
+<tt class="descname">maxlen</tt><a class="reference internal" href="../_modules/icarus/models/cache.html#NullCache.maxlen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.NullCache.maxlen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the maximum number of items the cache can store.</p>
+<p>Since this is a dummy cache implementation, this value is 0.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.models.cache.NullCache.name">
+<tt class="descname">name</tt><em class="property"> = 'NULL'</em><a class="headerlink" href="#icarus.models.cache.NullCache.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.NullCache.put">
+<tt class="descname">put</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#NullCache.put"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.NullCache.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert an item in the cache if not already inserted.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item to be inserted</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.cache.LruCache">
+<em class="property">class </em><tt class="descname">LruCache</tt><big>(</big><em>maxlen</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LruCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LruCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.cache.Cache" title="icarus.models.cache.Cache"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.cache.Cache</span></tt></a></p>
+<p>Least Recently Used (LRU) cache eviction policy.</p>
+<p>According to this policy, When a new item needs to inserted into the cache,
+it evicts the least recently requested one.
+This eviction policy is efficient for line speed operations because both
+search and replacement tasks can be performed in constant time (<em>O(1)</em>).</p>
+<p>This policy has been shown to perform well in the presence of temporal
+locality in the request pattern. However, its performance drops under the
+Independent Reference Model (IRM) assumption (i.e. the probability that an
+item is requested is not dependent on previous requests).</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.models.cache.LruCache.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LruCache.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LruCache.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Empty the cache</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.LruCache.dump">
+<tt class="descname">dump</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LruCache.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LruCache.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dump of all the elements currently in the cache possibly
+sorted according to the eviction policy.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.LruCache.get">
+<tt class="descname">get</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LruCache.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LruCache.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves an item from the cache. Differently from <em>has(k)</em>,
+calling this method may change the internal state of the caching
+object depending on the specific cache implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the requested item is in the cache
+or <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.LruCache.has">
+<tt class="descname">has</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LruCache.has"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LruCache.has" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if an item is in the cache without changing the internal
+state of the caching object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the requested item is in the cache
+or <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.models.cache.LruCache.maxlen">
+<tt class="descname">maxlen</tt><a class="reference internal" href="../_modules/icarus/models/cache.html#LruCache.maxlen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LruCache.maxlen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the maximum number of items the cache can store</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.models.cache.LruCache.name">
+<tt class="descname">name</tt><em class="property"> = 'LRU'</em><a class="headerlink" href="#icarus.models.cache.LruCache.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.LruCache.position">
+<tt class="descname">position</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LruCache.position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LruCache.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the current position of an item in the cache. Position <em>0</em>
+refers to the head of cache (i.e. most recently used item), while
+position <em>maxlen - 1</em> refers to the tail of the cache (i.e. the least
+recently used item).</p>
+<p>This method does not change the internal state of the cache.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
+<blockquote class="last">
+<div><p>The current position of the item in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.LruCache.put">
+<tt class="descname">put</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LruCache.put"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LruCache.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert an item in the cache if not already inserted.</p>
+<p>If the element is already present in the cache, it will pushed to the
+top of the cache.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item to be inserted</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.cache.LfuCache">
+<em class="property">class </em><tt class="descname">LfuCache</tt><big>(</big><em>maxlen</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LfuCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LfuCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.cache.Cache" title="icarus.models.cache.Cache"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.cache.Cache</span></tt></a></p>
+<p>Least Frequently Used (LFU) cache implementation</p>
+<p>The LFU replacement policy keeps a counter associated each item. Such
+counters are increased when the associated item is requested. Upon
+insertion of a new item, the cache evicts the one which was requested the
+least times in the past, i.e. the one whose associated value has the
+smallest value.</p>
+<p>In contrast to LRU, LFU has been shown to perform optimally under IRM
+demands. However, its implementation is computationally expensive since it
+cannot be implemented in such a way that both search and replacement tasks
+can be executed in constant time. This makes it particularly unfit for
+large caches and line speed operations.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.models.cache.LfuCache.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LfuCache.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LfuCache.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Empty the cache</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.LfuCache.dump">
+<tt class="descname">dump</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LfuCache.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LfuCache.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dump of all the elements currently in the cache possibly
+sorted according to the eviction policy.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.LfuCache.get">
+<tt class="descname">get</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LfuCache.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LfuCache.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves an item from the cache. Differently from <em>has(k)</em>,
+calling this method may change the internal state of the caching
+object depending on the specific cache implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the requested item is in the cache
+or <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.LfuCache.has">
+<tt class="descname">has</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LfuCache.has"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LfuCache.has" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if an item is in the cache without changing the internal
+state of the caching object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the requested item is in the cache
+or <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.models.cache.LfuCache.maxlen">
+<tt class="descname">maxlen</tt><a class="reference internal" href="../_modules/icarus/models/cache.html#LfuCache.maxlen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LfuCache.maxlen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the maximum number of items the cache can store</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.models.cache.LfuCache.name">
+<tt class="descname">name</tt><em class="property"> = 'LFU'</em><a class="headerlink" href="#icarus.models.cache.LfuCache.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.LfuCache.put">
+<tt class="descname">put</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LfuCache.put"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LfuCache.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert an item in the cache if not already inserted.</p>
+<p>If the element is already present in the cache, it will not be inserted
+again but the internal state of the cache object may change.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item to be inserted</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.cache.FifoCache">
+<em class="property">class </em><tt class="descname">FifoCache</tt><big>(</big><em>maxlen</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#FifoCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.FifoCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.cache.Cache" title="icarus.models.cache.Cache"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.cache.Cache</span></tt></a></p>
+<p>First In First Out (FIFO) cache implementation.</p>
+<p>According to the FIFO policy, when a new item is inserted, the evicted item
+is the first one inserted in the cache. The behavior of this policy differs
+from LRU only when an item already present in the cache is requested.
+In fact, while in LRU this item would be pushed to the top of the cache, in
+FIFO no movement is performed. The FIFO policy has a slightly simpler
+implementation in comparison to the LRU policy but yields worse performance.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.models.cache.FifoCache.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#FifoCache.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.FifoCache.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Empty the cache</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.FifoCache.dump">
+<tt class="descname">dump</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#FifoCache.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.FifoCache.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dump of all the elements currently in the cache possibly
+sorted according to the eviction policy.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.FifoCache.get">
+<tt class="descname">get</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#FifoCache.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.FifoCache.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves an item from the cache. Differently from <em>has(k)</em>,
+calling this method may change the internal state of the caching
+object depending on the specific cache implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the requested item is in the cache
+or <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.FifoCache.has">
+<tt class="descname">has</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#FifoCache.has"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.FifoCache.has" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if an item is in the cache without changing the internal
+state of the caching object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the requested item is in the cache
+or <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.models.cache.FifoCache.maxlen">
+<tt class="descname">maxlen</tt><a class="reference internal" href="../_modules/icarus/models/cache.html#FifoCache.maxlen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.FifoCache.maxlen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the maximum number of items the cache can store</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.models.cache.FifoCache.name">
+<tt class="descname">name</tt><em class="property"> = 'FIFO'</em><a class="headerlink" href="#icarus.models.cache.FifoCache.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.FifoCache.position">
+<tt class="descname">position</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#FifoCache.position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.FifoCache.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the current position of an item in the cache. Position <em>0</em>
+refers to the head of cache (i.e. most recently inserted item), while
+position <em>maxlen - 1</em> refers to the tail of the cache (i.e. the least
+recently inserted item).</p>
+<p>This method does not change the internal state of the cache.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
+<blockquote class="last">
+<div><p>The current position of the item in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.FifoCache.put">
+<tt class="descname">put</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#FifoCache.put"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.FifoCache.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert an item in the cache if not already inserted.</p>
+<p>If the element is already present in the cache, it will not be inserted
+again but the internal state of the cache object may change.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item to be inserted</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.cache.RandCache">
+<em class="property">class </em><tt class="descname">RandCache</tt><big>(</big><em>maxlen</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#RandCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.RandCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.cache.Cache" title="icarus.models.cache.Cache"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.cache.Cache</span></tt></a></p>
+<p>Random eviction cache implementation.</p>
+<p>This class implements a cache whereby the item to evict in case of a full
+cache is randomly selected. It generally yields poor performance in terms
+of cache hits but is sometimes used as baseline and for this reason it has
+been implemented here.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.models.cache.RandCache.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#RandCache.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.RandCache.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Empty the cache</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.RandCache.dump">
+<tt class="descname">dump</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#RandCache.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.RandCache.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dump of all the elements currently in the cache possibly
+sorted according to the eviction policy.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.RandCache.get">
+<tt class="descname">get</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#RandCache.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.RandCache.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves an item from the cache. Differently from <em>has(k)</em>,
+calling this method may change the internal state of the caching
+object depending on the specific cache implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the requested item is in the cache
+or <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.RandCache.has">
+<tt class="descname">has</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#RandCache.has"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.RandCache.has" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if an item is in the cache without changing the internal
+state of the caching object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the requested item is in the cache
+or <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.models.cache.RandCache.maxlen">
+<tt class="descname">maxlen</tt><a class="reference internal" href="../_modules/icarus/models/cache.html#RandCache.maxlen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.RandCache.maxlen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.models.cache.RandCache.name">
+<tt class="descname">name</tt><em class="property"> = 'RAND'</em><a class="headerlink" href="#icarus.models.cache.RandCache.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.RandCache.put">
+<tt class="descname">put</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#RandCache.put"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.RandCache.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert an item in the cache if not already inserted.</p>
+<p>If the element is already present in the cache, it will not be inserted
+again but the internal state of the cache object may change.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item to be inserted</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.models.cache.set_rand_insert">
+<tt class="descname">set_rand_insert</tt><big>(</big><em>cache</em>, <em>p</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#set_rand_insert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.set_rand_insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>It modifies the instance of a cache object such that contents are
+inserted randomly instead of deterministically.</p>
+<p>This function modifies the behavior of the <em>put</em> method of a given cache
+instance such that it inserts contents randomly with a given probability</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>cache</strong> : Cache</p>
+<blockquote>
+<div><p>The instance of a cache to be applied random insertion</p>
+</div></blockquote>
+<p><strong>p</strong> : float</p>
+<blockquote>
+<div><p>the insert probability</p>
+</div></blockquote>
+<p><strong>seed</strong> : any hashable type, optional</p>
+<blockquote class="last">
+<div><p>The seed of the random number generator</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-icarus.models.strategy">
+<span id="strategy-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">strategy</span></tt> Module<a class="headerlink" href="#module-icarus.models.strategy" title="Permalink to this headline">¶</a></h2>
+<p>Implementations of all caching and routing strategies</p>
+<dl class="class">
+<dt id="icarus.models.strategy.Strategy">
+<em class="property">class </em><tt class="descname">Strategy</tt><big>(</big><em>view</em>, <em>controller</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#Strategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.Strategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Base strategy imported by all other strategy classes</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.models.strategy.Strategy.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#Strategy.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.Strategy.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.Hashrouting">
+<em class="property">class </em><tt class="descname">Hashrouting</tt><big>(</big><em>view</em>, <em>controller</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#Hashrouting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.Hashrouting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
+<p>Base class for all hash-routing implementations. Hash-routing
+implementations are described in <a class="reference internal" href="#r1">[R1]</a>.</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[R1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> <ol class="last upperalpha simple" start="12">
+<li>Saino, I. Psaras and G. Pavlou, Hash-routing Schemes for</li>
+</ol>
+</td></tr>
+</tbody>
+</table>
+<p>Information-Centric Networking, in Proceedings of ACM SIGCOMM ICN&#8216;13
+workshop. Available:
+<a class="reference external" href="https://www.ee.ucl.ac.uk/~lsaino/publications/hashrouting-icn13.pdf">https://www.ee.ucl.ac.uk/~lsaino/publications/hashrouting-icn13.pdf</a></p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.models.strategy.Hashrouting.authoritative_cache">
+<tt class="descname">authoritative_cache</tt><big>(</big><em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#Hashrouting.authoritative_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.Hashrouting.authoritative_cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the authoritative cache node for the given content</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The identifier of the content</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>authoritative_cache</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The node on which the authoritative cache is deployed</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.Hashrouting.hash">
+<tt class="descname">hash</tt><big>(</big><em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#Hashrouting.hash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.Hashrouting.hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a hash code of the content for hash-routing purposes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The identifier of the content</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>hash</strong> : int</p>
+<blockquote class="last">
+<div><p>The hash code of the content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.HashroutingSymmetric">
+<em class="property">class </em><tt class="descname">HashroutingSymmetric</tt><big>(</big><em>view</em>, <em>controller</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#HashroutingSymmetric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.HashroutingSymmetric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Hashrouting" title="icarus.models.strategy.Hashrouting"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Hashrouting</span></tt></a></p>
+<p>Hash-routing with symmetric routing (HR SYMM)</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="icarus.models.strategy.HashroutingSymmetric.name">
+<tt class="descname">name</tt><em class="property"> = 'HR_SYMM'</em><a class="headerlink" href="#icarus.models.strategy.HashroutingSymmetric.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.HashroutingSymmetric.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#HashroutingSymmetric.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.HashroutingSymmetric.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.HashroutingAsymmetric">
+<em class="property">class </em><tt class="descname">HashroutingAsymmetric</tt><big>(</big><em>view</em>, <em>controller</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#HashroutingAsymmetric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.HashroutingAsymmetric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Hashrouting" title="icarus.models.strategy.Hashrouting"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Hashrouting</span></tt></a></p>
+<p>Hash-routing with asymmetric routing (HR ASYMM)</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="icarus.models.strategy.HashroutingAsymmetric.name">
+<tt class="descname">name</tt><em class="property"> = 'HR_ASYMM'</em><a class="headerlink" href="#icarus.models.strategy.HashroutingAsymmetric.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.HashroutingAsymmetric.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#HashroutingAsymmetric.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.HashroutingAsymmetric.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.HashroutingMulticast">
+<em class="property">class </em><tt class="descname">HashroutingMulticast</tt><big>(</big><em>view</em>, <em>controller</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#HashroutingMulticast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.HashroutingMulticast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Hashrouting" title="icarus.models.strategy.Hashrouting"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Hashrouting</span></tt></a></p>
+<p>Hash-routing implementation with multicast delivery of content packets.</p>
+<p>In this strategy, if there is a cache miss, when contant packets return in
+the domain, the packet is multicast, one copy being sent to the
+authoritative cache and the other to the receiver. If the cache is on the
+path from source to receiver, this strategy behaves as a normal symmetric
+hash-routing strategy.</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="icarus.models.strategy.HashroutingMulticast.name">
+<tt class="descname">name</tt><em class="property"> = 'HR_MULTICAST'</em><a class="headerlink" href="#icarus.models.strategy.HashroutingMulticast.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.HashroutingMulticast.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#HashroutingMulticast.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.HashroutingMulticast.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.HashroutingHybridAM">
+<em class="property">class </em><tt class="descname">HashroutingHybridAM</tt><big>(</big><em>view</em>, <em>controller</em>, <em>max_stretch=0.2</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#HashroutingHybridAM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.HashroutingHybridAM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Hashrouting" title="icarus.models.strategy.Hashrouting"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Hashrouting</span></tt></a></p>
+<p>Hash-routing implementation with hybrid asymmetric-multicast delivery of
+content packets.</p>
+<p>In this strategy, if there is a cache miss, when content packets return in
+the domain, the packet is delivered to the receiver following the shortest
+path. If the additional number of hops required to send a copy to the
+authoritative cache is below a specific fraction of the network diameter,
+then one copy is sent to the authoritative cache as well. If the cache is
+on the path from source to receiver, this strategy behaves as a normal
+symmetric hash-routing strategy.</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="icarus.models.strategy.HashroutingHybridAM.name">
+<tt class="descname">name</tt><em class="property"> = 'HR_HYBRID_AM'</em><a class="headerlink" href="#icarus.models.strategy.HashroutingHybridAM.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.HashroutingHybridAM.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#HashroutingHybridAM.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.HashroutingHybridAM.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.HashroutingHybridSM">
+<em class="property">class </em><tt class="descname">HashroutingHybridSM</tt><big>(</big><em>view</em>, <em>controller</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#HashroutingHybridSM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.HashroutingHybridSM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Hashrouting" title="icarus.models.strategy.Hashrouting"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Hashrouting</span></tt></a></p>
+<p>Hash-routing implementation with hybrid symmetric-multicast delivery of
+content packets.</p>
+<p>In this implementation, the edge router receiving a content packet decides
+whether to deliver the packet using multicast or symmetric hash-routing
+based on the total cost for delivering the Data to both cache and receiver
+in terms of hops.</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="icarus.models.strategy.HashroutingHybridSM.name">
+<tt class="descname">name</tt><em class="property"> = 'HR_HYBRID_SM'</em><a class="headerlink" href="#icarus.models.strategy.HashroutingHybridSM.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.HashroutingHybridSM.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#HashroutingHybridSM.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.HashroutingHybridSM.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.NoCache">
+<em class="property">class </em><tt class="descname">NoCache</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#NoCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.NoCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
+<p>Strategy without any caching</p>
+<p>This corresponds to the traffic in a normal TCP/IP network without any
+CDNs or overlay caching, where all content requests are served by the 
+original source.</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="icarus.models.strategy.NoCache.name">
+<tt class="descname">name</tt><em class="property"> = 'NO_CACHE'</em><a class="headerlink" href="#icarus.models.strategy.NoCache.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.NoCache.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#NoCache.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.NoCache.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.LeaveCopyEverywhere">
+<em class="property">class </em><tt class="descname">LeaveCopyEverywhere</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#LeaveCopyEverywhere"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.LeaveCopyEverywhere" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
+<p>Leave Copy Everywhere (LCE) strategy.</p>
+<p>In this strategy a copy of a content is replicated at any cache on the
+path between serving node and receiver.</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="icarus.models.strategy.LeaveCopyEverywhere.name">
+<tt class="descname">name</tt><em class="property"> = 'LCE'</em><a class="headerlink" href="#icarus.models.strategy.LeaveCopyEverywhere.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.LeaveCopyEverywhere.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#LeaveCopyEverywhere.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.LeaveCopyEverywhere.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.LeaveCopyDown">
+<em class="property">class </em><tt class="descname">LeaveCopyDown</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#LeaveCopyDown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.LeaveCopyDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
+<p>Leave Copy Down (LCD) strategy.</p>
+<p>According to this strategy, one copy of a content is replicated only in
+the caching node you hop away from the serving node in the direction of
+the receiver. This strategy is described in <a href="#id6"><span class="problematic" id="id7"><span id="id4"></span>[2]_</span></a>.</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="icarus.models.strategy.LeaveCopyDown.name">
+<tt class="descname">name</tt><em class="property"> = 'LCD'</em><a class="headerlink" href="#icarus.models.strategy.LeaveCopyDown.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.LeaveCopyDown.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#LeaveCopyDown.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.LeaveCopyDown.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.CacheLessForMore">
+<em class="property">class </em><tt class="descname">CacheLessForMore</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em>, <em>use_ego_betw=False</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#CacheLessForMore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.CacheLessForMore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
+<p>Cache less for more strategy <a href="#id8"><span class="problematic" id="id9"><span id="id5"></span>[4]_</span></a>.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>..[4] W. Chai, D. He, I. Psaras, G. Pavlou, Cache Less for More in</dt>
+<dd>Information-centric Networks, in IFIP NETWORKING &#8216;12
+Available: <a class="reference external" href="http://www.ee.ucl.ac.uk/~uceeips/centrality-networking12.pdf">http://www.ee.ucl.ac.uk/~uceeips/centrality-networking12.pdf</a></dd>
+</dl>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="icarus.models.strategy.CacheLessForMore.name">
+<tt class="descname">name</tt><em class="property"> = 'CL4M'</em><a class="headerlink" href="#icarus.models.strategy.CacheLessForMore.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.CacheLessForMore.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#CacheLessForMore.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.CacheLessForMore.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.RandomBernoulli">
+<em class="property">class </em><tt class="descname">RandomBernoulli</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em>, <em>p=0.2</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#RandomBernoulli"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.RandomBernoulli" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
+<p>Bernoulli random cache insertion.</p>
+<p>In this strategy, a content is randomly inserted in a cache on the path
+from serving node to receiver with probability <em>p</em>.</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="icarus.models.strategy.RandomBernoulli.name">
+<tt class="descname">name</tt><em class="property"> = 'RAND_BERNOULLI'</em><a class="headerlink" href="#icarus.models.strategy.RandomBernoulli.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.RandomBernoulli.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#RandomBernoulli.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.RandomBernoulli.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.RandomChoice">
+<em class="property">class </em><tt class="descname">RandomChoice</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#RandomChoice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.RandomChoice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
+<p>Random choice strategy</p>
+<p>This strategy stores the served content exactly in one single cache on the
+path from serving node to receiver selected randomly.</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="icarus.models.strategy.RandomChoice.name">
+<tt class="descname">name</tt><em class="property"> = 'RAND_CHOICE'</em><a class="headerlink" href="#icarus.models.strategy.RandomChoice.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.RandomChoice.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#RandomChoice.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.RandomChoice.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="icarus.results.html" title="results Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="icarus.execution.html" title="execution Package"
+             >previous</a> |</li>
+        <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="icarus.html" >icarus Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

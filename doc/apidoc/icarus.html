@@ -1,0 +1,617 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>icarus Package &mdash; Icarus 0.2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Icarus 0.2.1 documentation" href="../index.html" />
+    <link rel="next" title="execution Package" href="icarus.execution.html" />
+    <link rel="prev" title="Icarus: Caching Simulator for Information Centric Networking (ICN)" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="icarus.execution.html" title="execution Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Icarus: Caching Simulator for Information Centric Networking (ICN)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">icarus Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">icarus</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-icarus.orchestration"><tt class="docutils literal"><span class="pre">orchestration</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-icarus.registry"><tt class="docutils literal"><span class="pre">registry</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-icarus.run"><tt class="docutils literal"><span class="pre">run</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-icarus.util"><tt class="docutils literal"><span class="pre">util</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Icarus: Caching Simulator for Information Centric Networking (ICN)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="icarus.execution.html"
+                        title="next chapter">execution Package</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="icarus-package">
+<h1>icarus Package<a class="headerlink" href="#icarus-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">icarus</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-icarus.orchestration">
+<span id="orchestration-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">orchestration</span></tt> Module<a class="headerlink" href="#module-icarus.orchestration" title="Permalink to this headline">¶</a></h2>
+<p>Contains the code that orchestrates the execution of all experiments.</p>
+<p>The orchestrator is responsible for designing experiments with all combinations
+of parameters specified in the user-provided settings, schedule experiment
+execution on various</p>
+<dl class="class">
+<dt id="icarus.orchestration.Orchestrator">
+<em class="property">class </em><tt class="descname">Orchestrator</tt><big>(</big><em>settings</em>, <em>summary_freq=4</em><big>)</big><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Orchestrator.</p>
+<p>It is responsible for orchestrating the execution of all experiments and
+aggregate results.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.orchestration.Orchestrator.experiment_callback">
+<tt class="descname">experiment_callback</tt><big>(</big><em>args</em><big>)</big><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator.experiment_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator.experiment_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback method called by run_scenario</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>args</strong> : tuple</p>
+<blockquote class="last">
+<div><p>Tuple of arguments</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.orchestration.Orchestrator.run">
+<tt class="descname">run</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the orchestrator.</p>
+<p>This call is blocking, whether multiple processes are used or not. This
+methods returns only after all experiments are executed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.orchestration.Orchestrator.stop">
+<tt class="descname">stop</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop the execution of the orchestrator</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.orchestration.run_scenario">
+<tt class="descname">run_scenario</tt><big>(</big><em>settings</em>, <em>params</em>, <em>curr_exp</em>, <em>n_exp</em><big>)</big><a class="reference internal" href="../_modules/icarus/orchestration.html#run_scenario"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.run_scenario" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a single scenario experiment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>settings</strong> : Settings</p>
+<blockquote>
+<div><p>The simulator settings</p>
+</div></blockquote>
+<p><strong>params</strong> : dict</p>
+<blockquote>
+<div><p>Dictionary of parameters</p>
+</div></blockquote>
+<p><strong>curr_exp</strong> : int</p>
+<blockquote>
+<div><p>sequence number of the experiment</p>
+</div></blockquote>
+<p><strong>n_exp</strong> : int</p>
+<blockquote>
+<div><p>Number of scheduled experiments</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>results</strong> : 2-tuple</p>
+<blockquote class="last">
+<div><p>A 2-tuple of dictionaries. The first dict stores all the attributes of
+the experiment. The second dict stores the results.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-icarus.registry">
+<span id="registry-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">registry</span></tt> Module<a class="headerlink" href="#module-icarus.registry" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="icarus.registry.register_cache_policy">
+<tt class="descname">register_cache_policy</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_cache_policy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that register a class or a function to a register.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote class="last">
+<div><p>The name assigned to the class or function to store in the register</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.registry.register_data_collector">
+<tt class="descname">register_data_collector</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_data_collector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that register a class or a function to a register.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote class="last">
+<div><p>The name assigned to the class or function to store in the register</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.registry.register_decorator">
+<tt class="descname">register_decorator</tt><big>(</big><em>register</em><big>)</big><a class="reference internal" href="../_modules/icarus/registry.html#register_decorator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.registry.register_decorator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a decorator that register a class or function to a specified
+register</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register</strong> : dict</p>
+<blockquote>
+<div><p>The register to which the class or function is register</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>decorator</strong> : func</p>
+<blockquote class="last">
+<div><p>The decorator</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.registry.register_results_reader">
+<tt class="descname">register_results_reader</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_results_reader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that register a class or a function to a register.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote class="last">
+<div><p>The name assigned to the class or function to store in the register</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.registry.register_results_writer">
+<tt class="descname">register_results_writer</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_results_writer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that register a class or a function to a register.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote class="last">
+<div><p>The name assigned to the class or function to store in the register</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.registry.register_strategy">
+<tt class="descname">register_strategy</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_strategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that register a class or a function to a register.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote class="last">
+<div><p>The name assigned to the class or function to store in the register</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.registry.register_topology_factory">
+<tt class="descname">register_topology_factory</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_topology_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that register a class or a function to a register.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote class="last">
+<div><p>The name assigned to the class or function to store in the register</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-icarus.run">
+<span id="run-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">run</span></tt> Module<a class="headerlink" href="#module-icarus.run" title="Permalink to this headline">¶</a></h2>
+<p>Launches a simulation campaign and save results.</p>
+<dl class="function">
+<dt id="icarus.run.run">
+<tt class="descname">run</tt><big>(</big><em>config</em>, <em>output</em><big>)</big><a class="reference internal" href="../_modules/icarus/run.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.run.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run function. It starts the simulator.
+experiments</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>config</strong> : str</p>
+<blockquote>
+<div><p>Path of the configuration file</p>
+</div></blockquote>
+<p><strong>output</strong> : str</p>
+<blockquote class="last">
+<div><p>The file name where results will be saved</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.run.handler">
+<tt class="descname">handler</tt><big>(</big><em>settings</em>, <em>orch</em>, <em>output</em>, <em>signum=None</em>, <em>frame=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/run.html#handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.run.handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signal handler</p>
+<p>This function is called when the simulator receive SIGTERM, SIGHUP, SIGKILL
+or SIGQUIT from the OS.</p>
+<p>Its function is simply to write on a file the partial results.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>settings</strong> : Settings</p>
+<blockquote>
+<div><p>The simulator settings</p>
+</div></blockquote>
+<p><strong>orch</strong> : Orchestrator</p>
+<blockquote>
+<div><p>The instance of the orchestrator</p>
+</div></blockquote>
+<p><strong>output</strong> : str</p>
+<blockquote class="last">
+<div><p>The output file</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-icarus.util">
+<span id="util-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">util</span></tt> Module<a class="headerlink" href="#module-icarus.util" title="Permalink to this headline">¶</a></h2>
+<p>Utility functions</p>
+<dl class="class">
+<dt id="icarus.util.Settings">
+<em class="property">class </em><tt class="descname">Settings</tt><a class="reference internal" href="../_modules/icarus/util.html#Settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Object storing all settings</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.util.Settings.get">
+<tt class="descname">get</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Settings.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return value of settings with given name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>value</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The value of the setting</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.util.Settings.read_from">
+<tt class="descname">read_from</tt><big>(</big><em>path</em>, <em>freeze=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Settings.read_from"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings.read_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize settings by reading from a file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>path</strong> : str</p>
+<blockquote>
+<div><p>The path of the file from which settings are read</p>
+</div></blockquote>
+<p><strong>freeze</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p>If <em>True</em>, freezes object so that settings cannot be changed</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.util.Settings.set">
+<tt class="descname">set</tt><big>(</big><em>name</em>, <em>value</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Settings.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a given value for a settings with given name</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.util.config_logging">
+<tt class="descname">config_logging</tt><big>(</big><em>log_level='INFO'</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#config_logging"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.config_logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure logging level</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>log_level</strong> : int</p>
+<blockquote class="last">
+<div><p>The granularity of logging</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.util.inheritdoc">
+<tt class="descname">inheritdoc</tt><big>(</big><em>cls</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#inheritdoc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.inheritdoc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that inherits docstring from the overridden method of the
+superclass.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>cls</strong> : Class</p>
+<blockquote class="last">
+<div><p>The superclass from which the method docstring is inherit</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This decorator requires to specify the superclass the contains the method
+(with the same name of the method to which this decorator is applied) whose
+docstring is to be replicated. It is possible to implement more complex
+decorators which identify the superclass automatically. There are examples
+available in the Web (e.g. <a class="reference external" href="http://code.activestate.com/recipes/576862/">http://code.activestate.com/recipes/576862/</a>),
+however, the increased complexity leads to issues of interactions with
+other decorators.
+This implementation is simple, easy to understand and works well with
+Icarus code.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.util.timestr">
+<tt class="descname">timestr</tt><big>(</big><em>sec</em>, <em>with_seconds=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#timestr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.timestr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a time interval in seconds and returns it formatted in a string.</p>
+<p>The returned string includes days, hours, minutes and seconds as
+appropriate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>sec</strong> : float</p>
+<blockquote>
+<div><p>The time interval</p>
+</div></blockquote>
+<p><strong>with_seconds</strong> : bool</p>
+<blockquote>
+<div><p>If <em>True</em> the time string includes seconds, otherwise only minutes</p>
+</div></blockquote>
+<p><strong>Returns</strong> :</p>
+<p><strong>&#8212;&#8212;-</strong> :</p>
+<p><strong>timestr</strong> : str</p>
+<blockquote class="last">
+<div><p>A string expressing the time in days, hours, minutes and seconds</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.util.iround">
+<tt class="descname">iround</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#iround"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.iround" title="Permalink to this definition">¶</a></dt>
+<dd><p>Round float to closest integer</p>
+<p>This code was taken from here:
+<a class="reference external" href="http://www.daniweb.com/software-development/python/threads/299459/round-to-nearest-integer">http://www.daniweb.com/software-development/python/threads/299459/round-to-nearest-integer</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>x</strong> : float</p>
+<blockquote>
+<div><p>The number to round</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>xr</strong> : int</p>
+<blockquote class="last">
+<div><p>The rounded number</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="icarus.execution.html">execution Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="icarus.execution.html#id1"><tt class="docutils literal"><span class="pre">execution</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.execution.html#module-icarus.execution.collectors"><tt class="docutils literal"><span class="pre">collectors</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.execution.html#module-icarus.execution.engine"><tt class="docutils literal"><span class="pre">engine</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.execution.html#module-icarus.execution.network"><tt class="docutils literal"><span class="pre">network</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="icarus.models.html">models Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="icarus.models.html#id1"><tt class="docutils literal"><span class="pre">models</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.models.html#module-icarus.models.cache"><tt class="docutils literal"><span class="pre">cache</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.models.html#module-icarus.models.strategy"><tt class="docutils literal"><span class="pre">strategy</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="icarus.results.html">results Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="icarus.results.html#id1"><tt class="docutils literal"><span class="pre">results</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.results.html#module-icarus.results.plot"><tt class="docutils literal"><span class="pre">plot</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.results.html#module-icarus.results.readwrite"><tt class="docutils literal"><span class="pre">readwrite</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="icarus.scenarios.html">scenarios Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="icarus.scenarios.html#id1"><tt class="docutils literal"><span class="pre">scenarios</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.scenarios.html#module-icarus.scenarios.cacheplacement"><tt class="docutils literal"><span class="pre">cacheplacement</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.scenarios.html#module-icarus.scenarios.contentplacement"><tt class="docutils literal"><span class="pre">contentplacement</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.scenarios.html#module-icarus.scenarios.topology"><tt class="docutils literal"><span class="pre">topology</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.scenarios.html#module-icarus.scenarios.workload"><tt class="docutils literal"><span class="pre">workload</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="icarus.tools.html">tools Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="icarus.tools.html#id1"><tt class="docutils literal"><span class="pre">tools</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.tools.html#module-icarus.tools.cacheperf"><tt class="docutils literal"><span class="pre">cacheperf</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.tools.html#module-icarus.tools.stats"><tt class="docutils literal"><span class="pre">stats</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.tools.html#module-icarus.tools.traces"><tt class="docutils literal"><span class="pre">traces</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="icarus.execution.html" title="execution Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Icarus: Caching Simulator for Information Centric Networking (ICN)"
+             >previous</a> |</li>
+        <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

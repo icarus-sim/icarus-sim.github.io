@@ -1,0 +1,1723 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>execution Package &mdash; Icarus 0.2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Icarus 0.2.1 documentation" href="../index.html" />
+    <link rel="up" title="icarus Package" href="icarus.html" />
+    <link rel="next" title="models Package" href="icarus.models.html" />
+    <link rel="prev" title="icarus Package" href="icarus.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="icarus.models.html" title="models Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="icarus.html" title="icarus Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="icarus.html" accesskey="U">icarus Package</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">execution Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">execution</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-icarus.execution.collectors"><tt class="docutils literal"><span class="pre">collectors</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-icarus.execution.engine"><tt class="docutils literal"><span class="pre">engine</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-icarus.execution.network"><tt class="docutils literal"><span class="pre">network</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="icarus.html"
+                        title="previous chapter">icarus Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="icarus.models.html"
+                        title="next chapter">models Package</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="execution-package">
+<h1>execution Package<a class="headerlink" href="#execution-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">execution</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-icarus.execution"></span><p>This package contains the code for the execution of a single experiment.</p>
+</div>
+<div class="section" id="module-icarus.execution.collectors">
+<span id="collectors-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">collectors</span></tt> Module<a class="headerlink" href="#module-icarus.execution.collectors" title="Permalink to this headline">¶</a></h2>
+<p>This module contains performance metrics loggers</p>
+<dl class="class">
+<dt id="icarus.execution.collectors.DataCollector">
+<em class="property">class </em><tt class="descname">DataCollector</tt><big>(</big><em>view</em>, <em>**params</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Object collecting notifications about simulation events and measuring
+relevant metrics.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.execution.collectors.DataCollector.cache_hit">
+<tt class="descname">cache_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.cache_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the requested content has been served by the cache at
+node <em>node</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The node whose cache served the content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.DataCollector.content_hop">
+<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.content_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.DataCollector.end_session">
+<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.end_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the session is closed, i.e. the content has been
+successfully delivered to the receiver or a failure blocked the 
+execution of the request</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.DataCollector.request_hop">
+<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.request_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.DataCollector.results">
+<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the aggregated results measured by the collector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping metric with results.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.DataCollector.server_hit">
+<tt class="descname">server_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.server_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the requested content has been served by the server at
+node <em>node</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The server node which served the content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.DataCollector.start_session">
+<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies the collector that a new network session started.</p>
+<p>A session refers to the retrieval of a content from a receiver, from
+the issuing of a content request to the delivery of the content.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.execution.collectors.CollectorProxy">
+<em class="property">class </em><tt class="descname">CollectorProxy</tt><big>(</big><em>view</em>, <em>collectors</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<p>This class acts as a proxy for all concrete collectors towards the
+network controller.</p>
+<p>An instance of this class registers itself with the network controller and
+it receives notifications for all events. This class is responsible for
+dispatching events of interests to concrete collectors.</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="icarus.execution.collectors.CollectorProxy.EVENTS">
+<tt class="descname">EVENTS</tt><em class="property"> = ('start_session', 'end_session', 'cache_hit', 'server_hit', 'request_hop', 'content_hop', 'results')</em><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.EVENTS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.CollectorProxy.cache_hit">
+<tt class="descname">cache_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.cache_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the requested content has been served by the cache at
+node <em>node</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The node whose cache served the content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.CollectorProxy.content_hop">
+<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.content_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.CollectorProxy.end_session">
+<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.end_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the session is closed, i.e. the content has been
+successfully delivered to the receiver or a failure blocked the 
+execution of the request</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.CollectorProxy.request_hop">
+<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.request_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.CollectorProxy.results">
+<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the aggregated results measured by the collector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping metric with results.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.CollectorProxy.server_hit">
+<tt class="descname">server_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.server_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the requested content has been served by the server at
+node <em>node</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The server node which served the content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.CollectorProxy.start_session">
+<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.start_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies the collector that a new network session started.</p>
+<p>A session refers to the retrieval of a content from a receiver, from
+the issuing of a content request to the delivery of the content.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.execution.collectors.CacheHitRatioCollector">
+<em class="property">class </em><tt class="descname">CacheHitRatioCollector</tt><big>(</big><em>view</em>, <em>content_hits=False</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<p>Collector measuring the cache hit ratio, i.e. the portion of content
+requests served by a cache.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.execution.collectors.CacheHitRatioCollector.cache_hit">
+<tt class="descname">cache_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.cache_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the requested content has been served by the cache at
+node <em>node</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The node whose cache served the content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.execution.collectors.CacheHitRatioCollector.name">
+<tt class="descname">name</tt><em class="property"> = 'CACHE_HIT_RATIO'</em><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.CacheHitRatioCollector.results">
+<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the aggregated results measured by the collector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping metric with results.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.CacheHitRatioCollector.server_hit">
+<tt class="descname">server_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.server_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the requested content has been served by the server at
+node <em>node</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The server node which served the content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.CacheHitRatioCollector.start_session">
+<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies the collector that a new network session started.</p>
+<p>A session refers to the retrieval of a content from a receiver, from
+the issuing of a content request to the delivery of the content.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.execution.collectors.LinkLoadCollector">
+<em class="property">class </em><tt class="descname">LinkLoadCollector</tt><big>(</big><em>view</em>, <em>sr=10</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<p>Data collector measuring the link load</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.execution.collectors.LinkLoadCollector.content_hop">
+<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.content_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.execution.collectors.LinkLoadCollector.name">
+<tt class="descname">name</tt><em class="property"> = 'LINK_LOAD'</em><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.LinkLoadCollector.request_hop">
+<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.request_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.LinkLoadCollector.results">
+<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the aggregated results measured by the collector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping metric with results.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.LinkLoadCollector.start_session">
+<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies the collector that a new network session started.</p>
+<p>A session refers to the retrieval of a content from a receiver, from
+the issuing of a content request to the delivery of the content.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.execution.collectors.LatencyCollector">
+<em class="property">class </em><tt class="descname">LatencyCollector</tt><big>(</big><em>view</em>, <em>cdf=False</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<p>Data collector measuring latency, i.e. the delay taken to delivery a
+content.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.execution.collectors.LatencyCollector.content_hop">
+<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.content_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.LatencyCollector.end_session">
+<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.end_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the session is closed, i.e. the content has been
+successfully delivered to the receiver or a failure blocked the 
+execution of the request</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.execution.collectors.LatencyCollector.name">
+<tt class="descname">name</tt><em class="property"> = 'LATENCY'</em><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.LatencyCollector.request_hop">
+<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.request_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.LatencyCollector.results">
+<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the aggregated results measured by the collector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping metric with results.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.LatencyCollector.start_session">
+<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies the collector that a new network session started.</p>
+<p>A session refers to the retrieval of a content from a receiver, from
+the issuing of a content request to the delivery of the content.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.execution.collectors.PathStretchCollector">
+<em class="property">class </em><tt class="descname">PathStretchCollector</tt><big>(</big><em>view</em>, <em>cdf=False</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<p>Collector measuring the path stretch, i.e. the ratio between the actual
+path length and the shortest path length.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.execution.collectors.PathStretchCollector.content_hop">
+<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.content_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.PathStretchCollector.end_session">
+<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.end_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the session is closed, i.e. the content has been
+successfully delivered to the receiver or a failure blocked the 
+execution of the request</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.execution.collectors.PathStretchCollector.name">
+<tt class="descname">name</tt><em class="property"> = 'PATH_STRETCH'</em><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.PathStretchCollector.request_hop">
+<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.request_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.PathStretchCollector.results">
+<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the aggregated results measured by the collector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping metric with results.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.PathStretchCollector.start_session">
+<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies the collector that a new network session started.</p>
+<p>A session refers to the retrieval of a content from a receiver, from
+the issuing of a content request to the delivery of the content.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.execution.collectors.DebugCollector">
+<em class="property">class </em><tt class="descname">DebugCollector</tt><big>(</big><em>view</em>, <em>output=&lt;open file '&lt;stdout&gt;'</em>, <em>mode 'w' at 0x2ac5bf8a61e0&gt;</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DebugCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DebugCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<p>Collector printing debug information.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.execution.collectors.DebugCollector.cache_hit">
+<tt class="descname">cache_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DebugCollector.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DebugCollector.cache_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the requested content has been served by the cache at
+node <em>node</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The node whose cache served the content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.DebugCollector.content_hop">
+<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DebugCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DebugCollector.content_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.DebugCollector.end_session">
+<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DebugCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DebugCollector.end_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the session is closed, i.e. the content has been
+successfully delivered to the receiver or a failure blocked the 
+execution of the request</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.execution.collectors.DebugCollector.name">
+<tt class="descname">name</tt><em class="property"> = 'DEBUG'</em><a class="headerlink" href="#icarus.execution.collectors.DebugCollector.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.DebugCollector.request_hop">
+<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DebugCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DebugCollector.request_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.DebugCollector.results">
+<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DebugCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DebugCollector.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the aggregated results measured by the collector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping metric with results.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.DebugCollector.server_hit">
+<tt class="descname">server_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DebugCollector.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DebugCollector.server_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the requested content has been served by the server at
+node <em>node</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The server node which served the content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.DebugCollector.start_session">
+<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DebugCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DebugCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies the collector that a new network session started.</p>
+<p>A session refers to the retrieval of a content from a receiver, from
+the issuing of a content request to the delivery of the content.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.execution.collectors.TestCollector">
+<em class="property">class </em><tt class="descname">TestCollector</tt><big>(</big><em>view</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<p>Collector used for test cases only.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.execution.collectors.TestCollector.cache_hit">
+<tt class="descname">cache_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.cache_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the requested content has been served by the cache at
+node <em>node</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The node whose cache served the content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.TestCollector.content_hop">
+<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.content_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.TestCollector.end_session">
+<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.end_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the session is closed, i.e. the content has been
+successfully delivered to the receiver or a failure blocked the 
+execution of the request</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="icarus.execution.collectors.TestCollector.name">
+<tt class="descname">name</tt><em class="property"> = 'TEST'</em><a class="headerlink" href="#icarus.execution.collectors.TestCollector.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.TestCollector.request_hop">
+<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.request_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.TestCollector.server_hit">
+<tt class="descname">server_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.server_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the requested content has been served by the server at
+node <em>node</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The server node which served the content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.TestCollector.session_summary">
+<tt class="descname">session_summary</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.session_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.session_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a summary of latest session</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>session</strong> : dict</p>
+<blockquote class="last">
+<div><p>Summary of session</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.collectors.TestCollector.start_session">
+<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies the collector that a new network session started.</p>
+<p>A session refers to the retrieval of a content from a receiver, from
+the issuing of a content request to the delivery of the content.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-icarus.execution.engine">
+<span id="engine-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">engine</span></tt> Module<a class="headerlink" href="#module-icarus.execution.engine" title="Permalink to this headline">¶</a></h2>
+<p>This module implements the simulation engine.</p>
+<p>The simulation engine, given the parameters according to which a single
+experiments needs to be run, instantiates all the required classes and executes
+the experiment by iterating through the event provided by an event generator
+and providing them to a strategy instance.</p>
+<dl class="function">
+<dt id="icarus.execution.engine.exec_experiment">
+<tt class="descname">exec_experiment</tt><big>(</big><em>topology</em>, <em>events</em>, <em>strategy</em>, <em>collectors</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/engine.html#exec_experiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.engine.exec_experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the simulation of a specific scenario</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
+<blockquote>
+<div><p>An FNSS topology object with the network topology used for the
+simulation</p>
+</div></blockquote>
+<p><strong>events</strong> : iterable</p>
+<blockquote>
+<div><p>An iterable object whose elements are (time, event) tuples, where time
+is a float type indicating the timestamp of the event to be executed
+and event is a dictionary storing all the attributes of the event to
+execute</p>
+</div></blockquote>
+<p><strong>strategy</strong> : 2-tuple</p>
+<blockquote>
+<div><p>Strategy definition. It is a 2-tuple where the first element is the
+name of the strategy and the second element is a dictionary of
+strategy attributes</p>
+</div></blockquote>
+<p><strong>collectors: list of tuples</strong> :</p>
+<blockquote>
+<div><p>The collectors to be used. It is a list of 2-tuples. Each tuple has as
+first element the name of the collector and as second element a
+dictionary of collector parameters</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
+<blockquote class="last">
+<div><p>A dictionary with the aggregated simulation results from all collectors.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-icarus.execution.network">
+<span id="network-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">network</span></tt> Module<a class="headerlink" href="#module-icarus.execution.network" title="Permalink to this headline">¶</a></h2>
+<p>Network Model-View-Controller (MVC)</p>
+<dl class="class">
+<dt id="icarus.execution.network.NetworkModel">
+<em class="property">class </em><tt class="descname">NetworkModel</tt><big>(</big><em>topology</em>, <em>shortest_path=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Models the internal state of the network</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.execution.network.NetworkView">
+<em class="property">class </em><tt class="descname">NetworkView</tt><big>(</big><em>model</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.execution.network.NetworkView.caches">
+<tt class="descname">caches</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.caches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.caches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary mapping caching nodes and cache space</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>caches</strong> : dict</p>
+<blockquote class="last">
+<div><p>dict mapping caching nodes and cache space</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkView.content_locations">
+<tt class="descname">content_locations</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.content_locations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.content_locations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a set of all current locations of a specific content.</p>
+<p>This include both persistent content sources and temporary caches.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>nodes</strong> : set</p>
+<blockquote class="last">
+<div><p>A set of all nodes currently storing the given content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkView.content_source">
+<tt class="descname">content_source</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.content_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.content_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the node identifier where the content is persistently stores.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The node persistently storing the given content</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkView.link_delay">
+<tt class="descname">link_delay</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.link_delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.link_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the delay of link <em>(u, v)</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote>
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>delay</strong> : float</p>
+<blockquote class="last">
+<div><p>The link delay</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkView.link_type">
+<tt class="descname">link_type</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.link_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.link_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the type of link <em>(u, v)</em>.</p>
+<p>Type can be either <em>internal</em> or <em>external</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote>
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>link_type</strong> : str</p>
+<blockquote class="last">
+<div><p>The link type</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkView.shortest_path">
+<tt class="descname">shortest_path</tt><big>(</big><em>s</em>, <em>t</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.shortest_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.shortest_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the shortest path from <em>s</em> to <em>t</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>s</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>t</strong> : any hashable type</p>
+<blockquote>
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>shortest_path</strong> : list</p>
+<blockquote class="last">
+<div><p>List of nodes of the shortest path (origin and destination
+included)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkView.topology">
+<tt class="descname">topology</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.topology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the network topology</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
+<blockquote class="last">
+<div><p>The topology object</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The topology object returned by this method must not be modified by the
+caller. This object can only be modified through the NetworkController.
+Changes to this object will lead to inconsistent network state.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.execution.network.NetworkController">
+<em class="property">class </em><tt class="descname">NetworkController</tt><big>(</big><em>model</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Network controller</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.attach_collector">
+<tt class="descname">attach_collector</tt><big>(</big><em>collector</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.attach_collector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.attach_collector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attaches a data collector to which all events will be reported.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>collector</strong> : DataCollector</p>
+<blockquote class="last">
+<div><p>The data collector</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.detach_collector">
+<tt class="descname">detach_collector</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.detach_collector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.detach_collector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detaches the data collector.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.end_session">
+<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.end_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close a session</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.forward_content_hop">
+<tt class="descname">forward_content_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.forward_content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.forward_content_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward a content over link  u -&gt; v.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.forward_content_path">
+<tt class="descname">forward_content_path</tt><big>(</big><em>u</em>, <em>v</em>, <em>path=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.forward_content_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.forward_content_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward a content from node <em>s</em> to node <em>t</em> over the provided path.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>s</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>t</strong> : any hashable type</p>
+<blockquote>
+<div><p>Destination node</p>
+</div></blockquote>
+<p><strong>path</strong> : list, optional</p>
+<blockquote class="last">
+<div><p>The path to use. If not provided, shortest path is used</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.forward_request_hop">
+<tt class="descname">forward_request_hop</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.forward_request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.forward_request_hop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward a request over link  u -&gt; v.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Destination node</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.forward_request_path">
+<tt class="descname">forward_request_path</tt><big>(</big><em>s</em>, <em>t</em>, <em>path=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.forward_request_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.forward_request_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward a request from node <em>s</em> to node <em>t</em> over the provided path.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>s</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>t</strong> : any hashable type</p>
+<blockquote>
+<div><p>Destination node</p>
+</div></blockquote>
+<p><strong>path</strong> : list, optional</p>
+<blockquote class="last">
+<div><p>The path to use. If not provided, shortest path is used</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.get_content">
+<tt class="descname">get_content</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.get_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.get_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a content from a server or a cache.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote>
+<div><p>The node where the content is retrieved</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>content</strong> : bool</p>
+<blockquote class="last">
+<div><p>True if the content is available, False otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.put_content">
+<tt class="descname">put_content</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.put_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.put_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store content in the specified node.</p>
+<p>The node must have a cache stack and the actual insertion of the
+content is executed according to the caching policy. If the caching
+policy has a selective insertion policy, then content may not be
+inserted.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The node where the content is inserted</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.remove_link">
+<tt class="descname">remove_link</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.remove_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.remove_link" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.remove_node">
+<tt class="descname">remove_node</tt><big>(</big><em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.remove_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.remove_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.restore_link">
+<tt class="descname">restore_link</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.restore_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.restore_link" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.restore_node">
+<tt class="descname">restore_node</tt><big>(</big><em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.restore_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.restore_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.start_session">
+<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.start_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instruct the controller to start a new session (i.e. the retrieval
+of a content).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p><em>True</em> if this session needs to be reported to the collector,
+<em>False</em> otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="icarus.models.html" title="models Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="icarus.html" title="icarus Package"
+             >previous</a> |</li>
+        <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="icarus.html" >icarus Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

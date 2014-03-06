@@ -1,0 +1,607 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>scenarios Package &mdash; Icarus 0.2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Icarus 0.2.1 documentation" href="../index.html" />
+    <link rel="up" title="icarus Package" href="icarus.html" />
+    <link rel="next" title="tools Package" href="icarus.tools.html" />
+    <link rel="prev" title="results Package" href="icarus.results.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="icarus.tools.html" title="tools Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="icarus.results.html" title="results Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="icarus.html" accesskey="U">icarus Package</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">scenarios Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">scenarios</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-icarus.scenarios.cacheplacement"><tt class="docutils literal"><span class="pre">cacheplacement</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-icarus.scenarios.contentplacement"><tt class="docutils literal"><span class="pre">contentplacement</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-icarus.scenarios.topology"><tt class="docutils literal"><span class="pre">topology</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-icarus.scenarios.workload"><tt class="docutils literal"><span class="pre">workload</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="icarus.results.html"
+                        title="previous chapter">results Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="icarus.tools.html"
+                        title="next chapter">tools Package</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="scenarios-package">
+<h1>scenarios Package<a class="headerlink" href="#scenarios-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">scenarios</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-icarus.scenarios"></span><p>This package contains the code for generating simulation scenarios.</p>
+</div>
+<div class="section" id="module-icarus.scenarios.cacheplacement">
+<span id="cacheplacement-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">cacheplacement</span></tt> Module<a class="headerlink" href="#module-icarus.scenarios.cacheplacement" title="Permalink to this headline">¶</a></h2>
+<p>Implements cache placement strategies</p>
+<dl class="function">
+<dt id="icarus.scenarios.cacheplacement.uniform_cache_placement">
+<tt class="descname">uniform_cache_placement</tt><big>(</big><em>topology</em>, <em>cache_budget</em>, <em>cache_nodes</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/cacheplacement.html#uniform_cache_placement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.cacheplacement.uniform_cache_placement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Places cache budget uniformly across cache nodes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
+<blockquote>
+<div><p>The topology object</p>
+</div></blockquote>
+<p><strong>cache_budget</strong> : int</p>
+<blockquote>
+<div><p>The cumulative cache budget</p>
+</div></blockquote>
+<p><strong>cache_nodes</strong> : list</p>
+<blockquote>
+<div><p>List of nodes of the topology on which caches can be deployed</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache_placement</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping node to assigned cache space</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.scenarios.cacheplacement.degree_centrality_cache_placement">
+<tt class="descname">degree_centrality_cache_placement</tt><big>(</big><em>topology</em>, <em>cache_budget</em>, <em>cache_nodes</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/cacheplacement.html#degree_centrality_cache_placement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.cacheplacement.degree_centrality_cache_placement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Places cache budget proportionally to the degree of the node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
+<blockquote>
+<div><p>The topology object</p>
+</div></blockquote>
+<p><strong>cache_budget</strong> : int</p>
+<blockquote>
+<div><p>The cumulative cache budget</p>
+</div></blockquote>
+<p><strong>cache_nodes</strong> : list</p>
+<blockquote>
+<div><p>List of nodes of the topology on which caches can be deployed</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache_placement</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping node to assigned cache space</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.scenarios.cacheplacement.betweenness_centrality_cache_placement">
+<tt class="descname">betweenness_centrality_cache_placement</tt><big>(</big><em>topology</em>, <em>cache_budget</em>, <em>cache_nodes</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/cacheplacement.html#betweenness_centrality_cache_placement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.cacheplacement.betweenness_centrality_cache_placement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Places cache budget proportionally to the betweenness centrality of the
+node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
+<blockquote>
+<div><p>The topology object</p>
+</div></blockquote>
+<p><strong>cache_budget</strong> : int</p>
+<blockquote>
+<div><p>The cumulative cache budget</p>
+</div></blockquote>
+<p><strong>cache_nodes</strong> : list</p>
+<blockquote>
+<div><p>List of nodes of the topology on which caches can be deployed</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache_placement</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping node to assigned cache space</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-icarus.scenarios.contentplacement">
+<span id="contentplacement-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">contentplacement</span></tt> Module<a class="headerlink" href="#module-icarus.scenarios.contentplacement" title="Permalink to this headline">¶</a></h2>
+<p>Content placement strategies.</p>
+<p>This module contains function to decide the allocation of content objects to
+source nodes.</p>
+<dl class="function">
+<dt id="icarus.scenarios.contentplacement.uniform_content_placement">
+<tt class="descname">uniform_content_placement</tt><big>(</big><em>topology</em>, <em>contents</em>, <em>source_nodes</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/contentplacement.html#uniform_content_placement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.contentplacement.uniform_content_placement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Places content objects to source nodes randomly following a uniform
+distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
+<blockquote>
+<div><p>The topology object</p>
+</div></blockquote>
+<p><strong>contents</strong> : list</p>
+<blockquote>
+<div><blockquote>
+<div><p>List of content objects</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>source_nodes <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of nodes of the topology which are content sources</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache_placement</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping content objects to source nodes</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>A deterministic placement of objects (e.g., for reproducing results) can be
+achieved by using a fix seed value</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.scenarios.contentplacement.weighted_content_placement">
+<tt class="descname">weighted_content_placement</tt><big>(</big><em>topology</em>, <em>contents</em>, <em>source_weights</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/contentplacement.html#weighted_content_placement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.contentplacement.weighted_content_placement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Places content objects to source nodes randomly according to the weight
+of the source node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
+<blockquote>
+<div><p>The topology object</p>
+</div></blockquote>
+<p><strong>contents</strong> : list</p>
+<blockquote>
+<div><blockquote>
+<div><p>List of content objects</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>source_weights <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dict mapping nodes nodes of the topology which are content sources and
+the weight according to which content placement decision is made.</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache_placement</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping content objects to source nodes</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>A deterministic placement of objects (e.g., for reproducing results) can be
+achieved by using a fix seed value</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-icarus.scenarios.topology">
+<span id="topology-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">topology</span></tt> Module<a class="headerlink" href="#module-icarus.scenarios.topology" title="Permalink to this headline">¶</a></h2>
+<p>This module contains functions for creating or importing topologies for the
+experiments.</p>
+<dl class="function">
+<dt id="icarus.scenarios.topology.topology_binary_tree">
+<tt class="descname">topology_binary_tree</tt><big>(</big><em>network_cache=0.05</em>, <em>n_contents=100000</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#topology_binary_tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.topology_binary_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tree topology
+Parameters
+&#8212;&#8212;&#8212;-
+network_cache : float</p>
+<blockquote>
+<div>Size of network cache (sum of all caches) normalized by size of content
+population</div></blockquote>
+<dl class="docutils">
+<dt>n_contents <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>Size of content population</dd>
+<dt>seed <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd>The seed used for random number generation</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
+<blockquote class="last">
+<div><p>The topology object</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.scenarios.topology.topology_path">
+<tt class="descname">topology_path</tt><big>(</big><em>network_cache=0.05</em>, <em>n_contents=100000</em>, <em>n=3</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#topology_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.topology_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a scenario based on path topology</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>network_cache</strong> : float</p>
+<blockquote>
+<div><p>Size of network cache (sum of all caches) normalized by size of content
+population</p>
+</div></blockquote>
+<p><strong>n_contents</strong> : int</p>
+<blockquote>
+<div><p>Size of content population</p>
+</div></blockquote>
+<p><strong>seed</strong> : int, optional</p>
+<blockquote>
+<div><p>The seed used for random number generation</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
+<blockquote class="last">
+<div><p>The topology object</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.scenarios.topology.topology_geant">
+<tt class="descname">topology_geant</tt><big>(</big><em>network_cache=0.05</em>, <em>n_contents=100000</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#topology_geant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.topology_geant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a scenario based on GEANT topology</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>network_cache</strong> : float</p>
+<blockquote>
+<div><p>Size of network cache (sum of all caches) normalized by size of content
+population</p>
+</div></blockquote>
+<p><strong>n_contents</strong> : int</p>
+<blockquote>
+<div><p>Size of content population</p>
+</div></blockquote>
+<p><strong>seed</strong> : int, optional</p>
+<blockquote>
+<div><p>The seed used for random number generation</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
+<blockquote class="last">
+<div><p>The topology object</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.scenarios.topology.topology_tiscali">
+<tt class="descname">topology_tiscali</tt><big>(</big><em>network_cache=0.05</em>, <em>n_contents=100000</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#topology_tiscali"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.topology_tiscali" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a scenario based on Tiscali topology, parsed from RocketFuel dataset</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>network_cache</strong> : float</p>
+<blockquote>
+<div><p>Size of network cache (sum of all caches) normalized by size of content
+population</p>
+</div></blockquote>
+<p><strong>n_contents</strong> : int</p>
+<blockquote>
+<div><p>Size of content population</p>
+</div></blockquote>
+<p><strong>seed</strong> : int, optional</p>
+<blockquote>
+<div><p>The seed used for random number generation</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
+<blockquote class="last">
+<div><p>The topology object</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.scenarios.topology.topology_wide">
+<tt class="descname">topology_wide</tt><big>(</big><em>network_cache=0.05</em>, <em>n_contents=100000</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#topology_wide"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.topology_wide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a scenario based on GARR topology</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>network_cache</strong> : float</p>
+<blockquote>
+<div><p>Size of network cache (sum of all caches) normalized by size of content
+population</p>
+</div></blockquote>
+<p><strong>n_contents</strong> : int</p>
+<blockquote>
+<div><p>Size of content population</p>
+</div></blockquote>
+<p><strong>seed</strong> : int, optional</p>
+<blockquote>
+<div><p>The seed used for random number generation</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
+<blockquote class="last">
+<div><p>The topology object</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.scenarios.topology.topology_garr">
+<tt class="descname">topology_garr</tt><big>(</big><em>network_cache=0.05</em>, <em>n_contents=100000</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#topology_garr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.topology_garr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a scenario based on GARR topology</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>network_cache</strong> : float</p>
+<blockquote>
+<div><p>Size of network cache (sum of all caches) normalized by size of content
+population</p>
+</div></blockquote>
+<p><strong>n_contents</strong> : int</p>
+<blockquote>
+<div><p>Size of content population</p>
+</div></blockquote>
+<p><strong>seed</strong> : int, optional</p>
+<blockquote>
+<div><p>The seed used for random number generation</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
+<blockquote class="last">
+<div><p>The topology object</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-icarus.scenarios.workload">
+<span id="workload-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">workload</span></tt> Module<a class="headerlink" href="#module-icarus.scenarios.workload" title="Permalink to this headline">¶</a></h2>
+<p>Functions for generating traffic workloads</p>
+<dl class="function">
+<dt id="icarus.scenarios.workload.uniform_req_gen">
+<tt class="descname">uniform_req_gen</tt><big>(</big><em>topology</em>, <em>n_contents</em>, <em>alpha</em>, <em>rate=12.0</em>, <em>n_warmup=100000</em>, <em>n_measured=400000</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/workload.html#uniform_req_gen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.workload.uniform_req_gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function generates events on the fly, i.e. instead of creating an 
+event schedule to be kept in memory, returns an iterator that generates
+events when needed.</p>
+<p>This is useful for running large schedules of events where RAM is limited
+as its memory impact is considerably lower.</p>
+<p>These requests are Poisson-distributed while content popularity is
+Zipf-distributed</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
+<blockquote>
+<div><p>The topology to which the workload refers</p>
+</div></blockquote>
+<p><strong>n_contents</strong> : int</p>
+<blockquote>
+<div><p>The number of content object</p>
+</div></blockquote>
+<p><strong>alpha</strong> : float</p>
+<blockquote>
+<div><p>The Zipf alpha parameter</p>
+</div></blockquote>
+<p><strong>rate</strong> : float</p>
+<blockquote>
+<div><p>The mean rate of requests per second</p>
+</div></blockquote>
+<p><strong>n_warmup</strong> : int</p>
+<blockquote>
+<div><p>The number of warmup requests (i.e. requests executed to fill cache but
+not logged)</p>
+</div></blockquote>
+<p><strong>n_measured</strong> : int</p>
+<blockquote>
+<div><p>The number of logged requests after the warmup</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>events</strong> : iterator</p>
+<blockquote class="last">
+<div><p>Iterator of events. Each event is a 2-tuple where the first element is
+the timestamp at which the event occurs and the second element is a
+dictionary of event attributes.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.scenarios.workload.globetraff_req_gen">
+<tt class="descname">globetraff_req_gen</tt><big>(</big><em>topology</em>, <em>content_file</em>, <em>request_file</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/workload.html#globetraff_req_gen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.workload.globetraff_req_gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse requests from GlobeTraff workload generator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
+<blockquote>
+<div><p>The topology to which the workload refers</p>
+</div></blockquote>
+<p><strong>content_file</strong> : str</p>
+<blockquote>
+<div><p>The GlobeTraff content file</p>
+</div></blockquote>
+<p><strong>request_file</strong> : str</p>
+<blockquote class="last">
+<div><p>The GlobeTraff request file</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="icarus.tools.html" title="tools Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="icarus.results.html" title="results Package"
+             >previous</a> |</li>
+        <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="icarus.html" >icarus Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,762 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>icarus.models.cache &mdash; Icarus 0.2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Icarus 0.2.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for icarus.models.cache</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;Cache replacement policies implementations</span>
+
+<span class="sd">This module contains the implementations of all the cache replacement policies</span>
+<span class="sd">provided by Icarus.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">abc</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">icarus.util</span> <span class="kn">import</span> <span class="n">inheritdoc</span>
+<span class="kn">from</span> <span class="nn">icarus.registry</span> <span class="kn">import</span> <span class="n">register_cache_policy</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s">&#39;Node&#39;</span><span class="p">,</span>
+        <span class="s">&#39;Cache&#39;</span><span class="p">,</span>
+        <span class="s">&#39;NullCache&#39;</span><span class="p">,</span>
+        <span class="s">&#39;LruCache&#39;</span><span class="p">,</span>
+        <span class="s">&#39;LfuCache&#39;</span><span class="p">,</span>
+        <span class="s">&#39;FifoCache&#39;</span><span class="p">,</span>
+        <span class="s">&#39;RandCache&#39;</span><span class="p">,</span>
+        <span class="s">&#39;set_rand_insert&#39;</span>
+           <span class="p">]</span>
+
+
+<div class="viewcode-block" id="Node"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.Node">[docs]</a><span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Node of a linked list</span>
+<span class="sd">    </span>
+<span class="sd">    This class is used for implementing cache eviction policies relying on</span>
+<span class="sd">    doubly-linked lists for their implementation.</span>
+<span class="sd">    </span>
+<span class="sd">    This class is used for example by the LRU replacement policy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        down : Node</span>
+<span class="sd">            Pointer to the.downious node of the list</span>
+<span class="sd">        val : any hashable type</span>
+<span class="sd">            Object stored by this node</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down</span> <span class="o">=</span> <span class="n">down</span>        <span class="c"># Pointer to node down the chain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>          <span class="c"># Object stored by this node</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="bp">None</span>          <span class="c"># Pointer to node up the chain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c"># Number of hits of this object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c"># Time this object was created</span>
+
+</div>
+<div class="viewcode-block" id="Cache"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.Cache">[docs]</a><span class="k">class</span> <span class="nc">Cache</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base implementation of a cache object&quot;&quot;&quot;</span>
+    
+    <span class="nd">@abc.abstractmethod</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxlen</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        maxlen : int</span>
+<span class="sd">            The maximum number of items the cache can store</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;This method is not implemented&#39;</span><span class="p">)</span>
+    
+    <span class="nd">@abc.abstractmethod</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the number of items currently stored in the cache</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        len : int</span>
+<span class="sd">            The number of items currently in the cache</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;This method is not implemented&#39;</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="nd">@abc.abstractmethod</span>
+<div class="viewcode-block" id="Cache.maxlen"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.Cache.maxlen">[docs]</a>    <span class="k">def</span> <span class="nf">maxlen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the maximum number of items the cache can store</span>
+<span class="sd">        </span>
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        maxlen : int</span>
+<span class="sd">            The maximum number of items the cache can store </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;This method is not implemented&#39;</span><span class="p">)</span>
+</div>
+    <span class="nd">@abc.abstractmethod</span>
+<div class="viewcode-block" id="Cache.dump"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.Cache.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a dump of all the elements currently in the cache possibly</span>
+<span class="sd">        sorted according to the eviction policy.</span>
+<span class="sd">        </span>
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        cache_dump : list</span>
+<span class="sd">            The list of all items currently stored in the cache</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;This method is not implemented&#39;</span><span class="p">)</span>
+</div>
+    <span class="nd">@abc.abstractmethod</span>
+<div class="viewcode-block" id="Cache.has"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.Cache.has">[docs]</a>    <span class="k">def</span> <span class="nf">has</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if an item is in the cache without changing the internal</span>
+<span class="sd">        state of the caching object.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item looked up in the cache</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        v : bool</span>
+<span class="sd">            Boolean value being *True* if the requested item is in the cache</span>
+<span class="sd">            or *False* otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;This method is not implemented&#39;</span><span class="p">)</span>    
+</div>
+    <span class="nd">@abc.abstractmethod</span>
+<div class="viewcode-block" id="Cache.get"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.Cache.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves an item from the cache. Differently from *has(k)*,</span>
+<span class="sd">        calling this method may change the internal state of the caching</span>
+<span class="sd">        object depending on the specific cache implementation.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item looked up in the cache</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        v : bool</span>
+<span class="sd">            Boolean value being *True* if the requested item is in the cache</span>
+<span class="sd">            or *False* otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;This method is not implemented&#39;</span><span class="p">)</span> 
+</div>
+    <span class="nd">@abc.abstractmethod</span>
+<div class="viewcode-block" id="Cache.put"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.Cache.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Insert an item in the cache if not already inserted.</span>
+<span class="sd">        </span>
+<span class="sd">        If the element is already present in the cache, it will not be inserted</span>
+<span class="sd">        again but the internal state of the cache object may change.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item to be inserted</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        evicted : any hashable type</span>
+<span class="sd">            The evicted object or *None* if no contents were evicted.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;This method is not implemented&#39;</span><span class="p">)</span>
+    </div>
+    <span class="nd">@abc.abstractmethod</span>
+<div class="viewcode-block" id="Cache.clear"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.Cache.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Empty the cache</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;This method is not implemented&#39;</span><span class="p">)</span>
+
+
+</div></div>
+<span class="nd">@register_cache_policy</span><span class="p">(</span><span class="s">&#39;NULL&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="NullCache"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.NullCache">[docs]</a><span class="k">class</span> <span class="nc">NullCache</span><span class="p">(</span><span class="n">Cache</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Implementation of a null cache.</span>
+<span class="sd">    </span>
+<span class="sd">    This is a dummy cache which never stores anything. It is functionally</span>
+<span class="sd">    identical to a cache with max size equal to 0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+     
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        maxlen : int, optional</span>
+<span class="sd">            The max length of the cache. This parameters is always ignored</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the number of items currently stored in the cache.</span>
+<span class="sd">        </span>
+<span class="sd">        Since this is a dummy cache implementation, it is always empty</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        len : int</span>
+<span class="sd">            The number of items currently in the cache. It is always 0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="NullCache.maxlen"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.NullCache.maxlen">[docs]</a>    <span class="k">def</span> <span class="nf">maxlen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the maximum number of items the cache can store.</span>
+<span class="sd">        </span>
+<span class="sd">        Since this is a dummy cache implementation, this value is 0.</span>
+<span class="sd">        </span>
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        maxlen : int</span>
+<span class="sd">            The maximum number of items the cache can store. It is always 0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    </div>
+<div class="viewcode-block" id="NullCache.dump"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.NullCache.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of all the elements currently in the cache.</span>
+<span class="sd">        </span>
+<span class="sd">        In this case it is always an empty list.</span>
+<span class="sd">        </span>
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        cache_dump : list</span>
+<span class="sd">            An empty list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[]</span>
+</div>
+<div class="viewcode-block" id="NullCache.has"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.NullCache.has">[docs]</a>    <span class="k">def</span> <span class="nf">has</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if an item is in the cache without changing the internal</span>
+<span class="sd">        state of the caching object.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item looked up in the cache</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        v : bool</span>
+<span class="sd">            Boolean value being *True* if the requested item is in the cache</span>
+<span class="sd">            or *False* otherwise. It alwasy returns *False*</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="NullCache.get"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.NullCache.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves an item from the cache.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item looked up in the cache</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        v : bool</span>
+<span class="sd">            Boolean value being *True* if the requested item is in the cache</span>
+<span class="sd">            or *False* otherwise. It always returns False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="NullCache.put"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.NullCache.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Insert an item in the cache if not already inserted.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item to be inserted</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        evicted : any hashable type</span>
+<span class="sd">            The evicted object or *None* if no contents were evicted.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="NullCache.clear"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.NullCache.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+</div></div>
+<span class="nd">@register_cache_policy</span><span class="p">(</span><span class="s">&#39;LRU&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="LruCache"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LruCache">[docs]</a><span class="k">class</span> <span class="nc">LruCache</span><span class="p">(</span><span class="n">Cache</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Least Recently Used (LRU) cache eviction policy.</span>
+<span class="sd">    </span>
+<span class="sd">    According to this policy, When a new item needs to inserted into the cache,</span>
+<span class="sd">    it evicts the least recently requested one.</span>
+<span class="sd">    This eviction policy is efficient for line speed operations because both</span>
+<span class="sd">    search and replacement tasks can be performed in constant time (*O(1)*).</span>
+<span class="sd">    </span>
+<span class="sd">    This policy has been shown to perform well in the presence of temporal</span>
+<span class="sd">    locality in the request pattern. However, its performance drops under the</span>
+<span class="sd">    Independent Reference Model (IRM) assumption (i.e. the probability that an</span>
+<span class="sd">    item is requested is not dependent on previous requests).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+        
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxlen</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">maxlen</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;maxlen must be positive&#39;</span><span class="p">)</span>
+
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="LruCache.maxlen"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LruCache.maxlen">[docs]</a>    <span class="k">def</span> <span class="nf">maxlen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span>
+    </div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="LruCache.dump"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LruCache.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span>
+        <span class="k">while</span> <span class="n">cur</span><span class="p">:</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">down</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="LruCache.position"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LruCache.position">[docs]</a>    <span class="k">def</span> <span class="nf">position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the current position of an item in the cache. Position *0*</span>
+<span class="sd">        refers to the head of cache (i.e. most recently used item), while</span>
+<span class="sd">        position *maxlen - 1* refers to the tail of the cache (i.e. the least</span>
+<span class="sd">        recently used item).</span>
+<span class="sd">        </span>
+<span class="sd">        This method does not change the internal state of the cache.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item looked up in the cache</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        position : int</span>
+<span class="sd">            The current position of the item in the cache</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;The item </span><span class="si">%s</span><span class="s"> is not in the cache&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span>
+        <span class="k">while</span> <span class="n">cur</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cur</span><span class="o">.</span><span class="n">val</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">index</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">down</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+</div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="LruCache.has"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LruCache.has">[docs]</a>    <span class="k">def</span> <span class="nf">has</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span>
+            </div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="LruCache.get"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LruCache.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="c"># search content over the list</span>
+        <span class="c"># if it has it push on top, otherwise return false</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="o">.</span><span class="n">up</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span> <span class="c"># Content is already on top</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">down</span><span class="p">:</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">down</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">up</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">up</span> <span class="c"># The.bottom node (bottom) now points to the 2nd node</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">up</span><span class="o">.</span><span class="n">down</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">down</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="LruCache.put"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LruCache.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Insert an item in the cache if not already inserted.</span>
+<span class="sd">        </span>
+<span class="sd">        If the element is already present in the cache, it will pushed to the</span>
+<span class="sd">        top of the cache.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item to be inserted</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        evicted : any hashable type</span>
+<span class="sd">            The evicted object or *None* if no contents were evicted.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># if content in cache, push it on top</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="c"># if content not in cache append it on top</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="c"># If I reach cache size limit, evict a content</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxlen</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>    
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span>
+        <span class="n">evicted</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">val</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">up</span><span class="o">.</span><span class="n">down</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">up</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">evicted</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">a</span>
+        <span class="k">return</span> <span class="n">evicted</span>
+</div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="LruCache.clear"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LruCache.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">=</span> <span class="bp">None</span>
+
+
+            
+</div></div>
+<span class="nd">@register_cache_policy</span><span class="p">(</span><span class="s">&#39;LFU&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="LfuCache"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LfuCache">[docs]</a><span class="k">class</span> <span class="nc">LfuCache</span><span class="p">(</span><span class="n">Cache</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Least Frequently Used (LFU) cache implementation</span>
+<span class="sd">    </span>
+<span class="sd">    The LFU replacement policy keeps a counter associated each item. Such</span>
+<span class="sd">    counters are increased when the associated item is requested. Upon</span>
+<span class="sd">    insertion of a new item, the cache evicts the one which was requested the</span>
+<span class="sd">    least times in the past, i.e. the one whose associated value has the</span>
+<span class="sd">    smallest value.</span>
+<span class="sd">    </span>
+<span class="sd">    In contrast to LRU, LFU has been shown to perform optimally under IRM</span>
+<span class="sd">    demands. However, its implementation is computationally expensive since it</span>
+<span class="sd">    cannot be implemented in such a way that both search and replacement tasks</span>
+<span class="sd">    can be executed in constant time. This makes it particularly unfit for</span>
+<span class="sd">    large caches and line speed operations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxlen</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">maxlen</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;maxlen must be positive&#39;</span><span class="p">)</span>
+
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="LfuCache.maxlen"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LfuCache.maxlen">[docs]</a>    <span class="k">def</span> <span class="nf">maxlen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span>
+    </div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="LfuCache.dump"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LfuCache.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> 
+</div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="LfuCache.has"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LfuCache.has">[docs]</a>    <span class="k">def</span> <span class="nf">has</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span>
+</div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="LfuCache.get"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LfuCache.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">freq</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">t</span> 
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+</div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="LfuCache.put"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LfuCache.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span><span class="p">:</span>
+                <span class="n">evicted</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">evicted</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">evicted</span>
+        <span class="k">return</span> <span class="bp">None</span>
+        </div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="LfuCache.clear"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LfuCache.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+
+</div></div>
+<span class="nd">@register_cache_policy</span><span class="p">(</span><span class="s">&#39;FIFO&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="FifoCache"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.FifoCache">[docs]</a><span class="k">class</span> <span class="nc">FifoCache</span><span class="p">(</span><span class="n">Cache</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;First In First Out (FIFO) cache implementation.</span>
+<span class="sd">    </span>
+<span class="sd">    According to the FIFO policy, when a new item is inserted, the evicted item</span>
+<span class="sd">    is the first one inserted in the cache. The behavior of this policy differs</span>
+<span class="sd">    from LRU only when an item already present in the cache is requested.</span>
+<span class="sd">    In fact, while in LRU this item would be pushed to the top of the cache, in</span>
+<span class="sd">    FIFO no movement is performed. The FIFO policy has a slightly simpler</span>
+<span class="sd">    implementation in comparison to the LRU policy but yields worse performance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxlen</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">maxlen</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;maxlen must be positive&#39;</span><span class="p">)</span>
+    
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="FifoCache.maxlen"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.FifoCache.maxlen">[docs]</a>    <span class="k">def</span> <span class="nf">maxlen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span>
+    </div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="FifoCache.dump"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.FifoCache.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span>
+</div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="FifoCache.has"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.FifoCache.has">[docs]</a>    <span class="k">def</span> <span class="nf">has</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span>
+</div>
+<div class="viewcode-block" id="FifoCache.position"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.FifoCache.position">[docs]</a>    <span class="k">def</span> <span class="nf">position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the current position of an item in the cache. Position *0*</span>
+<span class="sd">        refers to the head of cache (i.e. most recently inserted item), while</span>
+<span class="sd">        position *maxlen - 1* refers to the tail of the cache (i.e. the least</span>
+<span class="sd">        recently inserted item).</span>
+<span class="sd">        </span>
+<span class="sd">        This method does not change the internal state of the cache.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item looked up in the cache</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        position : int</span>
+<span class="sd">            The current position of the item in the cache</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;The item </span><span class="si">%s</span><span class="s"> is not in the cache&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+                 </div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="FifoCache.get"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.FifoCache.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+             </div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="FifoCache.put"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.FifoCache.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="n">evicted</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxlen</span><span class="p">:</span>
+            <span class="n">evicted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">evicted</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">evicted</span>
+    </div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="FifoCache.clear"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.FifoCache.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+</div></div>
+<span class="nd">@register_cache_policy</span><span class="p">(</span><span class="s">&#39;RAND&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="RandCache"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.RandCache">[docs]</a><span class="k">class</span> <span class="nc">RandCache</span><span class="p">(</span><span class="n">Cache</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Random eviction cache implementation.</span>
+<span class="sd">    </span>
+<span class="sd">    This class implements a cache whereby the item to evict in case of a full</span>
+<span class="sd">    cache is randomly selected. It generally yields poor performance in terms</span>
+<span class="sd">    of cache hits but is sometimes used as baseline and for this reason it has</span>
+<span class="sd">    been implemented here.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxlen</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">maxlen</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">maxlen</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;maxlen must be positive&#39;</span><span class="p">)</span>
+
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="RandCache.maxlen"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.RandCache.maxlen">[docs]</a>    <span class="k">def</span> <span class="nf">maxlen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span>
+</div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="RandCache.dump"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.RandCache.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> 
+</div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="RandCache.has"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.RandCache.has">[docs]</a>    <span class="k">def</span> <span class="nf">has</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span>
+</div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="RandCache.get"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.RandCache.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="RandCache.put"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.RandCache.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="n">evicted</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span><span class="p">:</span>
+                <span class="n">evicted_index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxlen</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">evicted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="n">evicted_index</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="n">evicted_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">evicted</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)]</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">evicted</span>
+    </div>
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
+<div class="viewcode-block" id="RandCache.clear"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.RandCache.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    </div></div>
+<div class="viewcode-block" id="set_rand_insert"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.set_rand_insert">[docs]</a><span class="k">def</span> <span class="nf">set_rand_insert</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;It modifies the instance of a cache object such that contents are</span>
+<span class="sd">    inserted randomly instead of deterministically.</span>
+<span class="sd">    </span>
+<span class="sd">    This function modifies the behavior of the *put* method of a given cache</span>
+<span class="sd">    instance such that it inserts contents randomly with a given probability</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cache : Cache</span>
+<span class="sd">        The instance of a cache to be applied random insertion</span>
+<span class="sd">    p : float</span>
+<span class="sd">        the insert probability</span>
+<span class="sd">    seed : any hashable type, optional</span>
+<span class="sd">        The seed of the random number generator</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">Cache</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;cache must be an instance of Cache or its subclasses&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;p must be a value between 0 and 1&#39;</span><span class="p">)</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">put</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">put</span>
+    <span class="k">def</span> <span class="nf">rand_put</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">put</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">put</span> <span class="o">=</span> <span class="n">rand_put</span>
+    <span class="k">return</span> <span class="n">cache</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

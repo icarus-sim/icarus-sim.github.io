@@ -1,0 +1,35 @@
+execution Package
+=================
+
+:mod:`execution` Package
+------------------------
+
+.. automodule:: icarus.execution
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`collectors` Module
+------------------------
+
+.. automodule:: icarus.execution.collectors
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`engine` Module
+--------------------
+
+.. automodule:: icarus.execution.engine
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`network` Module
+---------------------
+
+.. automodule:: icarus.execution.network
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

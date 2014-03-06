@@ -1,0 +1,27 @@
+results Package
+===============
+
+:mod:`results` Package
+----------------------
+
+.. automodule:: icarus.results
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`plot` Module
+------------------
+
+.. automodule:: icarus.results.plot
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`readwrite` Module
+-----------------------
+
+.. automodule:: icarus.results.readwrite
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

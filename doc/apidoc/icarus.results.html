@@ -1,0 +1,648 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>results Package &mdash; Icarus 0.2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Icarus 0.2.1 documentation" href="../index.html" />
+    <link rel="up" title="icarus Package" href="icarus.html" />
+    <link rel="next" title="scenarios Package" href="icarus.scenarios.html" />
+    <link rel="prev" title="models Package" href="icarus.models.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="icarus.scenarios.html" title="scenarios Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="icarus.models.html" title="models Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="icarus.html" accesskey="U">icarus Package</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">results Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">results</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-icarus.results.plot"><tt class="docutils literal"><span class="pre">plot</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-icarus.results.readwrite"><tt class="docutils literal"><span class="pre">readwrite</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="icarus.models.html"
+                        title="previous chapter">models Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="icarus.scenarios.html"
+                        title="next chapter">scenarios Package</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="results-package">
+<h1>results Package<a class="headerlink" href="#results-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">results</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-icarus.results"></span><p>This package contains the code in charge of processing experiment results.</p>
+</div>
+<div class="section" id="module-icarus.results.plot">
+<span id="plot-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">plot</span></tt> Module<a class="headerlink" href="#module-icarus.results.plot" title="Permalink to this headline">¶</a></h2>
+<p>Plot results read from a resultset</p>
+<dl class="function">
+<dt id="icarus.results.plot.main">
+<tt class="descname">main</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.plot_bar_graph">
+<tt class="descname">plot_bar_graph</tt><big>(</big><em>resultset</em>, <em>desc</em>, <em>filename</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_bar_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_bar_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a bar chart with characteristics described in the plot descriptor
+out of the data contained in the resultset and save the plot in given
+directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>rs</strong> : ResultSet</p>
+<blockquote>
+<div><p>Result set</p>
+</div></blockquote>
+<p><strong>desc</strong> : dict</p>
+<blockquote>
+<div><p>The plot descriptor (more info below)</p>
+</div></blockquote>
+<p><strong>filename</strong> : str</p>
+<blockquote>
+<div><p>The name used to save the file. The file format is determined by the
+extension of the file. For example, if this filename is &#8216;foo.pdf&#8217;, the
+file will be saved in pdf format.</p>
+</div></blockquote>
+<p><strong>plotdir</strong> : str</p>
+<blockquote class="last">
+<div><p>The directory in which the plot will be saved.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The plot descriptor is a dictionary with a set of values that describe how
+to make the plot.</p>
+<dl class="docutils">
+<dt>The dictionary can contain the following keys:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>title <span class="classifier-delimiter">:</span> <span class="classifier">str, optional.</span></dt>
+<dd><p class="first last">The title of the graph</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xlabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">The x label</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ylabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">The y label</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>errorbar <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em> error bars will be plotted. Default value is <em>True</em></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>confidence <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">The confidence used to plot error bars. Default value is 0.95</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>metric <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span></dt>
+<dd><p class="first last">A tuple of 2-values representing the metric to plot.
+The first value is the name of the collector which measured the metric
+and the second value is the metric name. Example values could
+(&#8216;CACHE_HIT_RATIO&#8217;, &#8216;MEAN&#8217;), (&#8216;LINK_LOAD&#8217;, &#8216;MEAN_INTERNAL&#8217;) or 
+(&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>filter <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">A dictionary of values to filter in the resultset.
+Example: {&#8216;network_cache&#8217;: 0.004, &#8216;topology_name&#8217;: &#8216;GEANT&#8217;}</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xparam <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The name of the x axis metric, e.g. &#8216;alpha&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xvals <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">Range of x values, e.g. [0.6, 0.7, 0.8, 0.9]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>yparam <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The name of the y metric, e.g. &#8216;strategy&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>yvals <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of lines plotted. For example. if yparam = &#8216;strategy_name&#8217;, then
+a valid yvals value could be [&#8216;HR_SYMM&#8217;, &#8216;HR_ASYMM&#8217;]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>bar_color <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Dictionary mapping each value of yvals with a bar color</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>bar_hatch <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Dictionary mapping each value of yvals with a bar hatch</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>legend <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Dictionary mapping each value of yvals with a legend label</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>plotempty <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, plot and save graph even if empty. Default is <em>True</em></p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.plot_cache_hits_vs_alpha">
+<tt class="descname">plot_cache_hits_vs_alpha</tt><big>(</big><em>resultset</em>, <em>topology</em>, <em>cache_size</em>, <em>alpha_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_cache_hits_vs_alpha"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_cache_hits_vs_alpha" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.plot_cache_hits_vs_cache_size">
+<tt class="descname">plot_cache_hits_vs_cache_size</tt><big>(</big><em>resultset</em>, <em>topology</em>, <em>alpha</em>, <em>cache_size_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_cache_hits_vs_cache_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_cache_hits_vs_cache_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.plot_cache_hits_vs_topology">
+<tt class="descname">plot_cache_hits_vs_topology</tt><big>(</big><em>resultset</em>, <em>alpha</em>, <em>cache_size</em>, <em>topology_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_cache_hits_vs_topology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_cache_hits_vs_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot bar graphs of cache hit ratio for specific values of alpha and cache
+size for various topologies.</p>
+<p>The objective here is to show that our algorithms works well on all
+topologies considered</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.plot_latency_vs_alpha">
+<tt class="descname">plot_latency_vs_alpha</tt><big>(</big><em>resultset</em>, <em>topology</em>, <em>cache_size</em>, <em>alpha_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_latency_vs_alpha"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_latency_vs_alpha" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.plot_latency_vs_cache_size">
+<tt class="descname">plot_latency_vs_cache_size</tt><big>(</big><em>resultset</em>, <em>topology</em>, <em>alpha</em>, <em>cache_size_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_latency_vs_cache_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_latency_vs_cache_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.plot_lines">
+<tt class="descname">plot_lines</tt><big>(</big><em>resultset</em>, <em>desc</em>, <em>filename</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a graph with characteristics described in the plot descriptor out
+of the data contained in the resultset and save the plot in given directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>rs</strong> : ResultSet</p>
+<blockquote>
+<div><p>Result set</p>
+</div></blockquote>
+<p><strong>desc</strong> : dict</p>
+<blockquote>
+<div><p>The plot descriptor (more info below)</p>
+</div></blockquote>
+<p><strong>filename</strong> : str</p>
+<blockquote>
+<div><p>The name used to save the file. The file format is determined by the
+extension of the file. For example, if this filename is &#8216;foo.pdf&#8217;, the
+file will be saved in pdf format.</p>
+</div></blockquote>
+<p><strong>plotdir</strong> : str</p>
+<blockquote class="last">
+<div><p>The directory in which the plot will be saved.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The plot descriptor is a dictionary with a set of values that describe how
+to make the plot.</p>
+<dl class="docutils">
+<dt>The dictionary can contain the following keys:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>title <span class="classifier-delimiter">:</span> <span class="classifier">str, optional.</span></dt>
+<dd><p class="first last">The title of the graph</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xlabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">The x label</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ylabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">The y label</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>errorbar <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em> error bars will be plotted. Default value is <em>True</em></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>confidence <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">The confidence used to plot error bars. Default value is 0.95</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>metric <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span></dt>
+<dd><p class="first last">A tuple of 2-values representing the metric to plot.
+The first value is the name of the collector which measured the metric
+and the second value is the metric name. Example values could
+(&#8216;CACHE_HIT_RATIO&#8217;, &#8216;MEAN&#8217;), (&#8216;LINK_LOAD&#8217;, &#8216;MEAN_INTERNAL&#8217;) or 
+(&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>filter <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">A dictionary of values to filter in the resultset.
+Example: {&#8216;network_cache&#8217;: 0.004, &#8216;topology_name&#8217;: &#8216;GEANT&#8217;}</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xparam <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The name of the x axis metric, e.g. &#8216;alpha&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xvals <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">Range of x values, e.g. [0.6, 0.7, 0.8, 0.9]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>yparam <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The name of the y metric, e.g. &#8216;strategy&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>yvals <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of lines plotted. For example. if yparam = &#8216;strategy_name&#8217;, then
+a valid yvals value could be [&#8216;HR_SYMM&#8217;, &#8216;HR_ASYMM&#8217;]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xscale <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">The scale of x axis. Options allowed are &#8216;linear&#8217; and &#8216;log&#8217;. 
+Default value is &#8216;linear&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>yscale <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">The scale of y axis. Options allowed are &#8216;linear&#8217; and &#8216;log&#8217;.
+Default value is &#8216;linear&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>line_style <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Dictionary mapping each value of yvals with a line style</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>legend <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Dictionary mapping each value of yvals with a legend label</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>plotempty <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, plot and save graph even if empty. Default is <em>True</em></p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.plot_link_load_vs_alpha">
+<tt class="descname">plot_link_load_vs_alpha</tt><big>(</big><em>resultset</em>, <em>topology</em>, <em>cache_size</em>, <em>alpha_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_link_load_vs_alpha"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_link_load_vs_alpha" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.plot_link_load_vs_cache_size">
+<tt class="descname">plot_link_load_vs_cache_size</tt><big>(</big><em>resultset</em>, <em>topology</em>, <em>alpha</em>, <em>cache_size_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_link_load_vs_cache_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_link_load_vs_cache_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.plot_link_load_vs_topology">
+<tt class="descname">plot_link_load_vs_topology</tt><big>(</big><em>resultset</em>, <em>alpha</em>, <em>cache_size</em>, <em>topology_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_link_load_vs_topology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_link_load_vs_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot bar graphs of link load for specific values of alpha and cache
+size for various topologies.</p>
+<p>The objective here is to show that our algorithms works well on all
+topologies considered</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.run">
+<tt class="descname">run</tt><big>(</big><em>config</em>, <em>results</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the plot script</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>config</strong> : str</p>
+<blockquote>
+<div><p>The path of the configuration file</p>
+</div></blockquote>
+<p><strong>results</strong> : str</p>
+<blockquote>
+<div><p>The file storing the experiment results</p>
+</div></blockquote>
+<p><strong>plotdir</strong> : str</p>
+<blockquote class="last">
+<div><p>The directory into which graphs will be saved</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-icarus.results.readwrite">
+<span id="readwrite-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">readwrite</span></tt> Module<a class="headerlink" href="#module-icarus.results.readwrite" title="Permalink to this headline">¶</a></h2>
+<p>Functions for reading and writing results</p>
+<dl class="class">
+<dt id="icarus.results.readwrite.ResultSet">
+<em class="property">class </em><tt class="descname">ResultSet</tt><a class="reference internal" href="../_modules/icarus/results/readwrite.html#ResultSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.ResultSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>This class can be used to store results from different experiments,
+accessed and filtered.</p>
+<p>All operations that write data are thread-safe so that this object can 
+be shared by different processes.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="icarus.results.readwrite.ResultSet.add">
+<tt class="descname">add</tt><big>(</big><em>result</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/readwrite.html#ResultSet.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.ResultSet.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a result to the result set. This method is thread safe</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>results</strong> : 2-value tuple</p>
+<blockquote class="last">
+<div><p>2-value tuples where the first value is a dictionary of experiment
+parameters and the second value is the dictionary of experiment
+results</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.results.readwrite.ResultSet.dump">
+<tt class="descname">dump</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/results/readwrite.html#ResultSet.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.ResultSet.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump all results.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>results</strong> : list</p>
+<blockquote class="last">
+<div><p>A list of 2-value tuples where the first value is the dictionary
+of experiment parameters and the second value is the dictionary
+of experiment results.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.results.readwrite.ResultSet.filter">
+<tt class="descname">filter</tt><big>(</big><em>parameters</em>, <em>metrics=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/readwrite.html#ResultSet.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.ResultSet.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return subset of results matching specific conditions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>parameters</strong> : dict</p>
+<blockquote>
+<div><p>Dictionary listing all parameters and values to be matched in the
+results set</p>
+</div></blockquote>
+<p><strong>metrics</strong> : dict, optional</p>
+<blockquote>
+<div><p>List of metrics to be reported</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>filtered_results</strong> : list</p>
+<blockquote class="last">
+<div><p>List of 2-tuples of filtered results, where the first element is a
+dictionary of all experiment parameters and the second value is 
+a dictionary with experiment results.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.readwrite.write_results_pickle">
+<tt class="descname">write_results_pickle</tt><big>(</big><em>results</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/readwrite.html#write_results_pickle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.write_results_pickle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a resultset to a pickle file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>results</strong> : ResultSet</p>
+<blockquote>
+<div><p>The set of results</p>
+</div></blockquote>
+<p><strong>path</strong> : str</p>
+<blockquote class="last">
+<div><p>The path of the file to which write</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.readwrite.read_results_pickle">
+<tt class="descname">read_results_pickle</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/readwrite.html#read_results_pickle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.read_results_pickle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a resultset from a pickle file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>path</strong> : str</p>
+<blockquote>
+<div><p>The file path from which results are read</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>results</strong> : ResultSet</p>
+<blockquote class="last">
+<div><p>The read result set</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="icarus.scenarios.html" title="scenarios Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="icarus.models.html" title="models Package"
+             >previous</a> |</li>
+        <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="icarus.html" >icarus Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

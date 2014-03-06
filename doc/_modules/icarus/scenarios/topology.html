@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>icarus.scenarios.topology &mdash; Icarus 0.2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Icarus 0.2.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for icarus.scenarios.topology</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;This module contains functions for creating or importing topologies for the</span>
+<span class="sd">experiments.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">fnss</span>
+
+<span class="kn">from</span> <span class="nn">icarus.scenarios</span> <span class="kn">import</span> <span class="n">uniform_cache_placement</span><span class="p">,</span> <span class="n">uniform_content_placement</span>
+<span class="kn">from</span> <span class="nn">icarus.registry</span> <span class="kn">import</span> <span class="n">register_topology_factory</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s">&#39;topology_binary_tree&#39;</span><span class="p">,</span>
+        <span class="s">&#39;topology_path&#39;</span><span class="p">,</span>
+        <span class="s">&#39;topology_geant&#39;</span><span class="p">,</span>
+        <span class="s">&#39;topology_tiscali&#39;</span><span class="p">,</span>
+        <span class="s">&#39;topology_wide&#39;</span><span class="p">,</span>
+        <span class="s">&#39;topology_garr&#39;</span><span class="p">,</span>
+           <span class="p">]</span>
+
+
+<span class="c"># Delays</span>
+<span class="c"># These values are suggested by this Computer Networks 2011 paper:</span>
+<span class="c"># http://www.cs.ucla.edu/classes/winter09/cs217/2011CN_NameRouting.pdf</span>
+<span class="c"># which is citing as source of this data, measurements from this IMC&#39;06 paper:</span>
+<span class="c"># http://www.mpi-sws.org/~druschel/publications/ds2-imc.pdf</span>
+<span class="n">INTERNAL_LINK_DELAY</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">EXTERNAL_LINK_DELAY</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">34</span>
+
+
+<span class="n">TOPOLOGY_RESOURCES_DIR</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> 
+                                                <span class="n">path</span><span class="o">.</span><span class="n">pardir</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">pardir</span><span class="p">,</span> 
+                                                <span class="s">&#39;resources&#39;</span><span class="p">,</span> <span class="s">&#39;topologies&#39;</span><span class="p">))</span>
+
+
+<span class="nd">@register_topology_factory</span><span class="p">(</span><span class="s">&#39;BINARY_TREE&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="topology_binary_tree"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.topology_binary_tree">[docs]</a><span class="k">def</span> <span class="nf">topology_binary_tree</span><span class="p">(</span><span class="n">network_cache</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">n_contents</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a tree topology</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    network_cache : float</span>
+<span class="sd">        Size of network cache (sum of all caches) normalized by size of content</span>
+<span class="sd">        population</span>
+<span class="sd">    n_contents : int</span>
+<span class="sd">        Size of content population</span>
+<span class="sd">    seed : int, optional</span>
+<span class="sd">        The seed used for random number generation</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    topology : fnss.Topology</span>
+<span class="sd">        The topology object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mi">5</span>       <span class="c"># depth of the tree</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">k_ary_tree_topology</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">receivers</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes_iter</span><span class="p">()</span>
+                 <span class="k">if</span> <span class="n">topology</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;depth&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">h</span><span class="p">]</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes_iter</span><span class="p">()</span>
+               <span class="k">if</span> <span class="n">topology</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;depth&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">caches</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes_iter</span><span class="p">()</span>
+              <span class="k">if</span> <span class="n">topology</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;depth&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+              <span class="ow">and</span> <span class="n">topology</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;depth&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">h</span><span class="p">]</span>
+    <span class="c"># randomly allocate contents to sources</span>
+    <span class="n">content_placement</span> <span class="o">=</span> <span class="n">uniform_content_placement</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_contents</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">sources</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;contents&#39;</span><span class="p">:</span> <span class="n">content_placement</span><span class="p">[</span><span class="n">v</span><span class="p">]})</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;receiver&#39;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">cache_placement</span> <span class="o">=</span> <span class="n">uniform_cache_placement</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">network_cache</span><span class="o">*</span><span class="n">n_contents</span><span class="p">,</span> <span class="n">caches</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">cache_placement</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s">&#39;cache&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">size</span><span class="p">})</span>
+    <span class="c"># set weights and delays on all links</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
+    <span class="c"># label links as internal or external</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">edges_iter</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">sources</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;external&#39;</span>
+            <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">EXTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;internal&#39;</span>
+    <span class="k">return</span> <span class="n">topology</span>
+
+</div>
+<span class="nd">@register_topology_factory</span><span class="p">(</span><span class="s">&#39;PATH&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="topology_path"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.topology_path">[docs]</a><span class="k">def</span> <span class="nf">topology_path</span><span class="p">(</span><span class="n">network_cache</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">n_contents</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a scenario based on path topology</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    network_cache : float</span>
+<span class="sd">        Size of network cache (sum of all caches) normalized by size of content</span>
+<span class="sd">        population</span>
+<span class="sd">    n_contents : int</span>
+<span class="sd">        Size of content population</span>
+<span class="sd">    seed : int, optional</span>
+<span class="sd">        The seed used for random number generation</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    topology : fnss.Topology</span>
+<span class="sd">        The topology object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># 240 nodes in the main component</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">line_topology</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">receivers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>    
+    <span class="n">caches</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c"># randomly allocate contents to sources</span>
+    <span class="n">content_placement</span> <span class="o">=</span> <span class="n">uniform_content_placement</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_contents</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">sources</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;contents&#39;</span><span class="p">:</span> <span class="n">content_placement</span><span class="p">[</span><span class="n">v</span><span class="p">]})</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;receiver&#39;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="c"># set weights and delays on all links</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
+    <span class="c"># label links as internal or external</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">edges_iter</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">sources</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;external&#39;</span>
+            <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">EXTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;internal&#39;</span>
+    <span class="n">cache_placement</span> <span class="o">=</span> <span class="n">uniform_cache_placement</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">network_cache</span><span class="o">*</span><span class="n">n_contents</span><span class="p">,</span> <span class="n">caches</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">cache_placement</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s">&#39;cache&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">size</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">topology</span>
+
+</div>
+<span class="nd">@register_topology_factory</span><span class="p">(</span><span class="s">&#39;GEANT&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="topology_geant"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.topology_geant">[docs]</a><span class="k">def</span> <span class="nf">topology_geant</span><span class="p">(</span><span class="n">network_cache</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">n_contents</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a scenario based on GEANT topology</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    network_cache : float</span>
+<span class="sd">        Size of network cache (sum of all caches) normalized by size of content</span>
+<span class="sd">        population</span>
+<span class="sd">    n_contents : int</span>
+<span class="sd">        Size of content population</span>
+<span class="sd">    seed : int, optional</span>
+<span class="sd">        The seed used for random number generation</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    topology : fnss.Topology</span>
+<span class="sd">        The topology object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># 240 nodes in the main component</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">parse_topology_zoo</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TOPOLOGY_RESOURCES_DIR</span><span class="p">,</span>
+                                                 <span class="s">&#39;Geant2012.graphml&#39;</span><span class="p">)</span>
+                                       <span class="p">)</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">()</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">connected_component_subgraphs</span><span class="p">(</span><span class="n">topology</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">deg</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">topology</span><span class="p">)</span>
+    <span class="n">receivers</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">deg</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="c"># 8 nodes</span>
+    <span class="n">caches</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">deg</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">]</span> <span class="c"># 19 nodes</span>
+    <span class="c"># attach sources to topology</span>
+    <span class="n">source_attachments</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">deg</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span> <span class="c"># 13 nodes</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">source_attachments</span><span class="p">:</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1000</span> <span class="c"># node ID of source</span>
+        <span class="n">topology</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="n">routers</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">caches</span> <span class="o">+</span> <span class="n">sources</span> <span class="o">+</span> <span class="n">receivers</span><span class="p">]</span>
+    <span class="c"># randomly allocate contents to sources</span>
+    <span class="n">content_placement</span> <span class="o">=</span> <span class="n">uniform_content_placement</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_contents</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">sources</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="c"># add stacks to nodes</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;contents&#39;</span><span class="p">:</span> <span class="n">content_placement</span><span class="p">[</span><span class="n">v</span><span class="p">]})</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;receiver&#39;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">routers</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;router&#39;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="c"># set weights and delays on all links</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
+    <span class="c"># label links as internal or external</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">edges_iter</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">sources</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;external&#39;</span>
+            <span class="c"># this prevents sources to be used to route traffic</span>
+            <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)])</span>
+            <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">EXTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;internal&#39;</span>
+    <span class="c"># place caches </span>
+    <span class="n">cache_placement</span> <span class="o">=</span> <span class="n">uniform_cache_placement</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">network_cache</span><span class="o">*</span><span class="n">n_contents</span><span class="p">,</span> <span class="n">caches</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">cache_placement</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s">&#39;cache&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">size</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">topology</span>
+
+</div>
+<span class="nd">@register_topology_factory</span><span class="p">(</span><span class="s">&#39;TISCALI&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="topology_tiscali"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.topology_tiscali">[docs]</a><span class="k">def</span> <span class="nf">topology_tiscali</span><span class="p">(</span><span class="n">network_cache</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">n_contents</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a scenario based on Tiscali topology, parsed from RocketFuel dataset</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    network_cache : float</span>
+<span class="sd">        Size of network cache (sum of all caches) normalized by size of content</span>
+<span class="sd">        population</span>
+<span class="sd">    n_contents : int</span>
+<span class="sd">        Size of content population</span>
+<span class="sd">    seed : int, optional</span>
+<span class="sd">        The seed used for random number generation</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    topology : fnss.Topology</span>
+<span class="sd">        The topology object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># 240 nodes in the main component</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">parse_rocketfuel_isp_map</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TOPOLOGY_RESOURCES_DIR</span><span class="p">,</span>
+                                                       <span class="s">&#39;3257.r0.cch&#39;</span><span class="p">)</span>
+                                             <span class="p">)</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">()</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">connected_component_subgraphs</span><span class="p">(</span><span class="n">topology</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c"># degree of nodes</span>
+    <span class="n">deg</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">topology</span><span class="p">)</span>
+    <span class="c"># nodes with degree = 1</span>
+    <span class="n">onedeg</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">deg</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="c"># they are 80</span>
+    <span class="c"># we select as caches nodes with highest degrees</span>
+    <span class="c"># we use as min degree 6 --&gt; 36 nodes</span>
+    <span class="c"># If we changed min degrees, that would be the number of caches we would have:</span>
+    <span class="c"># Min degree    N caches</span>
+    <span class="c">#  2               160</span>
+    <span class="c">#  3               102</span>
+    <span class="c">#  4                75</span>
+    <span class="c">#  5                50</span>
+    <span class="c">#  6                36</span>
+    <span class="c">#  7                30</span>
+    <span class="c">#  8                26</span>
+    <span class="c">#  9                19</span>
+    <span class="c"># 10                16</span>
+    <span class="c"># 11                12</span>
+    <span class="c"># 12                11</span>
+    <span class="c"># 13                 7</span>
+    <span class="c"># 14                 3</span>
+    <span class="c"># 15                 3</span>
+    <span class="c"># 16                 2</span>
+    <span class="n">caches</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">deg</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">]</span> <span class="c"># 36 nodes</span>
+    <span class="c"># sources are node with degree 1 whose neighbor has degree at least equal to 5</span>
+    <span class="c"># we assume that sources are nodes connected to a hub</span>
+    <span class="c"># they are 44</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">onedeg</span> <span class="k">if</span> <span class="n">deg</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="mf">4.5</span><span class="p">]</span> <span class="c"># they are </span>
+    <span class="c"># receivers are node with degree 1 whose neighbor has degree at most equal to 4</span>
+    <span class="c"># we assume that receivers are nodes not well connected to the network</span>
+    <span class="c"># they are 36   </span>
+    <span class="n">receivers</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">onedeg</span> <span class="k">if</span> <span class="n">deg</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="mf">4.5</span><span class="p">]</span>
+    <span class="c"># we set router stacks because some strategies will fail if no stacks</span>
+    <span class="c"># are deployed </span>
+    <span class="n">routers</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">caches</span> <span class="o">+</span> <span class="n">sources</span> <span class="o">+</span> <span class="n">receivers</span><span class="p">]</span>
+
+    <span class="c"># set weights and delays on all links</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
+    <span class="c"># randomly allocate contents to sources</span>
+    <span class="n">content_placement</span> <span class="o">=</span> <span class="n">uniform_content_placement</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_contents</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+                                                  <span class="n">sources</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;contents&#39;</span><span class="p">:</span> <span class="n">content_placement</span><span class="p">[</span><span class="n">v</span><span class="p">]})</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;receiver&#39;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">routers</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;router&#39;</span><span class="p">,</span> <span class="p">{})</span>
+
+    <span class="c"># label links as internal or external</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">sources</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;external&#39;</span>
+            <span class="c"># this prevents sources to be used to route traffic</span>
+            <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)])</span>
+            <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">EXTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;internal&#39;</span>
+            
+    <span class="n">cache_placement</span> <span class="o">=</span> <span class="n">uniform_cache_placement</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">network_cache</span><span class="o">*</span><span class="n">n_contents</span><span class="p">,</span> <span class="n">caches</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">cache_placement</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s">&#39;cache&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">size</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">topology</span>
+
+</div>
+<span class="nd">@register_topology_factory</span><span class="p">(</span><span class="s">&#39;WIDE&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="topology_wide"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.topology_wide">[docs]</a><span class="k">def</span> <span class="nf">topology_wide</span><span class="p">(</span><span class="n">network_cache</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">n_contents</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a scenario based on GARR topology</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    network_cache : float</span>
+<span class="sd">        Size of network cache (sum of all caches) normalized by size of content</span>
+<span class="sd">        population</span>
+<span class="sd">    n_contents : int</span>
+<span class="sd">        Size of content population</span>
+<span class="sd">    seed : int, optional</span>
+<span class="sd">        The seed used for random number generation</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    topology : fnss.Topology</span>
+<span class="sd">        The topology object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">parse_topology_zoo</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TOPOLOGY_RESOURCES_DIR</span><span class="p">,</span> <span class="s">&#39;WideJpn.graphml&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">()</span>
+    <span class="c"># sources are nodes representing neighbouring AS&#39;s</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
+    <span class="c"># receivers are internal nodes with degree = 1</span>
+    <span class="n">receivers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">27</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+    <span class="c"># caches are all remaining nodes --&gt; 27 caches</span>
+    <span class="n">caches</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">receivers</span> <span class="o">+</span> <span class="n">sources</span><span class="p">]</span>
+    <span class="c"># set weights and delays on all links</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
+    <span class="c"># randomly allocate contents to sources</span>
+    <span class="n">content_placement</span> <span class="o">=</span> <span class="n">uniform_content_placement</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_contents</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+                                                  <span class="n">sources</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;contents&#39;</span><span class="p">:</span> <span class="n">content_placement</span><span class="p">[</span><span class="n">v</span><span class="p">]})</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;receiver&#39;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="c"># label links as internal or external</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">sources</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;external&#39;</span>
+            <span class="c"># this prevents sources to be used to route traffic</span>
+            <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)])</span>
+            <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">EXTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">,[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;internal&#39;</span>
+    <span class="n">cache_placement</span> <span class="o">=</span> <span class="n">uniform_cache_placement</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">network_cache</span><span class="o">*</span><span class="n">n_contents</span><span class="p">,</span> <span class="n">caches</span><span class="p">)</span>  
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">cache_placement</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s">&#39;cache&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">size</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">topology</span>
+
+</div>
+<span class="nd">@register_topology_factory</span><span class="p">(</span><span class="s">&#39;GARR&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="topology_garr"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.topology_garr">[docs]</a><span class="k">def</span> <span class="nf">topology_garr</span><span class="p">(</span><span class="n">network_cache</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">n_contents</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a scenario based on GARR topology</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    network_cache : float</span>
+<span class="sd">        Size of network cache (sum of all caches) normalized by size of content</span>
+<span class="sd">        population</span>
+<span class="sd">    n_contents : int</span>
+<span class="sd">        Size of content population</span>
+<span class="sd">    seed : int, optional</span>
+<span class="sd">        The seed used for random number generation</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    topology : fnss.Topology</span>
+<span class="sd">        The topology object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">parse_topology_zoo</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TOPOLOGY_RESOURCES_DIR</span><span class="p">,</span> <span class="s">&#39;Garr201201.graphml&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">()</span>
+    <span class="c"># sources are nodes representing neighbouring AS&#39;s</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">54</span><span class="p">]</span>
+    <span class="c"># receivers are internal nodes with degree = 1</span>
+    <span class="n">receivers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">60</span><span class="p">]</span>
+    <span class="c"># caches are all remaining nodes --&gt; 27 caches</span>
+    <span class="n">caches</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">receivers</span> <span class="o">+</span> <span class="n">sources</span><span class="p">]</span>
+    <span class="c"># set weights and delays on all links</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
+
+    <span class="c"># randomly allocate contents to sources</span>
+    <span class="n">content_placement</span> <span class="o">=</span> <span class="n">uniform_content_placement</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_contents</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+                                                  <span class="n">sources</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;contents&#39;</span><span class="p">:</span> <span class="n">content_placement</span><span class="p">[</span><span class="n">v</span><span class="p">]})</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;receiver&#39;</span><span class="p">,</span> <span class="p">{})</span>
+    
+    <span class="c"># label links as internal or external</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">sources</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;external&#39;</span>
+            <span class="c"># this prevents sources to be used to route traffic</span>
+            <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)])</span>
+            <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">EXTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">,[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;internal&#39;</span>
+    <span class="n">cache_placement</span> <span class="o">=</span> <span class="n">uniform_cache_placement</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">network_cache</span><span class="o">*</span><span class="n">n_contents</span><span class="p">,</span> <span class="n">caches</span><span class="p">)</span>  
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">cache_placement</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s">&#39;cache&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">size</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">topology</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

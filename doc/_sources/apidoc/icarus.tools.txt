@@ -1,0 +1,35 @@
+tools Package
+=============
+
+:mod:`tools` Package
+--------------------
+
+.. automodule:: icarus.tools
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`cacheperf` Module
+-----------------------
+
+.. automodule:: icarus.tools.cacheperf
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`stats` Module
+-------------------
+
+.. automodule:: icarus.tools.stats
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`traces` Module
+--------------------
+
+.. automodule:: icarus.tools.traces
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

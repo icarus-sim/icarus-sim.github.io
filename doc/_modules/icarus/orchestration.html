@@ -1,0 +1,369 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>icarus.orchestration &mdash; Icarus 0.2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Icarus 0.2.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for icarus.orchestration</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;Contains the code that orchestrates the execution of all experiments.</span>
+
+<span class="sd">The orchestrator is responsible for designing experiments with all combinations</span>
+<span class="sd">of parameters specified in the user-provided settings, schedule experiment</span>
+<span class="sd">execution on various</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="kn">as</span> <span class="nn">mp</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">signal</span>
+
+<span class="kn">from</span> <span class="nn">icarus.execution</span> <span class="kn">import</span> <span class="n">exec_experiment</span>
+<span class="kn">from</span> <span class="nn">icarus.scenarios</span> <span class="kn">import</span> <span class="n">uniform_req_gen</span>
+<span class="kn">from</span> <span class="nn">icarus.registry</span> <span class="kn">import</span> <span class="n">topology_factory_register</span><span class="p">,</span> <span class="n">cache_policy_register</span><span class="p">,</span> \
+                           <span class="n">strategy_register</span><span class="p">,</span> <span class="n">data_collector_register</span>
+<span class="kn">from</span> <span class="nn">icarus.results</span> <span class="kn">import</span> <span class="n">ResultSet</span>
+<span class="kn">from</span> <span class="nn">icarus.util</span> <span class="kn">import</span> <span class="n">timestr</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Orchestrator&#39;</span><span class="p">,</span> <span class="s">&#39;run_scenario&#39;</span><span class="p">]</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;orchestration&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Orchestrator"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.orchestration.Orchestrator">[docs]</a><span class="k">class</span> <span class="nc">Orchestrator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Orchestrator.</span>
+<span class="sd">    </span>
+<span class="sd">    It is responsible for orchestrating the execution of all experiments and</span>
+<span class="sd">    aggregate results.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">summary_freq</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        settings : Settings</span>
+<span class="sd">            The settings of the simulator</span>
+<span class="sd">        summary_freq : int</span>
+<span class="sd">            Frequency (in number of experiment) at which summary messages</span>
+<span class="sd">            are displayed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">settings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">ResultSet</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq</span> <span class="o">=</span> <span class="n">SequenceNumber</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exp_durations</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary_freq</span> <span class="o">=</span> <span class="n">summary_freq</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">PARALLEL_EXECUTION</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">N_PROCESSES</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="Orchestrator.stop"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.orchestration.Orchestrator.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stop the execution of the orchestrator</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Orchestrator is stopping&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">PARALLEL_EXECUTION</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="Orchestrator.run"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.orchestration.Orchestrator.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the orchestrator.</span>
+<span class="sd">        </span>
+<span class="sd">        This call is blocking, whether multiple processes are used or not. This</span>
+<span class="sd">        methods returns only after all experiments are executed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Create queue of experiment configurations</span>
+        <span class="k">if</span> <span class="s">&#39;EXPERIMENT_QUEUE&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">EXPERIMENT_QUEUE</span><span class="p">:</span>
+            <span class="n">queue</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">EXPERIMENT_QUEUE</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">queue</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">()</span>
+            <span class="n">n_contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">N_CONTENTS</span>
+            <span class="k">for</span> <span class="n">topology_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">TOPOLOGIES</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">network_cache</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">NETWORK_CACHE</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">ALPHA</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">strategy_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">STRATEGIES</span><span class="p">:</span>
+                            <span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span>
+                                          <span class="n">topology_name</span><span class="o">=</span><span class="n">topology_name</span><span class="p">,</span>
+                                          <span class="n">network_cache</span><span class="o">=</span><span class="n">network_cache</span><span class="p">,</span>
+                                          <span class="n">strategy_name</span><span class="o">=</span><span class="n">strategy_name</span><span class="p">,</span>
+                                          <span class="n">n_contents</span><span class="o">=</span><span class="n">n_contents</span><span class="p">,</span>
+                                          <span class="n">strategy_params</span><span class="o">=</span><span class="p">{})</span>
+                            <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="c"># Calc number of experiments nad number of processes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_exp</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">N_REPLICATIONS</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_proc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">N_PROCESSES</span> \
+                      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">PARALLEL_EXECUTION</span> \
+                      <span class="k">else</span> <span class="mi">1</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Starting simulations: </span><span class="si">%d</span><span class="s"> experiments, </span><span class="si">%d</span><span class="s"> process(es)&#39;</span> 
+                    <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_exp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_proc</span><span class="p">))</span>
+        <span class="c"># Schedule experiments from the queue</span>
+        <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+            <span class="n">experiment</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">N_REPLICATIONS</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">PARALLEL_EXECUTION</span><span class="p">:</span>
+                    <span class="n">last_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">run_scenario</span><span class="p">,</span>
+                            <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">,</span> <span class="n">experiment</span><span class="p">,</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">assign</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_exp</span><span class="p">),</span>
+                            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">experiment_callback</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">experiment_callback</span><span class="p">(</span><span class="n">run_scenario</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">,</span> 
+                                    <span class="n">experiment</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">assign</span><span class="p">(),</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">n_exp</span><span class="p">))</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                                
+        <span class="c"># If parallel execution, wait for all processes to terminate</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">PARALLEL_EXECUTION</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="c"># This solution is not optimal, but at least makes KeyboardInterrupt</span>
+            <span class="c"># work fine, which is crucial if launching the simulation remotely</span>
+            <span class="c"># via screen.</span>
+            <span class="c"># What happens here is that we keep waiting for possible</span>
+            <span class="c"># KeyboardInterrupts till the last scheduled process terminates</span>
+            <span class="c"># successfully. The last scheduled process is not necessarily the last</span>
+            <span class="c"># finishing one but nothing bad is going to happen in such case, it</span>
+            <span class="c"># will only not be possible interrupting the simulation between the</span>
+            <span class="c"># last scheduled process ends and the last ending process ends, which</span>
+            <span class="c"># is likely a matter of seconds.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">while</span> <span class="ow">not</span> <span class="n">last_job</span><span class="o">.</span><span class="n">ready</span><span class="p">():</span> <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    
+    </div>
+<div class="viewcode-block" id="Orchestrator.experiment_callback"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.orchestration.Orchestrator.experiment_callback">[docs]</a>    <span class="k">def</span> <span class="nf">experiment_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Callback method called by run_scenario</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        args : tuple</span>
+<span class="sd">            Tuple of arguments</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Extract parameters</span>
+        <span class="n">params</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="n">duration</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="c"># Store results</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">params</span><span class="p">,</span> <span class="n">results</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exp_durations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">seq</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">summary_freq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c"># Number of experiments scheduled to be executed</span>
+            <span class="n">n_scheduled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_exp</span> <span class="o">-</span> <span class="n">seq</span>
+            <span class="c"># Compute ETA</span>
+            <span class="n">n_cores</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_proc</span><span class="p">)</span>
+            <span class="n">mean_duration</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exp_durations</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exp_durations</span><span class="p">)</span>
+            <span class="n">eta</span> <span class="o">=</span> <span class="n">timestr</span><span class="p">(</span><span class="n">n_scheduled</span><span class="o">*</span><span class="n">mean_duration</span><span class="o">/</span><span class="n">n_cores</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+            <span class="c"># Print summary</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;SUMMARY | Completed: </span><span class="si">%d</span><span class="s">, Scheduled: </span><span class="si">%d</span><span class="s">, ETA: </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> 
+                        <span class="n">seq</span><span class="p">,</span> <span class="n">n_scheduled</span><span class="p">,</span> <span class="n">eta</span><span class="p">)</span>
+        
+</div></div>
+<span class="k">class</span> <span class="nc">SequenceNumber</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class models an increasing sequence number.</span>
+<span class="sd">    </span>
+<span class="sd">    It is used to assign a sequence number for an experiment in a thread-safe</span>
+<span class="sd">    manner.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initval</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        initval :int, optional</span>
+<span class="sd">            The starting sequence number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__seq</span> <span class="o">=</span> <span class="n">initval</span> <span class="o">-</span> <span class="mi">1</span>
+        
+    <span class="k">def</span> <span class="nf">assign</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assigns a new sequence number.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        seq : int</span>
+<span class="sd">            The sequence number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__seq</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__seq</span>
+        <span class="k">return</span> <span class="n">seq</span>
+    
+    <span class="k">def</span> <span class="nf">current</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the latest sequence number assigned</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        seq : int</span>
+<span class="sd">            The latest assigned sequence number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__seq</span>
+
+
+<div class="viewcode-block" id="run_scenario"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.orchestration.run_scenario">[docs]</a><span class="k">def</span> <span class="nf">run_scenario</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">curr_exp</span><span class="p">,</span> <span class="n">n_exp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run a single scenario experiment</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    settings : Settings</span>
+<span class="sd">        The simulator settings</span>
+<span class="sd">    params : dict</span>
+<span class="sd">        Dictionary of parameters</span>
+<span class="sd">    curr_exp : int</span>
+<span class="sd">        sequence number of the experiment</span>
+<span class="sd">    n_exp : int</span>
+<span class="sd">        Number of scheduled experiments</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    results : 2-tuple</span>
+<span class="sd">        A 2-tuple of dictionaries. The first dict stores all the attributes of</span>
+<span class="sd">        the experiment. The second dict stores the results.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">proc_name</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">current_process</span><span class="p">()</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;runner-</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">proc_name</span><span class="p">)</span>
+    
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;alpha&#39;</span><span class="p">]</span>
+        <span class="n">topology_name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;topology_name&#39;</span><span class="p">]</span>
+        <span class="n">network_cache</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;network_cache&#39;</span><span class="p">]</span>
+        <span class="n">strategy_name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;strategy_name&#39;</span><span class="p">]</span>
+        <span class="n">n_contents</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;n_contents&#39;</span><span class="p">]</span>
+        <span class="n">strategy_params</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;strategy_params&#39;</span><span class="p">]</span>
+        <span class="n">cache_policy</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;cache_policy&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;cache_policy&#39;</span> <span class="ow">in</span> <span class="n">params</span> \
+                       <span class="ow">and</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;cache_policy&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> \
+                       <span class="k">else</span> <span class="n">settings</span><span class="o">.</span><span class="n">CACHE_POLICY</span>
+        <span class="n">metrics</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">DATA_COLLECTORS</span>
+        
+        <span class="n">scenario</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, alpha: </span><span class="si">%s</span><span class="s">, netcache: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology_name</span><span class="p">,</span> <span class="n">strategy_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">alpha</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">network_cache</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Experiment </span><span class="si">%d</span><span class="s">/</span><span class="si">%d</span><span class="s"> | Preparing scenario: </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">curr_exp</span><span class="p">,</span> <span class="n">n_exp</span><span class="p">,</span> <span class="n">scenario</span><span class="p">)</span>
+        
+        <span class="c"># Check parameters</span>
+        <span class="k">if</span> <span class="n">topology_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">topology_factory_register</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;No topology factory implementation for </span><span class="si">%s</span><span class="s"> was found.&#39;</span> <span class="o">%</span> <span class="n">topology_name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">cache_policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache_policy_register</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;No implementation of cache policy </span><span class="si">%s</span><span class="s"> was found.&#39;</span> <span class="o">%</span> <span class="n">cache_policy</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">strategy_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">strategy_register</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;No implementation of strategy </span><span class="si">%s</span><span class="s"> was found.&#39;</span> <span class="o">%</span> <span class="n">strategy_name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">m</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data_collector_register</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;There are no implementations for at least one data collector specified&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        
+        <span class="c"># Get topology and event generator</span>
+        <span class="n">topology</span> <span class="o">=</span> <span class="n">topology_factory_register</span><span class="p">[</span><span class="n">topology_name</span><span class="p">](</span><span class="n">network_cache</span><span class="p">,</span> <span class="n">n_contents</span><span class="p">)</span>   
+        <span class="n">events</span> <span class="o">=</span> <span class="n">uniform_req_gen</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">n_contents</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> 
+                                          <span class="n">rate</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">NETWORK_REQUEST_RATE</span><span class="p">,</span>
+                                          <span class="n">n_warmup</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">N_WARMUP_REQUESTS</span><span class="p">,</span>
+                                          <span class="n">n_measured</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">N_MEASURED_REQUESTS</span><span class="p">)</span>
+        <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;cache_policy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cache_policy</span>
+    
+        <span class="n">collectors</span> <span class="o">=</span> <span class="p">[(</span><span class="n">m</span><span class="p">,</span> <span class="p">{})</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">]</span>
+        <span class="n">strategy</span> <span class="o">=</span> <span class="p">(</span><span class="n">strategy_name</span><span class="p">,</span> <span class="n">strategy_params</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Experiment </span><span class="si">%d</span><span class="s">/</span><span class="si">%d</span><span class="s"> | Start simulation&#39;</span><span class="p">,</span> <span class="n">curr_exp</span><span class="p">,</span> <span class="n">n_exp</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">exec_experiment</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">strategy</span><span class="p">,</span> <span class="n">collectors</span><span class="p">)</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Experiment </span><span class="si">%d</span><span class="s">/</span><span class="si">%d</span><span class="s"> | End simulation | Duration </span><span class="si">%s</span><span class="s">.&#39;</span><span class="p">,</span> 
+                    <span class="n">curr_exp</span><span class="p">,</span> <span class="n">n_exp</span><span class="p">,</span> <span class="n">timestr</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="bp">True</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">curr_exp</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;Received keyboard interrupt. Terminating&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
