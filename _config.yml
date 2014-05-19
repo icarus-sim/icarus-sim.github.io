@@ -1,0 +1,8 @@
+# Select GitHub markdown, all extensions are needed to get tables work correctly
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+
+# Include all files used by Sphinx documentation
+# Do not specify complete pattern e.g. doc/_static, it won't work.
+include: ["_static", "_modules", "_images", "_sources"]

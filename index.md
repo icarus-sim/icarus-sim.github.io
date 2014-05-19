@@ -1,3 +1,9 @@
+---
+layout: index
+title: Icarus
+tagline: Caching simulator for Information Centric Networking (ICN)
+---
+
 Icarus is a Python-based simulator for evaluating caching performance in Information Centric Networking (ICN).
 
 Icarus has been designed to be easy to use and very extensible.
@@ -22,9 +28,8 @@ You can also get the development branch from the Github repository using Git. Ju
 ### Configuration
 Before using the simulator, you need to install all required dependencies.
 
-If you use Ubuntu (version 13.10+) you can run the script `ubuntusetup.sh`
-located in the `scripts` folder which will take of installing all the
-dependencies. To run it, execute the following commands:
+If you use Ubuntu (version 13.10+) you can run the script `ubuntusetup.sh` located in the `scripts` folder which will take of installing all the required dependencies.
+To run it, execute the following commands:
 
     $ cd <YOUR ICARUS FOLDER>
     $ cd scripts
@@ -32,14 +37,13 @@ dependencies. To run it, execute the following commands:
 
 The script, after being launched, will ask you for superuser password.
 
-Otherwise, have a look at the `README.md` file, which explains how to configure your machine and install all required dependencies.
+Otherwise, have a look at the `README.md` file, which explains how to configure your machine and install all required dependencies for other operating systems.
 
 
 ### Usage
 
 #### Run simulations
-To use Icarus with the currently implemented topologies and models of caching policies
-and strategies you need to do the following.
+To use Icarus with the currently implemented topologies and models of caching policies and strategies you need to do the following.
 
 First, create a configuration file with all the desired parameters of your simulation. You can modify the file `config.py`, which is a well documented example configuration. You can even use the configuration file as it is just to get started.
 
@@ -55,7 +59,7 @@ where:
 
 Example usage could be:
 
-    $ python icarus.py --output results.pickle --plots graphs config.py
+    $ python icarus.py --results results.pickle --plots graphs config.py
 
 By executing the steps illustrated above it is possible to run simulations using the
 topologies, cache policies, strategies and result collectors readily available on
@@ -124,10 +128,11 @@ This script will run all simulations automatically, save all log files and plot 
 
 The logs will be saved in the `logs` directory, while the graphs will be saved in the `graphs` directory.
 
-
 ### License
 Icarus is licensed under the terms of the [GNU GPLv2 license](http://www.gnu.org/licenses/gpl-2.0.html).
 
 ### Contacts
-For further information about the Icarus simulator, please contact
-[Lorenzo Saino](http://www.ee.ucl.ac.uk/~lsaino)
+For further information about the Icarus simulator, please contact [Lorenzo Saino](http://www.ee.ucl.ac.uk/~lsaino)
+
+### Acknowledgments
+This work is funded by the EU-Japan initiative under European Commission FP7 grant agreement no. 608518 and NICT contract no. 167 ([the GreenICN project](http://www.greenicn.org/)).
