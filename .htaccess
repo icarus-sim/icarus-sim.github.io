@@ -1,0 +1,4 @@
+# block visitors referred from semalt.com
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} semalt\.com [NC]
+RewriteRule .* - [F]
