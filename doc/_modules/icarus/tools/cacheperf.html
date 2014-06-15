@@ -227,8 +227,8 @@
 <span class="sd">        d : float</span>
 <span class="sd">            Constant</span>
 <span class="sd">        </span>
-<span class="sd">        Return</span>
-<span class="sd">        ------</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
 <span class="sd">        roots : tuple</span>
 <span class="sd">            Tuple of real solutions.</span>
 <span class="sd">            The tuple may comprise either 1 or 3 values</span>
@@ -247,7 +247,7 @@
         <span class="n">discr</span> <span class="o">=</span> <span class="n">y_N</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">h_2</span>
         <span class="k">if</span> <span class="n">discr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">r_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_N</span> <span class="o">+</span> <span class="n">cubrt</span><span class="p">(</span><span class="mf">0.5</span><span class="o">/</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">y_N</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">discr</span><span class="p">)))</span> \
-                   <span class="o">+</span> <span class="n">cubrt</span><span class="p">(</span><span class="mf">0.5</span><span class="o">/</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">y_N</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">discr</span><span class="p">))))</span>
+                   <span class="o">+</span> <span class="n">cubrt</span><span class="p">(</span><span class="mf">0.5</span><span class="o">/</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">y_N</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">discr</span><span class="p">))),)</span>
         <span class="k">elif</span> <span class="n">discr</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">delta</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">delta_2</span><span class="p">)</span>
             <span class="n">r1</span> <span class="o">=</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">x_N</span> <span class="o">+</span> <span class="n">delta</span>

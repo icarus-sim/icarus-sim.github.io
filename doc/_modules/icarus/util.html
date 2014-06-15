@@ -74,16 +74,182 @@
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s">&#39;Settings&#39;</span><span class="p">,</span>
+        <span class="s">&#39;AnyValue&#39;</span><span class="p">,</span>
+        <span class="s">&#39;SequenceNumber&#39;</span><span class="p">,</span>
         <span class="s">&#39;config_logging&#39;</span><span class="p">,</span>
         <span class="s">&#39;inheritdoc&#39;</span><span class="p">,</span>
         <span class="s">&#39;timestr&#39;</span><span class="p">,</span>
-        <span class="s">&#39;iround&#39;</span>
+        <span class="s">&#39;iround&#39;</span><span class="p">,</span>
+        <span class="s">&#39;step_cdf&#39;</span><span class="p">,</span>
+        <span class="s">&#39;Tree&#39;</span><span class="p">,</span>
+        <span class="s">&#39;can_import&#39;</span>
            <span class="p">]</span>
 
+<div class="viewcode-block" id="Tree"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Tree">[docs]</a><span class="k">class</span> <span class="nc">Tree</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tree data structure</span>
+<span class="sd">    </span>
+<span class="sd">    This class models a tree data structure that is mainly used to store</span>
+<span class="sd">    experiment parameters and results in a hierarchical form that makes it</span>
+<span class="sd">    easier to search and filter data in them. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : input data</span>
+<span class="sd">            Data from which building a tree. Types supported are Tree objects</span>
+<span class="sd">            and dicts (or object that can be cast to trees), even nested.</span>
+<span class="sd">        attr : additional keyworded attributes. Attributes can be trees of leaf</span>
+<span class="sd">            values. If they&#39;re dictionaries, they will be converted to trees</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">Tree</span><span class="p">):</span>
+            <span class="c"># If data is not a Tree try to castto dict and iteratively recurse</span>
+            <span class="c"># it to convert each node to a tree</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">Tree</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="c"># Add processed data to the tree</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Tree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">Tree</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">attr</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="n">it</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k_child</span><span class="p">,</span> <span class="n">v_child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">base</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+            <span class="n">base</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k_child</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v_child</span><span class="p">,</span> <span class="n">Tree</span><span class="p">):</span>
+                <span class="n">it</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">v_child</span><span class="o">.</span><span class="n">__iter__</span><span class="p">(</span><span class="n">base</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">it</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">base</span><span class="p">),</span> <span class="n">v_child</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Tree</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Tree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setitem__</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="Tree.update"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Tree.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Tree</span><span class="p">):</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Tree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># This code is needed to fix an issue occurring while pickling.</span>
+        <span class="c"># Further info here:</span>
+        <span class="c"># http://stackoverflow.com/questions/3855428/how-to-pickle-and-unpickle-instances-of-a-class-that-inherits-from-defaultdict</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="o">.</span><span class="n">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">())</span> <span class="o">+</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+
+<div class="viewcode-block" id="Tree.paths"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Tree.paths">[docs]</a>    <span class="k">def</span> <span class="nf">paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a dictionary mapping all paths to final (non-tree) values</span>
+<span class="sd">        and the values.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        paths : dict</span>
+<span class="sd">            Path-value mapping</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Tree.getval"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Tree.getval">[docs]</a>    <span class="k">def</span> <span class="nf">getval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the value at a specific path, None if not there</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path : iterable</span>
+<span class="sd">            Path to the desired value</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        val : any type</span>
+<span class="sd">            The value at the given path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">Tree</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">:</span>
+                <span class="n">tree</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="bp">None</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">Tree</span><span class="p">)</span> <span class="ow">and</span> <span class="n">tree</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="n">tree</span>
+    </div>
+<div class="viewcode-block" id="Tree.setval"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Tree.setval">[docs]</a>    <span class="k">def</span> <span class="nf">setval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set a value at a specific path</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path : iterable</span>
+<span class="sd">            Path to the value</span>
+<span class="sd">        val : any type</span>
+<span class="sd">            The value to set at the given path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tree</span> <span class="o">=</span><span class="bp">self</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Tree</span><span class="p">):</span>
+                <span class="n">tree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">()</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">tree</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">val</span>
+    </div>
+<div class="viewcode-block" id="Tree.pprint"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Tree.pprint">[docs]</a>    <span class="k">def</span> <span class="nf">pprint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Pretty print the tree</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pprint : str</span>
+<span class="sd">            A pretty string representation of the tree</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    </div>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictonly</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;{&quot;</span> <span class="k">if</span> <span class="n">dictonly</span> <span class="k">else</span> <span class="s">&quot;Tree({&quot;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">: &quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">, &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">__str__</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Tree</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;}&quot;</span> <span class="k">if</span> <span class="n">dictonly</span> <span class="k">else</span> <span class="s">&quot;})&quot;</span>
+        <span class="k">return</span> <span class="n">s</span>
+    
+<div class="viewcode-block" id="Tree.match"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Tree.match">[docs]</a>    <span class="k">def</span> <span class="nf">match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">condition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if the tree matches a given condition.</span>
+<span class="sd">        </span>
+<span class="sd">        The condition is another tree. This method iterates to all the values</span>
+<span class="sd">        of the condition and verify that all values of the condition tree are</span>
+<span class="sd">        present in this tree and have the same value.</span>
+<span class="sd">        </span>
+<span class="sd">        Note that the operation is not symmetric i.e.</span>
+<span class="sd">        self.match(condition) != condition.match(self). In fact, this method</span>
+<span class="sd">        return True if this tree has values not present in the condition tree</span>
+<span class="sd">        while it would return False if the condition has values not present</span>
+<span class="sd">        in this tree.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        condition : Tree</span>
+<span class="sd">            The condition to check</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        match : bool</span>
+<span class="sd">            True if the tree matches the condition, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getval</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="n">val</span> <span class="k">for</span> <span class="n">path</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">condition</span><span class="o">.</span><span class="n">paths</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    </div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Tree.empty"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Tree.empty">[docs]</a>    <span class="k">def</span> <span class="nf">empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return True if the tree is empty, False otherwise&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</div></div>
 <div class="viewcode-block" id="Settings"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Settings">[docs]</a><span class="k">class</span> <span class="nc">Settings</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Object storing all settings&quot;&quot;&quot;</span>
 
@@ -93,7 +259,7 @@
         <span class="c"># This kind of assignment using __setattr__ is to prevent infinite</span>
         <span class="c"># recursion </span>
         <span class="nb">object</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;__conf&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())</span>
-        <span class="nb">object</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;frozen&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="nb">object</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;__frozen&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the number of settings</span>
@@ -108,8 +274,8 @@
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return value of settings with given name</span>
 <span class="sd">        </span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ---------</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        name : str</span>
 <span class="sd">            Name of the setting</span>
 <span class="sd">            </span>
@@ -126,8 +292,8 @@
     <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return value of settings with given name</span>
 <span class="sd">        </span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ---------</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        name : str</span>
 <span class="sd">            Name of the setting</span>
 <span class="sd">            </span>
@@ -138,6 +304,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">&#39;_Settings__conf&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;__conf&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">&#39;_Settings__frozen&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;__frozen&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__conf</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__conf</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -146,8 +314,8 @@
     <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Sets a given value for a settings with given name</span>
 <span class="sd">        </span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ---------</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        name : str</span>
 <span class="sd">            Name of the setting</span>
 <span class="sd">        value : any hashable type</span>
@@ -158,8 +326,8 @@
     <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Sets a given value for a settings with given name</span>
 <span class="sd">        </span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ---------</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        name : str</span>
 <span class="sd">            Name of the setting</span>
 <span class="sd">        value : any hashable type</span>
@@ -172,12 +340,12 @@
     <span class="k">def</span> <span class="nf">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Removes a specific setting</span>
 <span class="sd">        </span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ---------</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        name : str</span>
 <span class="sd">            Name of the setting</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__frozen</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Settings are frozen and cannot be modified&#39;</span><span class="p">)</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__conf</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
         
@@ -196,7 +364,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__conf</span>
 
-<div class="viewcode-block" id="Settings.read_from"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Settings.read_from">[docs]</a>    <span class="k">def</span> <span class="nf">read_from</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">freeze</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Settings.frozen"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Settings.frozen">[docs]</a>    <span class="k">def</span> <span class="nf">frozen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;Return whether the object is frozen or not.&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__frozen</span>
+</div>
+<div class="viewcode-block" id="Settings.read_from"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Settings.read_from">[docs]</a>    <span class="k">def</span> <span class="nf">read_from</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">freeze</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize settings by reading from a file</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -206,19 +379,24 @@
 <span class="sd">        freeze : bool, optional</span>
 <span class="sd">            If *True*, freezes object so that settings cannot be changed</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__frozen</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Settings are frozen and cannot be modified&#39;</span><span class="p">)</span>
         <span class="k">exec</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__conf</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__conf</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="n">k</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span>
                 <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__conf</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span> <span class="o">=</span> <span class="n">freeze</span>
+        <span class="k">if</span> <span class="n">freeze</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">freeze</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="Settings.freeze"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Settings.freeze">[docs]</a>    <span class="k">def</span> <span class="nf">freeze</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;Freeze the objects. No settings can be added or modified any more&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__frozen</span> <span class="o">=</span> <span class="bp">True</span>
     </div>
 <div class="viewcode-block" id="Settings.get"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Settings.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return value of settings with given name</span>
 <span class="sd">        </span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ---------</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        name : str</span>
 <span class="sd">            Name of the setting</span>
 <span class="sd">            </span>
@@ -235,8 +413,8 @@
 <div class="viewcode-block" id="Settings.set"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Settings.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Sets a given value for a settings with given name</span>
 <span class="sd">        </span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ---------</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        name : str</span>
 <span class="sd">            Name of the setting</span>
 <span class="sd">        value : any hashable type</span>
@@ -245,6 +423,92 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Settings are frozen and cannot be modified&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__conf</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+</div></div>
+<div class="viewcode-block" id="AnyValue"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.AnyValue">[docs]</a><span class="k">class</span> <span class="nc">AnyValue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Pseudo-value that returns True when compared to any other object.</span>
+<span class="sd">    </span>
+<span class="sd">    This object can be used for example to store parameters in resultsets. </span>
+<span class="sd">    </span>
+<span class="sd">    One concrete usage example is the following: let&#39;s assume that a user runs</span>
+<span class="sd">    an experiment using various strategies under different values of a</span>
+<span class="sd">    specific parameter and that the user knows that one strategy does not</span>
+<span class="sd">    depend on that parameters while others do.</span>
+<span class="sd">    If a user wants to plot the sensitivity of all these strategies against</span>
+<span class="sd">    this parameter, he would want the strategy insensitive to that parameter to</span>
+<span class="sd">    be selected from the resultset when filtering it against any value of that</span>
+<span class="sd">    parameter. This can be achieved by setting AnyValue() to this parameter in</span>
+<span class="sd">    the result related to that strategy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return always True</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : any</span>
+<span class="sd">            The object to be compared</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        eq : bool</span>
+<span class="sd">            Always True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return always False</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : any</span>
+<span class="sd">            The object to be compared</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        en : bool</span>
+<span class="sd">            Always False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="SequenceNumber"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.SequenceNumber">[docs]</a><span class="k">class</span> <span class="nc">SequenceNumber</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class models an increasing sequence number.</span>
+<span class="sd">    </span>
+<span class="sd">    It is used to assign a sequence number for an experiment in a thread-safe</span>
+<span class="sd">    manner.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initval</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        initval :int, optional</span>
+<span class="sd">            The starting sequence number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__seq</span> <span class="o">=</span> <span class="n">initval</span> <span class="o">-</span> <span class="mi">1</span>
+        
+<div class="viewcode-block" id="SequenceNumber.assign"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.SequenceNumber.assign">[docs]</a>    <span class="k">def</span> <span class="nf">assign</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assigns a new sequence number.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        seq : int</span>
+<span class="sd">            The sequence number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__seq</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__seq</span>
+        <span class="k">return</span> <span class="n">seq</span>
+    </div>
+<div class="viewcode-block" id="SequenceNumber.current"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.SequenceNumber.current">[docs]</a>    <span class="k">def</span> <span class="nf">current</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the latest sequence number assigned</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        seq : int</span>
+<span class="sd">            The latest assigned sequence number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__seq</span>
 
 </div></div>
 <div class="viewcode-block" id="config_logging"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.config_logging">[docs]</a><span class="k">def</span> <span class="nf">config_logging</span><span class="p">(</span><span class="n">log_level</span><span class="o">=</span><span class="s">&#39;INFO&#39;</span><span class="p">):</span>
@@ -289,6 +553,7 @@
         <span class="n">function</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s">&#39;sup.</span><span class="si">%s</span><span class="s">.__doc__&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">function</span>
     <span class="k">return</span> <span class="n">_decorator</span>
+
 </div>
 <div class="viewcode-block" id="timestr"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.timestr">[docs]</a><span class="k">def</span> <span class="nf">timestr</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">with_seconds</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get a time interval in seconds and returns it formatted in a string.</span>
@@ -302,6 +567,7 @@
 <span class="sd">        The time interval</span>
 <span class="sd">    with_seconds : bool</span>
 <span class="sd">        If *True* the time string includes seconds, otherwise only minutes</span>
+<span class="sd">    </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    timestr : str</span>
@@ -326,16 +592,7 @@
         <span class="n">vals</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
         <span class="n">units</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
     <span class="k">return</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%d%s</span><span class="s"> &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">units</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vals</span><span class="p">)))[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="c">#    flag = False</span>
-<span class="c">#    if t.tm_yday &gt; 1:</span>
-<span class="c">#        fmt_t = &quot;%dd %dh %dm&quot; % (t.tm_yday - 1, t.tm_hour, t.tm_min)</span>
-<span class="c">#    elif t.tm_hour &gt; 0:</span>
-<span class="c">#        fmt_t = &quot;%dh %dm&quot; % (t.tm_hour, t.tm_min)</span>
-<span class="c">#    else:</span>
-<span class="c">#        fmt_t = &quot;%dm&quot; % t.tm_min</span>
-<span class="c">#    if show_seconds:</span>
-<span class="c">#        fmt_t += &quot; %ds&quot; % t.tm_sec</span>
-<span class="c">#    return fmt_t</span>
+
 </div>
 <div class="viewcode-block" id="iround"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.iround">[docs]</a><span class="k">def</span> <span class="nf">iround</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Round float to closest integer</span>
@@ -354,7 +611,60 @@
 <span class="sd">        The rounded number</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">y</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="o">.</span><span class="mi">5</span>
-    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="step_cdf"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.step_cdf">[docs]</a><span class="k">def</span> <span class="nf">step_cdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert an empirical CDF in set of points representing steps.</span>
+
+<span class="sd">    Normally this is conversion is done for plotting purposes.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : array</span>
+<span class="sd">        The x values of the CDF</span>
+<span class="sd">    y : array</span>
+<span class="sd">        The y values of the CDF</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    x : array</span>
+<span class="sd">        The x values of the CDF</span>
+<span class="sd">    y : array</span>
+<span class="sd">        The y values of the CDF</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;x and y must have the same size&#39;</span><span class="p">)</span>
+    <span class="n">sx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+    <span class="n">sy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+        <span class="n">sx</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">sx</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">sy</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sy</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">sy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">sx</span><span class="p">,</span> <span class="n">sy</span>
+
+</div>
+<div class="viewcode-block" id="can_import"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.can_import">[docs]</a><span class="k">def</span> <span class="nf">can_import</span><span class="p">(</span><span class="n">statement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Try executing an import statement and return True if succeeds or False</span>
+<span class="sd">    othrwise</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    statement : string</span>
+<span class="sd">        The import statement</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    can_import : bool</span>
+<span class="sd">        True if can import, False otherwise</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">exec</span><span class="p">(</span><span class="n">statement</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span></div>
 </pre></div>
 
           </div>

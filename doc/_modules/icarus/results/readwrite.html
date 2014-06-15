@@ -77,7 +77,7 @@
     <span class="kn">import</span> <span class="nn">cPickle</span> <span class="kn">as</span> <span class="nn">pickle</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">pickle</span>
-
+<span class="kn">from</span> <span class="nn">icarus.util</span> <span class="kn">import</span> <span class="n">Tree</span>
 <span class="kn">from</span> <span class="nn">icarus.registry</span> <span class="kn">import</span> <span class="n">register_results_reader</span><span class="p">,</span> <span class="n">register_results_writer</span>
 
 
@@ -95,12 +95,17 @@
 <span class="sd">    be shared by different processes.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Constructor</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        attr : dict, optional</span>
+<span class="sd">            Dictionary of common attributes to all experiments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_results</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">()</span>
         <span class="c"># Dict of global attributes common to all experiments</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">attr</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr</span> <span class="o">=</span> <span class="n">attr</span> <span class="k">if</span> <span class="n">attr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="p">{}</span>
     
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the number of results in the resultset</span>
@@ -151,20 +156,31 @@
                              <span class="s">&#39;they have different global attributes&#39;</span><span class="p">)</span>
         <span class="n">rs</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">resultset</span><span class="p">):</span>
-            <span class="n">rs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">rs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">rs</span>
 
-<div class="viewcode-block" id="ResultSet.add"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.readwrite.ResultSet.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add a result to the result set. This method is thread safe</span>
+<div class="viewcode-block" id="ResultSet.add"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.readwrite.ResultSet.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">results</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a result to the result set.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        results : 2-value tuple</span>
-<span class="sd">            2-value tuples where the first value is a dictionary of experiment</span>
-<span class="sd">            parameters and the second value is the dictionary of experiment</span>
-<span class="sd">            results</span>
+<span class="sd">        parameters : Tree</span>
+<span class="sd">            Tree of experiment parameters</span>
+<span class="sd">        results : Tree</span>
+<span class="sd">            Tree of experiment results</span>
+<span class="sd">            </span>
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        If parameters and results are dictionaries, this method will attempt to</span>
+<span class="sd">        convert them to trees and storing them anyway. It is necessary that</span>
+<span class="sd">        parameters and results are saved as trees so that plotting functions</span>
+<span class="sd">        can search correctly in them.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">Tree</span><span class="p">):</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">Tree</span><span class="p">):</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">parameters</span><span class="p">,</span> <span class="n">results</span><span class="p">))</span>
     </div>
 <div class="viewcode-block" id="ResultSet.dump"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.readwrite.ResultSet.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Dump all results.</span>
@@ -179,36 +195,32 @@
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">)</span>
 
     </div>
-<div class="viewcode-block" id="ResultSet.filter"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.readwrite.ResultSet.filter">[docs]</a>    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ResultSet.filter"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.readwrite.ResultSet.filter">[docs]</a>    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">condition</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return subset of results matching specific conditions</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        parameters : dict</span>
+<span class="sd">        condition : dict</span>
 <span class="sd">            Dictionary listing all parameters and values to be matched in the</span>
-<span class="sd">            results set</span>
+<span class="sd">            results set. Each parameter, i.e. each key of the dictionary must</span>
+<span class="sd">            be an iterable object containing the path in the parameters tree</span>
+<span class="sd">            to the required parameter </span>
 <span class="sd">        metrics : dict, optional</span>
 <span class="sd">            List of metrics to be reported</span>
 <span class="sd">        </span>
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        filtered_results : list</span>
+<span class="sd">        filtered_results : ResultSet</span>
 <span class="sd">            List of 2-tuples of filtered results, where the first element is a</span>
-<span class="sd">            dictionary of all experiment parameters and the second value is </span>
-<span class="sd">            a dictionary with experiment results.</span>
+<span class="sd">            tree of all experiment parameters and the second value is </span>
+<span class="sd">            a tree with experiment results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">filtered_results</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">exp_params</span><span class="p">,</span> <span class="n">exp_metrics</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">:</span>
-            <span class="n">match</span> <span class="o">=</span> <span class="bp">True</span>
-            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">exp_params</span> <span class="ow">or</span> <span class="n">exp_params</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">!=</span> <span class="n">v</span><span class="p">:</span>
-                    <span class="n">match</span> <span class="o">=</span> <span class="bp">False</span>
-                    <span class="k">break</span>
-            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
-                <span class="n">filtered_metrics</span> <span class="o">=</span> <span class="n">exp_metrics</span> <span class="k">if</span> <span class="n">metrics</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> \
-                    <span class="nb">dict</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">exp_metrics</span><span class="p">[</span><span class="n">m</span><span class="p">])</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">metrics</span> <span class="k">if</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">exp_metrics</span><span class="p">)</span>
-                <span class="n">filtered_results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">exp_params</span><span class="p">,</span> <span class="n">filtered_metrics</span><span class="p">))</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">filtered_results</span><span class="p">)</span>
+        <span class="n">filtered_resultset</span> <span class="o">=</span> <span class="n">ResultSet</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">results</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">:</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">parameters</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">condition</span><span class="p">):</span>
+                <span class="n">filtered_resultset</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">filtered_resultset</span>
 
 </div></div>
 <span class="nd">@register_results_writer</span><span class="p">(</span><span class="s">&#39;PICKLE&#39;</span><span class="p">)</span>

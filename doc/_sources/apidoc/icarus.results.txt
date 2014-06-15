@@ -25,3 +25,11 @@ results Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`visualize` Module
+-----------------------
+
+.. automodule:: icarus.results.visualize
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

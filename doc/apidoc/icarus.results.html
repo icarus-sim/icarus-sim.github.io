@@ -26,9 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Icarus 0.2.1 documentation" href="../index.html" />
-    <link rel="up" title="icarus Package" href="icarus.html" />
-    <link rel="next" title="scenarios Package" href="icarus.scenarios.html" />
-    <link rel="prev" title="models Package" href="icarus.models.html" /> 
+    <link rel="up" title="icarus Package" href="icarus.html" /> 
   </head>
   <body>
     <div class="related">
@@ -43,12 +41,6 @@
         <li class="right" >
           <a href="../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="icarus.scenarios.html" title="scenarios Package"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="icarus.models.html" title="models Package"
-             accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
           <li><a href="icarus.html" accesskey="U">icarus Package</a> &raquo;</li> 
       </ul>
@@ -60,17 +52,14 @@
 <li><a class="reference internal" href="#">results Package</a><ul>
 <li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">results</span></tt> Package</a></li>
 <li><a class="reference internal" href="#module-icarus.results.plot"><tt class="docutils literal"><span class="pre">plot</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-icarus.results.readwrite"><tt class="docutils literal"><span class="pre">readwrite</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-icarus.results.readwrite"><tt class="docutils literal"><span class="pre">readwrite</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-icarus.results.visualize"><tt class="docutils literal"><span class="pre">visualize</span></tt> Module</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="icarus.models.html"
-                        title="previous chapter">models Package</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="icarus.scenarios.html"
-                        title="next chapter">scenarios Package</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -100,186 +89,7 @@
 </div>
 <div class="section" id="module-icarus.results.plot">
 <span id="plot-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">plot</span></tt> Module<a class="headerlink" href="#module-icarus.results.plot" title="Permalink to this headline">¶</a></h2>
-<p>Plot results read from a resultset</p>
-<dl class="function">
-<dt id="icarus.results.plot.main">
-<tt class="descname">main</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.main" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="icarus.results.plot.plot_bar_graph">
-<tt class="descname">plot_bar_graph</tt><big>(</big><em>resultset</em>, <em>desc</em>, <em>filename</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_bar_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_bar_graph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot a bar chart with characteristics described in the plot descriptor
-out of the data contained in the resultset and save the plot in given
-directory.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>rs</strong> : ResultSet</p>
-<blockquote>
-<div><p>Result set</p>
-</div></blockquote>
-<p><strong>desc</strong> : dict</p>
-<blockquote>
-<div><p>The plot descriptor (more info below)</p>
-</div></blockquote>
-<p><strong>filename</strong> : str</p>
-<blockquote>
-<div><p>The name used to save the file. The file format is determined by the
-extension of the file. For example, if this filename is &#8216;foo.pdf&#8217;, the
-file will be saved in pdf format.</p>
-</div></blockquote>
-<p><strong>plotdir</strong> : str</p>
-<blockquote class="last">
-<div><p>The directory in which the plot will be saved.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Notes</p>
-<p>The plot descriptor is a dictionary with a set of values that describe how
-to make the plot.</p>
-<dl class="docutils">
-<dt>The dictionary can contain the following keys:</dt>
-<dd><ul class="first last">
-<li><dl class="first docutils">
-<dt>title <span class="classifier-delimiter">:</span> <span class="classifier">str, optional.</span></dt>
-<dd><p class="first last">The title of the graph</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>xlabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
-<dd><p class="first last">The x label</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>ylabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
-<dd><p class="first last">The y label</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>errorbar <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
-<dd><p class="first last">If <em>True</em> error bars will be plotted. Default value is <em>True</em></p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>confidence <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
-<dd><p class="first last">The confidence used to plot error bars. Default value is 0.95</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>metric <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span></dt>
-<dd><p class="first last">A tuple of 2-values representing the metric to plot.
-The first value is the name of the collector which measured the metric
-and the second value is the metric name. Example values could
-(&#8216;CACHE_HIT_RATIO&#8217;, &#8216;MEAN&#8217;), (&#8216;LINK_LOAD&#8217;, &#8216;MEAN_INTERNAL&#8217;) or 
-(&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;)</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>filter <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd><p class="first last">A dictionary of values to filter in the resultset.
-Example: {&#8216;network_cache&#8217;: 0.004, &#8216;topology_name&#8217;: &#8216;GEANT&#8217;}</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>xparam <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">The name of the x axis metric, e.g. &#8216;alpha&#8217;</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>xvals <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
-<dd><p class="first last">Range of x values, e.g. [0.6, 0.7, 0.8, 0.9]</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>yparam <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">The name of the y metric, e.g. &#8216;strategy&#8217;</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>yvals <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
-<dd><p class="first last">List of lines plotted. For example. if yparam = &#8216;strategy_name&#8217;, then
-a valid yvals value could be [&#8216;HR_SYMM&#8217;, &#8216;HR_ASYMM&#8217;]</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>bar_color <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
-<dd><p class="first last">Dictionary mapping each value of yvals with a bar color</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>bar_hatch <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
-<dd><p class="first last">Dictionary mapping each value of yvals with a bar hatch</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>legend <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
-<dd><p class="first last">Dictionary mapping each value of yvals with a legend label</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>plotempty <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
-<dd><p class="first last">If <em>True</em>, plot and save graph even if empty. Default is <em>True</em></p>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="icarus.results.plot.plot_cache_hits_vs_alpha">
-<tt class="descname">plot_cache_hits_vs_alpha</tt><big>(</big><em>resultset</em>, <em>topology</em>, <em>cache_size</em>, <em>alpha_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_cache_hits_vs_alpha"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_cache_hits_vs_alpha" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="icarus.results.plot.plot_cache_hits_vs_cache_size">
-<tt class="descname">plot_cache_hits_vs_cache_size</tt><big>(</big><em>resultset</em>, <em>topology</em>, <em>alpha</em>, <em>cache_size_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_cache_hits_vs_cache_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_cache_hits_vs_cache_size" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="icarus.results.plot.plot_cache_hits_vs_topology">
-<tt class="descname">plot_cache_hits_vs_topology</tt><big>(</big><em>resultset</em>, <em>alpha</em>, <em>cache_size</em>, <em>topology_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_cache_hits_vs_topology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_cache_hits_vs_topology" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot bar graphs of cache hit ratio for specific values of alpha and cache
-size for various topologies.</p>
-<p>The objective here is to show that our algorithms works well on all
-topologies considered</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="icarus.results.plot.plot_latency_vs_alpha">
-<tt class="descname">plot_latency_vs_alpha</tt><big>(</big><em>resultset</em>, <em>topology</em>, <em>cache_size</em>, <em>alpha_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_latency_vs_alpha"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_latency_vs_alpha" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="icarus.results.plot.plot_latency_vs_cache_size">
-<tt class="descname">plot_latency_vs_cache_size</tt><big>(</big><em>resultset</em>, <em>topology</em>, <em>alpha</em>, <em>cache_size_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_latency_vs_cache_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_latency_vs_cache_size" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<p>Plot results read from a result set</p>
 <dl class="function">
 <dt id="icarus.results.plot.plot_lines">
 <tt class="descname">plot_lines</tt><big>(</big><em>resultset</em>, <em>desc</em>, <em>filename</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_lines" title="Permalink to this definition">¶</a></dt>
@@ -348,25 +158,8 @@ to make the plot.</p>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>metric <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span></dt>
-<dd><p class="first last">A tuple of 2-values representing the metric to plot.
-The first value is the name of the collector which measured the metric
-and the second value is the metric name. Example values could
-(&#8216;CACHE_HIT_RATIO&#8217;, &#8216;MEAN&#8217;), (&#8216;LINK_LOAD&#8217;, &#8216;MEAN_INTERNAL&#8217;) or 
-(&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;)</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>filter <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd><p class="first last">A dictionary of values to filter in the resultset.
-Example: {&#8216;network_cache&#8217;: 0.004, &#8216;topology_name&#8217;: &#8216;GEANT&#8217;}</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>xparam <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">The name of the x axis metric, e.g. &#8216;alpha&#8217;</p>
+<dt>xparam <span class="classifier-delimiter">:</span> <span class="classifier">iterable</span></dt>
+<dd><p class="first last">Path to the value of the x axis metric, e.g. [&#8216;workload&#8217;, &#8216;alpha&#8217;]</p>
 </dd>
 </dl>
 </li>
@@ -377,15 +170,455 @@ Example: {&#8216;network_cache&#8217;: 0.004, &#8216;topology_name&#8217;: &#821
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>yparam <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">The name of the y metric, e.g. &#8216;strategy&#8217;</p>
+<dt>filter <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">A dictionary of values to filter in the resultset.
+Example: {&#8216;network_cache&#8217;: 0.004, &#8216;topology_name&#8217;: &#8216;GEANT&#8217;}
+If not specified or None, no filtering is executed on the results
+and possibly heterogeneous results may be plotted together</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>yvals <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
-<dd><p class="first last">List of lines plotted. For example. if yparam = &#8216;strategy_name&#8217;, then
-a valid yvals value could be [&#8216;HR_SYMM&#8217;, &#8216;HR_ASYMM&#8217;]</p>
+<dt>ymetrics <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples</span></dt>
+<dd><p class="first last">List of metrics to be shown on the graph. The i-th metric of the list
+is the metric that the i-th line on the graph will represent. If
+all lines are for the same metric, then all elements of the list are
+equal.
+Each single metric (i.e. each element of the list) is a tuple modeling
+the path to identify a specific metric into an entry of a result set.
+Normally, it is a 2-value list where the first value is the name of
+the collector which measured the metric and the second value is the
+metric name. Example values could be (&#8216;CACHE_HIT_RATIO&#8217;, &#8216;MEAN&#8217;),
+(&#8216;LINK_LOAD&#8217;, &#8216;MEAN_INTERNAL&#8217;) or (&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;).
+For example, if in a graph of N lines all lines of the graph show mean
+latency, then ymetrics = [(&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;)]*5.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ycondnames <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span></dt>
+<dd><p class="first last">List of condition names specific to each line of the graph. Different
+from the conditions expressed in the filter parameter, which are
+global, these conditions are specific to one bar. Ech condition name,
+different from the filter parameter is a path to a condition to be
+checked, e.g. (&#8216;topology&#8217;, &#8216;name&#8217;). Values to be matched for this
+conditions are specified in ycondvals. This list must be as long as
+the number of lines to plot. If not specified, all lines are filtered
+by the conditions of filter parameter only, but in this case all
+ymetrics should be different.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ycondvals <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span></dt>
+<dd><p class="first last">List of values that the conditions of ycondnames must meet. This list
+must be as long as the number of lines to plot. If not specified,
+all lines are filtered by the conditions of filter parameter only,
+but in this case all ymetrics should be different.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xscale <span class="classifier-delimiter">:</span> <span class="classifier">(&#8216;linear&#8217; | &#8216;log&#8217;), optional</span></dt>
+<dd><p class="first last">The scale of x axis. Default value is &#8216;linear&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>yscale <span class="classifier-delimiter">:</span> <span class="classifier">(&#8216;linear&#8217; | &#8216;log&#8217;), optional</span></dt>
+<dd><p class="first last">The scale of y axis. Default value is &#8216;linear&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>line_style <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Dictionary mapping each value of yvals with a line style</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>plot_args <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Additional args to be provided to the Pyplot errorbar function.
+Example parameters that can be specified here are <em>linewidth</em> and
+<em>elinewidth</em></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>legend <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Dictionary mapping each value of yvals with a legend label. If not
+specified, it is not plotted. If you wish to plot it with the
+name of the line, set it to put yvals or ymetrics, depending on which
+one is used</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>legend_args <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Optional legend arguments, such as ncol</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>plotempty <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, plot and save graph even if empty. Default is <em>True</em></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xmin, xmax: float, optional</dt>
+<dd><p class="first last">The limits of the x axis. If not specified, they&#8217;re set to the min and
+max values of xvals</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ymin, ymax: float, optional</dt>
+<dd><p class="first last">The limits of the y axis. If not specified, they&#8217;re automatically
+selected by Matplotlib</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.plot_bar_chart">
+<tt class="descname">plot_bar_chart</tt><big>(</big><em>resultset</em>, <em>desc</em>, <em>filename</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_bar_chart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_bar_chart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a bar chart with characteristics described in the plot descriptor
+out of the data contained in the resultset and save the plot in given
+directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>rs</strong> : ResultSet</p>
+<blockquote>
+<div><p>Result set</p>
+</div></blockquote>
+<p><strong>desc</strong> : dict</p>
+<blockquote>
+<div><p>The plot descriptor (more info below)</p>
+</div></blockquote>
+<p><strong>filename</strong> : str</p>
+<blockquote>
+<div><p>The name used to save the file. The file format is determined by the
+extension of the file. For example, if this filename is &#8216;foo.pdf&#8217;, the
+file will be saved in pdf format.</p>
+</div></blockquote>
+<p><strong>plotdir</strong> : str</p>
+<blockquote class="last">
+<div><p>The directory in which the plot will be saved.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The plot descriptor is a dictionary with a set of values that describe how
+to make the plot.</p>
+<dl class="docutils">
+<dt>The dictionary can contain the following keys:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>title <span class="classifier-delimiter">:</span> <span class="classifier">str, optional.</span></dt>
+<dd><p class="first last">The title of the graph</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xlabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">The x label</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ylabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">The y label</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>errorbar <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em> error bars will be plotted. Default value is <em>True</em></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>confidence <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">The confidence used to plot error bars. Default value is 0.95</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>filter <span class="classifier-delimiter">:</span> <span class="classifier">tree or dict of dicts, optional</span></dt>
+<dd><p class="first last">A tree or nested dictionary of values to include from the resultset.
+Example: {&#8216;cache_placement&#8217;: {&#8216;network_cache&#8217;: 0.004},
+&#8216;topology&#8217;: {&#8216;name&#8217;, &#8216;GEANT&#8217;}}.
+If not specified or None, no filtering is executed on the results
+and possibly heterogeneous results may be plotted together.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xparam <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span></dt>
+<dd><p class="first last">The path of the x axis metric, e.g. (&#8216;workload&#8217;, &#8216;alpha&#8217;)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xvals <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">Range of x values, e.g. [0.6, 0.7, 0.8, 0.9]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xticks <span class="classifier-delimiter">:</span> <span class="classifier">list, optional</span></dt>
+<dd><p class="first last">Names to display as ticks. If not specified, xvals is used instead</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ymetrics <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples</span></dt>
+<dd><p class="first last">List of metrics to be shown on the graph. The i-th metric of the list
+is the metric that the i-th bar on the graph will represent. If
+all bars are for the same metric, then all elements of the list are
+equal.
+Each single metric (i.e. each element of the list) is a tuple modeling
+the path to identify a specific metric into an entry of a result set.
+Normally, it is a 2-value list where the first value is the name of
+the collector which measured the metric and the second value is the
+metric name. Example values could be (&#8216;CACHE_HIT_RATIO&#8217;, &#8216;MEAN&#8217;),
+(&#8216;LINK_LOAD&#8217;, &#8216;MEAN_INTERNAL&#8217;) or (&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;).
+For example, if in a graph of N bars all bar of the graph show mean
+latency, then ymetrics = [(&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;)]*5.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ycondnames <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span></dt>
+<dd><p class="first last">List of condition names specific to each bar of the graph. Different
+from the conditions expressed in the filter parameter, which are
+global, these conditions are specific to one bar. Ech condition name,
+different from the filter parameter is a path to a condition to be
+checked, e.g. (&#8216;topology&#8217;, &#8216;name&#8217;). Values to be matched for this
+conditions are specified in ycondvals. This list must be as long as
+the number of bars to plot. If not specified, all bars are filtered
+by the conditions of filter parameter only, but in this case all
+ymetrics should be different.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ycondvals <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span></dt>
+<dd><p class="first last">List of values that the conditions of ycondnames must meet. This list
+must be as long as the number of bars to plot. If not specified,
+all bars are filtered by the conditions of filter parameter only,
+but in this case all ymetrics should be different.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>placement <span class="classifier-delimiter">:</span> <span class="classifier">(grouped | stacked | [x, y, ...])</span></dt>
+<dd><p class="first last">Defines how to place bars in the plot. If grouped, defaults, all
+bars for a specific xval are grouped next to each other, if stacked,
+they are plot on top of each other. It is also possible to specify a
+custom grouped+stacked placement with a list of integers, in which
+the number of items is the number of columns and the actual value of
+an items is the number of metrics stacked on the column. For example
+[4,2,3] means plotting 4 + 2 + 3 = 9 metrics: 4 stacked in the first
+column, 2 stacked on the second and 3 stacked on the third  
+If <em>True</em>, draw all bars of a group stacked on top of each other.
+Default value is <em>False</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>group_width <span class="classifier-delimiter">:</span> <span class="classifier">float, default: 0.4</span></dt>
+<dd><p class="first last">Width of a group of bars</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>bar_color <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Dictionary mapping each value of yvals with a bar color</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>bar_hatch <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Dictionary mapping each value of yvals with a bar hatch. If set to
+None all bars will be plotted without hatch. If not set, hatches will
+be plotted randomly</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>legend <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Dictionary mapping each value of yvals with a legend label. If not
+specified, it is not plotted. If you wish to plot it with the
+name of the line, set it to put yvals or ymetrics, depending on which
+one is used</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>legend_args <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Optional legend arguments, such as ncol</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>plotempty <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, plot and save graph even if empty. Default is <em>True</em></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ymax: float, optional</dt>
+<dd><p class="first last">The upper limit of the y axis. If not specified, it is automatically
+selected by Matplotlib</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.plot.plot_cdf">
+<tt class="descname">plot_cdf</tt><big>(</big><em>resultset</em>, <em>desc</em>, <em>filename</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_cdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_cdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a CDF with characteristics described in the plot descriptor
+out of the data contained in the resultset and save the plot in given
+directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>rs</strong> : ResultSet</p>
+<blockquote>
+<div><p>Result set</p>
+</div></blockquote>
+<p><strong>desc</strong> : dict</p>
+<blockquote>
+<div><p>The plot descriptor (more info below)</p>
+</div></blockquote>
+<p><strong>filename</strong> : str</p>
+<blockquote>
+<div><p>The name used to save the file. The file format is determined by the
+extension of the file. For example, if this filename is &#8216;foo.pdf&#8217;, the
+file will be saved in pdf format.</p>
+</div></blockquote>
+<p><strong>plotdir</strong> : str</p>
+<blockquote class="last">
+<div><p>The directory in which the plot will be saved.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The plot descriptor is a dictionary with a set of values that describe how
+to make the plot.</p>
+<dl class="docutils">
+<dt>The dictionary can contain the following keys:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>title <span class="classifier-delimiter">:</span> <span class="classifier">str, optional.</span></dt>
+<dd><p class="first last">The title of the graph</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xlabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">The x label</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ylabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">The y label. The default value is &#8216;Cumulative probability&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>confidence <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">The confidence used to plot error bars. Default value is 0.95</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>metric <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">A list of values representing the metric to plot. These values are the
+path to identify a specific metric into an entry of a result set.
+Normally, it is a 2-value list where the first value is the name of
+the collector which measured the metric and the second value is the
+metric name. The metric must be a CDF.
+Example values could be [&#8216;LATENCY&#8217;, &#8216;CDF&#8217;].</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>filter <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">A dictionary of values to filter in the resultset.
+Example: {&#8216;network_cache&#8217;: 0.004, &#8216;topology_name&#8217;: &#8216;GEANT&#8217;}
+If not specified or None, no filtering is executed on the results
+and possibly heterogeneous results may be plotted together</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ymetrics <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples</span></dt>
+<dd><p class="first last">List of metrics to be shown on the graph. The i-th metric of the list
+is the metric that the i-th line on the graph will represent. If
+all lines are for the same metric, then all elements of the list are
+equal.
+Each single metric (i.e. each element of the list) is a tuple modeling
+the path to identify a specific metric into an entry of a result set.
+Normally, it is a 2-value list where the first value is the name of
+the collector which measured the metric and the second value is the
+metric name. Example values could be (&#8216;CACHE_HIT_RATIO&#8217;, &#8216;MEAN&#8217;),
+(&#8216;LINK_LOAD&#8217;, &#8216;MEAN_INTERNAL&#8217;) or (&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;).
+For example, if in a graph of N lines all lines of the graph show mean
+latency, then ymetrics = [(&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;)]*5.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ycondnames <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span></dt>
+<dd><p class="first last">List of condition names specific to each line of the graph. Different
+from the conditions expressed in the filter parameter, which are
+global, these conditions are specific to one bar. Ech condition name,
+different from the filter parameter is a path to a condition to be
+checked, e.g. (&#8216;topology&#8217;, &#8216;name&#8217;). Values to be matched for this
+conditions are specified in ycondvals. This list must be as long as
+the number of lines to plot. If not specified, all lines are filtered
+by the conditions of filter parameter only, but in this case all
+ymetrics should be different.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ycondvals <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span></dt>
+<dd><p class="first last">List of values that the conditions of ycondnames must meet. This list
+must be as long as the number of lines to plot. If not specified,
+all lines are filtered by the conditions of filter parameter only,
+but in this case all ymetrics should be different.</p>
 </dd>
 </dl>
 </li>
@@ -404,8 +637,8 @@ Default value is &#8216;linear&#8217;</p>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
+<dt>step <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em> draws the CDF with steps. Default value is <em>True</em></p>
 </dd>
 </dl>
 </li>
@@ -417,7 +650,22 @@ Default value is &#8216;linear&#8217;</p>
 </li>
 <li><dl class="first docutils">
 <dt>legend <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
-<dd><p class="first last">Dictionary mapping each value of yvals with a legend label</p>
+<dd><p class="first last">Dictionary mapping each value of yvals with a legend label. If not
+specified, it is not plotted. If you wish to plot it with the
+name of the line, set it to put yvals or ymetrics, depending on which
+one is used</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>legend_args <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">Optional legend arguments, such as ncol</p>
 </dd>
 </dl>
 </li>
@@ -432,82 +680,61 @@ Default value is &#8216;linear&#8217;</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="icarus.results.plot.plot_link_load_vs_alpha">
-<tt class="descname">plot_link_load_vs_alpha</tt><big>(</big><em>resultset</em>, <em>topology</em>, <em>cache_size</em>, <em>alpha_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_link_load_vs_alpha"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_link_load_vs_alpha" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="icarus.results.plot.plot_link_load_vs_cache_size">
-<tt class="descname">plot_link_load_vs_cache_size</tt><big>(</big><em>resultset</em>, <em>topology</em>, <em>alpha</em>, <em>cache_size_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_link_load_vs_cache_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_link_load_vs_cache_size" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="icarus.results.plot.plot_link_load_vs_topology">
-<tt class="descname">plot_link_load_vs_topology</tt><big>(</big><em>resultset</em>, <em>alpha</em>, <em>cache_size</em>, <em>topology_range</em>, <em>strategies</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#plot_link_load_vs_topology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.plot_link_load_vs_topology" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot bar graphs of link load for specific values of alpha and cache
-size for various topologies.</p>
-<p>The objective here is to show that our algorithms works well on all
-topologies considered</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="icarus.results.plot.run">
-<tt class="descname">run</tt><big>(</big><em>config</em>, <em>results</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/plot.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.plot.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run the plot script</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>config</strong> : str</p>
-<blockquote>
-<div><p>The path of the configuration file</p>
-</div></blockquote>
-<p><strong>results</strong> : str</p>
-<blockquote>
-<div><p>The file storing the experiment results</p>
-</div></blockquote>
-<p><strong>plotdir</strong> : str</p>
-<blockquote class="last">
-<div><p>The directory into which graphs will be saved</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 <div class="section" id="module-icarus.results.readwrite">
 <span id="readwrite-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">readwrite</span></tt> Module<a class="headerlink" href="#module-icarus.results.readwrite" title="Permalink to this headline">¶</a></h2>
 <p>Functions for reading and writing results</p>
 <dl class="class">
 <dt id="icarus.results.readwrite.ResultSet">
-<em class="property">class </em><tt class="descname">ResultSet</tt><a class="reference internal" href="../_modules/icarus/results/readwrite.html#ResultSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.ResultSet" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">ResultSet</tt><big>(</big><em>attr=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/readwrite.html#ResultSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.ResultSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>This class can be used to store results from different experiments,
 accessed and filtered.</p>
 <p>All operations that write data are thread-safe so that this object can 
 be shared by different processes.</p>
 <p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.results.readwrite.ResultSet.add" title="icarus.results.readwrite.ResultSet.add"><tt class="xref py py-obj docutils literal"><span class="pre">add</span></tt></a>(parameters,&nbsp;results)</td>
+<td>Add a result to the result set.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.results.readwrite.ResultSet.dump" title="icarus.results.readwrite.ResultSet.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
+<td>Dump all results.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.results.readwrite.ResultSet.filter" title="icarus.results.readwrite.ResultSet.filter"><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt></a>(condition)</td>
+<td>Return subset of results matching specific conditions</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="icarus.results.readwrite.ResultSet.add">
-<tt class="descname">add</tt><big>(</big><em>result</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/readwrite.html#ResultSet.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.ResultSet.add" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a result to the result set. This method is thread safe</p>
+<tt class="descname">add</tt><big>(</big><em>parameters</em>, <em>results</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/readwrite.html#ResultSet.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.ResultSet.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a result to the result set.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>results</strong> : 2-value tuple</p>
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>parameters</strong> : Tree</p>
+<blockquote>
+<div><p>Tree of experiment parameters</p>
+</div></blockquote>
+<p><strong>results</strong> : Tree</p>
 <blockquote class="last">
-<div><p>2-value tuples where the first value is a dictionary of experiment
-parameters and the second value is the dictionary of experiment
-results</p>
+<div><p>Tree of experiment results</p>
 </div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Notes</p>
+<p>If parameters and results are dictionaries, this method will attempt to
+convert them to trees and storing them anyway. It is necessary that
+parameters and results are saved as trees so that plotting functions
+can search correctly in them.</p>
 </dd></dl>
 
 <dl class="method">
@@ -532,16 +759,18 @@ of experiment results.</p>
 
 <dl class="method">
 <dt id="icarus.results.readwrite.ResultSet.filter">
-<tt class="descname">filter</tt><big>(</big><em>parameters</em>, <em>metrics=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/readwrite.html#ResultSet.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.ResultSet.filter" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">filter</tt><big>(</big><em>condition</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/readwrite.html#ResultSet.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.ResultSet.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return subset of results matching specific conditions</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>parameters</strong> : dict</p>
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>condition</strong> : dict</p>
 <blockquote>
 <div><p>Dictionary listing all parameters and values to be matched in the
-results set</p>
+results set. Each parameter, i.e. each key of the dictionary must
+be an iterable object containing the path in the parameters tree
+to the required parameter</p>
 </div></blockquote>
 <p><strong>metrics</strong> : dict, optional</p>
 <blockquote>
@@ -549,11 +778,11 @@ results set</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>filtered_results</strong> : list</p>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>filtered_results</strong> : ResultSet</p>
 <blockquote class="last">
 <div><p>List of 2-tuples of filtered results, where the first element is a
-dictionary of all experiment parameters and the second value is 
-a dictionary with experiment results.</p>
+tree of all experiment parameters and the second value is 
+a tree with experiment results.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -610,6 +839,71 @@ a dictionary with experiment results.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-icarus.results.visualize">
+<span id="visualize-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">visualize</span></tt> Module<a class="headerlink" href="#module-icarus.results.visualize" title="Permalink to this headline">¶</a></h2>
+<p>Functions for visualizing results on graphs of topologies</p>
+<dl class="function">
+<dt id="icarus.results.visualize.draw_stack_deployment">
+<tt class="descname">draw_stack_deployment</tt><big>(</big><em>topology</em>, <em>plotdir</em>, <em>filename</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/visualize.html#draw_stack_deployment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.visualize.draw_stack_deployment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a topology with different node colors according to stack</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
+<blockquote>
+<div><p>The topology to draw</p>
+</div></blockquote>
+<p><strong>plotdir</strong> : string</p>
+<blockquote>
+<div><p>The directory onto which draw plots</p>
+</div></blockquote>
+<p><strong>filename</strong> : string</p>
+<blockquote class="last">
+<div><p>The name of the image file to save</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.results.visualize.draw_network_load">
+<tt class="descname">draw_network_load</tt><big>(</big><em>topology</em>, <em>result</em>, <em>plotdir</em>, <em>filename</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/visualize.html#draw_network_load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.visualize.draw_network_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw topology with node colors according to stack and node size and link
+color according to server/cache hits and link loads.</p>
+<p>Nodes are colored according to COLORMAP. Edge are colored on a blue-red
+scale where blue means min link load and red means max link load.
+Sources and caches have variable size proportional to their hit ratios.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
+<blockquote>
+<div><p>The topology to draw</p>
+</div></blockquote>
+<p><strong>result</strong> : Tree</p>
+<blockquote>
+<div><p>The tree representing the specific experiment result from which metric
+are read</p>
+</div></blockquote>
+<p><strong>plotdir</strong> : string</p>
+<blockquote>
+<div><p>The directory onto which draw plots</p>
+</div></blockquote>
+<p><strong>filename</strong> : string</p>
+<blockquote class="last">
+<div><p>The name of the image file to save</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -630,12 +924,6 @@ a dictionary with experiment results.</p>
         <li class="right" >
           <a href="../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="icarus.scenarios.html" title="scenarios Package"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="icarus.models.html" title="models Package"
-             >previous</a> |</li>
         <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
           <li><a href="icarus.html" >icarus Package</a> &raquo;</li> 
       </ul>

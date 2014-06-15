@@ -56,7 +56,9 @@
 <li><a class="reference internal" href="#">tools Package</a><ul>
 <li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">tools</span></tt> Package</a></li>
 <li><a class="reference internal" href="#module-icarus.tools.cacheperf"><tt class="docutils literal"><span class="pre">cacheperf</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-icarus.tools.stats"><tt class="docutils literal"><span class="pre">stats</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-icarus.tools.stats"><tt class="docutils literal"><span class="pre">stats</span></tt> Module</a><ul>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-icarus.tools.traces"><tt class="docutils literal"><span class="pre">traces</span></tt> Module</a></li>
 </ul>
 </li>
@@ -92,7 +94,7 @@
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">tools</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="module-icarus.tools"></span><p>This package contains code providing various functionalities useful in
 caching research.</p>
-<p>Examples include code for importing and analysing traffic traces, modelling the
+<p>Examples include code for importing and analyzing traffic traces, modeling the
 behavior of caches and statistical utilities.</p>
 </div>
 <div class="section" id="module-icarus.tools.cacheperf">
@@ -329,16 +331,52 @@ set to 30 times the content population</p>
 <p>The support must be a finite discrete set of contiguous integers
 {1, ..., N}. This definition of discrete distribution.</p>
 <p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.tools.stats.DiscreteDist.rv" title="icarus.tools.stats.DiscreteDist.rv"><tt class="xref py py-obj docutils literal"><span class="pre">rv</span></tt></a>()</td>
+<td>Get rand value from the distribution</td>
+</tr>
+</tbody>
+</table>
 <dl class="attribute">
 <dt id="icarus.tools.stats.DiscreteDist.cdf">
 <tt class="descname">cdf</tt><a class="reference internal" href="../_modules/icarus/tools/stats.html#DiscreteDist.cdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.DiscreteDist.cdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the Cumulative Density Function (CDF)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cdf</strong> : Numpy array</p>
+<blockquote class="last">
+<div><p>Array representing cdf</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="icarus.tools.stats.DiscreteDist.pdf">
 <tt class="descname">pdf</tt><a class="reference internal" href="../_modules/icarus/tools/stats.html#DiscreteDist.pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.DiscreteDist.pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the Probability Density Function (PDF)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>pdf</strong> : Numpy array</p>
+<blockquote class="last">
+<div><p>Array representing the probability density function of the
+distribution</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -356,6 +394,22 @@ set to 30 times the content population</p>
 <p>Implements a truncated Zipf distribution, i.e. a Zipf distribution with
 a finite population, which can hence take values of alpha &gt; 0.</p>
 <p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">rv</span></tt>()</td>
+<td>Get rand value from the distribution</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="icarus.tools.stats.TruncatedZipfDist.alpha">
+<tt class="descname">alpha</tt><a class="reference internal" href="../_modules/icarus/tools/stats.html#TruncatedZipfDist.alpha"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.TruncatedZipfDist.alpha" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="function">

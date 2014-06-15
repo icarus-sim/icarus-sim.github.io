@@ -13,11 +13,12 @@ You can download a stable release in a zip or tar.gz format using the links belo
 
 **Latest version:**
 
- * Version 0.2.1: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.2.1.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.2.1.tar.gz)\]
+ * Version 0.3.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.3.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.3.0.tar.gz)\]
 
 **Older versions:**
 
- * Version 0.2: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.2.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.2.tar.gz)\]
+ * Version 0.2.1: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.2.1.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.2.1.tar.gz)\]
+ * Version 0.2.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.2.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.2.tar.gz)\]
  * Version 0.1.1: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.1.1.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.1.1.tar.gz)\]
  * Version 0.1.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.1.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.1.tar.gz)\]
 
@@ -32,8 +33,7 @@ If you use Ubuntu (version 13.10+) you can run the script `ubuntusetup.sh` locat
 To run it, execute the following commands:
 
     $ cd <YOUR ICARUS FOLDER>
-    $ cd scripts
-    $ sh ubuntusetup.sh
+    $ sh scripts/ubuntusetup.sh
 
 The script, after being launched, will ask you for superuser password.
 
@@ -45,21 +45,28 @@ Otherwise, have a look at the `README.md` file, which explains how to configure 
 #### Run simulations
 To use Icarus with the currently implemented topologies and models of caching policies and strategies you need to do the following.
 
-First, create a configuration file with all the desired parameters of your simulation. You can modify the file `config.py`, which is a well documented example configuration. You can even use the configuration file as it is just to get started.
+First, create a configuration file with all the desired parameters of your simulation. You can modify the file `config.py`, which is a well documented example configuration. You can even use the configuration file as it is just to get started. Alternatively, have a look at the `examples` folder which contains examples of configuration files for various uses.
 
 Second, run Icarus by running the script `icarus.py` using the following syntax
 
-    $ python icarus.py --results RESULTS_FILE [--plots PLOTS_DIR] CONF_FILE
+    $ python icarus.py --results RESULTS_FILE CONF_FILE
 
 where:
 
  * `RESULTS_FILE` is the [pickle](http://docs.python.org/3/library/pickle.html) file in which results will be saved,
- * `PLOTS_DIR` is the directory where graphs plotting the results will be saved. If the folder does not exist, it will be created. This parameter is optional. If omitted, graphs will not be plotted. Results can be plotted at a later stage anyway.
  * `CONF_FILE` is the configuration file
 
 Example usage could be:
 
-    $ python icarus.py --results results.pickle --plots graphs config.py
+    $ python icarus.py --results results.pickle config.py
+
+After saved results in pickle format you can extract results in a human readable format
+using the `printresults.py` script from the `scripts` folder. Example usage could be:
+
+    $ python scripts/printresults.py results.pickle > results.txt
+
+Icarus also provides a set of helper functions for plotting results. Have a look at the `examples`
+folder for plot examples.
 
 By executing the steps illustrated above it is possible to run simulations using the
 topologies, cache policies, strategies and result collectors readily available on
@@ -78,8 +85,8 @@ Otherwise, please browse the source code. It is very well documented and easy to
 understand.
 
 #### Modelling tools
-In addition. Icarus provides utilities for modelling the performance of caches and
-work with traffic traces. The code is included in the [`icarus.tools`](http://icarus-sim.github.io/doc/apidoc/icarus.tools.html) package.
+Icarus provides utilities for modelling the performance of caches and
+work with traffic traces. The code is included in the `icarus.tools` package.
 These tools are described in detail in [this paper](http://www.ee.ucl.ac.uk/~lsaino/publications/icarus-simutools14.pdf).
 
 ### Documentation
@@ -108,25 +115,14 @@ If you use Icarus for your paper, please refer to the following publication:
     }
 
 ### Reproduce hash-routing results
-This repository contains the code and configuration to reproduce the results and plot the graphs presented
-in the paper:
+The Icarus simulator can be used to reproduce the results and plot the graphs presented in the paper:
 
 L.Saino, I. Psaras and G. Pavlou, Hash-routing Schemes for Information Centric Networking,
 in *Proc. of the 3rd ACM SIGCOMM workshop on Information Centric Networking (ICN'13)*, Hong Kong, China, August 2013.
-\[[PDF](http://www.ee.ucl.ac.uk/~lsaino/publications/hashrouting-icn13.pdf)\],
-\[[BibTex](http://www.ee.ucl.ac.uk/~lsaino/publications/hashrouting-icn13.bib)\]
+[\[PDF\]](http://www.ee.ucl.ac.uk/~lsaino/publications/hashrouting-icn13.pdf),
+[\[BibTex\]](http://www.ee.ucl.ac.uk/~lsaino/publications/hashrouting-icn13.bib)
 
-To reproduce results and plot the graph, simply go to the folder `./reproduce-results/hashrouting-icn13` and run the script `reproduce_results.sh`. 
-
-    $ cd <YOUR ICARUS FOLDER>
-    $ cd reproduce-results/hashrouting-icn13
-    $ sh reproduce_results.sh
-
-This script has been tested only on Ubuntu 12.04, but should work fine on any more recent versions.
-
-This script will run all simulations automatically, save all log files and plot all graphs.
-
-The logs will be saved in the `logs` directory, while the graphs will be saved in the `graphs` directory.
+All the code, data and documentation required is made available in the [icarus-sim/hashrouting-icn13-results](http://github.com/icarus-sim/hashrouting-icn13-results) repository.
 
 ### License
 Icarus is licensed under the terms of the [GNU GPLv2 license](http://www.gnu.org/licenses/gpl-2.0.html).

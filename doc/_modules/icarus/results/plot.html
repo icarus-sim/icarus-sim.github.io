@@ -70,36 +70,37 @@
             
   <h1>Source code for icarus.results.plot</h1><div class="highlight"><pre>
 <span class="c">#!/usr/bin/env python</span>
-<span class="sd">&quot;&quot;&quot;Plot results read from a resultset</span>
+<span class="sd">&quot;&quot;&quot;Plot results read from a result set</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">collections</span>
-<span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">icarus.util</span> <span class="kn">import</span> <span class="n">Settings</span><span class="p">,</span> <span class="n">config_logging</span>
+<span class="kn">from</span> <span class="nn">icarus.util</span> <span class="kn">import</span> <span class="n">Tree</span><span class="p">,</span> <span class="n">step_cdf</span>
 <span class="kn">from</span> <span class="nn">icarus.tools</span> <span class="kn">import</span> <span class="n">means_confidence_interval</span>
-<span class="kn">from</span> <span class="nn">icarus.registry</span> <span class="kn">import</span> <span class="n">results_reader_register</span>
 
 
-<span class="c"># Logger object</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;plot&#39;</span><span class="p">)</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;plot_lines&#39;</span><span class="p">,</span> <span class="s">&#39;plot_bar_chart&#39;</span><span class="p">,</span> <span class="s">&#39;plot_cdf&#39;</span><span class="p">]</span>
+
 
 <span class="c"># These lines prevent insertion of Type 3 fonts in figures</span>
-<span class="c"># Publishers don&#39;t want them</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;ps.useafm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;pdf.use14corefonts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;text.usetex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c"># Publishers don&#39;t want them. However, in some case these commands block the</span>
+<span class="c"># embedding of fonts raising complaints for example from EDAS</span>
+<span class="c">#plt.rcParams[&#39;ps.useafm&#39;] = True</span>
+<span class="c">#plt.rcParams[&#39;pdf.use14corefonts&#39;] = True</span>
+
+<span class="c"># If True text is interpreted as LaTeX, e.g. underscore are interpreted as </span>
+<span class="c"># subscript. If False, text is interpreted literally</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;text.usetex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
 
 <span class="c"># Aspect ratio of the output figures</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="mf">4.5</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span>
 
 <span class="c"># Size of font in legends</span>
-<span class="n">LEGEND_SIZE</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">LEGEND_SIZE</span> <span class="o">=</span> <span class="mi">14</span>
 
 <span class="c"># Plot</span>
 <span class="n">PLOT_EMPTY_GRAPHS</span> <span class="o">=</span> <span class="bp">False</span>
@@ -110,245 +111,7 @@
 <span class="c"># Catalogue of possible hatch styles (for bar charts)</span>
 <span class="n">HATCH_CATALOGUE</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\\\\</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;//&#39;</span><span class="p">,</span> <span class="s">&#39;+&#39;</span><span class="p">,</span> <span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;o&#39;</span><span class="p">,</span> <span class="s">&#39;.&#39;</span><span class="p">,</span>  <span class="s">&#39;|&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span>  <span class="s">&#39;O&#39;</span><span class="p">]</span>
 
-<span class="c"># This dict maps strategy names to the style of the line to be used in the plots</span>
-<span class="c"># Off-path strategies: solid lines</span>
-<span class="c"># On-path strategies: dashed lines</span>
-<span class="c"># No-cache: dotted line</span>
-<span class="n">STRATEGY_STYLE</span> <span class="o">=</span> <span class="p">{</span>
-         <span class="s">&#39;HR_SYMM&#39;</span><span class="p">:</span>         <span class="s">&#39;b-o&#39;</span><span class="p">,</span>
-         <span class="s">&#39;HR_ASYMM&#39;</span><span class="p">:</span>        <span class="s">&#39;g-D&#39;</span><span class="p">,</span>
-         <span class="s">&#39;HR_MULTICAST&#39;</span><span class="p">:</span>    <span class="s">&#39;m-^&#39;</span><span class="p">,</span>         
-         <span class="s">&#39;HR_HYBRID_AM&#39;</span><span class="p">:</span>    <span class="s">&#39;c-s&#39;</span><span class="p">,</span>
-         <span class="s">&#39;HR_HYBRID_SM&#39;</span><span class="p">:</span>    <span class="s">&#39;r-v&#39;</span><span class="p">,</span>
-         <span class="s">&#39;LCE&#39;</span><span class="p">:</span>             <span class="s">&#39;b--p&#39;</span><span class="p">,</span>
-         <span class="s">&#39;LCD&#39;</span><span class="p">:</span>             <span class="s">&#39;g--&gt;&#39;</span><span class="p">,</span>
-         <span class="s">&#39;CL4M&#39;</span><span class="p">:</span>            <span class="s">&#39;g--&gt;&#39;</span><span class="p">,</span>
-         <span class="s">&#39;PROB_CACHE&#39;</span><span class="p">:</span>      <span class="s">&#39;c--&lt;&#39;</span><span class="p">,</span>
-         <span class="s">&#39;RAND_CHOICE&#39;</span><span class="p">:</span>     <span class="s">&#39;r--&lt;&#39;</span><span class="p">,</span>
-         <span class="s">&#39;RAND_BERNOULLI&#39;</span><span class="p">:</span>  <span class="s">&#39;g--*&#39;</span><span class="p">,</span>
-         <span class="s">&#39;NO_CACHE&#39;</span><span class="p">:</span>        <span class="s">&#39;k:o&#39;</span><span class="p">,</span>
-         <span class="s">&#39;OPTIMAL&#39;</span><span class="p">:</span>         <span class="s">&#39;k-o&#39;</span>
-                <span class="p">}</span>
-
-<span class="c"># This dict maps name of strategies to names to be displayed in the legend</span>
-<span class="n">STRATEGY_LEGEND</span> <span class="o">=</span> <span class="p">{</span>
-         <span class="s">&#39;LCE&#39;</span><span class="p">:</span>             <span class="s">&#39;LCE&#39;</span><span class="p">,</span>
-         <span class="s">&#39;LCD&#39;</span><span class="p">:</span>             <span class="s">&#39;LCD&#39;</span><span class="p">,</span>
-         <span class="s">&#39;HR_SYMM&#39;</span><span class="p">:</span>         <span class="s">&#39;HR Symm&#39;</span><span class="p">,</span>
-         <span class="s">&#39;HR_ASYMM&#39;</span><span class="p">:</span>        <span class="s">&#39;HR Asymm&#39;</span><span class="p">,</span>
-         <span class="s">&#39;HR_MULTICAST&#39;</span><span class="p">:</span>    <span class="s">&#39;HR Multicast&#39;</span><span class="p">,</span>         
-         <span class="s">&#39;HR_HYBRID_AM&#39;</span><span class="p">:</span>    <span class="s">&#39;HR Hybrid AM&#39;</span><span class="p">,</span>
-         <span class="s">&#39;HR_HYBRID_SM&#39;</span><span class="p">:</span>    <span class="s">&#39;HR Hybrid SM&#39;</span><span class="p">,</span>
-         <span class="s">&#39;CL4M&#39;</span><span class="p">:</span>            <span class="s">&#39;CL4M&#39;</span><span class="p">,</span>
-         <span class="s">&#39;PROB_CACHE&#39;</span><span class="p">:</span>      <span class="s">&#39;ProbCache&#39;</span><span class="p">,</span>
-         <span class="s">&#39;RAND_CHOICE&#39;</span><span class="p">:</span>     <span class="s">&#39;Random (choice)&#39;</span><span class="p">,</span>
-         <span class="s">&#39;RAND_BERNOULLI&#39;</span><span class="p">:</span>  <span class="s">&#39;Random (Bernoulli)&#39;</span><span class="p">,</span>
-         <span class="s">&#39;NO_CACHE&#39;</span><span class="p">:</span>        <span class="s">&#39;No caching&#39;</span><span class="p">,</span>
-         <span class="s">&#39;OPTIMAL&#39;</span><span class="p">:</span>         <span class="s">&#39;Optimal&#39;</span>
-                    <span class="p">}</span>
-
-<span class="c"># Color and hatch styles for bar charts of cache hit ratio and link load vs topology</span>
-<span class="n">STRATEGY_BAR_COLOR</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&#39;LCE&#39;</span><span class="p">:</span>          <span class="s">&#39;k&#39;</span><span class="p">,</span>
-    <span class="s">&#39;LCD&#39;</span><span class="p">:</span>          <span class="s">&#39;0.4&#39;</span><span class="p">,</span>
-    <span class="s">&#39;NO_CACHE&#39;</span><span class="p">:</span>     <span class="s">&#39;0.5&#39;</span><span class="p">,</span>
-    <span class="s">&#39;HR_ASYMM&#39;</span><span class="p">:</span>     <span class="s">&#39;0.6&#39;</span><span class="p">,</span>
-    <span class="s">&#39;HR_SYMM&#39;</span><span class="p">:</span>      <span class="s">&#39;0.7&#39;</span>
-    <span class="p">}</span>
-
-<span class="n">STRATEGY_BAR_HATCH</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&#39;LCE&#39;</span><span class="p">:</span>          <span class="bp">None</span><span class="p">,</span>
-    <span class="s">&#39;LCD&#39;</span><span class="p">:</span>          <span class="s">&#39;//&#39;</span><span class="p">,</span>
-    <span class="s">&#39;NO_CACHE&#39;</span><span class="p">:</span>     <span class="s">&#39;x&#39;</span><span class="p">,</span>
-    <span class="s">&#39;HR_ASYMM&#39;</span><span class="p">:</span>     <span class="s">&#39;+&#39;</span><span class="p">,</span>
-    <span class="s">&#39;HR_SYMM&#39;</span><span class="p">:</span>      <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span>
-    <span class="p">}</span>
-
-
-<div class="viewcode-block" id="plot_cache_hits_vs_alpha"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.plot_cache_hits_vs_alpha">[docs]</a><span class="k">def</span> <span class="nf">plot_cache_hits_vs_alpha</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">,</span> <span class="n">alpha_range</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
-    <span class="n">desc</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Cache hit ratio: T=</span><span class="si">%s</span><span class="s"> C=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ylabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Cache hit ratio&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xlabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">u&#39;Content distribution </span><span class="se">\u03b1</span><span class="s">&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;strategy_name&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strategies</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;alpha&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha_range</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">topology_name</span><span class="o">=</span><span class="n">topology</span><span class="p">,</span> <span class="n">network_cache</span><span class="o">=</span><span class="n">cache_size</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;metric&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;CACHE_HIT_RATIO&#39;</span><span class="p">,</span> <span class="s">&#39;MEAN&#39;</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;errorbar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;upper left&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;line_style&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_STYLE</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_LEGEND</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;plotempty&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PLOT_EMPTY_GRAPHS</span>
-    <span class="k">if</span> <span class="s">&#39;NO_CACHE&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]:</span>
-        <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#39;NO_CACHE&#39;</span><span class="p">)</span>
-    <span class="n">plot_lines</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="s">&#39;CACHE_HIT_RATIO_T=</span><span class="si">%s</span><span class="s">@C=</span><span class="si">%s</span><span class="s">.pdf&#39;</span>
-               <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">),</span> <span class="n">plotdir</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="plot_cache_hits_vs_cache_size"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.plot_cache_hits_vs_cache_size">[docs]</a><span class="k">def</span> <span class="nf">plot_cache_hits_vs_cache_size</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">cache_size_range</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
-    <span class="n">desc</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Cache hit ratio: T=</span><span class="si">%s</span><span class="s"> A=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xlabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">u&#39;Cache to population ratio&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ylabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Cache hit ratio&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xscale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;log&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;strategy_name&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strategies</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;network_cache&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cache_size_range</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">topology_name</span><span class="o">=</span><span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;metric&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;CACHE_HIT_RATIO&#39;</span><span class="p">,</span> <span class="s">&#39;MEAN&#39;</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;errorbar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;upper left&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;line_style&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_STYLE</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_LEGEND</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;plotempty&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PLOT_EMPTY_GRAPHS</span>
-    <span class="k">if</span> <span class="s">&#39;NO_CACHE&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]:</span>
-        <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#39;NO_CACHE&#39;</span><span class="p">)</span>
-    <span class="n">plot_lines</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span><span class="s">&#39;CACHE_HIT_RATIO_T=</span><span class="si">%s</span><span class="s">@A=</span><span class="si">%s</span><span class="s">.pdf&#39;</span>
-               <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="p">),</span> <span class="n">plotdir</span><span class="p">)</span>
     
-</div>
-<div class="viewcode-block" id="plot_link_load_vs_alpha"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.plot_link_load_vs_alpha">[docs]</a><span class="k">def</span> <span class="nf">plot_link_load_vs_alpha</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">,</span> <span class="n">alpha_range</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
-    <span class="n">desc</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Internal link load: T=</span><span class="si">%s</span><span class="s"> C=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xlabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">u&#39;Content distribution </span><span class="se">\u03b1</span><span class="s">&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ylabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Internal link load&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;strategy_name&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strategies</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;alpha&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha_range</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">topology_name</span><span class="o">=</span><span class="n">topology</span><span class="p">,</span> <span class="n">network_cache</span><span class="o">=</span><span class="n">cache_size</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;metric&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;LINK_LOAD&#39;</span><span class="p">,</span> <span class="s">&#39;MEAN_INTERNAL&#39;</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;errorbar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;upper right&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;line_style&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_STYLE</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_LEGEND</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;plotempty&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PLOT_EMPTY_GRAPHS</span>
-    <span class="n">plot_lines</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="s">&#39;LINK_LOAD_INTERNAL_T=</span><span class="si">%s</span><span class="s">@C=</span><span class="si">%s</span><span class="s">.pdf&#39;</span>
-               <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">),</span> <span class="n">plotdir</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="plot_link_load_vs_cache_size"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.plot_link_load_vs_cache_size">[docs]</a><span class="k">def</span> <span class="nf">plot_link_load_vs_cache_size</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">cache_size_range</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
-    <span class="n">desc</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Internal link load: T=</span><span class="si">%s</span><span class="s"> A=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xlabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Cache to population ratio&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ylabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Internal link load&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xscale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;log&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;strategy_name&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strategies</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;network_cache&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cache_size_range</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">topology_name</span><span class="o">=</span><span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;metric&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;LINK_LOAD&#39;</span><span class="p">,</span> <span class="s">&#39;MEAN_INTERNAL&#39;</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;errorbar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;upper right&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;line_style&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_STYLE</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_LEGEND</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;plotempty&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PLOT_EMPTY_GRAPHS</span>
-    <span class="n">plot_lines</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="s">&#39;LINK_LOAD_INTERNAL_T=</span><span class="si">%s</span><span class="s">@A=</span><span class="si">%s</span><span class="s">.pdf&#39;</span>
-               <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="p">),</span> <span class="n">plotdir</span><span class="p">)</span>
-    
-</div>
-<div class="viewcode-block" id="plot_latency_vs_alpha"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.plot_latency_vs_alpha">[docs]</a><span class="k">def</span> <span class="nf">plot_latency_vs_alpha</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">,</span> <span class="n">alpha_range</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
-    <span class="n">desc</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Latency: T=</span><span class="si">%s</span><span class="s"> C=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xlabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">u&#39;Content distribution </span><span class="se">\u03b1</span><span class="s">&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ylabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Latency (ms)&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;strategy_name&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strategies</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;alpha&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha_range</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">topology_name</span><span class="o">=</span><span class="n">topology</span><span class="p">,</span> <span class="n">network_cache</span><span class="o">=</span><span class="n">cache_size</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;metric&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;LATENCY&#39;</span><span class="p">,</span> <span class="s">&#39;MEAN&#39;</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;errorbar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;upper right&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;line_style&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_STYLE</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_LEGEND</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;plotempty&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PLOT_EMPTY_GRAPHS</span>
-    <span class="n">plot_lines</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="s">&#39;LATENCY_T=</span><span class="si">%s</span><span class="s">@C=</span><span class="si">%s</span><span class="s">.pdf&#39;</span>
-               <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">),</span> <span class="n">plotdir</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="plot_latency_vs_cache_size"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.plot_latency_vs_cache_size">[docs]</a><span class="k">def</span> <span class="nf">plot_latency_vs_cache_size</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">cache_size_range</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
-    <span class="n">desc</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Latency: T=</span><span class="si">%s</span><span class="s"> A=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xlabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Cache to population ratio&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ylabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Latency&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xscale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;log&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;strategy_name&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strategies</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;network_cache&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cache_size_range</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">topology_name</span><span class="o">=</span><span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;metric&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;LATENCY&#39;</span><span class="p">,</span> <span class="s">&#39;MEAN&#39;</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;errorbar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;upper right&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;line_style&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_STYLE</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_LEGEND</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;plotempty&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PLOT_EMPTY_GRAPHS</span>
-    <span class="n">plot_lines</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="s">&#39;LATENCY_T=</span><span class="si">%s</span><span class="s">@A=</span><span class="si">%s</span><span class="s">.pdf&#39;</span>
-               <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="p">),</span> <span class="n">plotdir</span><span class="p">)</span>
-    
-</div>
-<div class="viewcode-block" id="plot_cache_hits_vs_topology"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.plot_cache_hits_vs_topology">[docs]</a><span class="k">def</span> <span class="nf">plot_cache_hits_vs_topology</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">,</span> <span class="n">topology_range</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plot bar graphs of cache hit ratio for specific values of alpha and cache</span>
-<span class="sd">    size for various topologies.</span>
-<span class="sd">    </span>
-<span class="sd">    The objective here is to show that our algorithms works well on all</span>
-<span class="sd">    topologies considered</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">desc</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Cache hit ratio: A=</span><span class="si">%s</span><span class="s"> C=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ylabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Cache hit ratio&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;strategy_name&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strategies</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;topology_name&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topology_range</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">network_cache</span><span class="o">=</span><span class="n">cache_size</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;metric&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;CACHE_HIT_RATIO&#39;</span><span class="p">,</span> <span class="s">&#39;MEAN&#39;</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;errorbar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;lower right&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;bar_color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_BAR_COLOR</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;bar_hatch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_BAR_HATCH</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_LEGEND</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;plotempty&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PLOT_EMPTY_GRAPHS</span>
-    <span class="k">if</span> <span class="s">&#39;NO_CACHE&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]:</span>
-        <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#39;NO_CACHE&#39;</span><span class="p">)</span>
-    <span class="n">plot_bar_graph</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="s">&#39;CACHE_HIT_RATIO_A=</span><span class="si">%s</span><span class="s">_C=</span><span class="si">%s</span><span class="s">.pdf&#39;</span>
-                   <span class="o">%</span> <span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">),</span> <span class="n">plotdir</span><span class="p">)</span>
-    
-</div>
-<div class="viewcode-block" id="plot_link_load_vs_topology"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.plot_link_load_vs_topology">[docs]</a><span class="k">def</span> <span class="nf">plot_link_load_vs_topology</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">,</span> <span class="n">topology_range</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plot bar graphs of link load for specific values of alpha and cache</span>
-<span class="sd">    size for various topologies.</span>
-<span class="sd">    </span>
-<span class="sd">    The objective here is to show that our algorithms works well on all</span>
-<span class="sd">    topologies considered</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">desc</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Internal link load: A=</span><span class="si">%s</span><span class="s"> C=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ylabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Internal link load&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;strategy_name&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strategies</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xparam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;topology_name&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topology_range</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">network_cache</span><span class="o">=</span><span class="n">cache_size</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;metric&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;LINK_LOAD&#39;</span><span class="p">,</span> <span class="s">&#39;MEAN_INTERNAL&#39;</span><span class="p">)</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;errorbar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;lower right&#39;</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;bar_color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_BAR_COLOR</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;bar_hatch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_BAR_HATCH</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STRATEGY_LEGEND</span>
-    <span class="n">desc</span><span class="p">[</span><span class="s">&#39;plotempty&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PLOT_EMPTY_GRAPHS</span>
-    <span class="n">plot_bar_graph</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="s">&#39;LINK_LOAD_INTERNAL_A=</span><span class="si">%s</span><span class="s">_C=</span><span class="si">%s</span><span class="s">.pdf&#39;</span>
-                   <span class="o">%</span> <span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">),</span> <span class="n">plotdir</span><span class="p">)</span>
-
-
-    </div>
 <div class="viewcode-block" id="plot_lines"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.plot_lines">[docs]</a><span class="k">def</span> <span class="nf">plot_lines</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Plot a graph with characteristics described in the plot descriptor out</span>
 <span class="sd">    of the data contained in the resultset and save the plot in given directory.</span>
@@ -382,38 +145,70 @@
 <span class="sd">         If *True* error bars will be plotted. Default value is *True*</span>
 <span class="sd">     * confidence : float, optional</span>
 <span class="sd">         The confidence used to plot error bars. Default value is 0.95</span>
-<span class="sd">     * metric : tuple</span>
-<span class="sd">         A tuple of 2-values representing the metric to plot.</span>
-<span class="sd">         The first value is the name of the collector which measured the metric</span>
-<span class="sd">         and the second value is the metric name. Example values could</span>
-<span class="sd">         (&#39;CACHE_HIT_RATIO&#39;, &#39;MEAN&#39;), (&#39;LINK_LOAD&#39;, &#39;MEAN_INTERNAL&#39;) or </span>
-<span class="sd">         (&#39;LATENCY&#39;, &#39;MEAN&#39;)</span>
-<span class="sd">     * filter : dict</span>
-<span class="sd">         A dictionary of values to filter in the resultset.</span>
-<span class="sd">         Example: {&#39;network_cache&#39;: 0.004, &#39;topology_name&#39;: &#39;GEANT&#39;}</span>
-<span class="sd">     * xparam : str</span>
-<span class="sd">         The name of the x axis metric, e.g. &#39;alpha&#39;</span>
+<span class="sd">     * xparam : iterable</span>
+<span class="sd">         Path to the value of the x axis metric, e.g. [&#39;workload&#39;, &#39;alpha&#39;]</span>
 <span class="sd">     * xvals : list</span>
 <span class="sd">         Range of x values, e.g. [0.6, 0.7, 0.8, 0.9]</span>
-<span class="sd">     * yparam : str</span>
-<span class="sd">         The name of the y metric, e.g. &#39;strategy&#39;</span>
-<span class="sd">     * yvals : list</span>
-<span class="sd">         List of lines plotted. For example. if yparam = &#39;strategy_name&#39;, then</span>
-<span class="sd">         a valid yvals value could be [&#39;HR_SYMM&#39;, &#39;HR_ASYMM&#39;]</span>
-<span class="sd">     * xscale : str, optional</span>
-<span class="sd">         The scale of x axis. Options allowed are &#39;linear&#39; and &#39;log&#39;. </span>
-<span class="sd">         Default value is &#39;linear&#39;</span>
-<span class="sd">     * yscale : str, optional</span>
-<span class="sd">         The scale of y axis. Options allowed are &#39;linear&#39; and &#39;log&#39;.</span>
-<span class="sd">         Default value is &#39;linear&#39;</span>
-<span class="sd">     * legend_loc : str</span>
-<span class="sd">         Legend location, e.g. &#39;upper left&#39;</span>
+<span class="sd">     * filter : dict, optional</span>
+<span class="sd">         A dictionary of values to filter in the resultset.</span>
+<span class="sd">         Example: {&#39;network_cache&#39;: 0.004, &#39;topology_name&#39;: &#39;GEANT&#39;}</span>
+<span class="sd">         If not specified or None, no filtering is executed on the results</span>
+<span class="sd">         and possibly heterogeneous results may be plotted together</span>
+<span class="sd">     * ymetrics : list of tuples</span>
+<span class="sd">         List of metrics to be shown on the graph. The i-th metric of the list</span>
+<span class="sd">         is the metric that the i-th line on the graph will represent. If</span>
+<span class="sd">         all lines are for the same metric, then all elements of the list are</span>
+<span class="sd">         equal.</span>
+<span class="sd">         Each single metric (i.e. each element of the list) is a tuple modeling</span>
+<span class="sd">         the path to identify a specific metric into an entry of a result set.</span>
+<span class="sd">         Normally, it is a 2-value list where the first value is the name of</span>
+<span class="sd">         the collector which measured the metric and the second value is the</span>
+<span class="sd">         metric name. Example values could be (&#39;CACHE_HIT_RATIO&#39;, &#39;MEAN&#39;),</span>
+<span class="sd">         (&#39;LINK_LOAD&#39;, &#39;MEAN_INTERNAL&#39;) or (&#39;LATENCY&#39;, &#39;MEAN&#39;).</span>
+<span class="sd">         For example, if in a graph of N lines all lines of the graph show mean</span>
+<span class="sd">         latency, then ymetrics = [(&#39;LATENCY&#39;, &#39;MEAN&#39;)]*5.</span>
+<span class="sd">     * ycondnames : list of tuples, optional</span>
+<span class="sd">         List of condition names specific to each line of the graph. Different</span>
+<span class="sd">         from the conditions expressed in the filter parameter, which are</span>
+<span class="sd">         global, these conditions are specific to one bar. Ech condition name,</span>
+<span class="sd">         different from the filter parameter is a path to a condition to be</span>
+<span class="sd">         checked, e.g. (&#39;topology&#39;, &#39;name&#39;). Values to be matched for this</span>
+<span class="sd">         conditions are specified in ycondvals. This list must be as long as</span>
+<span class="sd">         the number of lines to plot. If not specified, all lines are filtered</span>
+<span class="sd">         by the conditions of filter parameter only, but in this case all</span>
+<span class="sd">         ymetrics should be different.</span>
+<span class="sd">     * ycondvals : list of tuples, optional</span>
+<span class="sd">         List of values that the conditions of ycondnames must meet. This list</span>
+<span class="sd">         must be as long as the number of lines to plot. If not specified,</span>
+<span class="sd">         all lines are filtered by the conditions of filter parameter only,</span>
+<span class="sd">         but in this case all ymetrics should be different.</span>
+<span class="sd">     * xscale : (&#39;linear&#39; | &#39;log&#39;), optional</span>
+<span class="sd">         The scale of x axis. Default value is &#39;linear&#39;</span>
+<span class="sd">     * yscale : (&#39;linear&#39; | &#39;log&#39;), optional</span>
+<span class="sd">         The scale of y axis. Default value is &#39;linear&#39;</span>
 <span class="sd">     * line_style : dict, optional</span>
 <span class="sd">         Dictionary mapping each value of yvals with a line style</span>
+<span class="sd">     * plot_args : dict, optional</span>
+<span class="sd">         Additional args to be provided to the Pyplot errorbar function.</span>
+<span class="sd">         Example parameters that can be specified here are *linewidth* and</span>
+<span class="sd">         *elinewidth*</span>
 <span class="sd">     * legend : dict, optional</span>
-<span class="sd">         Dictionary mapping each value of yvals with a legend label</span>
+<span class="sd">         Dictionary mapping each value of yvals with a legend label. If not</span>
+<span class="sd">         specified, it is not plotted. If you wish to plot it with the</span>
+<span class="sd">         name of the line, set it to put yvals or ymetrics, depending on which</span>
+<span class="sd">         one is used</span>
+<span class="sd">     * legend_loc : str</span>
+<span class="sd">         Legend location, e.g. &#39;upper left&#39;</span>
+<span class="sd">     * legend_args : dict, optional</span>
+<span class="sd">         Optional legend arguments, such as ncol</span>
 <span class="sd">     * plotempty : bool, optional</span>
-<span class="sd">         If *True*, plot and save graph even if empty. Default is *True* </span>
+<span class="sd">         If *True*, plot and save graph even if empty. Default is *True*</span>
+<span class="sd">     * xmin, xmax: float, optional</span>
+<span class="sd">        The limits of the x axis. If not specified, they&#39;re set to the min and</span>
+<span class="sd">        max values of xvals</span>
+<span class="sd">     * ymin, ymax: float, optional</span>
+<span class="sd">        The limits of the y axis. If not specified, they&#39;re automatically</span>
+<span class="sd">        selected by Matplotlib</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
     <span class="k">if</span> <span class="s">&#39;title&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
@@ -426,40 +221,62 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;xscale&#39;</span><span class="p">])</span>
     <span class="k">if</span> <span class="s">&#39;yscale&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;yscale&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s">&#39;filter&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">desc</span> <span class="ow">or</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">xvals</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">])</span>
+    <span class="n">ymetrics</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ymetrics&#39;</span><span class="p">]</span>
+    <span class="n">ycondnames</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ycondnames&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;ycondnames&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="bp">None</span>
+    <span class="n">ycondvals</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ycondvals&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;ycondvals&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">ycondnames</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">ycondvals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">ymetrics</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">ycondnames</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">ycondvals</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;ymetrics, ycondnames and ycondvals must have the same length&#39;</span><span class="p">)</span>
+        <span class="c"># yvals is basically the list of values that differentiate each line</span>
+        <span class="c"># it is used for legends and styles mainly</span>
+        <span class="n">yvals</span> <span class="o">=</span> <span class="n">ycondvals</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ymetrics</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ymetrics</span><span class="p">,</span> <span class="n">ycondvals</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">yvals</span> <span class="o">=</span> <span class="n">ymetrics</span>
+    <span class="n">plot_args</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;plot_args&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;plot_args&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="p">{}</span>
     <span class="n">plot_empty</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;plotempty&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;plotempty&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="bp">True</span>
     <span class="n">empty</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yvals</span><span class="p">)):</span>
         <span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xvals</span><span class="p">))</span>
         <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xvals</span><span class="p">))</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xvals</span><span class="p">)):</span>
-            <span class="n">condition</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="o">+</span> \
-                             <span class="p">[(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;xparam&#39;</span><span class="p">],</span> <span class="n">xvals</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
-                              <span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;yparam&#39;</span><span class="p">],</span> <span class="n">l</span><span class="p">)])</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;metric&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]][</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;metric&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
-                    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">resultset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">condition</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xvals</span><span class="p">)):</span>
+            <span class="n">condition</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">])</span>
+            <span class="n">condition</span><span class="o">.</span><span class="n">setval</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;xparam&#39;</span><span class="p">],</span> <span class="n">xvals</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">ycondnames</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">condition</span><span class="o">.</span><span class="n">setval</span><span class="p">(</span><span class="n">ycondnames</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ycondvals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">getval</span><span class="p">(</span><span class="n">ymetrics</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">resultset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">condition</span><span class="p">)]</span>
             <span class="n">confidence</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;confidence&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;confidence&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="mf">0.95</span> 
-            <span class="n">means</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">means_confidence_interval</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">confidence</span><span class="p">)</span>
+            <span class="n">means</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">err</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">means_confidence_interval</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">confidence</span><span class="p">)</span>
         <span class="n">yerr</span> <span class="o">=</span> <span class="bp">None</span> <span class="k">if</span> <span class="s">&#39;errorbar&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;errorbar&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="n">err</span>
-        <span class="n">fmt</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;line_style&#39;</span><span class="p">][</span><span class="n">l</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;line_style&#39;</span> <span class="ow">in</span> <span class="n">desc</span> \
-              <span class="ow">and</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;line_style&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s">&#39;-&#39;</span>
+        <span class="n">fmt</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;line_style&#39;</span><span class="p">][</span><span class="n">yvals</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">if</span> <span class="s">&#39;line_style&#39;</span> <span class="ow">in</span> <span class="n">desc</span> \
+              <span class="ow">and</span> <span class="n">yvals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;line_style&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s">&#39;-&#39;</span>
         <span class="c"># This check is to prevent crashing when trying to plot arrays of nan</span>
         <span class="c"># values with axes log scale</span>
         <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xvals</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">means</span><span class="p">):</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">xvals</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">yerr</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">xvals</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">yerr</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">,</span> <span class="o">**</span><span class="n">plot_args</span><span class="p">)</span>
             <span class="n">empty</span> <span class="o">=</span> <span class="bp">False</span>
     <span class="k">if</span> <span class="n">empty</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">plot_empty</span><span class="p">:</span>
         <span class="k">return</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">xvals</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">xvals</span><span class="p">))</span>
-    <span class="n">legend</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">][</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]]</span> <span class="k">if</span> <span class="s">&#39;legend&#39;</span><span class="ow">in</span> <span class="n">desc</span> \
-             <span class="k">else</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">legend</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">LEGEND_SIZE</span><span class="p">},</span> <span class="n">loc</span><span class="o">=</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">])</span>
+    <span class="n">x_min</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xmin&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;xmin&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="nb">min</span><span class="p">(</span><span class="n">xvals</span><span class="p">)</span>
+    <span class="n">x_max</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xmax&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;xmax&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="nb">max</span><span class="p">(</span><span class="n">xvals</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;ymin&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;ymin&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s">&#39;ymax&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymax</span><span class="o">=</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;ymax&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s">&#39;legend&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
+        <span class="n">legend</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">][</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">yvals</span><span class="p">]</span>
+        <span class="n">legend_args</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_args&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;legend_args&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">legend</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">LEGEND_SIZE</span><span class="p">},</span> <span class="n">loc</span><span class="o">=</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">],</span> <span class="o">**</span><span class="n">legend_args</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">plotdir</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
 
 </div>
-<div class="viewcode-block" id="plot_bar_graph"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.plot_bar_graph">[docs]</a><span class="k">def</span> <span class="nf">plot_bar_graph</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
+<div class="viewcode-block" id="plot_bar_chart"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.plot_bar_chart">[docs]</a><span class="k">def</span> <span class="nf">plot_bar_chart</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Plot a bar chart with characteristics described in the plot descriptor</span>
 <span class="sd">    out of the data contained in the resultset and save the plot in given</span>
 <span class="sd">    directory.</span>
@@ -493,34 +310,79 @@
 <span class="sd">         If *True* error bars will be plotted. Default value is *True*</span>
 <span class="sd">     * confidence : float, optional</span>
 <span class="sd">         The confidence used to plot error bars. Default value is 0.95</span>
-<span class="sd">     * metric : tuple</span>
-<span class="sd">         A tuple of 2-values representing the metric to plot.</span>
-<span class="sd">         The first value is the name of the collector which measured the metric</span>
-<span class="sd">         and the second value is the metric name. Example values could</span>
-<span class="sd">         (&#39;CACHE_HIT_RATIO&#39;, &#39;MEAN&#39;), (&#39;LINK_LOAD&#39;, &#39;MEAN_INTERNAL&#39;) or </span>
-<span class="sd">         (&#39;LATENCY&#39;, &#39;MEAN&#39;)</span>
-<span class="sd">     * filter : dict</span>
-<span class="sd">         A dictionary of values to filter in the resultset.</span>
-<span class="sd">         Example: {&#39;network_cache&#39;: 0.004, &#39;topology_name&#39;: &#39;GEANT&#39;}</span>
-<span class="sd">     * xparam : str</span>
-<span class="sd">         The name of the x axis metric, e.g. &#39;alpha&#39;</span>
+<span class="sd">     * filter : tree or dict of dicts, optional</span>
+<span class="sd">         A tree or nested dictionary of values to include from the resultset.</span>
+<span class="sd">         Example: {&#39;cache_placement&#39;: {&#39;network_cache&#39;: 0.004},</span>
+<span class="sd">         &#39;topology&#39;: {&#39;name&#39;, &#39;GEANT&#39;}}.</span>
+<span class="sd">         If not specified or None, no filtering is executed on the results</span>
+<span class="sd">         and possibly heterogeneous results may be plotted together.</span>
+<span class="sd">     * xparam : tuple</span>
+<span class="sd">         The path of the x axis metric, e.g. (&#39;workload&#39;, &#39;alpha&#39;)</span>
 <span class="sd">     * xvals : list</span>
 <span class="sd">         Range of x values, e.g. [0.6, 0.7, 0.8, 0.9]</span>
-<span class="sd">     * yparam : str</span>
-<span class="sd">         The name of the y metric, e.g. &#39;strategy&#39;</span>
-<span class="sd">     * yvals : list</span>
-<span class="sd">         List of lines plotted. For example. if yparam = &#39;strategy_name&#39;, then</span>
-<span class="sd">         a valid yvals value could be [&#39;HR_SYMM&#39;, &#39;HR_ASYMM&#39;]</span>
-<span class="sd">     * legend_loc : str</span>
-<span class="sd">         Legend location, e.g. &#39;upper left&#39;</span>
+<span class="sd">     * xticks : list, optional</span>
+<span class="sd">         Names to display as ticks. If not specified, xvals is used instead</span>
+<span class="sd">     * ymetrics : list of tuples</span>
+<span class="sd">         List of metrics to be shown on the graph. The i-th metric of the list</span>
+<span class="sd">         is the metric that the i-th bar on the graph will represent. If</span>
+<span class="sd">         all bars are for the same metric, then all elements of the list are</span>
+<span class="sd">         equal.</span>
+<span class="sd">         Each single metric (i.e. each element of the list) is a tuple modeling</span>
+<span class="sd">         the path to identify a specific metric into an entry of a result set.</span>
+<span class="sd">         Normally, it is a 2-value list where the first value is the name of</span>
+<span class="sd">         the collector which measured the metric and the second value is the</span>
+<span class="sd">         metric name. Example values could be (&#39;CACHE_HIT_RATIO&#39;, &#39;MEAN&#39;),</span>
+<span class="sd">         (&#39;LINK_LOAD&#39;, &#39;MEAN_INTERNAL&#39;) or (&#39;LATENCY&#39;, &#39;MEAN&#39;).</span>
+<span class="sd">         For example, if in a graph of N bars all bar of the graph show mean</span>
+<span class="sd">         latency, then ymetrics = [(&#39;LATENCY&#39;, &#39;MEAN&#39;)]*5.</span>
+<span class="sd">     * ycondnames : list of tuples, optional</span>
+<span class="sd">         List of condition names specific to each bar of the graph. Different</span>
+<span class="sd">         from the conditions expressed in the filter parameter, which are</span>
+<span class="sd">         global, these conditions are specific to one bar. Ech condition name,</span>
+<span class="sd">         different from the filter parameter is a path to a condition to be</span>
+<span class="sd">         checked, e.g. (&#39;topology&#39;, &#39;name&#39;). Values to be matched for this</span>
+<span class="sd">         conditions are specified in ycondvals. This list must be as long as</span>
+<span class="sd">         the number of bars to plot. If not specified, all bars are filtered</span>
+<span class="sd">         by the conditions of filter parameter only, but in this case all</span>
+<span class="sd">         ymetrics should be different.</span>
+<span class="sd">     * ycondvals : list of tuples, optional</span>
+<span class="sd">         List of values that the conditions of ycondnames must meet. This list</span>
+<span class="sd">         must be as long as the number of bars to plot. If not specified,</span>
+<span class="sd">         all bars are filtered by the conditions of filter parameter only,</span>
+<span class="sd">         but in this case all ymetrics should be different.</span>
+<span class="sd">     * placement : (grouped | stacked | [x, y, ...])</span>
+<span class="sd">         Defines how to place bars in the plot. If grouped, defaults, all</span>
+<span class="sd">         bars for a specific xval are grouped next to each other, if stacked,</span>
+<span class="sd">         they are plot on top of each other. It is also possible to specify a</span>
+<span class="sd">         custom grouped+stacked placement with a list of integers, in which</span>
+<span class="sd">         the number of items is the number of columns and the actual value of</span>
+<span class="sd">         an items is the number of metrics stacked on the column. For example</span>
+<span class="sd">         [4,2,3] means plotting 4 + 2 + 3 = 9 metrics: 4 stacked in the first</span>
+<span class="sd">         column, 2 stacked on the second and 3 stacked on the third  </span>
+<span class="sd">         If *True*, draw all bars of a group stacked on top of each other.</span>
+<span class="sd">         Default value is *False*.</span>
+<span class="sd">     * group_width : float, default: 0.4</span>
+<span class="sd">         Width of a group of bars</span>
 <span class="sd">     * bar_color : dict, optional</span>
 <span class="sd">         Dictionary mapping each value of yvals with a bar color</span>
 <span class="sd">     * bar_hatch : dict, optional</span>
-<span class="sd">         Dictionary mapping each value of yvals with a bar hatch</span>
+<span class="sd">         Dictionary mapping each value of yvals with a bar hatch. If set to</span>
+<span class="sd">         None all bars will be plotted without hatch. If not set, hatches will</span>
+<span class="sd">         be plotted randomly</span>
 <span class="sd">     * legend : dict, optional</span>
-<span class="sd">         Dictionary mapping each value of yvals with a legend label</span>
+<span class="sd">         Dictionary mapping each value of yvals with a legend label. If not</span>
+<span class="sd">         specified, it is not plotted. If you wish to plot it with the</span>
+<span class="sd">         name of the line, set it to put yvals or ymetrics, depending on which</span>
+<span class="sd">         one is used</span>
+<span class="sd">     * legend_loc : str</span>
+<span class="sd">         Legend location, e.g. &#39;upper left&#39;</span>
+<span class="sd">     * legend_args : dict, optional</span>
+<span class="sd">         Optional legend arguments, such as ncol</span>
 <span class="sd">     * plotempty : bool, optional</span>
 <span class="sd">         If *True*, plot and save graph even if empty. Default is *True*</span>
+<span class="sd">     * ymax: float, optional</span>
+<span class="sd">        The upper limit of the y axis. If not specified, it is automatically</span>
+<span class="sd">        selected by Matplotlib</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
     <span class="k">if</span> <span class="s">&#39;title&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
@@ -531,125 +393,256 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;xlabel&#39;</span><span class="p">])</span>
     <span class="k">if</span> <span class="s">&#39;ylabel&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;ylabel&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s">&#39;filter&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">desc</span> <span class="ow">or</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">plot_empty</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;plotempty&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;plotempty&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="bp">True</span>
+    
+    <span class="n">ymetrics</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ymetrics&#39;</span><span class="p">]</span>
+    <span class="n">ycondnames</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ycondnames&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;ycondnames&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="bp">None</span>
+    <span class="n">ycondvals</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ycondvals&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;ycondvals&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">ycondnames</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">ycondvals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">ymetrics</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">ycondnames</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">ycondvals</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;ymetrics, ycondnames and ycondvals must have the same length&#39;</span><span class="p">)</span>
+        <span class="c"># yvals is basically the list of values that differentiate each bar</span>
+        <span class="c"># it is used for legends and styles mainly</span>
+        <span class="n">yvals</span> <span class="o">=</span> <span class="n">ycondvals</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ymetrics</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ymetrics</span><span class="p">,</span> <span class="n">ycondvals</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">yvals</span> <span class="o">=</span> <span class="n">ymetrics</span>
+    <span class="n">placement</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;placement&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;placement&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="s">&#39;grouped&#39;</span>
+    <span class="k">if</span> <span class="n">placement</span> <span class="o">==</span> <span class="s">&#39;grouped&#39;</span><span class="p">:</span>
+        <span class="n">placement</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yvals</span><span class="p">))]</span>
+    <span class="k">elif</span> <span class="n">placement</span> <span class="o">==</span> <span class="s">&#39;stacked&#39;</span><span class="p">:</span>
+        <span class="n">placement</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">yvals</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">placement</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">yvals</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Placement definition incorrect. &#39;</span>
+                             <span class="s">&#39;The sum of values of the list must be equal to &#39;</span>
+                             <span class="s">&#39;the number of y values&#39;</span><span class="p">)</span>
+    <span class="n">xticks</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xticks&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;xticks&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">]</span>
     <span class="n">empty</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="c"># Spacing attributes</span>
-    <span class="n">GROUP_WIDTH</span> <span class="o">=</span> <span class="mf">0.4</span>                           <span class="c"># width of a group of bars </span>
-    <span class="n">WIDTH</span> <span class="o">=</span> <span class="n">GROUP_WIDTH</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">])</span>      <span class="c"># width of a single bar</span>
-    <span class="n">SEPARATION</span> <span class="o">=</span> <span class="n">WIDTH</span><span class="o">/</span><span class="mi">2</span>                        <span class="c"># space between adjacent groups</span>
-    <span class="n">BORDER</span> <span class="o">=</span> <span class="mf">0.6</span> <span class="o">*</span> <span class="n">SEPARATION</span>                   <span class="c"># left and right borders</span>
+    <span class="c"># width of a group of bars</span>
+    <span class="n">group_width</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;group_width&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;group_width&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="mf">0.4</span> 
+    <span class="n">width</span> <span class="o">=</span> <span class="n">group_width</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">placement</span><span class="p">)</span>          <span class="c"># width of a single bar</span>
+    <span class="n">separation</span> <span class="o">=</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span>                        <span class="c"># space between adjacent groups</span>
+    <span class="n">border</span> <span class="o">=</span> <span class="mf">0.6</span> <span class="o">*</span> <span class="n">separation</span>                   <span class="c"># left and right borders</span>
         
     <span class="n">elem</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>         <span class="c"># bar objects (for legend)</span>
     <span class="c"># Select colors and hatches</span>
-    <span class="n">yvals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">])</span>
     <span class="k">if</span> <span class="s">&#39;bar_color&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">y</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;bar_color&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">yvals</span><span class="p">):</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;bar_color&#39;</span><span class="p">]</span>
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">yvals</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">BW_COLOR_CATALOGUE</span><span class="p">):</span>
         <span class="n">color</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">y</span><span class="p">,</span> <span class="n">BW_COLOR_CATALOGUE</span><span class="p">[</span><span class="n">yvals</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">yvals</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
-    <span class="k">if</span> <span class="s">&#39;bar_hatch&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">y</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;bar_hatch&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">yvals</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s">&#39;bar_hatch&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="ow">and</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;bar_hatch&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">hatch</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s">&#39;bar_hatch&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">y</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;bar_hatch&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">yvals</span><span class="p">):</span>
         <span class="n">hatch</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;bar_hatch&#39;</span><span class="p">]</span>
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">yvals</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">BW_COLOR_CATALOGUE</span><span class="p">):</span>
         <span class="n">hatch</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">y</span><span class="p">,</span> <span class="n">HATCH_CATALOGUE</span><span class="p">[</span><span class="n">yvals</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">yvals</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">hatch</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
     <span class="c"># Plot bars</span>
-    <span class="n">left</span> <span class="o">=</span> <span class="n">BORDER</span>       <span class="c"># left-most point of the bar about to draw</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="n">border</span>    <span class="c"># left-most point of the bar about to draw</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">])):</span>
-        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]:</span>
-            <span class="n">condition</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="o">+</span> \
-                             <span class="p">[(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;xparam&#39;</span><span class="p">],</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]),</span>
-                              <span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;yparam&#39;</span><span class="p">],</span> <span class="n">l</span><span class="p">)])</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;metric&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]][</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;metric&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
-                    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">resultset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">condition</span><span class="p">)]</span>
-            <span class="n">confidence</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;confidence&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;confidence&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="mf">0.95</span> 
-            <span class="n">meanval</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">means_confidence_interval</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">confidence</span><span class="p">)</span>
-            <span class="n">yerr</span> <span class="o">=</span> <span class="bp">None</span> <span class="k">if</span> <span class="s">&#39;errorbar&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;errorbar&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="n">err</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">meanval</span><span class="p">):</span>
-                <span class="n">empty</span> <span class="o">=</span> <span class="bp">False</span>
-            <span class="n">elem</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">meanval</span><span class="p">,</span> <span class="n">WIDTH</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> 
-                              <span class="n">yerr</span><span class="o">=</span><span class="n">yerr</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="s">&#39;k&#39;</span><span class="p">,</span> <span class="n">hatch</span><span class="o">=</span><span class="n">hatch</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
-            <span class="n">left</span> <span class="o">+=</span> <span class="n">WIDTH</span>
-        <span class="n">left</span> <span class="o">+=</span> <span class="n">SEPARATION</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">placement</span><span class="p">:</span>
+            <span class="n">bottom</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c"># Bottom point of a bar. It is alway 0 if stacked is False</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+                <span class="n">condition</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">])</span>
+                <span class="n">condition</span><span class="o">.</span><span class="n">setval</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;xparam&#39;</span><span class="p">],</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">ycondnames</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">condition</span><span class="o">.</span><span class="n">setval</span><span class="p">(</span><span class="n">ycondnames</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">ycondvals</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">getval</span><span class="p">(</span><span class="n">ymetrics</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+                            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">resultset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">condition</span><span class="p">)]</span>
+                <span class="n">confidence</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;confidence&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;confidence&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="mf">0.95</span> 
+                <span class="n">meanval</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">means_confidence_interval</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">confidence</span><span class="p">)</span>
+                <span class="n">yerr</span> <span class="o">=</span> <span class="bp">None</span> <span class="k">if</span> <span class="s">&#39;errorbar&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;errorbar&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="n">err</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">meanval</span><span class="p">):</span>
+                    <span class="n">empty</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="n">elem</span><span class="p">[</span><span class="n">yvals</span><span class="p">[</span><span class="n">l</span><span class="p">]]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">meanval</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span>
+                                         <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">[</span><span class="n">yvals</span><span class="p">[</span><span class="n">l</span><span class="p">]],</span> 
+                                         <span class="n">yerr</span><span class="o">=</span><span class="n">yerr</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">bottom</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="s">&#39;k&#39;</span><span class="p">,</span>
+                                         <span class="n">hatch</span><span class="o">=</span><span class="n">hatch</span><span class="p">[</span><span class="n">yvals</span><span class="p">[</span><span class="n">l</span><span class="p">]],</span> <span class="n">label</span><span class="o">=</span><span class="n">yvals</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+                <span class="n">bottom</span> <span class="o">+=</span> <span class="n">meanval</span>
+                <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="n">width</span>
+        <span class="n">left</span> <span class="o">+=</span> <span class="n">separation</span>
     <span class="k">if</span> <span class="n">empty</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">plot_empty</span><span class="p">:</span>
         <span class="k">return</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">BORDER</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">WIDTH</span><span class="p">)</span> <span class="o">+</span> 
-               <span class="p">(</span><span class="n">SEPARATION</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">WIDTH</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">])),</span>
-               <span class="n">desc</span><span class="p">[</span><span class="s">&#39;xvals&#39;</span><span class="p">])</span>
-    <span class="n">legend</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">][</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]]</span> <span class="k">if</span> <span class="s">&#39;legend&#39;</span><span class="ow">in</span> <span class="n">desc</span> \
-             <span class="k">else</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">elem</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]],</span> <span class="n">legend</span><span class="p">,</span>
-               <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">LEGEND_SIZE</span><span class="p">},</span> <span class="n">loc</span><span class="o">=</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">])</span>
+    <span class="n">n_bars</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">placement</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">border</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">n_bars</span><span class="o">*</span><span class="n">width</span><span class="p">)</span> <span class="o">+</span> 
+               <span class="p">(</span><span class="n">separation</span> <span class="o">+</span> <span class="n">n_bars</span><span class="o">*</span><span class="n">width</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xticks</span><span class="p">)),</span>
+               <span class="n">xticks</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;legend&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
+        <span class="n">legend</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">][</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">yvals</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;legend&#39;</span><span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="n">yvals</span>
+        <span class="n">legend_args</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_args&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;legend_args&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">elem</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">yvals</span><span class="p">],</span> <span class="n">legend</span><span class="p">,</span>
+                   <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">LEGEND_SIZE</span><span class="p">},</span>
+                   <span class="n">loc</span><span class="o">=</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">],</span>
+                   <span class="o">**</span><span class="n">legend_args</span><span class="p">)</span>
     <span class="n">xmin</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">left</span> <span class="o">-</span> <span class="n">SEPARATION</span> <span class="o">+</span> <span class="n">BORDER</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">left</span> <span class="o">-</span> <span class="n">separation</span> <span class="o">+</span> <span class="n">border</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;ymax&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymax</span><span class="o">=</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;ymax&#39;</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">plotdir</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
 
 </div>
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Run the plot script</span>
+<div class="viewcode-block" id="plot_cdf"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.plot_cdf">[docs]</a><span class="k">def</span> <span class="nf">plot_cdf</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot a CDF with characteristics described in the plot descriptor</span>
+<span class="sd">    out of the data contained in the resultset and save the plot in given</span>
+<span class="sd">    directory.</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    config : str</span>
-<span class="sd">        The path of the configuration file</span>
-<span class="sd">    results : str</span>
-<span class="sd">        The file storing the experiment results</span>
+<span class="sd">    rs : ResultSet</span>
+<span class="sd">        Result set</span>
+<span class="sd">    desc : dict</span>
+<span class="sd">        The plot descriptor (more info below)</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        The name used to save the file. The file format is determined by the</span>
+<span class="sd">        extension of the file. For example, if this filename is &#39;foo.pdf&#39;, the</span>
+<span class="sd">        file will be saved in pdf format.</span>
 <span class="sd">    plotdir : str</span>
-<span class="sd">        The directory into which graphs will be saved</span>
+<span class="sd">        The directory in which the plot will be saved.</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The plot descriptor is a dictionary with a set of values that describe how</span>
+<span class="sd">    to make the plot.</span>
+<span class="sd">    </span>
+<span class="sd">    The dictionary can contain the following keys:</span>
+<span class="sd">     * title : str, optional.</span>
+<span class="sd">           The title of the graph</span>
+<span class="sd">     * xlabel : str, optional</span>
+<span class="sd">         The x label</span>
+<span class="sd">     * ylabel : str, optional</span>
+<span class="sd">         The y label. The default value is &#39;Cumulative probability&#39;</span>
+<span class="sd">     * confidence : float, optional</span>
+<span class="sd">         The confidence used to plot error bars. Default value is 0.95</span>
+<span class="sd">     * metric : list</span>
+<span class="sd">         A list of values representing the metric to plot. These values are the</span>
+<span class="sd">         path to identify a specific metric into an entry of a result set.</span>
+<span class="sd">         Normally, it is a 2-value list where the first value is the name of</span>
+<span class="sd">         the collector which measured the metric and the second value is the</span>
+<span class="sd">         metric name. The metric must be a CDF.</span>
+<span class="sd">         Example values could be [&#39;LATENCY&#39;, &#39;CDF&#39;].</span>
+<span class="sd">     * filter : dict, optional</span>
+<span class="sd">         A dictionary of values to filter in the resultset.</span>
+<span class="sd">         Example: {&#39;network_cache&#39;: 0.004, &#39;topology_name&#39;: &#39;GEANT&#39;}</span>
+<span class="sd">         If not specified or None, no filtering is executed on the results</span>
+<span class="sd">         and possibly heterogeneous results may be plotted together</span>
+<span class="sd">     * ymetrics : list of tuples</span>
+<span class="sd">         List of metrics to be shown on the graph. The i-th metric of the list</span>
+<span class="sd">         is the metric that the i-th line on the graph will represent. If</span>
+<span class="sd">         all lines are for the same metric, then all elements of the list are</span>
+<span class="sd">         equal.</span>
+<span class="sd">         Each single metric (i.e. each element of the list) is a tuple modeling</span>
+<span class="sd">         the path to identify a specific metric into an entry of a result set.</span>
+<span class="sd">         Normally, it is a 2-value list where the first value is the name of</span>
+<span class="sd">         the collector which measured the metric and the second value is the</span>
+<span class="sd">         metric name. Example values could be (&#39;CACHE_HIT_RATIO&#39;, &#39;MEAN&#39;),</span>
+<span class="sd">         (&#39;LINK_LOAD&#39;, &#39;MEAN_INTERNAL&#39;) or (&#39;LATENCY&#39;, &#39;MEAN&#39;).</span>
+<span class="sd">         For example, if in a graph of N lines all lines of the graph show mean</span>
+<span class="sd">         latency, then ymetrics = [(&#39;LATENCY&#39;, &#39;MEAN&#39;)]*5.</span>
+<span class="sd">     * ycondnames : list of tuples, optional</span>
+<span class="sd">         List of condition names specific to each line of the graph. Different</span>
+<span class="sd">         from the conditions expressed in the filter parameter, which are</span>
+<span class="sd">         global, these conditions are specific to one bar. Ech condition name,</span>
+<span class="sd">         different from the filter parameter is a path to a condition to be</span>
+<span class="sd">         checked, e.g. (&#39;topology&#39;, &#39;name&#39;). Values to be matched for this</span>
+<span class="sd">         conditions are specified in ycondvals. This list must be as long as</span>
+<span class="sd">         the number of lines to plot. If not specified, all lines are filtered</span>
+<span class="sd">         by the conditions of filter parameter only, but in this case all</span>
+<span class="sd">         ymetrics should be different.</span>
+<span class="sd">     * ycondvals : list of tuples, optional</span>
+<span class="sd">         List of values that the conditions of ycondnames must meet. This list</span>
+<span class="sd">         must be as long as the number of lines to plot. If not specified,</span>
+<span class="sd">         all lines are filtered by the conditions of filter parameter only,</span>
+<span class="sd">         but in this case all ymetrics should be different.</span>
+<span class="sd">     * xscale : str, optional</span>
+<span class="sd">         The scale of x axis. Options allowed are &#39;linear&#39; and &#39;log&#39;. </span>
+<span class="sd">         Default value is &#39;linear&#39;</span>
+<span class="sd">     * yscale : str, optional</span>
+<span class="sd">         The scale of y axis. Options allowed are &#39;linear&#39; and &#39;log&#39;.</span>
+<span class="sd">         Default value is &#39;linear&#39;</span>
+<span class="sd">     * step : bool, optional</span>
+<span class="sd">         If *True* draws the CDF with steps. Default value is *True*</span>
+<span class="sd">     * line_style : dict, optional</span>
+<span class="sd">         Dictionary mapping each value of yvals with a line style</span>
+<span class="sd">     * legend : dict, optional</span>
+<span class="sd">         Dictionary mapping each value of yvals with a legend label. If not</span>
+<span class="sd">         specified, it is not plotted. If you wish to plot it with the</span>
+<span class="sd">         name of the line, set it to put yvals or ymetrics, depending on which</span>
+<span class="sd">         one is used</span>
+<span class="sd">     * legend_loc : str</span>
+<span class="sd">         Legend location, e.g. &#39;upper left&#39;</span>
+<span class="sd">     * legend_args : dict, optional</span>
+<span class="sd">         Optional legend arguments, such as ncol</span>
+<span class="sd">     * plotempty : bool, optional</span>
+<span class="sd">         If *True*, plot and save graph even if empty. Default is *True* </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
-    <span class="n">settings</span><span class="o">.</span><span class="n">read_from</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
-    <span class="n">config_logging</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOG_LEVEL</span><span class="p">)</span>
-    <span class="n">resultset</span> <span class="o">=</span> <span class="n">results_reader_register</span><span class="p">[</span><span class="n">settings</span><span class="o">.</span><span class="n">RESULTS_FORMAT</span><span class="p">](</span><span class="n">results</span><span class="p">)</span>
-    <span class="c"># Create dir if not existsing</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">plotdir</span><span class="p">):</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">plotdir</span><span class="p">)</span>
-    <span class="c"># Parse params from settings</span>
-    <span class="n">topologies</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">TOPOLOGIES</span>
-    <span class="n">cache_sizes</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">NETWORK_CACHE</span>
-    <span class="n">alphas</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">ALPHA</span>
-    <span class="n">strategies</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">STRATEGIES</span>
-    <span class="c">#Plot graphs</span>
-    <span class="k">for</span> <span class="n">topology</span> <span class="ow">in</span> <span class="n">topologies</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">cache_size</span> <span class="ow">in</span> <span class="n">cache_sizes</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Plotting cache hit ratio for topology </span><span class="si">%s</span><span class="s"> and cache size </span><span class="si">%s</span><span class="s"> vs alpha&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">cache_size</span><span class="p">)))</span>
-            <span class="n">plot_cache_hits_vs_alpha</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Plotting link load for topology </span><span class="si">%s</span><span class="s"> vs cache size </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">cache_size</span><span class="p">)))</span>
-            <span class="n">plot_link_load_vs_alpha</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Plotting latency for topology </span><span class="si">%s</span><span class="s"> vs cache size </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">cache_size</span><span class="p">)))</span>
-            <span class="n">plot_latency_vs_alpha</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">topology</span> <span class="ow">in</span> <span class="n">topologies</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Plotting cache hit ratio for topology </span><span class="si">%s</span><span class="s"> and alpha </span><span class="si">%s</span><span class="s"> vs cache size&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">alpha</span><span class="p">)))</span>
-            <span class="n">plot_cache_hits_vs_cache_size</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">cache_sizes</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Plotting link load for topology </span><span class="si">%s</span><span class="s"> and alpha </span><span class="si">%s</span><span class="s"> vs cache size&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">alpha</span><span class="p">)))</span>
-            <span class="n">plot_link_load_vs_cache_size</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">cache_sizes</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Plotting latency for topology </span><span class="si">%s</span><span class="s"> and alpha </span><span class="si">%s</span><span class="s"> vs cache size&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">alpha</span><span class="p">)))</span>
-            <span class="n">plot_latency_vs_cache_size</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">cache_sizes</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">cache_size</span> <span class="ow">in</span> <span class="n">cache_sizes</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Plotting cache hit ratio for cache size </span><span class="si">%s</span><span class="s"> vs alpha </span><span class="si">%s</span><span class="s"> against topologies&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cache_size</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">alpha</span><span class="p">)))</span>
-            <span class="n">plot_cache_hits_vs_topology</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Plotting link load for cache size </span><span class="si">%s</span><span class="s"> vs alpha </span><span class="si">%s</span><span class="s"> against topologies&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cache_size</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">alpha</span><span class="p">)))</span>
-            <span class="n">plot_link_load_vs_topology</span><span class="p">(</span><span class="n">resultset</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">plotdir</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Exit. Plots were saved in directory </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">plotdir</span><span class="p">))</span>
-</div>
-<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../apidoc/icarus.results.html#icarus.results.plot.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;-r&quot;</span><span class="p">,</span> <span class="s">&quot;--results&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&quot;results&quot;</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s">&#39;the results file&#39;</span><span class="p">,</span>
-                        <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;-o&quot;</span><span class="p">,</span> <span class="s">&quot;--output&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&quot;output&quot;</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s">&#39;the output directory where plots will be saved&#39;</span><span class="p">,</span>
-                        <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;config&quot;</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;the configuration file&quot;</span><span class="p">)</span>
-    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-    <span class="n">run</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">results</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
-</div>
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="k">if</span> <span class="s">&#39;title&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s">&#39;xlabel&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;xlabel&#39;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;ylabel&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;ylabel&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="s">&#39;Cumulative probability&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;xscale&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;xscale&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s">&#39;yscale&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;yscale&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s">&#39;filter&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">desc</span> <span class="ow">or</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;step&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;step&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="bp">True</span>
+    <span class="n">plot_empty</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;plotempty&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;plotempty&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="bp">True</span>
+    <span class="n">ymetrics</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ymetrics&#39;</span><span class="p">]</span>
+    <span class="n">ycondnames</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ycondnames&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;ycondnames&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="bp">None</span>
+    <span class="n">ycondvals</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;ycondvals&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;ycondvals&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">ycondnames</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">ycondvals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">ymetrics</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">ycondnames</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">ycondvals</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;ymetrics, ycondnames and ycondvals must have the same length&#39;</span><span class="p">)</span>
+        <span class="c"># yvals is basically the list of values that differentiate each line</span>
+        <span class="c"># it is used for legends and styles mainly</span>
+        <span class="n">yvals</span> <span class="o">=</span> <span class="n">ycondvals</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ymetrics</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ymetrics</span><span class="p">,</span> <span class="n">ycondvals</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">yvals</span> <span class="o">=</span> <span class="n">ymetrics</span>
+    <span class="n">x_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">infty</span>
+    <span class="n">x_max</span> <span class="o">=</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">infty</span>
+    <span class="n">empty</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yvals</span><span class="p">)):</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;filter&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">ycondnames</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">condition</span><span class="o">.</span><span class="n">setval</span><span class="p">(</span><span class="n">ycondnames</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ycondvals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>      
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">getval</span><span class="p">(</span><span class="n">ymetrics</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">resultset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">condition</span><span class="p">)]</span>
+        <span class="c"># If there are more than 1 CDFs in the resultset, take the first one</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">x_cdf</span><span class="p">,</span> <span class="n">y_cdf</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">step</span><span class="p">:</span>
+                <span class="n">x_cdf</span><span class="p">,</span> <span class="n">y_cdf</span> <span class="o">=</span> <span class="n">step_cdf</span><span class="p">(</span><span class="n">x_cdf</span><span class="p">,</span> <span class="n">y_cdf</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x_cdf</span><span class="p">,</span> <span class="n">y_cdf</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="n">fmt</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;line_style&#39;</span><span class="p">][</span><span class="n">yvals</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">if</span> <span class="s">&#39;line_style&#39;</span> <span class="ow">in</span> <span class="n">desc</span> \
+              <span class="ow">and</span> <span class="n">yvals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;line_style&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s">&#39;-&#39;</span>
+        <span class="c"># This check is to prevent crashing when trying to plot arrays of nan</span>
+        <span class="c"># values with axes log scale</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_cdf</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">y_cdf</span><span class="p">):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">fmt</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_cdf</span><span class="p">,</span> <span class="n">y_cdf</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
+            <span class="n">empty</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">x_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_cdf</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">x_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x_max</span><span class="p">,</span> <span class="n">x_cdf</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">empty</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">plot_empty</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;legend&#39;</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">:</span>
+        <span class="n">legend</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">][</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;yvals&#39;</span><span class="p">]]</span>
+        <span class="n">legend_args</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_args&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;legend_args&#39;</span> <span class="ow">in</span> <span class="n">desc</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">legend</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">LEGEND_SIZE</span><span class="p">},</span> <span class="n">loc</span><span class="o">=</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">],</span> <span class="o">**</span><span class="n">legend_args</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">legend</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">LEGEND_SIZE</span><span class="p">},</span> <span class="n">loc</span><span class="o">=</span><span class="n">desc</span><span class="p">[</span><span class="s">&#39;legend_loc&#39;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">plotdir</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
