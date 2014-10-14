@@ -1,35 +1,38 @@
-results Package
-===============
+icarus.results package
+======================
 
-:mod:`results` Package
-----------------------
+Submodules
+----------
 
-.. automodule:: icarus.results
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`plot` Module
-------------------
+icarus.results.plot module
+--------------------------
 
 .. automodule:: icarus.results.plot
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`readwrite` Module
------------------------
+icarus.results.readwrite module
+-------------------------------
 
 .. automodule:: icarus.results.readwrite
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`visualize` Module
------------------------
+icarus.results.visualize module
+-------------------------------
 
 .. automodule:: icarus.results.visualize
     :members:
     :undoc-members:
     :show-inheritance:
 
+
+Module contents
+---------------
+
+.. automodule:: icarus.results
+    :members:
+    :undoc-members:
+    :show-inheritance:

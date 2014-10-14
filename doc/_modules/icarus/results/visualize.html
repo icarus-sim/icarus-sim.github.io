@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.results.visualize &mdash; Icarus 0.2.1 documentation</title>
+    <title>icarus.results.visualize &mdash; Icarus 0.4.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.2.1',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.2.1 documentation" href="../../../index.html" />
+    <link rel="top" title="Icarus 0.4.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -41,7 +39,7 @@
         <li class="right" >
           <a href="../../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
@@ -90,8 +88,6 @@
             <span class="s">&#39;receiver&#39;</span><span class="p">:</span>  <span class="s">&#39;green&#39;</span><span class="p">,</span>
             <span class="s">&#39;router&#39;</span><span class="p">:</span>    <span class="s">&#39;white&#39;</span><span class="p">,</span>
             <span class="s">&#39;cache&#39;</span><span class="p">:</span>     <span class="s">&#39;red&#39;</span><span class="p">,</span>
-            <span class="s">&#39;rsn&#39;</span><span class="p">:</span>       <span class="s">&#39;yellow&#39;</span><span class="p">,</span>
-            <span class="s">&#39;cache+rsn&#39;</span><span class="p">:</span> <span class="s">&#39;orange&#39;</span><span class="p">,</span>
             <span class="p">}</span>
 
 
@@ -107,21 +103,14 @@
 <span class="sd">    -------</span>
 <span class="sd">    stack_map : dict</span>
 <span class="sd">        Dict mapping node to stack. Options are:</span>
-<span class="sd">        source | receiver | router | cache | rsn | cache+rsn </span>
+<span class="sd">        source | receiver | router | cache</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">stack</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">stacks</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">&#39;router&#39;</span><span class="p">:</span>
-            <span class="n">rsn</span> <span class="o">=</span> <span class="bp">False</span>
             <span class="n">cache</span> <span class="o">=</span> <span class="bp">False</span>
-            <span class="k">if</span> <span class="s">&#39;rsn_size&#39;</span> <span class="ow">in</span> <span class="n">props</span> <span class="ow">and</span> <span class="n">props</span><span class="p">[</span><span class="s">&#39;rsn_size&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">rsn</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="k">if</span> <span class="s">&#39;cache_size&#39;</span> <span class="ow">in</span> <span class="n">props</span> <span class="ow">and</span> <span class="n">props</span><span class="p">[</span><span class="s">&#39;cache_size&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">cache</span> <span class="o">=</span> <span class="bp">True</span>
-            <span class="k">if</span> <span class="n">rsn</span> <span class="ow">and</span> <span class="n">cache</span><span class="p">:</span>
-                <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;cache+rsn&#39;</span>
-            <span class="k">elif</span> <span class="n">rsn</span><span class="p">:</span>
-                <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;rsn&#39;</span>
             <span class="k">elif</span> <span class="n">cache</span><span class="p">:</span>
                 <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;cache&#39;</span>
             <span class="k">else</span><span class="p">:</span>
@@ -208,13 +197,13 @@
         <li class="right" >
           <a href="../../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

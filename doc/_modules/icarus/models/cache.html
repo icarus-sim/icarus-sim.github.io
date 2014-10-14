@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.models.cache &mdash; Icarus 0.2.1 documentation</title>
+    <title>icarus.models.cache &mdash; Icarus 0.4.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.2.1',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.2.1 documentation" href="../../../index.html" />
+    <link rel="top" title="Icarus 0.4.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -41,7 +39,7 @@
         <li class="right" >
           <a href="../../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
@@ -95,7 +93,8 @@
         <span class="s">&#39;FifoCache&#39;</span><span class="p">,</span>
         <span class="s">&#39;RandEvictionCache&#39;</span><span class="p">,</span>
         <span class="s">&#39;rand_insert_cache&#39;</span><span class="p">,</span>
-        <span class="s">&#39;keyval_cache&#39;</span>
+        <span class="s">&#39;keyval_cache&#39;</span><span class="p">,</span>
+        <span class="s">&#39;ttl_cache&#39;</span><span class="p">,</span>
            <span class="p">]</span>
 
 
@@ -909,8 +908,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">maxlen</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;maxlen must be positive&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">segments</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;maxlen must be a positive integer&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">segments</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">segments</span> <span class="o">&gt;</span> <span class="n">maxlen</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;segments must be an integer and 0 &lt; segments &lt;= maxlen&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_segment</span> <span class="o">=</span> <span class="p">[</span><span class="n">LinkedSet</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">segments</span><span class="p">)]</span>
         <span class="n">quotient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span> <span class="o">//</span> <span class="n">segments</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_segment_maxlen</span> <span class="o">=</span> <span class="p">[</span><span class="n">quotient</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">segments</span><span class="p">)]</span>
@@ -1297,13 +1296,12 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;p must be a value between 0 and 1&#39;</span><span class="p">)</span>
     <span class="n">cache</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">cache</span><span class="p">)</span>
     <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">put</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">put</span>
-    <span class="k">def</span> <span class="nf">rand_put</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">c_put</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">put</span>
+    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">put</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-    <span class="n">cache</span><span class="o">.</span><span class="n">put</span> <span class="o">=</span> <span class="n">rand_put</span>
-    <span class="n">cache</span><span class="o">.</span><span class="n">put</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="s">&#39;put&#39;</span>
-    <span class="n">cache</span><span class="o">.</span><span class="n">put</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">put</span><span class="o">.</span><span class="n">__doc__</span>
+            <span class="k">return</span> <span class="n">c_put</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">put</span> <span class="o">=</span> <span class="n">put</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">put</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">c_put</span><span class="o">.</span><span class="n">__doc__</span>
     <span class="k">return</span> <span class="n">cache</span>
 
 </div>
@@ -1313,7 +1311,13 @@
 <span class="sd">    </span>
 <span class="sd">    This modifies the signature and/or return types of methods *get*, *put* and</span>
 <span class="sd">    *dump*. The new format is documented in the docstrings of the modified</span>
-<span class="sd">    methods of the cache instance</span>
+<span class="sd">    methods of the cache instance.</span>
+<span class="sd">    </span>
+<span class="sd">    This function modifies the contract of methods of Cache objects, which is</span>
+<span class="sd">    admittedly a bad software engineering practice . It may also lead to bugs</span>
+<span class="sd">    in a key-value cache implementation if the base key-only cache</span>
+<span class="sd">    implementation from which it derives has methods calling other methods of</span>
+<span class="sd">    the same instance.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -1327,15 +1331,17 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">Cache</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;cache must be an instance of Cache or its subclasses&#39;</span><span class="p">)</span>
-    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;the cache must be empty&#39;</span><span class="p">)</span>
     <span class="n">cache</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">cache</span><span class="p">)</span>
-    <span class="n">cache</span><span class="o">.</span><span class="n">_vals</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">_val</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">k_put</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">put</span>
     <span class="n">k_get</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span>
-    <span class="n">k_dump</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">dump</span> 
+    <span class="n">k_remove</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">remove</span>
+    <span class="n">k_dump</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">dump</span>
     <span class="n">k_clear</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">clear</span>
     
-    <span class="k">def</span> <span class="nf">kv_put</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Insert an item in the cache if not already inserted.</span>
 <span class="sd">        </span>
 <span class="sd">        If the element is already present in the cache with the same value, it</span>
@@ -1355,14 +1361,14 @@
 <span class="sd">            The key, value tuple of the evicted object or *None* if no contents</span>
 <span class="sd">            were evicted.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">cache</span><span class="o">.</span><span class="n">_vals</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
         <span class="n">evicted</span> <span class="o">=</span> <span class="n">k_put</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">evicted</span><span class="p">:</span>
-            <span class="n">val</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">_vals</span><span class="p">[</span><span class="n">evicted</span><span class="p">]</span>
-            <span class="k">del</span> <span class="n">cache</span><span class="o">.</span><span class="n">_vals</span><span class="p">[</span><span class="n">evicted</span><span class="p">]</span>
-            <span class="k">return</span> <span class="n">evicted</span><span class="p">,</span> <span class="n">val</span> 
+        <span class="n">cache</span><span class="o">.</span><span class="n">_val</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">if</span> <span class="n">evicted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">_val</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">evicted</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">evicted</span><span class="p">,</span> <span class="n">val</span>
+        
     
-    <span class="k">def</span> <span class="nf">kv_get</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Retrieve an item from the cache.</span>
 <span class="sd">        </span>
 <span class="sd">        Differently from *has(k)*, calling this method may change the internal</span>
@@ -1380,9 +1386,219 @@
 <span class="sd">            The value of the requested object or *None* if it is not in the</span>
 <span class="sd">            cache</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">cache</span><span class="o">.</span><span class="n">_vals</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">if</span> <span class="n">k_get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">else</span> <span class="bp">None</span> 
+        <span class="k">return</span> <span class="n">cache</span><span class="o">.</span><span class="n">_val</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">if</span> <span class="n">k_get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">else</span> <span class="bp">None</span> 
     
-    <span class="k">def</span> <span class="nf">kv_dump</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Remove an item from the cache, if present</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item looked up in the cache</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        v : any hashable type</span>
+<span class="sd">            The value of the deleted object or *None* if it was not in the</span>
+<span class="sd">            cache</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">cache</span><span class="o">.</span><span class="n">_val</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">if</span> <span class="n">k_remove</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">else</span> <span class="bp">None</span>
+        
+    <span class="k">def</span> <span class="nf">dump</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Return a dump of all the elements currently in the cache possibly</span>
+<span class="sd">        sorted according to the eviction policy.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        cache_dump : list of tuples</span>
+<span class="sd">            The list of items currently stored in the cache represented as</span>
+<span class="sd">            key, value pairs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dump</span> <span class="o">=</span> <span class="n">k_dump</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="n">cache</span><span class="o">.</span><span class="n">_val</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">dump</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">clear</span><span class="p">():</span>
+        <span class="n">k_clear</span><span class="p">()</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">_val</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the value of item k</span>
+<span class="sd">        </span>
+<span class="sd">        Differently from *get(k)*, calling this method does not change the</span>
+<span class="sd">        internal state of the cache.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item looked up in the cache</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        v : any hashable type</span>
+<span class="sd">            The value of the requested object or *None* if it is not in the</span>
+<span class="sd">            cache</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">cache</span><span class="o">.</span><span class="n">_val</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">cache</span><span class="o">.</span><span class="n">_val</span> <span class="k">else</span> <span class="bp">None</span>
+        
+    <span class="n">cache</span><span class="o">.</span><span class="n">put</span> <span class="o">=</span> <span class="n">put</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">get</span> <span class="o">=</span> <span class="n">get</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">remove</span> <span class="o">=</span> <span class="n">remove</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">dump</span> <span class="o">=</span> <span class="n">dump</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">clear</span> <span class="o">=</span> <span class="n">clear</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">clear</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">k_clear</span><span class="o">.</span><span class="n">__doc__</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+    
+    <span class="k">return</span> <span class="n">cache</span>
+    
+</div>
+<div class="viewcode-block" id="ttl_cache"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.ttl_cache">[docs]</a><span class="k">def</span> <span class="nf">ttl_cache</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">f_time</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a TTL cache.</span>
+<span class="sd">    </span>
+<span class="sd">    This function takes as a input a cache policy and returns a new policy</span>
+<span class="sd">    where items, when inserted, are (optionally) labelled with their expiration</span>
+<span class="sd">    time and are automatically evicted when their validity expires.</span>
+<span class="sd">    </span>
+<span class="sd">    The time validity is verified against the return value of the callable</span>
+<span class="sd">    argument *f_time*, which is called whenever a purging is executed.</span>
+<span class="sd">    </span>
+<span class="sd">    This implementation can be used with both real time and simulated time.    </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cache : Cache</span>
+<span class="sd">        The instance of a cache to be changed to a TTL cache</span>
+<span class="sd">    f_time : callable</span>
+<span class="sd">        A function that returns the current time (simulated or real). The</span>
+<span class="sd">        return type must be a numerical value, e.g. float</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    cache : Cache</span>
+<span class="sd">        The modified cache instance</span>
+<span class="sd">        </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The returned TTL cache performs purging operations only when *has*, *get*,</span>
+<span class="sd">    *put* and *dump* operations are performed. This ensures correctness when</span>
+<span class="sd">    normal caches are used with common routing and caching strategies.</span>
+<span class="sd">    However, if other operations like *position* or *len* are executed,</span>
+<span class="sd">    results may take into account also expired items. In such cases, it is then</span>
+<span class="sd">    advisable to execute a *purge* first.  </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">Cache</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;cache must be an instance of Cache or its subclasses&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;the cache must be empty&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">f_time</span><span class="p">,</span> <span class="s">&#39;__call__&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;f_time must be callable&#39;</span><span class="p">)</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">cache</span><span class="p">)</span>
+    
+    <span class="n">cache</span><span class="o">.</span><span class="n">f_time</span> <span class="o">=</span> <span class="n">f_time</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span> <span class="o">=</span> <span class="n">LinkedSet</span><span class="p">()</span>
+    
+    <span class="n">c_put</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">put</span>
+    <span class="n">c_get</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span>
+    <span class="n">c_has</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">has</span>
+    <span class="n">c_remove</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">remove</span>
+    <span class="n">c_dump</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">dump</span>
+    <span class="n">c_clear</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">clear</span>
+    
+    <span class="k">def</span> <span class="nf">_purge_till</span><span class="p">(</span><span class="n">expiry</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Purge all entries expired before a certain time</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        expiry : float</span>
+<span class="sd">            Cutoff expiration time</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="o">.</span><span class="n">bottom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> \
+              <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span><span class="p">[</span><span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="o">.</span><span class="n">bottom</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">expiry</span><span class="p">:</span>
+            <span class="n">expired</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="o">.</span><span class="n">pop_bottom</span><span class="p">()</span>
+            <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">expired</span><span class="p">)</span>
+            <span class="n">c_remove</span><span class="p">(</span><span class="n">expired</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">purge</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Purge all expired items&quot;&quot;&quot;</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">_purge_till</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">f_time</span><span class="p">())</span>
+    
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">c_get</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">cache</span><span class="o">.</span><span class="n">f_time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">remove</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span> 
+    
+    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">expires</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Insert an item in the cache if not already inserted.</span>
+<span class="sd">        </span>
+<span class="sd">        If the element is already present in the cache, it will not be inserted</span>
+<span class="sd">        again but the internal state of the cache object may change.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item to be inserted</span>
+<span class="sd">        ttl : float, optional</span>
+<span class="sd">            The TTL of the item, i.e. its relative expiration time</span>
+<span class="sd">        expires : float, optional</span>
+<span class="sd">            The absolute expiration time of the item. It cannot be used in</span>
+<span class="sd">            conjunction with ttl. If both ttl and expires are None, then the</span>
+<span class="sd">            inserted content has infinite TTL.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        evicted : any hashable type</span>
+<span class="sd">            The evicted object or *None* if no contents were evicted.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">f_time</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ttl</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">expires</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Both expires and ttl parameters provided. &#39;</span>
+                             <span class="s">&#39;Only one can be provided.&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ttl</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c"># if TTL is not positive, then do not cache the content at all</span>
+                <span class="k">return</span> <span class="bp">None</span>
+            <span class="n">expires</span> <span class="o">=</span> <span class="n">now</span> <span class="o">+</span> <span class="n">ttl</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c"># case where TTL is None</span>
+            <span class="k">if</span> <span class="n">expires</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="c"># If both TTL and expire are None, then TTL is infinite</span>
+                <span class="n">expires</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">infty</span>
+            <span class="k">elif</span> <span class="n">expires</span> <span class="o">&lt;=</span> <span class="n">now</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+        <span class="c"># Purge expired items only if cache is full for performance reasons</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache</span><span class="p">)</span> <span class="o">==</span> <span class="n">cache</span><span class="o">.</span><span class="n">maxlen</span><span class="p">:</span>
+            <span class="n">cache</span><span class="o">.</span><span class="n">_purge_till</span><span class="p">(</span><span class="n">now</span><span class="p">)</span>
+        <span class="n">evicted</span> <span class="o">=</span> <span class="n">c_put</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">evicted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">evicted</span><span class="p">)</span>
+            <span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">evicted</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span> <span class="ow">or</span> <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">expires</span><span class="p">:</span>
+            <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">expires</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="p">:</span>
+                <span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="o">.</span><span class="n">append_top</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">expires</span> <span class="o">&gt;=</span> <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                        <span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="o">.</span><span class="n">insert_above</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+                        <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="o">.</span><span class="n">append_bottom</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">evicted</span>
+    
+    <span class="k">def</span> <span class="nf">has</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">c_has</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cache</span><span class="o">.</span><span class="n">f_time</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> 
+    
+    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="n">c_remove</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">dump</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;Return a dump of all the elements currently in the cache possibly</span>
 <span class="sd">        sorted according to the eviction policy.</span>
 <span class="sd">        </span>
@@ -1390,30 +1606,32 @@
 <span class="sd">        ------</span>
 <span class="sd">        cache_dump : list of tuples</span>
 <span class="sd">            The list of items currently stored in the cache represented as</span>
-<span class="sd">            key, value pairs</span>
+<span class="sd">            (key, expiration time) pairs</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">dump</span> <span class="o">=</span> <span class="n">k_dump</span><span class="p">()</span>
-        <span class="k">return</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="n">cache</span><span class="o">.</span><span class="n">_vals</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">dump</span><span class="p">]</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">purge</span><span class="p">()</span>
+        <span class="n">dump</span> <span class="o">=</span> <span class="n">c_dump</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">dump</span><span class="p">]</span>
     
-    <span class="k">def</span> <span class="nf">kv_clear</span><span class="p">():</span>
-        <span class="n">k_clear</span><span class="p">()</span>
-        <span class="n">cache</span><span class="o">.</span><span class="n">_vals</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-        
-    <span class="n">cache</span><span class="o">.</span><span class="n">put</span> <span class="o">=</span> <span class="n">kv_put</span>
-    <span class="n">cache</span><span class="o">.</span><span class="n">put</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="s">&#39;put&#39;</span>
+    <span class="k">def</span> <span class="nf">clear</span><span class="p">():</span>
+        <span class="n">c_clear</span><span class="p">()</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">expiry</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">_exp_list</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="n">cache</span><span class="o">.</span><span class="n">_purge_till</span> <span class="o">=</span> <span class="n">_purge_till</span>
     
-    <span class="n">cache</span><span class="o">.</span><span class="n">get</span> <span class="o">=</span> <span class="n">kv_get</span>
-    <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="s">&#39;get&#39;</span>
-    
-    <span class="n">cache</span><span class="o">.</span><span class="n">dump</span> <span class="o">=</span> <span class="n">kv_dump</span>
-    <span class="n">cache</span><span class="o">.</span><span class="n">dump</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="s">&#39;dump&#39;</span>
-    
-    <span class="n">cache</span><span class="o">.</span><span class="n">clear</span> <span class="o">=</span> <span class="n">kv_clear</span>
-    <span class="n">cache</span><span class="o">.</span><span class="n">clear</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="s">&#39;clear&#39;</span>
-    <span class="n">cache</span><span class="o">.</span><span class="n">clear</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">k_clear</span><span class="o">.</span><span class="n">__doc__</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">get</span> <span class="o">=</span> <span class="n">get</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">put</span> <span class="o">=</span> <span class="n">put</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">has</span> <span class="o">=</span> <span class="n">has</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">remove</span> <span class="o">=</span> <span class="n">remove</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">dump</span> <span class="o">=</span> <span class="n">dump</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">clear</span> <span class="o">=</span> <span class="n">clear</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">purge</span> <span class="o">=</span> <span class="n">purge</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">clear</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">c_clear</span><span class="o">.</span><span class="n">__doc__</span>
     
     <span class="k">return</span> <span class="n">cache</span>
-    </div>
+</div>
+<span class="k">def</span> <span class="nf">ttl_keyval_cache</span><span class="p">():</span>
+    <span class="k">pass</span>
 </pre></div>
 
           </div>
@@ -1433,13 +1651,13 @@
         <li class="right" >
           <a href="../../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

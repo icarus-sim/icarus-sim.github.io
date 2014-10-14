@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>models Package &mdash; Icarus 0.2.1 documentation</title>
+    <title>icarus.models package &mdash; Icarus 0.4.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.1',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,8 +23,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.2.1 documentation" href="../index.html" />
-    <link rel="up" title="icarus Package" href="icarus.html" /> 
+    <link rel="top" title="Icarus 0.4.0 documentation" href="../index.html" />
+    <link rel="up" title="icarus package" href="icarus.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,22 +39,23 @@
         <li class="right" >
           <a href="../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
-          <li><a href="icarus.html" accesskey="U">icarus Package</a> &raquo;</li> 
+        <li><a href="../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+          <li><a href="icarus.html" accesskey="U">icarus package</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">models Package</a><ul>
-<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">models</span></tt> Package</a></li>
-<li><a class="reference internal" href="#module-icarus.models.cache"><tt class="docutils literal"><span class="pre">cache</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#">icarus.models package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-icarus.models.cache">icarus.models.cache module</a><ul>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-icarus.models.strategy"><tt class="docutils literal"><span class="pre">strategy</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#module-icarus.models.strategy">icarus.models.strategy module</a><ul>
 </ul>
 </li>
+<li><a class="reference internal" href="#module-icarus.models">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -82,22 +81,20 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="models-package">
-<h1>models Package<a class="headerlink" href="#models-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="id1">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">models</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-icarus.models"></span><p>This package contains implementations of models of cache replacement
-policies and caching and routing strategies.</p>
+  <div class="section" id="icarus-models-package">
+<h1>icarus.models package<a class="headerlink" href="#icarus-models-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-icarus.models.cache">
-<span id="cache-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">cache</span></tt> Module<a class="headerlink" href="#module-icarus.models.cache" title="Permalink to this headline">¶</a></h2>
+<span id="icarus-models-cache-module"></span><h2>icarus.models.cache module<a class="headerlink" href="#module-icarus.models.cache" title="Permalink to this headline">¶</a></h2>
 <p>Cache replacement policies implementations</p>
 <p>This module contains the implementations of all the cache replacement policies
 provided by Icarus.</p>
 <dl class="class">
 <dt id="icarus.models.cache.LinkedSet">
 <em class="property">class </em><tt class="descname">LinkedSet</tt><big>(</big><em>iterable=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LinkedSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LinkedSet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
 <p>A doubly-linked set, i.e. a set whose entries are ordered and stored in
 a doubly-linked list.</p>
 <p>This data structure is designed to efficiently implement a number of cache
@@ -161,7 +158,7 @@ before a given item.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The item to append</p>
 </div></blockquote>
@@ -179,7 +176,7 @@ before a given item.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The item to append</p>
 </div></blockquote>
@@ -197,7 +194,7 @@ before a given item.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>bottom</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>bottom</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The item at the bottom or <em>None</em> if the set is empty</p>
 </div></blockquote>
@@ -223,13 +220,13 @@ set.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item whose index is queried</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>index</strong> : int</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>index</strong> : int</p>
 <blockquote class="last">
 <div><p>The index of the item</p>
 </div></blockquote>
@@ -247,7 +244,7 @@ set.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>i</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>i</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item of the set above which the new item is inserted</p>
 </div></blockquote>
@@ -269,7 +266,7 @@ set.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>i</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>i</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item of the set below which the new item is inserted</p>
 </div></blockquote>
@@ -291,7 +288,7 @@ set.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The item to move down</p>
 </div></blockquote>
@@ -309,7 +306,7 @@ set.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The item to move to the bottom</p>
 </div></blockquote>
@@ -327,7 +324,7 @@ set.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The item to move to the top</p>
 </div></blockquote>
@@ -345,7 +342,7 @@ set.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The item to move up</p>
 </div></blockquote>
@@ -363,7 +360,7 @@ set.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>bottom</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>bottom</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The item at the bottom or <em>None</em> if the set is empty</p>
 </div></blockquote>
@@ -381,7 +378,7 @@ set.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>top</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>top</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The item at the top or <em>None</em> if the set is empty</p>
 </div></blockquote>
@@ -399,7 +396,7 @@ set.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The item to remove</p>
 </div></blockquote>
@@ -417,7 +414,7 @@ set.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>top</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>top</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The item at the top or <em>None</em> if the set is empty</p>
 </div></blockquote>
@@ -432,7 +429,7 @@ set.</p>
 <dl class="class">
 <dt id="icarus.models.cache.Cache">
 <em class="property">class </em><tt class="descname">Cache</tt><big>(</big><em>maxlen</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#Cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.Cache" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
 <p>Base implementation of a cache object</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
@@ -476,7 +473,7 @@ sorted according to the eviction policy.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
 <blockquote class="last">
 <div><p>The list of all items currently stored in the cache</p>
 </div></blockquote>
@@ -497,13 +494,13 @@ implementation.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise</p>
@@ -523,13 +520,13 @@ state of the caching object.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise</p>
@@ -556,13 +553,13 @@ again but the internal state of the cache object may change.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
 </div></blockquote>
@@ -580,13 +577,13 @@ again but the internal state of the cache object may change.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
 <blockquote class="last">
 <div><p><em>True</em> if the content was in the cache, <em>False</em> if it was not.</p>
 </div></blockquote>
@@ -647,7 +644,7 @@ identical to a cache with max size equal to 0.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
 <blockquote class="last">
 <div><p>An empty list.</p>
 </div></blockquote>
@@ -665,13 +662,13 @@ identical to a cache with max size equal to 0.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise. It always returns False</p>
@@ -691,13 +688,13 @@ state of the caching object.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise. It always returns <em>False</em></p>
@@ -717,7 +714,7 @@ or <em>False</em> otherwise. It always returns <em>False</em></p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>maxlen</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>maxlen</strong> : int</p>
 <blockquote class="last">
 <div><p>The maximum number of items the cache can store. It is always 0</p>
 </div></blockquote>
@@ -740,13 +737,13 @@ or <em>False</em> otherwise. It always returns <em>False</em></p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
 </div></blockquote>
@@ -765,13 +762,13 @@ or <em>False</em> otherwise. It always returns <em>False</em></p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
 <blockquote class="last">
 <div><p><em>True</em> if the content was in the cache, <em>False</em> if it was not. It
 always return <em>False</em></p>
@@ -842,7 +839,7 @@ sorted according to the eviction policy.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
 <blockquote class="last">
 <div><p>The list of all items currently stored in the cache</p>
 </div></blockquote>
@@ -863,13 +860,13 @@ implementation.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise</p>
@@ -889,13 +886,13 @@ state of the caching object.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise</p>
@@ -929,13 +926,13 @@ recently used item).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
 <blockquote class="last">
 <div><p>The current position of the item in the cache</p>
 </div></blockquote>
@@ -955,13 +952,13 @@ top of the cache.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
 </div></blockquote>
@@ -979,13 +976,13 @@ top of the cache.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
 <blockquote class="last">
 <div><p><em>True</em> if the content was in the cache, <em>False</em> if it was not.</p>
 </div></blockquote>
@@ -1057,7 +1054,7 @@ sorted according to the eviction policy.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
 <blockquote class="last">
 <div><p>The list of all items currently stored in the cache</p>
 </div></blockquote>
@@ -1078,13 +1075,13 @@ implementation.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise</p>
@@ -1104,13 +1101,13 @@ state of the caching object.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise</p>
@@ -1144,13 +1141,13 @@ recently used item).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
 <blockquote class="last">
 <div><p>The current position of the item in the cache</p>
 </div></blockquote>
@@ -1170,13 +1167,13 @@ top of the cache.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
 </div></blockquote>
@@ -1194,13 +1191,13 @@ top of the cache.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
 <blockquote class="last">
 <div><p><em>True</em> if the content was in the cache, <em>False</em> if it was not.</p>
 </div></blockquote>
@@ -1269,7 +1266,7 @@ sorted according to the eviction policy.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
 <blockquote class="last">
 <div><p>The list of all items currently stored in the cache</p>
 </div></blockquote>
@@ -1290,13 +1287,13 @@ implementation.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise</p>
@@ -1316,13 +1313,13 @@ state of the caching object.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise</p>
@@ -1354,13 +1351,13 @@ again but the internal state of the cache object may change.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
 </div></blockquote>
@@ -1378,13 +1375,13 @@ again but the internal state of the cache object may change.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
 <blockquote class="last">
 <div><p><em>True</em> if the content was in the cache, <em>False</em> if it was not.</p>
 </div></blockquote>
@@ -1452,7 +1449,7 @@ sorted according to the eviction policy.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
 <blockquote class="last">
 <div><p>The list of all items currently stored in the cache</p>
 </div></blockquote>
@@ -1473,13 +1470,13 @@ implementation.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise</p>
@@ -1499,13 +1496,13 @@ state of the caching object.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise</p>
@@ -1539,13 +1536,13 @@ recently inserted item).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
 <blockquote class="last">
 <div><p>The current position of the item in the cache</p>
 </div></blockquote>
@@ -1565,13 +1562,13 @@ again but the internal state of the cache object may change.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
 </div></blockquote>
@@ -1589,13 +1586,13 @@ again but the internal state of the cache object may change.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
 <blockquote class="last">
 <div><p><em>True</em> if the content was in the cache, <em>False</em> if it was not.</p>
 </div></blockquote>
@@ -1658,7 +1655,7 @@ sorted according to the eviction policy.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_dump</strong> : list</p>
 <blockquote class="last">
 <div><p>The list of all items currently stored in the cache</p>
 </div></blockquote>
@@ -1679,13 +1676,13 @@ implementation.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise</p>
@@ -1705,13 +1702,13 @@ state of the caching object.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item looked up in the cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>v</strong> : bool</p>
 <blockquote class="last">
 <div><p>Boolean value being <em>True</em> if the requested item is in the cache
 or <em>False</em> otherwise</p>
@@ -1742,13 +1739,13 @@ again but the internal state of the cache object may change.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
 </div></blockquote>
@@ -1766,13 +1763,13 @@ again but the internal state of the cache object may change.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
 <blockquote>
 <div><p>The item to be inserted</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
 <blockquote class="last">
 <div><p><em>True</em> if the content was in the cache, <em>False</em> if it was not.</p>
 </div></blockquote>
@@ -1795,7 +1792,7 @@ instance such that it inserts contents randomly with a given probability</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>cache</strong> : Cache</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>cache</strong> : Cache</p>
 <blockquote>
 <div><p>The instance of a cache to be applied random insertion</p>
 </div></blockquote>
@@ -1809,7 +1806,7 @@ instance such that it inserts contents randomly with a given probability</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache</strong> : Cache</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache</strong> : Cache</p>
 <blockquote class="last">
 <div><p>The modified cache instance</p>
 </div></blockquote>
@@ -1826,18 +1823,23 @@ instance such that it inserts contents randomly with a given probability</p>
 together with a value instead of just a key.</p>
 <p>This modifies the signature and/or return types of methods <em>get</em>, <em>put</em> and
 <em>dump</em>. The new format is documented in the docstrings of the modified
-methods of the cache instance</p>
+methods of the cache instance.</p>
+<p>This function modifies the contract of methods of Cache objects, which is
+admittedly a bad software engineering practice . It may also lead to bugs
+in a key-value cache implementation if the base key-only cache
+implementation from which it derives has methods calling other methods of
+the same instance.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>cache</strong> : Cache</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>cache</strong> : Cache</p>
 <blockquote>
 <div><p>The instance of a cache to be changed to a key-value cache</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>cache</strong> : Cache</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache</strong> : Cache</p>
 <blockquote class="last">
 <div><p>The modified cache instance</p>
 </div></blockquote>
@@ -1847,14 +1849,56 @@ methods of the cache instance</p>
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="icarus.models.cache.ttl_cache">
+<tt class="descname">ttl_cache</tt><big>(</big><em>cache</em>, <em>f_time</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#ttl_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.ttl_cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a TTL cache.</p>
+<p>This function takes as a input a cache policy and returns a new policy
+where items, when inserted, are (optionally) labelled with their expiration
+time and are automatically evicted when their validity expires.</p>
+<p>The time validity is verified against the return value of the callable
+argument <em>f_time</em>, which is called whenever a purging is executed.</p>
+<p>This implementation can be used with both real time and simulated time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>cache</strong> : Cache</p>
+<blockquote>
+<div><p>The instance of a cache to be changed to a TTL cache</p>
+</div></blockquote>
+<p><strong>f_time</strong> : callable</p>
+<blockquote>
+<div><p>A function that returns the current time (simulated or real). The
+return type must be a numerical value, e.g. float</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache</strong> : Cache</p>
+<blockquote class="last">
+<div><p>The modified cache instance</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The returned TTL cache performs purging operations only when <em>has</em>, <em>get</em>,
+<em>put</em> and <em>dump</em> operations are performed. This ensures correctness when
+normal caches are used with common routing and caching strategies.
+However, if other operations like <em>position</em> or <em>len</em> are executed,
+results may take into account also expired items. In such cases, it is then
+advisable to execute a <em>purge</em> first.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-icarus.models.strategy">
-<span id="strategy-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">strategy</span></tt> Module<a class="headerlink" href="#module-icarus.models.strategy" title="Permalink to this headline">¶</a></h2>
+<span id="icarus-models-strategy-module"></span><h2>icarus.models.strategy module<a class="headerlink" href="#module-icarus.models.strategy" title="Permalink to this headline">¶</a></h2>
 <p>Implementations of all caching and routing strategies</p>
 <dl class="class">
 <dt id="icarus.models.strategy.Strategy">
 <em class="property">class </em><tt class="descname">Strategy</tt><big>(</big><em>view</em>, <em>controller</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#Strategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.Strategy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
 <p>Base strategy imported by all other strategy classes</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
@@ -1879,7 +1923,7 @@ retrieved from the network view.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
 <blockquote>
 <div><p>The timestamp of the event</p>
 </div></blockquote>
@@ -1909,12 +1953,12 @@ collectors attached to the network.</p>
 <em class="property">class </em><tt class="descname">Hashrouting</tt><big>(</big><em>view</em>, <em>controller</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#Hashrouting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.Hashrouting" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
 <p>Base class for all hash-routing implementations. Hash-routing
-implementations are described in <a class="reference internal" href="#r1">[R1]</a>.</p>
+implementations are described in <a class="reference internal" href="#r1" id="id1">[R1]</a>.</p>
 <p class="rubric">References</p>
 <table class="docutils citation" frame="void" id="r1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[R1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> <ol class="last upperalpha simple" start="12">
+<tr><td class="label">[R1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> <ol class="last upperalpha simple" start="12">
 <li>Saino, I. Psaras and G. Pavlou, Hash-routing Schemes for</li>
 </ol>
 </td></tr>
@@ -1949,13 +1993,13 @@ workshop. Available:
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>content</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>content</strong> : any hashable type</p>
 <blockquote>
 <div><p>The identifier of the content</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>authoritative_cache</strong> : any hashable type</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>authoritative_cache</strong> : any hashable type</p>
 <blockquote class="last">
 <div><p>The node on which the authoritative cache is deployed</p>
 </div></blockquote>
@@ -1973,13 +2017,13 @@ workshop. Available:
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>content</strong> : any hashable type</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>content</strong> : any hashable type</p>
 <blockquote>
 <div><p>The identifier of the content</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>hash</strong> : int</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>hash</strong> : int</p>
 <blockquote class="last">
 <div><p>The hash code of the content</p>
 </div></blockquote>
@@ -2030,7 +2074,7 @@ retrieved from the network view.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
 <blockquote>
 <div><p>The timestamp of the event</p>
 </div></blockquote>
@@ -2094,7 +2138,7 @@ retrieved from the network view.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
 <blockquote>
 <div><p>The timestamp of the event</p>
 </div></blockquote>
@@ -2163,7 +2207,7 @@ retrieved from the network view.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
 <blockquote>
 <div><p>The timestamp of the event</p>
 </div></blockquote>
@@ -2235,7 +2279,7 @@ retrieved from the network view.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
 <blockquote>
 <div><p>The timestamp of the event</p>
 </div></blockquote>
@@ -2262,7 +2306,7 @@ collectors attached to the network.</p>
 
 <dl class="class">
 <dt id="icarus.models.strategy.HashroutingHybridSM">
-<em class="property">class </em><tt class="descname">HashroutingHybridSM</tt><big>(</big><em>view</em>, <em>controller</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#HashroutingHybridSM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.HashroutingHybridSM" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">HashroutingHybridSM</tt><big>(</big><em>view</em>, <em>controller</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#HashroutingHybridSM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.HashroutingHybridSM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Hashrouting" title="icarus.models.strategy.Hashrouting"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Hashrouting</span></tt></a></p>
 <p>Hash-routing implementation with hybrid symmetric-multicast delivery of
 content packets.</p>
@@ -2304,7 +2348,7 @@ retrieved from the network view.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
 <blockquote>
 <div><p>The timestamp of the event</p>
 </div></blockquote>
@@ -2365,7 +2409,7 @@ retrieved from the network view.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
 <blockquote>
 <div><p>The timestamp of the event</p>
 </div></blockquote>
@@ -2425,7 +2469,7 @@ retrieved from the network view.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
 <blockquote>
 <div><p>The timestamp of the event</p>
 </div></blockquote>
@@ -2457,7 +2501,7 @@ collectors attached to the network.</p>
 <p>Leave Copy Down (LCD) strategy.</p>
 <p>According to this strategy, one copy of a content is replicated only in
 the caching node you hop away from the serving node in the direction of
-the receiver. This strategy is described in <a href="#id6"><span class="problematic" id="id7"><span id="id4"></span>[2]_</span></a>.</p>
+the receiver. This strategy is described in <a href="#id5"><span class="problematic" id="id6"><span id="id3"></span>[2]_</span></a>.</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -2486,7 +2530,7 @@ retrieved from the network view.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
 <blockquote>
 <div><p>The timestamp of the event</p>
 </div></blockquote>
@@ -2515,10 +2559,10 @@ collectors attached to the network.</p>
 <dt id="icarus.models.strategy.CacheLessForMore">
 <em class="property">class </em><tt class="descname">CacheLessForMore</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em>, <em>use_ego_betw=False</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#CacheLessForMore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.CacheLessForMore" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
-<p>Cache less for more strategy <a href="#id8"><span class="problematic" id="id9"><span id="id5"></span>[4]_</span></a>.</p>
+<p>Cache less for more strategy <a href="#id7"><span class="problematic" id="id8"><span id="id4"></span>[5]_</span></a>.</p>
 <p class="rubric">References</p>
 <dl class="docutils">
-<dt>..[4] W. Chai, D. He, I. Psaras, G. Pavlou, Cache Less for More in</dt>
+<dt>..[5] W. Chai, D. He, I. Psaras, G. Pavlou, Cache Less for More in</dt>
 <dd>Information-centric Networks, in IFIP NETWORKING &#8216;12
 Available: <a class="reference external" href="http://www.ee.ucl.ac.uk/~uceeips/centrality-networking12.pdf">http://www.ee.ucl.ac.uk/~uceeips/centrality-networking12.pdf</a></dd>
 </dl>
@@ -2550,7 +2594,7 @@ retrieved from the network view.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
 <blockquote>
 <div><p>The timestamp of the event</p>
 </div></blockquote>
@@ -2610,7 +2654,7 @@ retrieved from the network view.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
 <blockquote>
 <div><p>The timestamp of the event</p>
 </div></blockquote>
@@ -2670,7 +2714,7 @@ retrieved from the network view.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
 <blockquote>
 <div><p>The timestamp of the event</p>
 </div></blockquote>
@@ -2696,6 +2740,11 @@ collectors attached to the network.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-icarus.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-icarus.models" title="Permalink to this headline">¶</a></h2>
+<p>This package contains implementations of models of cache replacement
+policies and caching and routing strategies.</p>
+</div>
 </div>
 
 
@@ -2716,13 +2765,13 @@ collectors attached to the network.</p>
         <li class="right" >
           <a href="../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">Icarus 0.2.1 documentation</a> &raquo;</li>
-          <li><a href="icarus.html" >icarus Package</a> &raquo;</li> 
+        <li><a href="../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+          <li><a href="icarus.html" >icarus package</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

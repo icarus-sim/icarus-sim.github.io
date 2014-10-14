@@ -1,5 +1,6 @@
 ---
 layout: index
+name: Icarus - ICN Caching Simulator  
 title: Icarus
 tagline: Caching simulator for Information Centric Networking (ICN)
 ---
@@ -13,10 +14,11 @@ You can download a stable release in a zip or tar.gz format using the links belo
 
 **Latest version:**
 
- * Version 0.3.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.3.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.3.0.tar.gz)\]
+ * Version 0.4.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.4.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.4.0.tar.gz)\]
 
 **Older versions:**
 
+ * Version 0.3.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.3.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.3.0.tar.gz)\]
  * Version 0.2.1: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.2.1.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.2.1.tar.gz)\]
  * Version 0.2.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.2.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.2.tar.gz)\]
  * Version 0.1.1: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.1.1.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.1.1.tar.gz)\]
@@ -69,7 +71,7 @@ Icarus also provides a set of helper functions for plotting results. Have a look
 folder for plot examples.
 
 By executing the steps illustrated above it is possible to run simulations using the
-topologies, cache policies, strategies and result collectors readily available on
+topologies, cache eviction policies, strategies and result collectors readily available on
 Icarus. Icarus makes it easy to implement new models to use in simulations.
 
 To implement new models, please refer to the description of the simulator 
