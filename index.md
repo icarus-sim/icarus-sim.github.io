@@ -1,7 +1,7 @@
 ---
 layout: index
-name: Icarus - ICN Caching Simulator  
 title: Icarus
+titlehead: Icarus - ICN Caching Simulator  
 tagline: Caching simulator for Information Centric Networking (ICN)
 ---
 
