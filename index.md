@@ -130,7 +130,7 @@ All the code, data and documentation required is made available in the [icarus-s
 Icarus is licensed under the terms of the [GNU GPLv2 license](http://www.gnu.org/licenses/gpl-2.0.html).
 
 ### Contacts
-For further information about the Icarus simulator, please contact [Lorenzo Saino](http://www.ee.ucl.ac.uk/~lsaino)
+For further information about the Icarus simulator, please contact [Lorenzo Saino](http://www.ee.ucl.ac.uk/~lsaino).
 
 ### Acknowledgments
-This work is funded by the EU-Japan initiative under European Commission FP7 grant agreement no. 608518 and NICT contract no. 167 ([the GreenICN project](http://www.greenicn.org/)).
+This work has been funded by the EU-Japan initiative, under EU FP7 grant agreement no. 608518 and NICT contract no. 167 ([GreenICN](http://www.greenicn.org/)), and by the EU FP7 grant agreement ICT-248784 ([COMET](http://www.comet-project.org/)).
