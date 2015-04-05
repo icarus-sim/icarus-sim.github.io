@@ -5,9 +5,13 @@ titlehead: Icarus - ICN Caching Simulator
 tagline: Caching simulator for Information Centric Networking (ICN)
 ---
 
-Icarus is a Python-based simulator for evaluating caching performance in Information Centric Networking (ICN).
+Icarus is a Python-based discrete-event simulator for evaluating caching
+performance in Information Centric Networks (ICN).
 
-Icarus has been designed to be easy to use and very extensible.
+Icarus is not bound to any specific ICN architecture. Its design allows users
+to implement and evalute new caching policies or caching and routing strategy
+with few lines of code.
+
 
 ### Download
 You can download a stable release in a zip or tar.gz format using the links below.
@@ -28,18 +32,54 @@ You can also get the development branch from the Github repository using Git. Ju
 
     $ git clone https://github.com/icarus-sim/icarus.git
 
-### Configuration
-Before using the simulator, you need to install all required dependencies.
+### Installation
 
-If you use Ubuntu (version 13.10+) you can run the script `ubuntusetup.sh` located in the `scripts` folder which will take of installing all the required dependencies.
-To run it, execute the following commands:
+#### Ubuntu 13.10+
+If you use Ubuntu (version 13.10+) you can run the script `ubuntusetup.sh`
+located in the `scripts` folder which will take of installing all the
+dependencies. To run it, executes the following commands
 
     $ cd <YOUR ICARUS FOLDER>
     $ sh scripts/ubuntusetup.sh
 
 The script, after being launched, will ask you for superuser password.
 
-Otherwise, have a look at the `README.md` file, which explains how to configure your machine and install all required dependencies for other operating systems.
+Finally, it is advisable to add Icarus path to the PYTHONPATH environment variable. This makes it possible to launch Icarus from outside the Icarus root directory or call Icarus APIs from other programs:
+
+    $ cd <YOUR ICARUS FOLDER>
+    $ export PYTHONPATH=`pwd`:$PYTHONPATH
+
+Note however that setting the PYTHONPATH this way does not persist across reboots. To make it persist you should add the export instruction to a script that your machine executes at boot or login time, e.g. `.bashrc` (if you use Bash).
+
+#### Other operating systems
+If you have other operating systems, you can install all dependencies manually. 
+
+Icarus dependencies are:
+
+* **Python interpreter (2.7.x)**: you can either download it
+  from the [Python website](http://www.python.org) or, possibly, from the package
+  manager of your operating system.
+* The following Python packages: 
+   * **numpy** (versin 1.6 onwards)
+   * **scipy** (version 0.12 onwards)
+   * **matplotlib** (version 1.2 onwards)
+   * **networkx** (version 1.6 onwards)
+   * **fnss** (version 0.5.1 onwards)
+
+All these packages can be installed using either [`easy_install`](http://pythonhosted.org/setuptools/easy_install.html) or [`pip`](http://www.pip-installer.org/en/latest/) utilities.
+
+If you use `pip` run:
+
+    $ pip install numpy scipy matplotlib networkx fnss
+
+If you use `easy_install` run:
+
+    $ easy_install numpy scipy matplotlib networkx fnss
+
+You may need to run `pip` or `easy_install` as superuser. The installation of these packages, especially `numpy` and `scipy` may also require to install additional libraries.
+
+#### Virtual machine
+You can also run Icarus within a virtual machine. [This repository](https://github.com/icarus-sim/icarus-vm) contains scripts and documentation to set up a virtual machine with Icarus and all its dependencies.
 
 
 ### Usage
