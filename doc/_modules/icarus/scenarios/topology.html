@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.scenarios.topology &mdash; Icarus 0.4.0 documentation</title>
+    <title>icarus.scenarios.topology &mdash; Icarus 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.4.0 documentation" href="../../../index.html" />
+    <link rel="top" title="Icarus 0.5.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
@@ -67,9 +67,21 @@
           <div class="body">
             
   <h1>Source code for icarus.scenarios.topology</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;This module contains functions for creating or importing topologies for the</span>
-<span class="sd">experiments.</span>
+<span class="sd">&quot;&quot;&quot;Functions for creating or importing topologies for experiments.</span>
+
+<span class="sd">To create a custom topology, create a function returning an instance of the</span>
+<span class="sd">`IcnTopology` class. An IcnTopology is simply a subclass of a Topology class</span>
+<span class="sd">provided by FNSS.</span>
+
+<span class="sd">A valid ICN topology must have the following attributes:</span>
+<span class="sd"> * Each node must have one stack among: source, receiver, router</span>
+<span class="sd"> * The topology must have an attribute called `icr_candidates` which is a set</span>
+<span class="sd">   of router nodes on which a cache may be possibly deployed. Caches are not</span>
+<span class="sd">   deployed directly at topology creation, instead they are deployed by a </span>
+<span class="sd">   cache placement algorithm.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+
 <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
 
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
@@ -80,12 +92,13 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s">&#39;IcnTopology&#39;</span><span class="p">,</span>
-        <span class="s">&#39;topology_binary_tree&#39;</span><span class="p">,</span>
+        <span class="s">&#39;topology_tree&#39;</span><span class="p">,</span>
         <span class="s">&#39;topology_path&#39;</span><span class="p">,</span>
         <span class="s">&#39;topology_geant&#39;</span><span class="p">,</span>
         <span class="s">&#39;topology_tiscali&#39;</span><span class="p">,</span>
         <span class="s">&#39;topology_wide&#39;</span><span class="p">,</span>
         <span class="s">&#39;topology_garr&#39;</span><span class="p">,</span>
+        <span class="s">&#39;topology_rocketfuel_latency&#39;</span>
            <span class="p">]</span>
 
 
@@ -95,17 +108,30 @@
 <span class="c"># which is citing as source of this data, measurements from this IMC&#39;06 paper:</span>
 <span class="c"># http://www.mpi-sws.org/~druschel/publications/ds2-imc.pdf</span>
 <span class="n">INTERNAL_LINK_DELAY</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">EXTERNAL_LINK_DELAY</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">34</span>
+<span class="n">EXTERNAL_LINK_DELAY</span> <span class="o">=</span> <span class="mi">34</span>
 
-
+<span class="c"># Path where all topologies are stored</span>
 <span class="n">TOPOLOGY_RESOURCES_DIR</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> 
                                                 <span class="n">path</span><span class="o">.</span><span class="n">pardir</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">pardir</span><span class="p">,</span> 
                                                 <span class="s">&#39;resources&#39;</span><span class="p">,</span> <span class="s">&#39;topologies&#39;</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="IcnTopology"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.IcnTopology">[docs]</a><span class="k">class</span> <span class="nc">IcnTopology</span><span class="p">(</span><span class="n">fnss</span><span class="o">.</span><span class="n">Topology</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class modelling an ICN topology</span>
+<span class="sd">    </span>
+<span class="sd">    An ICN topology is a simple FNSS Topology with addition methods that</span>
+<span class="sd">    return sets of caching nodes, sources and receivers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     
 <div class="viewcode-block" id="IcnTopology.cache_nodes"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.IcnTopology.cache_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">cache_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a dictionary mapping nodes with a cache and respective cache</span>
+<span class="sd">        size</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        cache_nodes : dict</span>
+<span class="sd">            Dictionary mapping node identifiers and cache size</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;stack&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s">&#39;cache_size&#39;</span><span class="p">]</span>
                 <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span>
                 <span class="k">if</span> <span class="s">&#39;stack&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
@@ -113,31 +139,50 @@
                 <span class="p">}</span>
         </div>
 <div class="viewcode-block" id="IcnTopology.sources"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.IcnTopology.sources">[docs]</a>    <span class="k">def</span> <span class="nf">sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span>
-                <span class="k">if</span> <span class="s">&#39;stack&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
-                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;stack&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;source&#39;</span><span class="p">]</span>
+        <span class="sd">&quot;&quot;&quot;Return a set of source nodes</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        sources : set</span>
+<span class="sd">            Set of source nodes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span>
+                   <span class="k">if</span> <span class="s">&#39;stack&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+                   <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;stack&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;source&#39;</span><span class="p">)</span>
         </div>
 <div class="viewcode-block" id="IcnTopology.receivers"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.IcnTopology.receivers">[docs]</a>    <span class="k">def</span> <span class="nf">receivers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span>
-                <span class="k">if</span> <span class="s">&#39;stack&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
-                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;stack&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;receiver&#39;</span><span class="p">]</span>
+        <span class="sd">&quot;&quot;&quot;Return a set of receiver nodes</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        receivers : set</span>
+<span class="sd">            Set of receiver nodes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span>
+                   <span class="k">if</span> <span class="s">&#39;stack&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+                   <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;stack&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;receiver&#39;</span><span class="p">)</span>
+
 </div></div>
-<span class="nd">@register_topology_factory</span><span class="p">(</span><span class="s">&#39;BINARY_TREE&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="topology_binary_tree"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.topology_binary_tree">[docs]</a><span class="k">def</span> <span class="nf">topology_binary_tree</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a tree topology</span>
+<span class="nd">@register_topology_factory</span><span class="p">(</span><span class="s">&#39;TREE&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="topology_tree"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.topology_tree">[docs]</a><span class="k">def</span> <span class="nf">topology_tree</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a tree topology, with a source at the root, receivers at the </span>
+<span class="sd">    leafs and caches at all intermediate nodes.</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    seed : int, optional</span>
-<span class="sd">        The seed used for random number generation</span>
+<span class="sd">    h : height </span>
+<span class="sd">        The height of the tree</span>
+<span class="sd">    k : branching factor</span>
+<span class="sd">        The branching factor of the tree</span>
+<span class="sd">    delay : float</span>
+<span class="sd">        The link delay in milliseconds</span>
 <span class="sd">        </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    topology : fnss.Topology</span>
+<span class="sd">    topology : IcnTopology</span>
 <span class="sd">        The topology object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="mi">5</span>       <span class="c"># depth of the tree</span>
-    <span class="n">topology</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">k_ary_tree_topology</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">k_ary_tree_topology</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
     <span class="n">receivers</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes_iter</span><span class="p">()</span>
                  <span class="k">if</span> <span class="n">topology</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;depth&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">h</span><span class="p">]</span>
     <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes_iter</span><span class="p">()</span>
@@ -145,7 +190,7 @@
     <span class="n">routers</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes_iter</span><span class="p">()</span>
               <span class="k">if</span> <span class="n">topology</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;depth&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
               <span class="ow">and</span> <span class="n">topology</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;depth&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">h</span><span class="p">]</span>
-    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">routers</span>
+    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">routers</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
         <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
@@ -154,37 +199,35 @@
         <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;router&#39;</span><span class="p">)</span>
     <span class="c"># set weights and delays on all links</span>
     <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-    <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
-    <span class="c"># label links as internal or external</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
+    <span class="c"># label links as internal</span>
     <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">edges_iter</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">sources</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
-            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;external&#39;</span>
-            <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">EXTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;internal&#39;</span>
+        <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;internal&#39;</span>
     <span class="k">return</span> <span class="n">IcnTopology</span><span class="p">(</span><span class="n">topology</span><span class="p">)</span>
 
 </div>
 <span class="nd">@register_topology_factory</span><span class="p">(</span><span class="s">&#39;PATH&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="topology_path"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.topology_path">[docs]</a><span class="k">def</span> <span class="nf">topology_path</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a scenario based on path topology</span>
+<div class="viewcode-block" id="topology_path"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.topology_path">[docs]</a><span class="k">def</span> <span class="nf">topology_path</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a path topology with a receiver on node `0` and a source at node</span>
+<span class="sd">    &#39;n-1&#39;</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    seed : int, optional</span>
-<span class="sd">        The seed used for random number generation</span>
+<span class="sd">    n : int (&gt;=3)</span>
+<span class="sd">        The number of nodes</span>
+<span class="sd">    delay : float</span>
+<span class="sd">        The link delay in milliseconds</span>
 <span class="sd">        </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    topology : fnss.Topology</span>
+<span class="sd">    topology : IcnTopology</span>
 <span class="sd">        The topology object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># 240 nodes in the main component</span>
     <span class="n">topology</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">line_topology</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="n">receivers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>    
     <span class="n">routers</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">routers</span>
+    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">routers</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
         <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
@@ -193,14 +236,10 @@
         <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;router&#39;</span><span class="p">)</span>
     <span class="c"># set weights and delays on all links</span>
     <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-    <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
+    <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
     <span class="c"># label links as internal or external</span>
     <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">edges_iter</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">sources</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
-            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;external&#39;</span>
-            <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">EXTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;internal&#39;</span>
+        <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;internal&#39;</span>
     <span class="k">return</span> <span class="n">IcnTopology</span><span class="p">(</span><span class="n">topology</span><span class="p">)</span>
 
 </div>
@@ -235,7 +274,7 @@
         <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
     <span class="n">routers</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sources</span> <span class="o">+</span> <span class="n">receivers</span><span class="p">]</span>
     <span class="c"># add stacks to nodes</span>
-    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">icr_candidates</span>
+    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">icr_candidates</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
         <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
@@ -317,7 +356,7 @@
     <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
     
     <span class="c"># Deploy stacks</span>
-    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">icr_candidates</span>
+    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">icr_candidates</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
         <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
@@ -364,7 +403,7 @@
     <span class="n">fnss</span><span class="o">.</span><span class="n">set_weights_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
     <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
     <span class="c"># Deploy stacks</span>
-    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">icr_candidates</span>
+    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">icr_candidates</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
         <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
@@ -410,13 +449,13 @@
     <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
 
     <span class="c"># Deploy stacks</span>
-    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">icr_candidates</span>
+    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">icr_candidates</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
         <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
         <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;receiver&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">routers</span><span class="p">:</span>
-        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;rotuer&#39;</span><span class="p">)</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;router&#39;</span><span class="p">)</span>
     
     <span class="c"># label links as internal or external</span>
     <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
@@ -470,7 +509,7 @@
     <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
     
     <span class="c"># Deploy stacks</span>
-    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">icr_candidates</span>
+    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">icr_candidates</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
         <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
@@ -529,7 +568,7 @@
     <span class="c"># Select as ICR candidates the top 50% routers for betweenness centrality</span>
     <span class="n">icr_candidates</span> <span class="o">=</span> <span class="n">routers</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">routers</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">:]</span> 
     <span class="c"># add stacks to nodes</span>
-    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">icr_candidates</span>
+    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">icr_candidates</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
         <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
@@ -619,7 +658,7 @@
     <span class="n">fnss</span><span class="o">.</span><span class="n">set_delays_constant</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">INTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="s">&#39;ms&#39;</span><span class="p">)</span>
     
     <span class="c"># deploy stacks</span>
-    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">icr_candidates</span>
+    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">icr_candidates</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
         <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
@@ -637,6 +676,68 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;internal&#39;</span>
     <span class="k">return</span> <span class="n">IcnTopology</span><span class="p">(</span><span class="n">topology</span><span class="p">)</span>
+
+
+<span class="nd">@register_topology_factory</span><span class="p">(</span><span class="s">&#39;ROCKET_FUEL&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="topology_rocketfuel_latency"><a class="viewcode-back" href="../../../apidoc/icarus.scenarios.html#icarus.scenarios.topology.topology_rocketfuel_latency">[docs]</a><span class="k">def</span> <span class="nf">topology_rocketfuel_latency</span><span class="p">(</span><span class="n">asn</span><span class="p">,</span> <span class="n">source_ratio</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">ext_delay</span><span class="o">=</span><span class="n">EXTERNAL_LINK_DELAY</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parse a generic RocketFuel topology with annotated latencies</span>
+<span class="sd">    </span>
+<span class="sd">    To each node of the parsed topology it is attached an artificial receiver</span>
+<span class="sd">    node. To the routers with highest degree it is also attached a source node. </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    asn : int</span>
+<span class="sd">        AS number</span>
+<span class="sd">    source_ratio : float</span>
+<span class="sd">        Ratio between number of source nodes (artificially attached) and routers</span>
+<span class="sd">    ext_delay : float</span>
+<span class="sd">        Delay on external nodes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">source_ratio</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">source_ratio</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;source_ratio must be comprised between 0 and 1&#39;</span><span class="p">)</span>
+    <span class="n">f_topo</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TOPOLOGY_RESOURCES_DIR</span><span class="p">,</span> <span class="s">&#39;rocketfuel-latency&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">asn</span><span class="p">),</span> <span class="s">&#39;latencies.intra&#39;</span><span class="p">)</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">parse_rocketfuel_isp_latency</span><span class="p">(</span><span class="n">f_topo</span><span class="p">)</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">()</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">connected_component_subgraphs</span><span class="p">(</span><span class="n">topology</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c"># First mark all current links as inernal</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">edges_iter</span><span class="p">():</span>
+        <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;internal&#39;</span>
+    <span class="c"># Note: I don&#39;t need to filter out nodes with degree 1 cause they all have</span>
+    <span class="c"># a greater degree value but we compute degree to decide where to attach sources</span>
+    <span class="n">routers</span> <span class="o">=</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span>
+    <span class="c"># Source attachment</span>
+    <span class="n">n_sources</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">source_ratio</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">routers</span><span class="p">))</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;src_</span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_sources</span><span class="p">)]</span>
+    <span class="n">deg</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">topology</span><span class="p">)</span>
+    
+    <span class="c"># Attach sources based on their degree purely, but they may end up quite clustered </span>
+    <span class="n">routers</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">routers</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">deg</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)):</span>
+        <span class="n">topology</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">sources</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">routers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">delay</span><span class="o">=</span><span class="n">ext_delay</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;external&#39;</span><span class="p">)</span>
+    
+    <span class="c"># Here let&#39;s try attach them via cluster</span>
+<span class="c">#     clusters = compute_clusters(topology, n_sources, distance=None, n_iter=1000)</span>
+<span class="c">#     source_attachments = [max(cluster, key=lambda k: deg[k]) for cluster in clusters]</span>
+<span class="c">#     for i in range(len(sources)):</span>
+<span class="c">#         topology.add_edge(sources[i], source_attachments[i], delay=ext_delay, type=&#39;external&#39;)</span>
+    
+    <span class="c"># attach artificial receiver nodes to ICR candidates</span>
+    <span class="n">receivers</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;rec_</span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">routers</span><span class="p">))]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">routers</span><span class="p">)):</span>
+        <span class="n">topology</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">receivers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">routers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">delay</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;internal&#39;</span><span class="p">)</span>
+    <span class="c"># Set weights to latency values</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">edges_iter</span><span class="p">():</span>
+        <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topology</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s">&#39;delay&#39;</span><span class="p">]</span>
+    <span class="c"># Deploy stacks on nodes</span>
+    <span class="n">topology</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s">&#39;icr_candidates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">routers</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;source&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">receivers</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;receiver&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">routers</span><span class="p">:</span>
+        <span class="n">fnss</span><span class="o">.</span><span class="n">add_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s">&#39;router&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">IcnTopology</span><span class="p">(</span><span class="n">topology</span><span class="p">)</span>
+    </div>
 </pre></div>
 
           </div>
@@ -656,7 +757,7 @@
         <li class="right" >
           <a href="../../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.results.readwrite &mdash; Icarus 0.4.0 documentation</title>
+    <title>icarus.results.readwrite &mdash; Icarus 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.4.0 documentation" href="../../../index.html" />
+    <link rel="top" title="Icarus 0.5.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
@@ -89,6 +89,12 @@
     <span class="sd">&quot;&quot;&quot;This class can be used to store results from different experiments,</span>
 <span class="sd">    accessed and filtered.</span>
 <span class="sd">    </span>
+<span class="sd">    A result set is basically a list of results, one per each experiment. Each</span>
+<span class="sd">    entry of the resultset is a 2-tuple referring to a single experiment.</span>
+<span class="sd">    In this 2-tuple: </span>
+<span class="sd">     * the first element is a tree with all parameters of the experiment</span>
+<span class="sd">     * the second element is a tree with all results of the experiment </span>
+<span class="sd">    </span>
 <span class="sd">    All operations that write data are thread-safe so that this object can </span>
 <span class="sd">    be shared by different processes.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -117,6 +123,11 @@
     
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns iterator over the resultset</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        iter : iterator</span>
+<span class="sd">            Iterator over the resultset</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">)</span>
         
@@ -271,7 +282,7 @@
         <li class="right" >
           <a href="../../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

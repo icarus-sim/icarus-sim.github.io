@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.orchestration &mdash; Icarus 0.4.0 documentation</title>
+    <title>icarus.orchestration &mdash; Icarus 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.4.0 documentation" href="../../index.html" />
+    <link rel="top" title="Icarus 0.5.0 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
@@ -67,11 +67,10 @@
           <div class="body">
             
   <h1>Source code for icarus.orchestration</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;Contains the code that orchestrates the execution of all experiments.</span>
+<span class="sd">&quot;&quot;&quot;Orchestrate the execution of all experiments.</span>
 
-<span class="sd">The orchestrator is responsible for designing experiments with all combinations</span>
-<span class="sd">of parameters specified in the user-provided settings, schedule experiment</span>
-<span class="sd">execution on various</span>
+<span class="sd">The orchestrator is responsible for scheduling experiments specified in the</span>
+<span class="sd">user-provided settings.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -122,7 +121,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">n_fail</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">summary_freq</span> <span class="o">=</span> <span class="n">summary_freq</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">PARALLEL_EXECUTION</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">PARALLEL_EXECUTION</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">N_PROCESSES</span><span class="p">)</span>
     
 <div class="viewcode-block" id="Orchestrator.stop"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.orchestration.Orchestrator.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -141,9 +140,6 @@
 <span class="sd">        methods returns only after all experiments are executed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c"># Create queue of experiment configurations</span>
-        <span class="k">if</span> <span class="s">&#39;EXPERIMENT_QUEUE&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;No EXPERIMENT_QUEUE setting found. Exiting&#39;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">queue</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">EXPERIMENT_QUEUE</span><span class="p">)</span>
         <span class="c"># Calculate number of experiments and number of processes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_exp</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">N_REPLICATIONS</span> 
@@ -279,14 +275,7 @@
             <span class="k">return</span> <span class="bp">None</span>
         <span class="n">workload</span> <span class="o">=</span> <span class="n">WORKLOAD</span><span class="p">[</span><span class="n">workload_name</span><span class="p">](</span><span class="n">topology</span><span class="p">,</span> <span class="o">**</span><span class="n">workload_spec</span><span class="p">)</span>
         
-        <span class="n">contpl_spec</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="s">&#39;content_placement&#39;</span><span class="p">]</span>
-        <span class="n">contpl_name</span> <span class="o">=</span> <span class="n">contpl_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">contpl_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CONTENT_PLACEMENT</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;No content placement implementation named </span><span class="si">%s</span><span class="s"> was found.&#39;</span>
-                         <span class="o">%</span> <span class="n">contpl_name</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">None</span>
-        <span class="n">CONTENT_PLACEMENT</span><span class="p">[</span><span class="n">contpl_name</span><span class="p">](</span><span class="n">topology</span><span class="p">,</span> <span class="n">workload</span><span class="o">.</span><span class="n">contents</span><span class="p">,</span> <span class="o">**</span><span class="n">contpl_spec</span><span class="p">)</span>
-        
+        <span class="c"># Assign caches to nodes</span>
         <span class="k">if</span> <span class="s">&#39;cache_placement&#39;</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">:</span>
             <span class="n">cachepl_spec</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="s">&#39;cache_placement&#39;</span><span class="p">]</span>
             <span class="n">cachepl_name</span> <span class="o">=</span> <span class="n">cachepl_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">)</span>
@@ -299,7 +288,19 @@
             <span class="c"># the whole network</span>
             <span class="n">cachepl_spec</span><span class="p">[</span><span class="s">&#39;cache_budget&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">workload</span><span class="o">.</span><span class="n">n_contents</span> <span class="o">*</span> <span class="n">network_cache</span>
             <span class="n">CACHE_PLACEMENT</span><span class="p">[</span><span class="n">cachepl_name</span><span class="p">](</span><span class="n">topology</span><span class="p">,</span> <span class="o">**</span><span class="n">cachepl_spec</span><span class="p">)</span>
-              
+
+        <span class="c"># Assign contents to sources</span>
+        <span class="c"># If there are many contents, after doing this, performing operations</span>
+        <span class="c"># requiring a topology deep copy, i.e. to_directed/undirected, will</span>
+        <span class="c"># take long.</span>
+        <span class="n">contpl_spec</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="s">&#39;content_placement&#39;</span><span class="p">]</span>
+        <span class="n">contpl_name</span> <span class="o">=</span> <span class="n">contpl_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">contpl_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CONTENT_PLACEMENT</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;No content placement implementation named </span><span class="si">%s</span><span class="s"> was found.&#39;</span>
+                         <span class="o">%</span> <span class="n">contpl_name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="n">CONTENT_PLACEMENT</span><span class="p">[</span><span class="n">contpl_name</span><span class="p">](</span><span class="n">topology</span><span class="p">,</span> <span class="n">workload</span><span class="o">.</span><span class="n">contents</span><span class="p">,</span> <span class="o">**</span><span class="n">contpl_spec</span><span class="p">)</span>
+
         <span class="c"># caching and routing strategy definition</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="s">&#39;strategy&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">strategy</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STRATEGY</span><span class="p">:</span>
@@ -361,7 +362,7 @@
         <li class="right" >
           <a href="../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.models package &mdash; Icarus 0.4.0 documentation</title>
+    <title>icarus.models package &mdash; Icarus 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.4.0 documentation" href="../index.html" />
+    <link rel="top" title="Icarus 0.5.0 documentation" href="../index.html" />
     <link rel="up" title="icarus package" href="icarus.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="icarus.html" accesskey="U">icarus package</a> &raquo;</li> 
       </ul>
     </div>
@@ -95,10 +95,10 @@ provided by Icarus.</p>
 <dt id="icarus.models.cache.LinkedSet">
 <em class="property">class </em><tt class="descname">LinkedSet</tt><big>(</big><em>iterable=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#LinkedSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.LinkedSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
-<p>A doubly-linked set, i.e. a set whose entries are ordered and stored in
-a doubly-linked list.</p>
+<p>A doubly-linked set, i.e., a set whose entries are ordered and stored
+as a doubly-linked list.</p>
 <p>This data structure is designed to efficiently implement a number of cache
-eviction policies such as LRU and derivatives like segmented LRU.</p>
+replacement policies such as LRU and derivatives such as Segmented LRU.</p>
 <p>It provides O(1) time complexity for the following operations: searching,
 remove from any position, move to top, move to bottom, insert after or
 before a given item.</p>
@@ -441,19 +441,22 @@ set.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.Cache.clear" title="icarus.models.cache.Cache.clear"><tt class="xref py py-obj docutils literal"><span class="pre">clear</span></tt></a>()</td>
 <td>Empty the cache</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.Cache.dump" title="icarus.models.cache.Cache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.Cache.do" title="icarus.models.cache.Cache.do"><tt class="xref py py-obj docutils literal"><span class="pre">do</span></tt></a>(op,&nbsp;k,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Utility method that performs a specified operation on a given item.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.Cache.dump" title="icarus.models.cache.Cache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
 <td>Return a dump of all the elements currently in the cache possibly sorted according to the eviction policy.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.Cache.get" title="icarus.models.cache.Cache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.Cache.get" title="icarus.models.cache.Cache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
 <td>Retrieves an item from the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.Cache.has" title="icarus.models.cache.Cache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.Cache.has" title="icarus.models.cache.Cache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
 <td>Check if an item is in the cache without changing the internal state of the caching object.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.Cache.put" title="icarus.models.cache.Cache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.Cache.put" title="icarus.models.cache.Cache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
 <td>Insert an item in the cache if not already inserted.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.Cache.remove" title="icarus.models.cache.Cache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.Cache.remove" title="icarus.models.cache.Cache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
 <td>Remove an item from the cache, if present.</td>
 </tr>
 </tbody>
@@ -462,6 +465,45 @@ set.</p>
 <dt id="icarus.models.cache.Cache.clear">
 <tt class="descname">clear</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#Cache.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.Cache.clear" title="Permalink to this definition">¶</a></dt>
 <dd><p>Empty the cache</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.cache.Cache.do">
+<tt class="descname">do</tt><big>(</big><em>op</em>, <em>k</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#Cache.do"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.Cache.do" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility method that performs a specified operation on a given item.</p>
+<p>This method allows to perform one of the different operations on an
+item:</p>
+<blockquote>
+<div><ul class="simple">
+<li>GET: Retrieve an item</li>
+<li>PUT: Insert an item</li>
+<li>UPDATE: Update the value associated to an item</li>
+<li>DELETE: Remove an item</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>op</strong> : string</p>
+<blockquote>
+<div><p>The operation to execute: GET | PUT | UPDATE | DELETE</p>
+</div></blockquote>
+<p><strong>k</strong> : any hashable type</p>
+<blockquote>
+<div><p>The item looked up in the cache</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>res</strong> : bool</p>
+<blockquote class="last">
+<div><p>Boolean value being <em>True</em> if the operation succeeded or <em>False</em>
+otherwise.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -612,19 +654,22 @@ identical to a cache with max size equal to 0.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.NullCache.clear" title="icarus.models.cache.NullCache.clear"><tt class="xref py py-obj docutils literal"><span class="pre">clear</span></tt></a>()</td>
 <td>Empty the cache</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.NullCache.dump" title="icarus.models.cache.NullCache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">do</span></tt>(op,&nbsp;k,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Utility method that performs a specified operation on a given item.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.NullCache.dump" title="icarus.models.cache.NullCache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
 <td>Return a list of all the elements currently in the cache.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.NullCache.get" title="icarus.models.cache.NullCache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.NullCache.get" title="icarus.models.cache.NullCache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
 <td>Retrieves an item from the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.NullCache.has" title="icarus.models.cache.NullCache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.NullCache.has" title="icarus.models.cache.NullCache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
 <td>Check if an item is in the cache without changing the internal state of the caching object.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.NullCache.put" title="icarus.models.cache.NullCache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.NullCache.put" title="icarus.models.cache.NullCache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
 <td>Insert an item in the cache if not already inserted.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.NullCache.remove" title="icarus.models.cache.NullCache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.NullCache.remove" title="icarus.models.cache.NullCache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
 <td>Remove a specified item from the cache.</td>
 </tr>
 </tbody>
@@ -804,22 +849,25 @@ item is requested is not dependent on previous requests).</p>
 <tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LruCache.clear" title="icarus.models.cache.LruCache.clear"><tt class="xref py py-obj docutils literal"><span class="pre">clear</span></tt></a>()</td>
 <td>Empty the cache</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.LruCache.dump" title="icarus.models.cache.LruCache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">do</span></tt>(op,&nbsp;k,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Utility method that performs a specified operation on a given item.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LruCache.dump" title="icarus.models.cache.LruCache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
 <td>Return a dump of all the elements currently in the cache possibly sorted according to the eviction policy.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LruCache.get" title="icarus.models.cache.LruCache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.LruCache.get" title="icarus.models.cache.LruCache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
 <td>Retrieves an item from the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.LruCache.has" title="icarus.models.cache.LruCache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LruCache.has" title="icarus.models.cache.LruCache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
 <td>Check if an item is in the cache without changing the internal state of the caching object.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LruCache.position" title="icarus.models.cache.LruCache.position"><tt class="xref py py-obj docutils literal"><span class="pre">position</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.LruCache.position" title="icarus.models.cache.LruCache.position"><tt class="xref py py-obj docutils literal"><span class="pre">position</span></tt></a>(k)</td>
 <td>Return the current position of an item in the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.LruCache.put" title="icarus.models.cache.LruCache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LruCache.put" title="icarus.models.cache.LruCache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
 <td>Insert an item in the cache if not already inserted.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LruCache.remove" title="icarus.models.cache.LruCache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.LruCache.remove" title="icarus.models.cache.LruCache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
 <td>Remove an item from the cache, if present.</td>
 </tr>
 </tbody>
@@ -1019,22 +1067,25 @@ and recency of item reference.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.clear" title="icarus.models.cache.SegmentedLruCache.clear"><tt class="xref py py-obj docutils literal"><span class="pre">clear</span></tt></a>()</td>
 <td>Empty the cache</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.dump" title="icarus.models.cache.SegmentedLruCache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">do</span></tt>(op,&nbsp;k,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Utility method that performs a specified operation on a given item.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.dump" title="icarus.models.cache.SegmentedLruCache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>([serialized])</td>
 <td>Return a dump of all the elements currently in the cache possibly sorted according to the eviction policy.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.get" title="icarus.models.cache.SegmentedLruCache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.get" title="icarus.models.cache.SegmentedLruCache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
 <td>Retrieves an item from the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.has" title="icarus.models.cache.SegmentedLruCache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.has" title="icarus.models.cache.SegmentedLruCache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
 <td>Check if an item is in the cache without changing the internal state of the caching object.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.position" title="icarus.models.cache.SegmentedLruCache.position"><tt class="xref py py-obj docutils literal"><span class="pre">position</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.position" title="icarus.models.cache.SegmentedLruCache.position"><tt class="xref py py-obj docutils literal"><span class="pre">position</span></tt></a>(k)</td>
 <td>Return the current position of an item in the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.put" title="icarus.models.cache.SegmentedLruCache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.put" title="icarus.models.cache.SegmentedLruCache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
 <td>Insert an item in the cache if not already inserted.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.remove" title="icarus.models.cache.SegmentedLruCache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.SegmentedLruCache.remove" title="icarus.models.cache.SegmentedLruCache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
 <td>Remove an item from the cache, if present.</td>
 </tr>
 </tbody>
@@ -1047,7 +1098,7 @@ and recency of item reference.</p>
 
 <dl class="method">
 <dt id="icarus.models.cache.SegmentedLruCache.dump">
-<tt class="descname">dump</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#SegmentedLruCache.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.SegmentedLruCache.dump" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">dump</tt><big>(</big><em>serialized=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#SegmentedLruCache.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.SegmentedLruCache.dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a dump of all the elements currently in the cache possibly
 sorted according to the eviction policy.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1219,6 +1270,10 @@ counters are increased when the associated item is requested. Upon
 insertion of a new item, the cache evicts the one which was requested the
 least times in the past, i.e. the one whose associated value has the
 smallest value.</p>
+<p>This is an implementation of an In-Cache-LFU, i.e. a cache that keeps
+counters for items only as long as they are in cache and resets the
+counter of an item when it is evicted. This is different from a Perfect-LFU
+policy in which a counter is maintained also when the content is evicted.</p>
 <p>In contrast to LRU, LFU has been shown to perform optimally under IRM
 demands. However, its implementation is computationally expensive since it
 cannot be implemented in such a way that both search and replacement tasks
@@ -1234,19 +1289,22 @@ large caches and line speed operations.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LfuCache.clear" title="icarus.models.cache.LfuCache.clear"><tt class="xref py py-obj docutils literal"><span class="pre">clear</span></tt></a>()</td>
 <td>Empty the cache</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.LfuCache.dump" title="icarus.models.cache.LfuCache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">do</span></tt>(op,&nbsp;k,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Utility method that performs a specified operation on a given item.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LfuCache.dump" title="icarus.models.cache.LfuCache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
 <td>Return a dump of all the elements currently in the cache possibly sorted according to the eviction policy.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LfuCache.get" title="icarus.models.cache.LfuCache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.LfuCache.get" title="icarus.models.cache.LfuCache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
 <td>Retrieves an item from the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.LfuCache.has" title="icarus.models.cache.LfuCache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LfuCache.has" title="icarus.models.cache.LfuCache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
 <td>Check if an item is in the cache without changing the internal state of the caching object.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LfuCache.put" title="icarus.models.cache.LfuCache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.LfuCache.put" title="icarus.models.cache.LfuCache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
 <td>Insert an item in the cache if not already inserted.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.LfuCache.remove" title="icarus.models.cache.LfuCache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.LfuCache.remove" title="icarus.models.cache.LfuCache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
 <td>Remove an item from the cache, if present.</td>
 </tr>
 </tbody>
@@ -1395,7 +1453,7 @@ again but the internal state of the cache object may change.</p>
 
 <dl class="class">
 <dt id="icarus.models.cache.FifoCache">
-<em class="property">class </em><tt class="descname">FifoCache</tt><big>(</big><em>maxlen</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#FifoCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.FifoCache" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">FifoCache</tt><big>(</big><em>maxlen</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#FifoCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.FifoCache" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#icarus.models.cache.Cache" title="icarus.models.cache.Cache"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.cache.Cache</span></tt></a></p>
 <p>First In First Out (FIFO) cache implementation.</p>
 <p>According to the FIFO policy, when a new item is inserted, the evicted item
@@ -1414,22 +1472,25 @@ implementation in comparison to the LRU policy but yields worse performance.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.clear" title="icarus.models.cache.FifoCache.clear"><tt class="xref py py-obj docutils literal"><span class="pre">clear</span></tt></a>()</td>
 <td>Empty the cache</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.dump" title="icarus.models.cache.FifoCache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">do</span></tt>(op,&nbsp;k,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Utility method that performs a specified operation on a given item.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.dump" title="icarus.models.cache.FifoCache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
 <td>Return a dump of all the elements currently in the cache possibly sorted according to the eviction policy.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.get" title="icarus.models.cache.FifoCache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.get" title="icarus.models.cache.FifoCache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
 <td>Retrieves an item from the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.has" title="icarus.models.cache.FifoCache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.has" title="icarus.models.cache.FifoCache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
 <td>Check if an item is in the cache without changing the internal state of the caching object.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.position" title="icarus.models.cache.FifoCache.position"><tt class="xref py py-obj docutils literal"><span class="pre">position</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.position" title="icarus.models.cache.FifoCache.position"><tt class="xref py py-obj docutils literal"><span class="pre">position</span></tt></a>(k)</td>
 <td>Return the current position of an item in the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.put" title="icarus.models.cache.FifoCache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.put" title="icarus.models.cache.FifoCache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
 <td>Insert an item in the cache if not already inserted.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.remove" title="icarus.models.cache.FifoCache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.FifoCache.remove" title="icarus.models.cache.FifoCache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
 <td>Remove an item from the cache, if present.</td>
 </tr>
 </tbody>
@@ -1609,10 +1670,13 @@ again but the internal state of the cache object may change.</p>
 <em class="property">class </em><tt class="descname">RandEvictionCache</tt><big>(</big><em>maxlen</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#RandEvictionCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.RandEvictionCache" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#icarus.models.cache.Cache" title="icarus.models.cache.Cache"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.cache.Cache</span></tt></a></p>
 <p>Random eviction cache implementation.</p>
-<p>This class implements a cache whereby the item to evict in case of a full
-cache is randomly selected. It generally yields poor performance in terms
-of cache hits but is sometimes used as baseline and for this reason it has
-been implemented here.</p>
+<p>This class implements a cache replacement policies which randomly select
+an item to evict when the cache is full. It generally yields poor
+performance in terms of cache hits, especially with non-stationary
+workloads but is sometimes used as baseline and for this reason it has been
+implemented here.</p>
+<p>In case of stationary IRM workloads, the RAND eviction policy provably
+achieves the same cache hit ratio of the FIFO replacement policy.</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -1623,19 +1687,22 @@ been implemented here.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.RandEvictionCache.clear" title="icarus.models.cache.RandEvictionCache.clear"><tt class="xref py py-obj docutils literal"><span class="pre">clear</span></tt></a>()</td>
 <td>Empty the cache</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.RandEvictionCache.dump" title="icarus.models.cache.RandEvictionCache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">do</span></tt>(op,&nbsp;k,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Utility method that performs a specified operation on a given item.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.RandEvictionCache.dump" title="icarus.models.cache.RandEvictionCache.dump"><tt class="xref py py-obj docutils literal"><span class="pre">dump</span></tt></a>()</td>
 <td>Return a dump of all the elements currently in the cache possibly sorted according to the eviction policy.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.RandEvictionCache.get" title="icarus.models.cache.RandEvictionCache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.RandEvictionCache.get" title="icarus.models.cache.RandEvictionCache.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(k)</td>
 <td>Retrieves an item from the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.RandEvictionCache.has" title="icarus.models.cache.RandEvictionCache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.RandEvictionCache.has" title="icarus.models.cache.RandEvictionCache.has"><tt class="xref py py-obj docutils literal"><span class="pre">has</span></tt></a>(k)</td>
 <td>Check if an item is in the cache without changing the internal state of the caching object.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.RandEvictionCache.put" title="icarus.models.cache.RandEvictionCache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.RandEvictionCache.put" title="icarus.models.cache.RandEvictionCache.put"><tt class="xref py py-obj docutils literal"><span class="pre">put</span></tt></a>(k)</td>
 <td>Insert an item in the cache if not already inserted.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.models.cache.RandEvictionCache.remove" title="icarus.models.cache.RandEvictionCache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.cache.RandEvictionCache.remove" title="icarus.models.cache.RandEvictionCache.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(k)</td>
 <td>Remove an item from the cache, if present.</td>
 </tr>
 </tbody>
@@ -1784,7 +1851,8 @@ again but the internal state of the cache object may change.</p>
 <dl class="function">
 <dt id="icarus.models.cache.rand_insert_cache">
 <tt class="descname">rand_insert_cache</tt><big>(</big><em>cache</em>, <em>p</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/cache.html#rand_insert_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.cache.rand_insert_cache" title="Permalink to this definition">¶</a></dt>
-<dd><p>It modifies the instance of a cache object such that items are
+<dd><p>Return a random insertion cache</p>
+<p>It modifies the instance of a cache object such that items are
 inserted randomly instead of deterministically.</p>
 <p>This function modifies the behavior of the <em>put</em> method of a given cache
 instance such that it inserts contents randomly with a given probability</p>
@@ -2375,7 +2443,7 @@ collectors attached to the network.</p>
 
 <dl class="class">
 <dt id="icarus.models.strategy.NoCache">
-<em class="property">class </em><tt class="descname">NoCache</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#NoCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.NoCache" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">NoCache</tt><big>(</big><em>view</em>, <em>controller</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#NoCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.NoCache" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
 <p>Strategy without any caching</p>
 <p>This corresponds to the traffic in a normal TCP/IP network without any
@@ -2435,8 +2503,73 @@ collectors attached to the network.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="icarus.models.strategy.Edge">
+<em class="property">class </em><tt class="descname">Edge</tt><big>(</big><em>view</em>, <em>controller</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#Edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.Edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
+<p>Edge caching strategy.</p>
+<p>In this strategy only a cache at the edge is looked up before forwarding
+a content request to the original source.</p>
+<p>In practice, this is like an LCE but it only queries the first cache it
+finds in the path. It is assumed to be used with a topology where each
+PoP has a cache but it simulates a case where the cache is actually further
+down the access network and it is not looked up for transit traffic passing
+through the PoP but only for PoP-originated requests.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.strategy.Edge.process_event" title="icarus.models.strategy.Edge.process_event"><tt class="xref py py-obj docutils literal"><span class="pre">process_event</span></tt></a>(time,&nbsp;receiver,&nbsp;content,&nbsp;log)</td>
+<td>Process an event received from the simulation engine.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="icarus.models.strategy.Edge.name">
+<tt class="descname">name</tt><em class="property"> = 'EDGE'</em><a class="headerlink" href="#icarus.models.strategy.Edge.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.Edge.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#Edge.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.Edge.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="icarus.models.strategy.LeaveCopyEverywhere">
-<em class="property">class </em><tt class="descname">LeaveCopyEverywhere</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#LeaveCopyEverywhere"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.LeaveCopyEverywhere" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">LeaveCopyEverywhere</tt><big>(</big><em>view</em>, <em>controller</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#LeaveCopyEverywhere"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.LeaveCopyEverywhere" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
 <p>Leave Copy Everywhere (LCE) strategy.</p>
 <p>In this strategy a copy of a content is replicated at any cache on the
@@ -2496,7 +2629,7 @@ collectors attached to the network.</p>
 
 <dl class="class">
 <dt id="icarus.models.strategy.LeaveCopyDown">
-<em class="property">class </em><tt class="descname">LeaveCopyDown</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#LeaveCopyDown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.LeaveCopyDown" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">LeaveCopyDown</tt><big>(</big><em>view</em>, <em>controller</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#LeaveCopyDown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.LeaveCopyDown" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
 <p>Leave Copy Down (LCD) strategy.</p>
 <p>According to this strategy, one copy of a content is replicated only in
@@ -2557,7 +2690,7 @@ collectors attached to the network.</p>
 
 <dl class="class">
 <dt id="icarus.models.strategy.CacheLessForMore">
-<em class="property">class </em><tt class="descname">CacheLessForMore</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em>, <em>use_ego_betw=False</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#CacheLessForMore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.CacheLessForMore" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">CacheLessForMore</tt><big>(</big><em>view</em>, <em>controller</em>, <em>use_ego_betw=False</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#CacheLessForMore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.CacheLessForMore" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
 <p>Cache less for more strategy <a href="#id7"><span class="problematic" id="id8"><span id="id4"></span>[5]_</span></a>.</p>
 <p class="rubric">References</p>
@@ -2621,7 +2754,7 @@ collectors attached to the network.</p>
 
 <dl class="class">
 <dt id="icarus.models.strategy.RandomBernoulli">
-<em class="property">class </em><tt class="descname">RandomBernoulli</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em>, <em>p=0.2</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#RandomBernoulli"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.RandomBernoulli" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">RandomBernoulli</tt><big>(</big><em>view</em>, <em>controller</em>, <em>p=0.2</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#RandomBernoulli"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.RandomBernoulli" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
 <p>Bernoulli random cache insertion.</p>
 <p>In this strategy, a content is randomly inserted in a cache on the path
@@ -2681,7 +2814,7 @@ collectors attached to the network.</p>
 
 <dl class="class">
 <dt id="icarus.models.strategy.RandomChoice">
-<em class="property">class </em><tt class="descname">RandomChoice</tt><big>(</big><em>view</em>, <em>controller</em>, <em>symm_paths=True</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#RandomChoice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.RandomChoice" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">RandomChoice</tt><big>(</big><em>view</em>, <em>controller</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#RandomChoice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.RandomChoice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
 <p>Random choice strategy</p>
 <p>This strategy stores the served content exactly in one single cache on the
@@ -2706,6 +2839,70 @@ path from serving node to receiver selected randomly.</p>
 <dl class="method">
 <dt id="icarus.models.strategy.RandomChoice.process_event">
 <tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#RandomChoice.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.RandomChoice.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process an event received from the simulation engine.</p>
+<p>This event is processed by executing relevant actions of the network
+controller, potentially based on the current status of the network
+retrieved from the network view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote>
+<div><p>The timestamp of the event</p>
+</div></blockquote>
+<p><strong>receiver</strong> : any hashable type</p>
+<blockquote>
+<div><p>The receiver node requesting a content</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier requested by the receiver</p>
+</div></blockquote>
+<p><strong>log</strong> : bool</p>
+<blockquote class="last">
+<div><p>Indicates whether the event must be registered by the data
+collectors attached to the network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.models.strategy.NearestReplicaRouting">
+<em class="property">class </em><tt class="descname">NearestReplicaRouting</tt><big>(</big><em>view</em>, <em>controller</em>, <em>metacaching</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#NearestReplicaRouting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.NearestReplicaRouting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.models.strategy.Strategy" title="icarus.models.strategy.Strategy"><tt class="xref py py-class docutils literal"><span class="pre">icarus.models.strategy.Strategy</span></tt></a></p>
+<p>Ideal Nearest Replica Routing (NRR) strategy.</p>
+<p>In this strategy, a request is forwarded to the topologically close node
+holding a copy of the requested item. This strategy is ideal, as it is
+implemented assuming that each node knows the nearest replica of a content
+without any signalling</p>
+<p>On the return path, content can be caching according to a variety of
+metacaching policies. LCE and LCD are currently supported.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.models.strategy.NearestReplicaRouting.process_event" title="icarus.models.strategy.NearestReplicaRouting.process_event"><tt class="xref py py-obj docutils literal"><span class="pre">process_event</span></tt></a>(time,&nbsp;receiver,&nbsp;content,&nbsp;log)</td>
+<td>Process an event received from the simulation engine.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="icarus.models.strategy.NearestReplicaRouting.name">
+<tt class="descname">name</tt><em class="property"> = 'NRR'</em><a class="headerlink" href="#icarus.models.strategy.NearestReplicaRouting.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="icarus.models.strategy.NearestReplicaRouting.process_event">
+<tt class="descname">process_event</tt><big>(</big><em>time</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/models/strategy.html#NearestReplicaRouting.process_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.models.strategy.NearestReplicaRouting.process_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process an event received from the simulation engine.</p>
 <p>This event is processed by executing relevant actions of the network
 controller, potentially based on the current status of the network
@@ -2765,7 +2962,7 @@ policies and caching and routing strategies.</p>
         <li class="right" >
           <a href="../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="icarus.html" >icarus package</a> &raquo;</li> 
       </ul>
     </div>

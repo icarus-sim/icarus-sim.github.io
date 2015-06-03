@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.scenarios package &mdash; Icarus 0.4.0 documentation</title>
+    <title>icarus.scenarios package &mdash; Icarus 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.4.0 documentation" href="../index.html" />
+    <link rel="top" title="Icarus 0.5.0 documentation" href="../index.html" />
     <link rel="up" title="icarus package" href="icarus.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="icarus.html" accesskey="U">icarus package</a> &raquo;</li> 
       </ul>
     </div>
@@ -86,7 +86,10 @@
 </div>
 <div class="section" id="module-icarus.scenarios.cacheplacement">
 <span id="icarus-scenarios-cacheplacement-module"></span><h2>icarus.scenarios.cacheplacement module<a class="headerlink" href="#module-icarus.scenarios.cacheplacement" title="Permalink to this headline">¶</a></h2>
-<p>Implements cache placement strategies</p>
+<p>Cache placement strategies</p>
+<p>This module provides algorithms for performing cache placement, i.e. given
+a cumulative cache size and a topology where each possible node candidate is
+labelled, these functions deploy caching space to the nodes of the topology.</p>
 <dl class="function">
 <dt id="icarus.scenarios.cacheplacement.uniform_cache_placement">
 <tt class="descname">uniform_cache_placement</tt><big>(</big><em>topology</em>, <em>cache_budget</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/cacheplacement.html#uniform_cache_placement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.cacheplacement.uniform_cache_placement" title="Permalink to this definition">¶</a></dt>
@@ -287,12 +290,28 @@ achieved by using a fix seed value</p>
 </div>
 <div class="section" id="module-icarus.scenarios.topology">
 <span id="icarus-scenarios-topology-module"></span><h2>icarus.scenarios.topology module<a class="headerlink" href="#module-icarus.scenarios.topology" title="Permalink to this headline">¶</a></h2>
-<p>This module contains functions for creating or importing topologies for the
-experiments.</p>
+<p>Functions for creating or importing topologies for experiments.</p>
+<p>To create a custom topology, create a function returning an instance of the
+<cite>IcnTopology</cite> class. An IcnTopology is simply a subclass of a Topology class
+provided by FNSS.</p>
+<dl class="docutils">
+<dt>A valid ICN topology must have the following attributes:</dt>
+<dd><ul class="first last simple">
+<li>Each node must have one stack among: source, receiver, router</li>
+<li>The topology must have an attribute called <cite>icr_candidates</cite> which is a set
+of router nodes on which a cache may be possibly deployed. Caches are not
+deployed directly at topology creation, instead they are deployed by a 
+cache placement algorithm.</li>
+</ul>
+</dd>
+</dl>
 <dl class="class">
 <dt id="icarus.scenarios.topology.IcnTopology">
 <em class="property">class </em><tt class="descname">IcnTopology</tt><big>(</big><em>data=None</em>, <em>name=''</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#IcnTopology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.IcnTopology" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">fnss.topologies.topology.Topology</span></tt></p>
+<p>Class modelling an ICN topology</p>
+<p>An ICN topology is a simple FNSS Topology with addition methods that
+return sets of caching nodes, sources and receivers.</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -337,7 +356,7 @@ experiments.</p>
 <td>Return a dictionary of all buffer sizes, keyed by interface</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#icarus.scenarios.topology.IcnTopology.cache_nodes" title="icarus.scenarios.topology.IcnTopology.cache_nodes"><tt class="xref py py-obj docutils literal"><span class="pre">cache_nodes</span></tt></a>()</td>
-<td></td>
+<td>Return a dictionary mapping nodes with a cache and respective cache</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">capacities</span></tt>()</td>
 <td>Return a dictionary of all link capacities, keyed by link</td>
@@ -409,7 +428,7 @@ experiments.</p>
 <td>Return the number of nodes in the graph.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#icarus.scenarios.topology.IcnTopology.receivers" title="icarus.scenarios.topology.IcnTopology.receivers"><tt class="xref py py-obj docutils literal"><span class="pre">receivers</span></tt></a>()</td>
-<td></td>
+<td>Return a set of receiver nodes</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">remove_edge</span></tt>(u,&nbsp;v)</td>
 <td>Remove the edge between u and v.</td>
@@ -430,7 +449,7 @@ experiments.</p>
 <td>Return the number of edges.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#icarus.scenarios.topology.IcnTopology.sources" title="icarus.scenarios.topology.IcnTopology.sources"><tt class="xref py py-obj docutils literal"><span class="pre">sources</span></tt></a>()</td>
-<td></td>
+<td>Return a set of source nodes</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">stacks</span></tt>()</td>
 <td>Return a dictionary of all node stacks, keyed by node</td>
@@ -452,35 +471,84 @@ experiments.</p>
 <dl class="method">
 <dt id="icarus.scenarios.topology.IcnTopology.cache_nodes">
 <tt class="descname">cache_nodes</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#IcnTopology.cache_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.IcnTopology.cache_nodes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="icarus.scenarios.topology.IcnTopology.receivers">
-<tt class="descname">receivers</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#IcnTopology.receivers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.IcnTopology.receivers" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="icarus.scenarios.topology.IcnTopology.sources">
-<tt class="descname">sources</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#IcnTopology.sources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.IcnTopology.sources" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="icarus.scenarios.topology.topology_binary_tree">
-<tt class="descname">topology_binary_tree</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#topology_binary_tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.topology_binary_tree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a tree topology</p>
+<dd><p>Return a dictionary mapping nodes with a cache and respective cache
+size</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>seed</strong> : int, optional</p>
-<blockquote>
-<div><p>The seed used for random number generation</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_nodes</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary mapping node identifiers and cache size</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.scenarios.topology.IcnTopology.receivers">
+<tt class="descname">receivers</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#IcnTopology.receivers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.IcnTopology.receivers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a set of receiver nodes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>receivers</strong> : set</p>
+<blockquote class="last">
+<div><p>Set of receiver nodes</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.scenarios.topology.IcnTopology.sources">
+<tt class="descname">sources</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#IcnTopology.sources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.IcnTopology.sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a set of source nodes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sources</strong> : set</p>
+<blockquote class="last">
+<div><p>Set of source nodes</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.scenarios.topology.topology_tree">
+<tt class="descname">topology_tree</tt><big>(</big><em>k</em>, <em>h</em>, <em>delay=1</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#topology_tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.topology_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tree topology, with a source at the root, receivers at the 
+leafs and caches at all intermediate nodes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>h</strong> : height</p>
+<blockquote>
+<div><p>The height of the tree</p>
+</div></blockquote>
+<p><strong>k</strong> : branching factor</p>
+<blockquote>
+<div><p>The branching factor of the tree</p>
+</div></blockquote>
+<p><strong>delay</strong> : float</p>
+<blockquote>
+<div><p>The link delay in milliseconds</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : IcnTopology</p>
 <blockquote class="last">
 <div><p>The topology object</p>
 </div></blockquote>
@@ -492,19 +560,24 @@ experiments.</p>
 
 <dl class="function">
 <dt id="icarus.scenarios.topology.topology_path">
-<tt class="descname">topology_path</tt><big>(</big><em>n=3</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#topology_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.topology_path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a scenario based on path topology</p>
+<tt class="descname">topology_path</tt><big>(</big><em>n</em>, <em>delay=1</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#topology_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.topology_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a path topology with a receiver on node <cite>0</cite> and a source at node
+&#8216;n-1&#8217;</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>seed</strong> : int, optional</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n</strong> : int (&gt;=3)</p>
 <blockquote>
-<div><p>The seed used for random number generation</p>
+<div><p>The number of nodes</p>
+</div></blockquote>
+<p><strong>delay</strong> : float</p>
+<blockquote>
+<div><p>The link delay in milliseconds</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : IcnTopology</p>
 <blockquote class="last">
 <div><p>The topology object</p>
 </div></blockquote>
@@ -610,19 +683,59 @@ experiments.</p>
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="icarus.scenarios.topology.topology_rocketfuel_latency">
+<tt class="descname">topology_rocketfuel_latency</tt><big>(</big><em>asn</em>, <em>source_ratio=0.1</em>, <em>ext_delay=34</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#topology_rocketfuel_latency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.topology_rocketfuel_latency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a generic RocketFuel topology with annotated latencies</p>
+<p>To each node of the parsed topology it is attached an artificial receiver
+node. To the routers with highest degree it is also attached a source node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>asn</strong> : int</p>
+<blockquote>
+<div><p>AS number</p>
+</div></blockquote>
+<p><strong>source_ratio</strong> : float</p>
+<blockquote>
+<div><p>Ratio between number of source nodes (artificially attached) and routers</p>
+</div></blockquote>
+<p><strong>ext_delay</strong> : float</p>
+<blockquote class="last">
+<div><p>Delay on external nodes</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 <div class="section" id="module-icarus.scenarios.workload">
 <span id="icarus-scenarios-workload-module"></span><h2>icarus.scenarios.workload module<a class="headerlink" href="#module-icarus.scenarios.workload" title="Permalink to this headline">¶</a></h2>
 <p>Traffic workloads</p>
 <p>Every traffic workload to be used with Icarus must be modelled as an iterable
-class, i.e. a class with at least an __init__ method (through which it is
-inizialized, with values taken from the configuration file) and an __iter__
+class, i.e. a class with at least an <cite>__init__</cite> method (through which it is
+initialized, with values taken from the configuration file) and an <cite>__iter__</cite>
 method that is called to return a new event.</p>
-<p>Each workload must expose the &#8216;contents&#8217; attribute which is an iterable of
-all content identifiers. This is need for content placement</p>
+<p>Each call to the <cite>__iter__</cite> method must return a 2-tuple in which the first
+element is the timestamp at which the event occurs and the second is a
+dictionary, describing the event, which must contain at least the three
+following attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>receiver: The name of the node issuing the request</li>
+<li>content: The name of the content for which the request is issued</li>
+<li>log: A boolean value indicating whether this request should be logged or not
+for measurement purposes.</li>
+</ul>
+</div></blockquote>
+<p>Each workload must expose the <cite>contents</cite> attribute which is an iterable of
+all content identifiers. This is needed for content placement.</p>
 <dl class="class">
-<dt id="icarus.scenarios.workload.stationary_workload">
-<em class="property">class </em><tt class="descname">stationary_workload</tt><big>(</big><em>topology</em>, <em>n_contents</em>, <em>alpha</em>, <em>rate=12.0</em>, <em>n_warmup=100000</em>, <em>n_measured=400000</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/workload.html#stationary_workload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.workload.stationary_workload" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.scenarios.workload.StationaryWorkload">
+<em class="property">class </em><tt class="descname">StationaryWorkload</tt><big>(</big><em>topology</em>, <em>n_contents</em>, <em>alpha</em>, <em>beta=0</em>, <em>rate=1.0</em>, <em>n_warmup=100000</em>, <em>n_measured=400000</em>, <em>seed=None</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/workload.html#StationaryWorkload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.workload.StationaryWorkload" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
 <p>This function generates events on the fly, i.e. instead of creating an 
 event schedule to be kept in memory, returns an iterator that generates
@@ -631,6 +744,20 @@ events when needed.</p>
 as its memory impact is considerably lower.</p>
 <p>These requests are Poisson-distributed while content popularity is
 Zipf-distributed</p>
+<p>All requests are mapped to receivers uniformly unless a positive <em>beta</em>
+parameter is specified.</p>
+<p>If a <em>beta</em> parameter is specified, then receivers issue requests at
+different rates. The algorithm used to determine the requests rates for 
+each receiver is the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>All receiver are sorted in decreasing order of degree of the PoP they
+are attached to. This assumes that all receivers have degree = 1 and are
+attached to a node with degree &gt; 1</li>
+<li>Rates are then assigned following a Zipf distribution of coefficient
+beta where nodes with higher-degree PoPs have a higher request rate</li>
+</ul>
+</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -647,16 +774,20 @@ Zipf-distributed</p>
 <blockquote>
 <div><p>The Zipf alpha parameter</p>
 </div></blockquote>
-<p><strong>rate</strong> : float</p>
+<p><strong>beta</strong> : float, optional</p>
+<blockquote>
+<div><p>Parameter indicating</p>
+</div></blockquote>
+<p><strong>rate</strong> : float, optional</p>
 <blockquote>
 <div><p>The mean rate of requests per second</p>
 </div></blockquote>
-<p><strong>n_warmup</strong> : int</p>
+<p><strong>n_warmup</strong> : int, optional</p>
 <blockquote>
 <div><p>The number of warmup requests (i.e. requests executed to fill cache but
 not logged)</p>
 </div></blockquote>
-<p><strong>n_measured</strong> : int</p>
+<p><strong>n_measured</strong> : int, optional</p>
 <blockquote>
 <div><p>The number of logged requests after the warmup</p>
 </div></blockquote>
@@ -673,17 +804,31 @@ dictionary of event attributes.</p>
 </tbody>
 </table>
 <dl class="attribute">
-<dt id="icarus.scenarios.workload.stationary_workload.name">
-<tt class="descname">name</tt><em class="property"> = 'STATIONARY'</em><a class="headerlink" href="#icarus.scenarios.workload.stationary_workload.name" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.scenarios.workload.StationaryWorkload.name">
+<tt class="descname">name</tt><em class="property"> = 'STATIONARY'</em><a class="headerlink" href="#icarus.scenarios.workload.StationaryWorkload.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="icarus.scenarios.workload.globetraff_workload">
-<em class="property">class </em><tt class="descname">globetraff_workload</tt><big>(</big><em>topology</em>, <em>content_file</em>, <em>request_file</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/workload.html#globetraff_workload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.workload.globetraff_workload" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.scenarios.workload.GlobetraffWorkload">
+<em class="property">class </em><tt class="descname">GlobetraffWorkload</tt><big>(</big><em>topology</em>, <em>reqs_file</em>, <em>contents_file</em>, <em>beta=0</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/workload.html#GlobetraffWorkload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.workload.GlobetraffWorkload" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
 <p>Parse requests from GlobeTraff workload generator</p>
+<p>All requests are mapped to receivers uniformly unless a positive <em>beta</em>
+parameter is specified.</p>
+<p>If a <em>beta</em> parameter is specified, then receivers issue requests at
+different rates. The algorithm used to determine the requests rates for 
+each receiver is the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>All receiver are sorted in decreasing order of degree of the PoP they
+are attached to. This assumes that all receivers have degree = 1 and are
+attached to a node with degree &gt; 1</li>
+<li>Rates are then assigned following a Zipf distribution of coefficient
+beta where nodes with higher-degree PoPs have a higher request rate</li>
+</ul>
+</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -692,21 +837,119 @@ dictionary of event attributes.</p>
 <blockquote>
 <div><p>The topology to which the workload refers</p>
 </div></blockquote>
-<p><strong>content_file</strong> : str</p>
+<p><strong>reqs_file</strong> : str</p>
+<blockquote>
+<div><p>The GlobeTraff request file</p>
+</div></blockquote>
+<p><strong>contents_file</strong> : str</p>
 <blockquote>
 <div><p>The GlobeTraff content file</p>
 </div></blockquote>
-<p><strong>request_file</strong> : str</p>
+<p><strong>beta</strong> : float, optional</p>
+<blockquote>
+<div><p>Spatial skewness of requests rates</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>events</strong> : iterator</p>
 <blockquote class="last">
-<div><p>The GlobeTraff request file</p>
+<div><p>Iterator of events. Each event is a 2-tuple where the first element is
+the timestamp at which the event occurs and the second element is a
+dictionary of event attributes.</p>
 </div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
 <dl class="attribute">
-<dt id="icarus.scenarios.workload.globetraff_workload.name">
-<tt class="descname">name</tt><em class="property"> = 'GLOBETRAFF'</em><a class="headerlink" href="#icarus.scenarios.workload.globetraff_workload.name" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.scenarios.workload.GlobetraffWorkload.name">
+<tt class="descname">name</tt><em class="property"> = 'GLOBETRAFF'</em><a class="headerlink" href="#icarus.scenarios.workload.GlobetraffWorkload.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="icarus.scenarios.workload.TraceDrivenWorkload">
+<em class="property">class </em><tt class="descname">TraceDrivenWorkload</tt><big>(</big><em>topology</em>, <em>reqs_file</em>, <em>contents_file</em>, <em>n_contents</em>, <em>n_warmup</em>, <em>n_measured</em>, <em>rate=1.0</em>, <em>beta=0</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/icarus/scenarios/workload.html#TraceDrivenWorkload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.workload.TraceDrivenWorkload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<p>Parse requests from a generic request trace.</p>
+<dl class="docutils">
+<dt>This workload requires two text files:</dt>
+<dd><ul class="first last simple">
+<li>a requests file, where each line corresponds to a string identifying
+the content requested</li>
+<li>a contents file, which lists all unique content identifiers appearing
+in the requests file.</li>
+</ul>
+</dd>
+</dl>
+<p>Since the trace do not provide timestamps, requests are scheduled according
+to a Poisson process of rate <em>rate</em>. All requests are mapped to receivers
+uniformly unless a positive <em>beta</em> parameter is specified.</p>
+<p>If a <em>beta</em> parameter is specified, then receivers issue requests at
+different rates. The algorithm used to determine the requests rates for 
+each receiver is the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>All receiver are sorted in decreasing order of degree of the PoP they
+are attached to. This assumes that all receivers have degree = 1 and are
+attached to a node with degree &gt; 1</li>
+<li>Rates are then assigned following a Zipf distribution of coefficient
+beta where nodes with higher-degree PoPs have a higher request rate</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
+<blockquote>
+<div><p>The topology to which the workload refers</p>
+</div></blockquote>
+<p><strong>reqs_file</strong> : str</p>
+<blockquote>
+<div><p>The path to the requests file</p>
+</div></blockquote>
+<p><strong>contents_file</strong> : str</p>
+<blockquote>
+<div><p>The path to the contents file</p>
+</div></blockquote>
+<p><strong>n_contents</strong> : int</p>
+<blockquote>
+<div><p>The number of content object (i.e. the number of lines of contents_file)</p>
+</div></blockquote>
+<p><strong>n_warmup</strong> : int</p>
+<blockquote>
+<div><p>The number of warmup requests (i.e. requests executed to fill cache but
+not logged)</p>
+</div></blockquote>
+<p><strong>n_measured</strong> : int</p>
+<blockquote>
+<div><p>The number of logged requests after the warmup</p>
+</div></blockquote>
+<p><strong>rate</strong> : float, optional</p>
+<blockquote>
+<div><p>The network-wide mean rate of requests per second</p>
+</div></blockquote>
+<p><strong>beta</strong> : float, optional</p>
+<blockquote>
+<div><p>Spatial skewness of requests rates</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>events</strong> : iterator</p>
+<blockquote class="last">
+<div><p>Iterator of events. Each event is a 2-tuple where the first element is
+the timestamp at which the event occurs and the second element is a
+dictionary of event attributes.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="icarus.scenarios.workload.TraceDrivenWorkload.name">
+<tt class="descname">name</tt><em class="property"> = 'TRACE_DRIVEN'</em><a class="headerlink" href="#icarus.scenarios.workload.TraceDrivenWorkload.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -736,7 +979,7 @@ dictionary of event attributes.</p>
         <li class="right" >
           <a href="../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="icarus.html" >icarus package</a> &raquo;</li> 
       </ul>
     </div>

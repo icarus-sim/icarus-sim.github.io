@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.run &mdash; Icarus 0.4.0 documentation</title>
+    <title>icarus.run &mdash; Icarus 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.4.0 documentation" href="../../index.html" />
+    <link rel="top" title="Icarus 0.5.0 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
@@ -75,6 +75,7 @@
 <span class="kn">import</span> <span class="nn">signal</span>
 <span class="kn">import</span> <span class="nn">functools</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="kn">as</span> <span class="nn">mp</span>
 
 <span class="kn">from</span> <span class="nn">icarus.util</span> <span class="kn">import</span> <span class="n">Settings</span><span class="p">,</span> <span class="n">config_logging</span>
 <span class="kn">from</span> <span class="nn">icarus.registry</span> <span class="kn">import</span> <span class="n">RESULTS_WRITER</span>
@@ -109,7 +110,41 @@
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Saved intermediate results to file </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
     <span class="n">orch</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="n">signum</span><span class="p">)</span>
+
 </div>
+<span class="k">def</span> <span class="nf">_validate_settings</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">freeze</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Validate settings. If everything is OK freeze them&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s">&#39;EXPERIMENT_QUEUE&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;No EXPERIMENT_QUEUE setting found. Exiting&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="s">&#39;PARALLEL_EXECUTION&#39;</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">PARALLEL_EXECUTION</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;PARALLEL_EXECUTION setting not specified. Set to False&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">settings</span><span class="o">.</span><span class="n">PARALLEL_EXECUTION</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s">&#39;N_PROCESSES&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
+            <span class="n">n_proc</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+            <span class="n">settings</span><span class="o">.</span><span class="n">N_PROCESSES</span> <span class="o">=</span> <span class="n">n_proc</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;N_PROCESSES setting not specified. Set to </span><span class="si">%s</span><span class="s">&#39;</span>
+                         <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_proc</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s">&#39;N_REPLICATIONS&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
+        <span class="n">n_replications</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">N_REPLICATIONS</span> <span class="o">=</span> <span class="n">n_replications</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;N_REPLICATIONS setting not specified. Set to </span><span class="si">%s</span><span class="s">&#39;</span>
+                     <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_replications</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s">&#39;RESULTS_FORMAT&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
+        <span class="n">res_format</span> <span class="o">=</span> <span class="s">&#39;PICKLE&#39;</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">RESULTS_FORMAT</span> <span class="o">=</span> <span class="n">res_format</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;RESULTS_FORMAT setting not specified. Set to </span><span class="si">%s</span><span class="s">&#39;</span>
+                     <span class="o">%</span> <span class="n">res_format</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;LOG_LEVEL&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
+        <span class="n">log_level</span> <span class="o">=</span> <span class="s">&#39;INFO&#39;</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">LOG_LEVEL</span> <span class="o">=</span> <span class="n">log_level</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;LOG_LEVEL setting not specified. Set to </span><span class="si">%s</span><span class="s">&#39;</span>
+                     <span class="o">%</span> <span class="n">log_level</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">freeze</span><span class="p">:</span> 
+        <span class="n">settings</span><span class="o">.</span><span class="n">freeze</span><span class="p">()</span>
+
+
 <div class="viewcode-block" id="run"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.run.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">config_override</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">    Run function. It starts the simulator.</span>
@@ -128,15 +163,16 @@
     <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
     <span class="n">settings</span><span class="o">.</span><span class="n">read_from</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">config_override</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">config_override</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">config_override</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">v</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="n">settings</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-    <span class="n">settings</span><span class="o">.</span><span class="n">freeze</span><span class="p">()</span>
     <span class="c"># Config logger</span>
-    <span class="n">config_logging</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOG_LEVEL</span><span class="p">)</span>
+    <span class="n">config_logging</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOG_LEVEL</span> <span class="k">if</span> <span class="s">&#39;LOG_LEVEL&#39;</span> <span class="ow">in</span> <span class="n">settings</span> <span class="k">else</span> <span class="s">&#39;INFO&#39;</span><span class="p">)</span>
+    <span class="c"># Validate settings</span>
+    <span class="n">_validate_settings</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">freeze</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="c"># set up orchestration</span>
     <span class="n">orch</span> <span class="o">=</span> <span class="n">Orchestrator</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">sig</span> <span class="ow">in</span> <span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGTERM</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGHUP</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGQUIT</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGABRT</span><span class="p">):</span>
@@ -166,7 +202,7 @@
         <li class="right" >
           <a href="../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

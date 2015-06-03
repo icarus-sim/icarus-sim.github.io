@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.util &mdash; Icarus 0.4.0 documentation</title>
+    <title>icarus.util &mdash; Icarus 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.4.0 documentation" href="../../index.html" />
+    <link rel="top" title="Icarus 0.5.0 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
@@ -87,7 +87,9 @@
         <span class="s">&#39;step_cdf&#39;</span><span class="p">,</span>
         <span class="s">&#39;Tree&#39;</span><span class="p">,</span>
         <span class="s">&#39;can_import&#39;</span><span class="p">,</span>
-        <span class="s">&#39;overlay_betweenness_centrality&#39;</span>
+        <span class="s">&#39;overlay_betweenness_centrality&#39;</span><span class="p">,</span>
+        <span class="s">&#39;path_links&#39;</span><span class="p">,</span>
+        <span class="s">&#39;multicast_tree&#39;</span><span class="p">,</span>
            <span class="p">]</span>
 
 <div class="viewcode-block" id="Tree"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Tree">[docs]</a><span class="k">class</span> <span class="nc">Tree</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">):</span>
@@ -112,7 +114,7 @@
         <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">Tree</span><span class="p">):</span>
-            <span class="c"># If data is not a Tree try to castto dict and iteratively recurse</span>
+            <span class="c"># If data is not a Tree try to cast to dict and iteratively recurse</span>
             <span class="c"># it to convert each node to a tree</span>
             <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
@@ -125,7 +127,7 @@
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="p">[]):</span>
         <span class="n">it</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">k_child</span><span class="p">,</span> <span class="n">v_child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">k_child</span><span class="p">,</span> <span class="n">v_child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">base</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
             <span class="n">base</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k_child</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v_child</span><span class="p">,</span> <span class="n">Tree</span><span class="p">):</span>
@@ -140,6 +142,11 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">Tree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setitem__</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
     
 <div class="viewcode-block" id="Tree.update"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Tree.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update tree from e, similarly to dict.update</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Tree</span><span class="p">):</span>
             <span class="n">e</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Tree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
@@ -211,10 +218,28 @@
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     </div>
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictonly</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a string representation of the tree</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dictonly : bool, optional</span>
+<span class="sd">            If True, just return a representation of a corresponding dictionary</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;{&quot;</span> <span class="k">if</span> <span class="n">dictonly</span> <span class="k">else</span> <span class="s">&quot;Tree({&quot;</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">: &quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-            <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">, &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">__str__</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Tree</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="s">&quot;&#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="n">k</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Tree</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">__str__</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="s">&quot;&#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="n">v</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">, &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">)</span>
         <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;}&quot;</span> <span class="k">if</span> <span class="n">dictonly</span> <span class="k">else</span> <span class="s">&quot;})&quot;</span>
         <span class="k">return</span> <span class="n">s</span>
@@ -249,6 +274,7 @@
 <div class="viewcode-block" id="Tree.empty"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Tree.empty">[docs]</a>    <span class="k">def</span> <span class="nf">empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return True if the tree is empty, False otherwise&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+
 </div></div>
 <div class="viewcode-block" id="Settings"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.Settings">[docs]</a><span class="k">class</span> <span class="nc">Settings</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Object storing all settings&quot;&quot;&quot;</span>
@@ -470,6 +496,7 @@
 <span class="sd">            Always False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">False</span>
+
 </div>
 <div class="viewcode-block" id="SequenceNumber"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.SequenceNumber">[docs]</a><span class="k">class</span> <span class="nc">SequenceNumber</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This class models an increasing sequence number.</span>
@@ -693,9 +720,9 @@
 <span class="sd">        Dictionary of betweenness centralities keyed by node</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">origins</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">origins</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">stacks</span><span class="p">()</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> <span class="k">if</span> <span class="n">stack</span> <span class="o">==</span> <span class="s">&#39;receiver&#39;</span><span class="p">]</span>
+        <span class="n">origins</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">stacks</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">stack</span> <span class="o">==</span> <span class="s">&#39;receiver&#39;</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">destinations</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">destinations</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">stacks</span><span class="p">()</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> <span class="k">if</span> <span class="n">stack</span> <span class="o">==</span> <span class="s">&#39;source&#39;</span><span class="p">]</span>
+        <span class="n">destinations</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">stacks</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">stack</span> <span class="o">==</span> <span class="s">&#39;source&#39;</span><span class="p">]</span>
     <span class="n">betweenness</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     <span class="n">path</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">single_source_shortest_path</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">origins</span><span class="p">}</span>
     <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
@@ -710,6 +737,49 @@
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">betweenness</span><span class="p">:</span>
             <span class="n">betweenness</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">/=</span> <span class="n">norm</span>
     <span class="k">return</span> <span class="n">betweenness</span>
+
+
+<div class="viewcode-block" id="path_links"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.path_links">[docs]</a><span class="k">def</span> <span class="nf">path_links</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a path expressed as list of nodes into a path expressed as a</span>
+<span class="sd">    list of edges.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path : list</span>
+<span class="sd">        List of nodes</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    path : list</span>
+<span class="sd">        List of edges</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+
+</div>
+<div class="viewcode-block" id="multicast_tree"><a class="viewcode-back" href="../../apidoc/icarus.html#icarus.util.multicast_tree">[docs]</a><span class="k">def</span> <span class="nf">multicast_tree</span><span class="p">(</span><span class="n">shortest_paths</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">destinations</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a multicast tree expressed as a set of edges, without any</span>
+<span class="sd">    ordering</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    shortest_paths : dict of dicts</span>
+<span class="sd">        Return all pairs shortest paths</span>
+<span class="sd">    source : any hashable object</span>
+<span class="sd">        The source node of the multicast tree</span>
+<span class="sd">    destinations : iterable</span>
+<span class="sd">        All destinations of the multicast tree</span>
+<span class="sd">        </span>
+<span class="sd">    Return</span>
+<span class="sd">    ------</span>
+<span class="sd">    multicast_tree : set</span>
+<span class="sd">        Set of edges</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">destinations</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="n">source</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">path_links</span><span class="p">(</span><span class="n">shortest_paths</span><span class="p">[</span><span class="n">source</span><span class="p">][</span><span class="n">d</span><span class="p">])))</span>
+    <span class="k">return</span> <span class="n">tree</span></div>
 </pre></div>
 
           </div>
@@ -729,7 +799,7 @@
         <li class="right" >
           <a href="../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

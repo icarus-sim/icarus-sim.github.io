@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus package &mdash; Icarus 0.4.0 documentation</title>
+    <title>icarus package &mdash; Icarus 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.4.0 documentation" href="../index.html" />
+    <link rel="top" title="Icarus 0.5.0 documentation" href="../index.html" />
     <link rel="next" title="icarus.execution package" href="icarus.execution.html" />
     <link rel="prev" title="Icarus: Caching Simulator for Information Centric Networking (ICN)" href="../index.html" /> 
   </head>
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../index.html" title="Icarus: Caching Simulator for Information Centric Networking (ICN)"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Icarus 0.4.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -162,10 +162,9 @@
 </div>
 <div class="section" id="module-icarus.orchestration">
 <span id="icarus-orchestration-module"></span><h2>icarus.orchestration module<a class="headerlink" href="#module-icarus.orchestration" title="Permalink to this headline">¶</a></h2>
-<p>Contains the code that orchestrates the execution of all experiments.</p>
-<p>The orchestrator is responsible for designing experiments with all combinations
-of parameters specified in the user-provided settings, schedule experiment
-execution on various</p>
+<p>Orchestrate the execution of all experiments.</p>
+<p>The orchestrator is responsible for scheduling experiments specified in the
+user-provided settings.</p>
 <dl class="class">
 <dt id="icarus.orchestration.Orchestrator">
 <em class="property">class </em><tt class="descname">Orchestrator</tt><big>(</big><em>settings</em>, <em>summary_freq=4</em><big>)</big><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator" title="Permalink to this definition">¶</a></dt>
@@ -268,6 +267,7 @@ seconds)</p>
 </div>
 <div class="section" id="module-icarus.registry">
 <span id="icarus-registry-module"></span><h2>icarus.registry module<a class="headerlink" href="#module-icarus.registry" title="Permalink to this headline">¶</a></h2>
+<p>Registry keeping track of all registered pluggable components</p>
 <dl class="function">
 <dt id="icarus.registry.register_cache_placement">
 <tt class="descname">register_cache_placement</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_cache_placement" title="Permalink to this definition">¶</a></dt>
@@ -910,7 +910,7 @@ easier to search and filter data in them.</p>
 <td>Set a value at a specific path</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Tree.update" title="icarus.util.Tree.update"><tt class="xref py py-obj docutils literal"><span class="pre">update</span></tt></a>(e)</td>
-<td></td>
+<td>Update tree from e, similarly to dict.update</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">values</span></tt>(()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D&#8217;s&nbsp;values)</td>
 <td></td>
@@ -1050,7 +1050,8 @@ and the values.</p>
 <dl class="method">
 <dt id="icarus.util.Tree.update">
 <tt class="descname">update</tt><big>(</big><em>e</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Tree.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.update" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Update tree from e, similarly to dict.update</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -1072,6 +1073,58 @@ othrwise</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>can_import</strong> : bool</p>
 <blockquote class="last">
 <div><p>True if can import, False otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.util.path_links">
+<tt class="descname">path_links</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#path_links"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.path_links" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a path expressed as list of nodes into a path expressed as a
+list of edges.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : list</p>
+<blockquote>
+<div><p>List of nodes</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>path</strong> : list</p>
+<blockquote class="last">
+<div><p>List of edges</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.util.multicast_tree">
+<tt class="descname">multicast_tree</tt><big>(</big><em>shortest_paths</em>, <em>source</em>, <em>destinations</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#multicast_tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.multicast_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a multicast tree expressed as a set of edges, without any
+ordering</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>shortest_paths</strong> : dict of dicts</p>
+<blockquote>
+<div><p>Return all pairs shortest paths</p>
+</div></blockquote>
+<p><strong>source</strong> : any hashable object</p>
+<blockquote>
+<div><p>The source node of the multicast tree</p>
+</div></blockquote>
+<p><strong>destinations</strong> : iterable</p>
+<blockquote class="last">
+<div><p>All destinations of the multicast tree</p>
 </div></blockquote>
 </td>
 </tr>
@@ -1109,7 +1162,7 @@ othrwise</p>
         <li class="right" >
           <a href="../index.html" title="Icarus: Caching Simulator for Information Centric Networking (ICN)"
              >previous</a> |</li>
-        <li><a href="../index.html">Icarus 0.4.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

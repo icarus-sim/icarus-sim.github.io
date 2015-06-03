@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.results package &mdash; Icarus 0.4.0 documentation</title>
+    <title>icarus.results package &mdash; Icarus 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.4.0 documentation" href="../index.html" />
+    <link rel="top" title="Icarus 0.5.0 documentation" href="../index.html" />
     <link rel="up" title="icarus package" href="icarus.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="icarus.html" accesskey="U">icarus package</a> &raquo;</li> 
       </ul>
     </div>
@@ -250,7 +250,7 @@ one is used</p>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
 <dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
 </dd>
 </dl>
@@ -467,7 +467,7 @@ one is used</p>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
 <dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
 </dd>
 </dl>
@@ -654,7 +654,7 @@ one is used</p>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
 <dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
 </dd>
 </dl>
@@ -686,6 +686,15 @@ one is used</p>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
 <p>This class can be used to store results from different experiments,
 accessed and filtered.</p>
+<p>A result set is basically a list of results, one per each experiment. Each
+entry of the resultset is a 2-tuple referring to a single experiment.
+In this 2-tuple:</p>
+<blockquote>
+<div><ul class="simple">
+<li>the first element is a tree with all parameters of the experiment</li>
+<li>the second element is a tree with all results of the experiment</li>
+</ul>
+</div></blockquote>
 <p>All operations that write data are thread-safe so that this object can 
 be shared by different processes.</p>
 <p class="rubric">Methods</p>
@@ -840,7 +849,7 @@ a tree with experiment results.</p>
 <p>Functions for visualizing results on graphs of topologies</p>
 <dl class="function">
 <dt id="icarus.results.visualize.draw_stack_deployment">
-<tt class="descname">draw_stack_deployment</tt><big>(</big><em>topology</em>, <em>plotdir</em>, <em>filename</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/visualize.html#draw_stack_deployment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.visualize.draw_stack_deployment" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw_stack_deployment</tt><big>(</big><em>topology</em>, <em>filename</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/visualize.html#draw_stack_deployment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.visualize.draw_stack_deployment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw a topology with different node colors according to stack</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -866,7 +875,7 @@ a tree with experiment results.</p>
 
 <dl class="function">
 <dt id="icarus.results.visualize.draw_network_load">
-<tt class="descname">draw_network_load</tt><big>(</big><em>topology</em>, <em>result</em>, <em>plotdir</em>, <em>filename</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/visualize.html#draw_network_load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.visualize.draw_network_load" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw_network_load</tt><big>(</big><em>topology</em>, <em>result</em>, <em>filename</em>, <em>plotdir</em><big>)</big><a class="reference internal" href="../_modules/icarus/results/visualize.html#draw_network_load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.visualize.draw_network_load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw topology with node colors according to stack and node size and link
 color according to server/cache hits and link loads.</p>
 <p>Nodes are colored according to COLORMAP. Edge are colored on a blue-red
@@ -924,7 +933,7 @@ are read</p>
         <li class="right" >
           <a href="../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="icarus.html" >icarus package</a> &raquo;</li> 
       </ul>
     </div>

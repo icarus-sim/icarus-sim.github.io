@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.models.cache &mdash; Icarus 0.4.0 documentation</title>
+    <title>icarus.models.cache &mdash; Icarus 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.4.0 documentation" href="../../../index.html" />
+    <link rel="top" title="Icarus 0.5.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
@@ -99,19 +99,18 @@
 
 
 <div class="viewcode-block" id="LinkedSet"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.LinkedSet">[docs]</a><span class="k">class</span> <span class="nc">LinkedSet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A doubly-linked set, i.e. a set whose entries are ordered and stored in</span>
-<span class="sd">    a doubly-linked list.</span>
+    <span class="sd">&quot;&quot;&quot;A doubly-linked set, i.e., a set whose entries are ordered and stored</span>
+<span class="sd">    as a doubly-linked list.</span>
 <span class="sd">    </span>
 <span class="sd">    This data structure is designed to efficiently implement a number of cache</span>
-<span class="sd">    eviction policies such as LRU and derivatives like segmented LRU.</span>
+<span class="sd">    replacement policies such as LRU and derivatives such as Segmented LRU.</span>
 <span class="sd">        </span>
 <span class="sd">    It provides O(1) time complexity for the following operations: searching,</span>
 <span class="sd">    remove from any position, move to top, move to bottom, insert after or</span>
 <span class="sd">    before a given item.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">class</span> <span class="nc">_Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Class implementing a node of the linked list</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Class implementing a node of the linked list&quot;&quot;&quot;</span>
         
         <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">down</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;Constructor</span>
@@ -563,6 +562,37 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;This method is not implemented&#39;</span><span class="p">)</span>
 </div>
+<div class="viewcode-block" id="Cache.do"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.Cache.do">[docs]</a>    <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Utility method that performs a specified operation on a given item.</span>
+<span class="sd">        </span>
+<span class="sd">        This method allows to perform one of the different operations on an</span>
+<span class="sd">        item:</span>
+<span class="sd">         * GET: Retrieve an item</span>
+<span class="sd">         * PUT: Insert an item</span>
+<span class="sd">         * UPDATE: Update the value associated to an item</span>
+<span class="sd">         * DELETE: Remove an item</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        op : string</span>
+<span class="sd">            The operation to execute: GET | PUT | UPDATE | DELETE </span>
+<span class="sd">        k : any hashable type</span>
+<span class="sd">            The item looked up in the cache</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        res : bool</span>
+<span class="sd">            Boolean value being *True* if the operation succeeded or *False*</span>
+<span class="sd">            otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span>  <span class="p">{</span>
+            <span class="s">&#39;GET&#39;</span><span class="p">:</span>    <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">,</span>
+            <span class="s">&#39;PUT&#39;</span><span class="p">:</span>    <span class="bp">self</span><span class="o">.</span><span class="n">put</span><span class="p">,</span>
+            <span class="s">&#39;UPDATE&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">put</span><span class="p">,</span>
+            <span class="s">&#39;DELETE&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove</span>
+                <span class="p">}[</span><span class="n">op</span><span class="p">](</span><span class="n">k</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span> <span class="k">if</span> <span class="n">res</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="bp">False</span>
+</div>
     <span class="nd">@abc.abstractmethod</span>
 <div class="viewcode-block" id="Cache.has"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.Cache.has">[docs]</a>    <span class="k">def</span> <span class="nf">has</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if an item is in the cache without changing the internal</span>
@@ -642,7 +672,6 @@
         <span class="sd">&quot;&quot;&quot;Empty the cache</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;This method is not implemented&#39;</span><span class="p">)</span>
-
 
 </div></div>
 <span class="nd">@register_cache_policy</span><span class="p">(</span><span class="s">&#39;NULL&#39;</span><span class="p">)</span>
@@ -1024,8 +1053,9 @@
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_segment</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">seg</span><span class="p">))</span> <span class="o">+</span> <span class="n">position</span>
     </div>
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
-<div class="viewcode-block" id="SegmentedLruCache.dump"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.SegmentedLruCache.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segment</span><span class="p">)</span>
+<div class="viewcode-block" id="SegmentedLruCache.dump"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.SegmentedLruCache.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serialized</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="n">dump</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segment</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dump</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">serialized</span> <span class="k">else</span> <span class="n">dump</span>
     </div>
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
 <div class="viewcode-block" id="SegmentedLruCache.clear"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.SegmentedLruCache.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1043,6 +1073,11 @@
 <span class="sd">    insertion of a new item, the cache evicts the one which was requested the</span>
 <span class="sd">    least times in the past, i.e. the one whose associated value has the</span>
 <span class="sd">    smallest value.</span>
+<span class="sd">    </span>
+<span class="sd">    This is an implementation of an In-Cache-LFU, i.e. a cache that keeps</span>
+<span class="sd">    counters for items only as long as they are in cache and resets the</span>
+<span class="sd">    counter of an item when it is evicted. This is different from a Perfect-LFU</span>
+<span class="sd">    policy in which a counter is maintained also when the content is evicted.</span>
 <span class="sd">    </span>
 <span class="sd">    In contrast to LRU, LFU has been shown to perform optimally under IRM</span>
 <span class="sd">    demands. However, its implementation is computationally expensive since it</span>
@@ -1123,7 +1158,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxlen</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxlen</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_maxlen</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">maxlen</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_d</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
@@ -1206,10 +1241,14 @@
 <div class="viewcode-block" id="RandEvictionCache"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.RandEvictionCache">[docs]</a><span class="k">class</span> <span class="nc">RandEvictionCache</span><span class="p">(</span><span class="n">Cache</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Random eviction cache implementation.</span>
 <span class="sd">    </span>
-<span class="sd">    This class implements a cache whereby the item to evict in case of a full</span>
-<span class="sd">    cache is randomly selected. It generally yields poor performance in terms</span>
-<span class="sd">    of cache hits but is sometimes used as baseline and for this reason it has</span>
-<span class="sd">    been implemented here.</span>
+<span class="sd">    This class implements a cache replacement policies which randomly select</span>
+<span class="sd">    an item to evict when the cache is full. It generally yields poor</span>
+<span class="sd">    performance in terms of cache hits, especially with non-stationary</span>
+<span class="sd">    workloads but is sometimes used as baseline and for this reason it has been</span>
+<span class="sd">    implemented here.</span>
+<span class="sd">    </span>
+<span class="sd">    In case of stationary IRM workloads, the RAND eviction policy provably</span>
+<span class="sd">    achieves the same cache hit ratio of the FIFO replacement policy. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Cache</span><span class="p">)</span>
@@ -1270,7 +1309,9 @@
 
 </div></div>
 <div class="viewcode-block" id="rand_insert_cache"><a class="viewcode-back" href="../../../apidoc/icarus.models.html#icarus.models.cache.rand_insert_cache">[docs]</a><span class="k">def</span> <span class="nf">rand_insert_cache</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;It modifies the instance of a cache object such that items are</span>
+    <span class="sd">&quot;&quot;&quot;Return a random insertion cache</span>
+<span class="sd">    </span>
+<span class="sd">    It modifies the instance of a cache object such that items are</span>
 <span class="sd">    inserted randomly instead of deterministically.</span>
 <span class="sd">    </span>
 <span class="sd">    This function modifies the behavior of the *put* method of a given cache</span>
@@ -1367,7 +1408,6 @@
             <span class="n">val</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">_val</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">evicted</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">evicted</span><span class="p">,</span> <span class="n">val</span>
         
-    
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Retrieve an item from the cache.</span>
 <span class="sd">        </span>
@@ -1651,7 +1691,7 @@
         <li class="right" >
           <a href="../../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

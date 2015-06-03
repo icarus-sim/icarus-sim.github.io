@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.execution.network &mdash; Icarus 0.4.0 documentation</title>
+    <title>icarus.execution.network &mdash; Icarus 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.4.0 documentation" href="../../../index.html" />
+    <link rel="top" title="Icarus 0.5.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
@@ -68,6 +68,18 @@
             
   <h1>Source code for icarus.execution.network</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;Network Model-View-Controller (MVC)</span>
+
+<span class="sd">This module contains classes providing an abstraction of the network shown to</span>
+<span class="sd">the strategy implementation. The network is modelled using an MVC design</span>
+<span class="sd">pattern.</span>
+
+<span class="sd">A strategy performs actions on the network by calling methods of the </span>
+<span class="sd">`NetworkController`, that in turns updates  the `NetworkModel` instance that</span>
+<span class="sd">updates the `NetworkView` instance. The strategy can get updated information</span>
+<span class="sd">about the network status by calling methods of the `NetworkView` instance.</span>
+
+<span class="sd">The `NetworkController` is also responsible to notify a `DataCollectorProxy`</span>
+<span class="sd">of all relevant events.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
@@ -75,6 +87,7 @@
 <span class="kn">import</span> <span class="nn">fnss</span>
 
 <span class="kn">from</span> <span class="nn">icarus.registry</span> <span class="kn">import</span> <span class="n">CACHE_POLICY</span>
+<span class="kn">from</span> <span class="nn">icarus.util</span> <span class="kn">import</span> <span class="n">path_links</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s">&#39;NetworkModel&#39;</span><span class="p">,</span>
@@ -85,12 +98,39 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;orchestration&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">symmetrify_paths</span><span class="p">(</span><span class="n">shortest_paths</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Make paths symmetric</span>
+<span class="sd">    </span>
+<span class="sd">    Given a dictionary of all-pair shortest paths, it edits shortest paths to</span>
+<span class="sd">    ensure that all path are symmetric, e.g., path(u,v) = path(v,u)</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    shortest_paths : dict of dict</span>
+<span class="sd">        All pairs shortest paths</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    shortest_paths : dict of dict</span>
+<span class="sd">        All pairs shortest paths, with all paths symmetric</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function modifies the shortest paths dictionary provided</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">shortest_paths</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">shortest_paths</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
             <span class="n">shortest_paths</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">shortest_paths</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">u</span><span class="p">]))</span>
     <span class="k">return</span> <span class="n">shortest_paths</span>
 
+
 <div class="viewcode-block" id="NetworkView"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkView">[docs]</a><span class="k">class</span> <span class="nc">NetworkView</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Network view</span>
+<span class="sd">    </span>
+<span class="sd">    This class provides an interface that strategies and data collectors can</span>
+<span class="sd">    use to know updated information about the status of the network.</span>
+<span class="sd">    For example the network view provides information about shortest paths,</span>
+<span class="sd">    characteristics of links and currently cached objects in nodes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Constructor</span>
@@ -156,6 +196,16 @@
 <span class="sd">            included)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">t</span><span class="p">]</span>
+    </div>
+<div class="viewcode-block" id="NetworkView.all_pairs_shortest_paths"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkView.all_pairs_shortest_paths">[docs]</a>    <span class="k">def</span> <span class="nf">all_pairs_shortest_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return all pairs shortest paths</span>
+<span class="sd">        </span>
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        all_pairs_shortest_paths : dict of lists</span>
+<span class="sd">            Shortest paths between all pairs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">shortest_path</span>
 </div>
 <div class="viewcode-block" id="NetworkView.link_type"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkView.link_type">[docs]</a>    <span class="k">def</span> <span class="nf">link_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the type of link *(u, v)*.</span>
@@ -282,14 +332,16 @@
         <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">cache</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">dump</span><span class="p">()</span>
 
-         
 </div></div>
 <div class="viewcode-block" id="NetworkModel"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkModel">[docs]</a><span class="k">class</span> <span class="nc">NetworkModel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Models the internal state of the network</span>
+    <span class="sd">&quot;&quot;&quot;Models the internal state of the network.</span>
+<span class="sd">    </span>
+<span class="sd">    This object should never be edited by strategies directly, but only through</span>
+<span class="sd">    calls to the network controller.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">cache_policy</span><span class="p">,</span> <span class="n">shortest_path</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Constructors</span>
+        <span class="sd">&quot;&quot;&quot;Constructor</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -309,7 +361,7 @@
         
         <span class="c"># Shortest paths of the network</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">shortest_path</span> <span class="o">=</span> <span class="n">shortest_path</span> <span class="k">if</span> <span class="n">shortest_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> \
-                             <span class="k">else</span> <span class="n">symmetrify_paths</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">all_pairs_shortest_path</span><span class="p">(</span><span class="n">topology</span><span class="p">))</span>
+                             <span class="k">else</span> <span class="n">symmetrify_paths</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">all_pairs_dijkstra_path</span><span class="p">(</span><span class="n">topology</span><span class="p">))</span>
         
         <span class="c"># Network topology</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">topology</span> <span class="o">=</span> <span class="n">topology</span>
@@ -322,10 +374,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cache_size</span> <span class="o">=</span> <span class="p">{}</span>
         
         <span class="c"># Dictionary of link types (internal/external)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">link_type</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">topology</span><span class="o">.</span><span class="n">to_directed</span><span class="p">(),</span> <span class="s">&#39;type&#39;</span><span class="p">)</span>
-        
-        <span class="bp">self</span><span class="o">.</span><span class="n">link_delay</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">get_delays</span><span class="p">(</span><span class="n">topology</span><span class="o">.</span><span class="n">to_directed</span><span class="p">())</span>
-        
+        <span class="bp">self</span><span class="o">.</span><span class="n">link_type</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">link_delay</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">get_delays</span><span class="p">(</span><span class="n">topology</span><span class="p">)</span>
+        <span class="c"># Instead of this manual assignment, I could have converted the</span>
+        <span class="c"># topology to directed before extracting type and link delay but that</span>
+        <span class="c"># requires a deep copy of the topology that can take long time if</span>
+        <span class="c"># many content source mappings are included in the topology</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">topology</span><span class="o">.</span><span class="n">is_directed</span><span class="p">():</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="n">link_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">link_type</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">link_type</span><span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">)]</span> <span class="o">=</span> <span class="n">link_type</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="n">delay</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">link_delay</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">link_delay</span><span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">)]</span> <span class="o">=</span> <span class="n">delay</span>
+                
         <span class="c"># Initialize attributes</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">nodes_iter</span><span class="p">():</span>
             <span class="n">stack_name</span><span class="p">,</span> <span class="n">stack_props</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">get_stack</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
@@ -351,7 +411,12 @@
 
 </div>
 <div class="viewcode-block" id="NetworkController"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkController">[docs]</a><span class="k">class</span> <span class="nc">NetworkController</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Network controller&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Network controller</span>
+<span class="sd">    </span>
+<span class="sd">    This class is in charge of executing operations on the network model on</span>
+<span class="sd">    behalf of a strategy implementation. It is also in charge of notifying</span>
+<span class="sd">    data collectors of relevant events.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Constructor</span>
@@ -403,7 +468,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">collector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s">&#39;log&#39;</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">collector</span><span class="o">.</span><span class="n">start_session</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
     </div>
-<div class="viewcode-block" id="NetworkController.forward_request_path"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkController.forward_request_path">[docs]</a>    <span class="k">def</span> <span class="nf">forward_request_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="NetworkController.forward_request_path"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkController.forward_request_path">[docs]</a>    <span class="k">def</span> <span class="nf">forward_request_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">main_path</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Forward a request from node *s* to node *t* over the provided path.</span>
 <span class="sd">                </span>
 <span class="sd">        Parameters</span>
@@ -417,12 +482,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">t</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">hop</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
-            <span class="n">u</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">hop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-            <span class="n">v</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">hop</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">path_links</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">forward_request_hop</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
     </div>
-<div class="viewcode-block" id="NetworkController.forward_content_path"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkController.forward_content_path">[docs]</a>    <span class="k">def</span> <span class="nf">forward_content_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="NetworkController.forward_content_path"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkController.forward_content_path">[docs]</a>    <span class="k">def</span> <span class="nf">forward_content_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">main_path</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Forward a content from node *s* to node *t* over the provided path.</span>
 <span class="sd">                </span>
 <span class="sd">        Parameters</span>
@@ -436,12 +499,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">hop</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
-            <span class="n">u</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">hop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-            <span class="n">v</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">hop</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">path_links</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">forward_content_hop</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
     </div>
-<div class="viewcode-block" id="NetworkController.forward_request_hop"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkController.forward_request_hop">[docs]</a>    <span class="k">def</span> <span class="nf">forward_request_hop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<div class="viewcode-block" id="NetworkController.forward_request_hop"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkController.forward_request_hop">[docs]</a>    <span class="k">def</span> <span class="nf">forward_request_hop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">main_path</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Forward a request over link  u -&gt; v.</span>
 <span class="sd">                </span>
 <span class="sd">        Parameters</span>
@@ -452,9 +513,9 @@
 <span class="sd">            Destination node</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">collector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s">&#39;log&#39;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">collector</span><span class="o">.</span><span class="n">request_hop</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">collector</span><span class="o">.</span><span class="n">request_hop</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">main_path</span><span class="p">)</span>
     </div>
-<div class="viewcode-block" id="NetworkController.forward_content_hop"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkController.forward_content_hop">[docs]</a>    <span class="k">def</span> <span class="nf">forward_content_hop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<div class="viewcode-block" id="NetworkController.forward_content_hop"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkController.forward_content_hop">[docs]</a>    <span class="k">def</span> <span class="nf">forward_content_hop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">main_path</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Forward a content over link  u -&gt; v.</span>
 <span class="sd">                </span>
 <span class="sd">        Parameters</span>
@@ -465,7 +526,7 @@
 <span class="sd">            Destination node</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">collector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s">&#39;log&#39;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">collector</span><span class="o">.</span><span class="n">content_hop</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">collector</span><span class="o">.</span><span class="n">content_hop</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">main_path</span><span class="p">)</span>
     </div>
 <div class="viewcode-block" id="NetworkController.put_content"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.network.NetworkController.put_content">[docs]</a>    <span class="k">def</span> <span class="nf">put_content</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Store content in the specified node.</span>
@@ -506,6 +567,9 @@
             <span class="k">if</span> <span class="n">cache_hit</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s">&#39;log&#39;</span><span class="p">]:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">collector</span><span class="o">.</span><span class="n">cache_hit</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s">&#39;log&#39;</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">collector</span><span class="o">.</span><span class="n">cache_miss</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">cache_hit</span>
         <span class="n">name</span><span class="p">,</span> <span class="n">props</span> <span class="o">=</span> <span class="n">fnss</span><span class="o">.</span><span class="n">get_stack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">&#39;source&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s">&#39;content&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">props</span><span class="p">[</span><span class="s">&#39;contents&#39;</span><span class="p">]:</span>
@@ -574,7 +638,7 @@
         <li class="right" >
           <a href="../../../np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
