@@ -174,4 +174,4 @@ Icarus is licensed under the terms of the [GNU GPLv2 license](http://www.gnu.org
 For further information about the Icarus simulator, please contact [Lorenzo Saino](http://www.ee.ucl.ac.uk/~lsaino).
 
 ### Acknowledgments
-This work has been funded by the EU-Japan initiative, under EU FP7 grant agreement no. 608518 and NICT contract no. 167 ([GreenICN](http://www.greenicn.org/)), and by the EU FP7 grant agreement ICT-248784 ([COMET](http://www.comet-project.org/)).
+This work received funding from the EU-Japan initiative, under EU FP7 grant agreement no. 608518 and NICT contract no. 167 ([GreenICN project](http://www.greenicn.org/)) and from the EU FP7 program, under grant agreements 318488 ([Flamingo Network of Excellence project](http://www.fp7-flamingo.eu/)) and ICT-248784 ([COMET project](http://www.comet-project.org/)).
