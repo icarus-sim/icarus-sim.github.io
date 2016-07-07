@@ -9,12 +9,12 @@ Icarus is a Python-based discrete-event simulator for evaluating caching
 performance in Information Centric Networks (ICN).
 
 Icarus is not bound to any specific ICN architecture. Its design allows users
-to implement and evalute new caching policies or caching and routing strategy
+to implement and evaluate new caching policies or caching and routing strategy
 with few lines of code.
 
 
 ### Download
-You can download a stable release in a zip or tar.gz format using the links below.
+You can download a stable release in a `zip` or `tar.gz` format using the links below.
 
 **Latest version:**
 
@@ -53,14 +53,14 @@ Finally, it is advisable to add Icarus path to the PYTHONPATH environment variab
 Note however that setting the PYTHONPATH this way does not persist across reboots. To make it persist you should add the export instruction to a script that your machine executes at boot or login time, e.g. `.bashrc` (if you use Bash).
 
 #### Other operating systems
-If you have other operating systems, you can install all dependencies manually. 
+If you have other operating systems, you can install all dependencies manually.
 
 Icarus dependencies are:
 
 * **Python interpreter (2.7.x)**: you can either download it
   from the [Python website](http://www.python.org) or, possibly, from the package
   manager of your operating system.
-* The following Python packages: 
+* The following Python packages:
    * **numpy** (versin 1.6 onwards)
    * **scipy** (version 0.12 onwards)
    * **matplotlib** (version 1.2 onwards)
@@ -115,28 +115,28 @@ By executing the steps illustrated above it is possible to run simulations using
 topologies, cache eviction policies, strategies and result collectors readily available on
 Icarus. Icarus makes it easy to implement new models to use in simulations.
 
-To implement new models, please refer to the description of the simulator 
+To implement new models, please refer to the description of the simulator
 provided in this paper:
 
 L.Saino, I. Psaras and G. Pavlou, Icarus: a Caching Simulator for Information Centric
 Networking (ICN), in Proc. of SIMUTOOLS'14, Lisbon, Portugal, March 2014.
-\[[PDF](http://www.ee.ucl.ac.uk/~lsaino/publications/icarus-simutools14.pdf)\],
-\[[Slides](http://www.ee.ucl.ac.uk/~lsaino/publications/icarus-simutools14-slides.pdf)\],
-\[[BibTex](http://www.ee.ucl.ac.uk/~lsaino/publications/icarus-simutools14.bib)\]
+\[[PDF](https://lorenzosaino.github.io/publications/icarus-simutools14.pdf)\],
+\[[Slides](https://lorenzosaino.github.io/publications/icarus-simutools14-slides.pdf)\],
+\[[BibTex](https://lorenzosaino.github.io/publications/icarus-simutools14.bib)\]
 
 Otherwise, please browse the source code. It is very well documented and easy to
 understand.
 
-#### Modelling tools
-Icarus provides utilities for modelling the performance of caches and
+#### Modeling tools
+Icarus provides utilities for modeling the performance of caches and
 work with traffic traces. The code is included in the `icarus.tools` package.
-These tools are described in detail in [this paper](http://www.ee.ucl.ac.uk/~lsaino/publications/icarus-simutools14.pdf).
+These tools are described in detail in [this paper](https://lorenzosaino.github.io/publications/icarus-simutools14.pdf).
 
 ### Documentation
 If you desire further information about Icarus, you can find it in the following places:
 
- * In this ([pdf](http://www.ee.ucl.ac.uk/~lsaino/publications/icarus-simutools14.pdf), [slides](http://www.ee.ucl.ac.uk/~lsaino/publications/icarus-simutools14-slides.pdf)),
-   which describes the overall architecture of the Icarus simulator, the motivations for its design, 
+ * In this ([pdf](https://lorenzosaino.github.io/publications/icarus-simutools14.pdf), [slides](https://lorenzosaino.github.io/publications/icarus-simutools14-slides.pdf)),
+   which describes the overall architecture of the Icarus simulator, the motivations for its design,
    the models implemented and shows some snippets of codes on how to use the modelling tools.
  * In the [API reference](http://icarus-sim.github.io/doc/), which documents all packages, modules, classes, methods
    and functions included in the Icarus simulator.
@@ -162,8 +162,8 @@ The Icarus simulator can be used to reproduce the results and plot the graphs pr
 
 L.Saino, I. Psaras and G. Pavlou, Hash-routing Schemes for Information Centric Networking,
 in *Proc. of the 3rd ACM SIGCOMM workshop on Information Centric Networking (ICN'13)*, Hong Kong, China, August 2013.
-[\[PDF\]](http://www.ee.ucl.ac.uk/~lsaino/publications/hashrouting-icn13.pdf),
-[\[BibTex\]](http://www.ee.ucl.ac.uk/~lsaino/publications/hashrouting-icn13.bib)
+[\[PDF\]](https://lorenzosaino.github.io/publications/hashrouting-icn13.pdf),
+[\[BibTex\]](https://lorenzosaino.github.io/publications/hashrouting-icn13.bib)
 
 All the code, data and documentation required is made available in the [icarus-sim/hashrouting-icn13-results](http://github.com/icarus-sim/hashrouting-icn13-results) repository.
 
@@ -171,7 +171,7 @@ All the code, data and documentation required is made available in the [icarus-s
 Icarus is licensed under the terms of the [GNU GPLv2 license](http://www.gnu.org/licenses/gpl-2.0.html).
 
 ### Contacts
-For further information about the Icarus simulator, please contact [Lorenzo Saino](http://www.ee.ucl.ac.uk/~lsaino).
+For further information about the Icarus simulator, please contact [Lorenzo Saino](https://lorenzosaino.github.io).
 
 ### Acknowledgments
-This work received funding from the EU-Japan initiative, under EU FP7 grant agreement no. 608518 and NICT contract no. 167 ([GreenICN project](http://www.greenicn.org/)) and from the EU FP7 program, under grant agreements 318488 ([Flamingo Network of Excellence project](http://www.fp7-flamingo.eu/)) and ICT-248784 ([COMET project](http://www.comet-project.org/)).
+This work received funding from the UK EPSRC, under grant agreement no. EP/K019589/1 ([COMIT project](http://www.ee.ucl.ac.uk/comit-project/)), the EU-Japan initiative, under EU FP7 grant agreement no. 608518 and NICT contract no. 167 ([GreenICN project](http://www.greenicn.org/)) and from the EU FP7 program, under grant agreements 318488 ([Flamingo Network of Excellence project](http://www.fp7-flamingo.eu/)).
