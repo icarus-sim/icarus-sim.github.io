@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.execution.engine &mdash; Icarus 0.5.0 documentation</title>
+    <title>icarus.execution.engine &mdash; Icarus 0.6.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.5.0',
+        VERSION:     '0.6.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,11 +23,11 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.5.0 documentation" href="../../../index.html" />
+    <link rel="top" title="Icarus 0.6.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -36,26 +36,20 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="../../../np-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
-          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -64,26 +58,26 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for icarus.execution.engine</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;This module implements the simulation engine.</span>
+<span></span><span class="sd">&quot;&quot;&quot;This module implements the simulation engine.</span>
 
 <span class="sd">The simulation engine, given the parameters according to which a single</span>
 <span class="sd">experiments needs to be run, instantiates all the required classes and executes</span>
 <span class="sd">the experiment by iterating through the event provided by an event generator</span>
-<span class="sd">and providing them to a strategy instance. </span>
+<span class="sd">and providing them to a strategy instance.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">icarus.execution</span> <span class="kn">import</span> <span class="n">NetworkModel</span><span class="p">,</span> <span class="n">NetworkView</span><span class="p">,</span> <span class="n">NetworkController</span><span class="p">,</span> <span class="n">CollectorProxy</span>
-<span class="kn">from</span> <span class="nn">icarus.registry</span> <span class="kn">import</span> <span class="n">DATA_COLLECTOR</span><span class="p">,</span> <span class="n">STRATEGY</span>
+<span class="kn">from</span> <span class="nn">icarus.execution</span> <span class="k">import</span> <span class="n">NetworkModel</span><span class="p">,</span> <span class="n">NetworkView</span><span class="p">,</span> <span class="n">NetworkController</span><span class="p">,</span> <span class="n">CollectorProxy</span>
+<span class="kn">from</span> <span class="nn">icarus.registry</span> <span class="k">import</span> <span class="n">DATA_COLLECTOR</span><span class="p">,</span> <span class="n">STRATEGY</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;exec_experiment&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;exec_experiment&#39;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="exec_experiment"><a class="viewcode-back" href="../../../apidoc/icarus.execution.html#icarus.execution.engine.exec_experiment">[docs]</a><span class="k">def</span> <span class="nf">exec_experiment</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">workload</span><span class="p">,</span> <span class="n">netconf</span><span class="p">,</span> <span class="n">strategy</span><span class="p">,</span> <span class="n">cache_policy</span><span class="p">,</span> <span class="n">collectors</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Execute the simulation of a specific scenario.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    topology : Topology</span>
@@ -106,7 +100,7 @@
 <span class="sd">        The collectors to be used. It is a dictionary in which keys are the</span>
 <span class="sd">        names of collectors to use and values are dictionaries of attributes</span>
 <span class="sd">        for the collector they refer to.</span>
-<span class="sd">         </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    results : Tree</span>
@@ -115,16 +109,16 @@
     <span class="n">model</span> <span class="o">=</span> <span class="n">NetworkModel</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">cache_policy</span><span class="p">,</span> <span class="o">**</span><span class="n">netconf</span><span class="p">)</span>
     <span class="n">view</span> <span class="o">=</span> <span class="n">NetworkView</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">NetworkController</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-    
+
     <span class="n">collectors_inst</span> <span class="o">=</span> <span class="p">[</span><span class="n">DATA_COLLECTOR</span><span class="p">[</span><span class="n">name</span><span class="p">](</span><span class="n">view</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
                        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">collectors</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
     <span class="n">collector</span> <span class="o">=</span> <span class="n">CollectorProxy</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">collectors_inst</span><span class="p">)</span>
     <span class="n">controller</span><span class="o">.</span><span class="n">attach_collector</span><span class="p">(</span><span class="n">collector</span><span class="p">)</span>
-    
-    <span class="n">strategy_name</span> <span class="o">=</span> <span class="n">strategy</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
-    <span class="n">strategy_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">strategy</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s">&#39;name&#39;</span><span class="p">}</span>
+
+    <span class="n">strategy_name</span> <span class="o">=</span> <span class="n">strategy</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    <span class="n">strategy_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">strategy</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;name&#39;</span><span class="p">}</span>
     <span class="n">strategy_inst</span> <span class="o">=</span> <span class="n">STRATEGY</span><span class="p">[</span><span class="n">strategy_name</span><span class="p">](</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="o">**</span><span class="n">strategy_args</span><span class="p">)</span>
-    
+
     <span class="k">for</span> <span class="n">time</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">workload</span><span class="p">:</span>
         <span class="n">strategy_inst</span><span class="o">.</span><span class="n">process_event</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">**</span><span class="n">event</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">collector</span><span class="o">.</span><span class="n">results</span><span class="p">()</span></div>
@@ -135,7 +129,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -144,16 +138,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="../../../np-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
-          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
   </body>
 </html>

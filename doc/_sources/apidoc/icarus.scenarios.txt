@@ -4,6 +4,14 @@ icarus.scenarios package
 Submodules
 ----------
 
+icarus.scenarios.algorithms module
+----------------------------------
+
+.. automodule:: icarus.scenarios.algorithms
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 icarus.scenarios.cacheplacement module
 --------------------------------------
 

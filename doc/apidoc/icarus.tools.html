@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.tools package &mdash; Icarus 0.5.0 documentation</title>
+    <title>icarus.tools package &mdash; Icarus 0.6.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.0',
+        VERSION:     '0.6.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,11 +23,11 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.5.0 documentation" href="../index.html" />
+    <link rel="top" title="Icarus 0.6.0 documentation" href="../index.html" />
     <link rel="up" title="icarus package" href="icarus.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -36,14 +36,11 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="../np-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
-          <li><a href="icarus.html" accesskey="U">icarus package</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="icarus.html" accesskey="U">icarus package</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -59,17 +56,14 @@
 </li>
 </ul>
 
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -78,7 +72,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="icarus-tools-package">
 <h1>icarus.tools package<a class="headerlink" href="#icarus-tools-package" title="Permalink to this headline">¶</a></h1>
@@ -91,7 +85,7 @@
 replacement policies.</p>
 <dl class="function">
 <dt id="icarus.tools.cacheperf.che_characteristic_time">
-<tt class="descname">che_characteristic_time</tt><big>(</big><em>pdf</em>, <em>cache_size</em>, <em>target=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_characteristic_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_characteristic_time" title="Permalink to this definition">¶</a></dt>
+<code class="descname">che_characteristic_time</code><span class="sig-paren">(</span><em>pdf</em>, <em>cache_size</em>, <em>target=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_characteristic_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_characteristic_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the characteristic time of an item or of all items, as defined by
 Che et al.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -128,7 +122,7 @@ the characteristic time of only the specified item.</p>
 
 <dl class="function">
 <dt id="icarus.tools.cacheperf.che_per_content_cache_hit_ratio">
-<tt class="descname">che_per_content_cache_hit_ratio</tt><big>(</big><em>pdf</em>, <em>cache_size</em>, <em>target=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_per_content_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_per_content_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
+<code class="descname">che_per_content_cache_hit_ratio</code><span class="sig-paren">(</span><em>pdf</em>, <em>cache_size</em>, <em>target=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_per_content_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_per_content_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate the cache hit ratio of an item or of all items using the Che&#8217;s
 approximation.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -165,7 +159,7 @@ the cache hit ratio of only the specified item.</p>
 
 <dl class="function">
 <dt id="icarus.tools.cacheperf.che_cache_hit_ratio">
-<tt class="descname">che_cache_hit_ratio</tt><big>(</big><em>pdf</em>, <em>cache_size</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
+<code class="descname">che_cache_hit_ratio</code><span class="sig-paren">(</span><em>pdf</em>, <em>cache_size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate the overall cache hit ratio of an LRU cache under generic IRM
 demand using the Che&#8217;s approximation.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -194,7 +188,7 @@ demand using the Che&#8217;s approximation.</p>
 
 <dl class="function">
 <dt id="icarus.tools.cacheperf.che_characteristic_time_simplified">
-<tt class="descname">che_characteristic_time_simplified</tt><big>(</big><em>pdf</em>, <em>cache_size</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_characteristic_time_simplified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_characteristic_time_simplified" title="Permalink to this definition">¶</a></dt>
+<code class="descname">che_characteristic_time_simplified</code><span class="sig-paren">(</span><em>pdf</em>, <em>cache_size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_characteristic_time_simplified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_characteristic_time_simplified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the characteristic time of an LRU cache under a given IRM
 workload, as defined by Che et al.
 This function computes one single characteristic time for all contents.
@@ -226,7 +220,7 @@ reduced skewness in their popularity distribution.</p>
 
 <dl class="function">
 <dt id="icarus.tools.cacheperf.che_per_content_cache_hit_ratio_simplified">
-<tt class="descname">che_per_content_cache_hit_ratio_simplified</tt><big>(</big><em>pdf</em>, <em>cache_size</em>, <em>target=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_per_content_cache_hit_ratio_simplified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_per_content_cache_hit_ratio_simplified" title="Permalink to this definition">¶</a></dt>
+<code class="descname">che_per_content_cache_hit_ratio_simplified</code><span class="sig-paren">(</span><em>pdf</em>, <em>cache_size</em>, <em>target=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_per_content_cache_hit_ratio_simplified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_per_content_cache_hit_ratio_simplified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate the cache hit ratio of an item or of all items using the Che&#8217;s
 approximation. This version uses a single characteristic time for all
 contents.</p>
@@ -264,7 +258,7 @@ the cache hit ratio of only the specified item.</p>
 
 <dl class="function">
 <dt id="icarus.tools.cacheperf.che_cache_hit_ratio_simplified">
-<tt class="descname">che_cache_hit_ratio_simplified</tt><big>(</big><em>pdf</em>, <em>cache_size</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_cache_hit_ratio_simplified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_cache_hit_ratio_simplified" title="Permalink to this definition">¶</a></dt>
+<code class="descname">che_cache_hit_ratio_simplified</code><span class="sig-paren">(</span><em>pdf</em>, <em>cache_size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_cache_hit_ratio_simplified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_cache_hit_ratio_simplified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate the overall cache hit ratio of an LRU cache under generic IRM
 demand using the Che&#8217;s approximation. This version uses a single
 characteristic time for all contents.</p>
@@ -293,8 +287,112 @@ characteristic time for all contents.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="icarus.tools.cacheperf.che_characteristic_time_generalized">
+<code class="descname">che_characteristic_time_generalized</code><span class="sig-paren">(</span><em>pdf</em>, <em>cache_size</em>, <em>policy</em>, <em>**policy_args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_characteristic_time_generalized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_characteristic_time_generalized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the characteristic time of a cache under a given IRM demand
+according to the the extension of Che&#8217;s approximation proposed by Martina
+et al.
+This function computes one single characteristic time for all content items.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pdf</strong> : array-like</p>
+<blockquote>
+<div><p>The probability density function of an item being requested</p>
+</div></blockquote>
+<p><strong>cache_size</strong> : int</p>
+<blockquote>
+<div><p>The size of the cache (in number of items)</p>
+</div></blockquote>
+<p><strong>policy</strong> : str</p>
+<blockquote>
+<div><p>The cache replacement policy (&#8216;LRU&#8217;, &#8216;q-LRU&#8217;, &#8216;FIFO&#8217;, &#8216;RANDOM&#8217;)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>r</strong> : float</p>
+<blockquote class="last">
+<div><p>The characteristic time.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.tools.cacheperf.che_per_content_cache_hit_ratio_generalized">
+<code class="descname">che_per_content_cache_hit_ratio_generalized</code><span class="sig-paren">(</span><em>pdf</em>, <em>cache_size</em>, <em>policy</em>, <em>**policy_args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_per_content_cache_hit_ratio_generalized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_per_content_cache_hit_ratio_generalized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate the cache hit ratio of an item or of all items in a cache
+subject to IRM demand according to the extension of Che&#8217;s approximation
+proposed by Martina et al.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pdf</strong> : array-like</p>
+<blockquote>
+<div><p>The probability density function of an item being requested</p>
+</div></blockquote>
+<p><strong>cache_size</strong> : int</p>
+<blockquote>
+<div><p>The size of the cache (in number of items)</p>
+</div></blockquote>
+<p><strong>policy</strong> : str, optional</p>
+<blockquote>
+<div><p>The cache replacement policy (&#8216;LRU&#8217;, &#8216;q-LRU&#8217;, &#8216;FIFO&#8217;, &#8216;RANDOM&#8217;)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_hit_ratio</strong> : array of float or float</p>
+<blockquote class="last">
+<div><p>If target is None, returns an array with the cache hit ratios of all
+items in the population. If a target is specified, then it returns
+the cache hit ratio of only the specified item.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.tools.cacheperf.che_cache_hit_ratio_generalized">
+<code class="descname">che_cache_hit_ratio_generalized</code><span class="sig-paren">(</span><em>pdf</em>, <em>cache_size</em>, <em>policy='LRU'</em>, <em>**policy_args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#che_cache_hit_ratio_generalized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.che_cache_hit_ratio_generalized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate the overall cache hit ratio of a cache subject to IRM demand
+according to the extension of Che&#8217;s approximation proposed by Martina et al.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pdf</strong> : array-like</p>
+<blockquote>
+<div><p>The probability density function of an item being requested</p>
+</div></blockquote>
+<p><strong>cache_size</strong> : int</p>
+<blockquote>
+<div><p>The size of the cache (in number of items)</p>
+</div></blockquote>
+<p><strong>policy</strong> : str, optional</p>
+<blockquote>
+<div><p>The cache replacement policy (&#8216;LRU&#8217;, &#8216;q-LRU&#8217;, &#8216;FIFO&#8217;, &#8216;RANDOM&#8217;)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_hit_ratio</strong> : float</p>
+<blockquote class="last">
+<div><p>The overall cache hit ratio</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="icarus.tools.cacheperf.laoutaris_characteristic_time">
-<tt class="descname">laoutaris_characteristic_time</tt><big>(</big><em>alpha</em>, <em>population</em>, <em>cache_size</em>, <em>order=3</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#laoutaris_characteristic_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.laoutaris_characteristic_time" title="Permalink to this definition">¶</a></dt>
+<code class="descname">laoutaris_characteristic_time</code><span class="sig-paren">(</span><em>alpha</em>, <em>population</em>, <em>cache_size</em>, <em>order=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#laoutaris_characteristic_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.laoutaris_characteristic_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimates the Che&#8217;s characteristic time of an LRU cache under general
 power-law demand using the Laoutaris approximation.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -333,7 +431,7 @@ power-law demand using the Laoutaris approximation.</p>
 
 <dl class="function">
 <dt id="icarus.tools.cacheperf.laoutaris_per_content_cache_hit_ratio">
-<tt class="descname">laoutaris_per_content_cache_hit_ratio</tt><big>(</big><em>alpha</em>, <em>population</em>, <em>cache_size</em>, <em>order=3</em>, <em>target=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#laoutaris_per_content_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.laoutaris_per_content_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
+<code class="descname">laoutaris_per_content_cache_hit_ratio</code><span class="sig-paren">(</span><em>alpha</em>, <em>population</em>, <em>cache_size</em>, <em>order=3</em>, <em>target=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#laoutaris_per_content_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.laoutaris_per_content_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimates the per-content cache hit ratio of an LRU cache under general
 power-law demand using the Laoutaris approximation.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -380,7 +478,7 @@ the cache hit ratio of only the specified item.</p>
 
 <dl class="function">
 <dt id="icarus.tools.cacheperf.laoutaris_cache_hit_ratio">
-<tt class="descname">laoutaris_cache_hit_ratio</tt><big>(</big><em>alpha</em>, <em>population</em>, <em>cache_size</em>, <em>order=3</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#laoutaris_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.laoutaris_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
+<code class="descname">laoutaris_cache_hit_ratio</code><span class="sig-paren">(</span><em>alpha</em>, <em>population</em>, <em>cache_size</em>, <em>order=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#laoutaris_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.laoutaris_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate the cache hit ratio of an LRU cache under general power-law
 demand using the Laoutaris approximation.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -419,7 +517,7 @@ demand using the Laoutaris approximation.</p>
 
 <dl class="function">
 <dt id="icarus.tools.cacheperf.optimal_cache_hit_ratio">
-<tt class="descname">optimal_cache_hit_ratio</tt><big>(</big><em>pdf</em>, <em>cache_size</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#optimal_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.optimal_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
+<code class="descname">optimal_cache_hit_ratio</code><span class="sig-paren">(</span><em>pdf</em>, <em>cache_size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#optimal_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.optimal_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the value of the optimal cache hit ratio of a cache under IRM
 stationary demand with a given pdf.</p>
 <p>In practice this function returns the probability of a cache hit if cache
@@ -451,7 +549,7 @@ corresponds to the steady-state cache hit ratio of an LFU cache.</p>
 
 <dl class="function">
 <dt id="icarus.tools.cacheperf.numeric_per_content_cache_hit_ratio">
-<tt class="descname">numeric_per_content_cache_hit_ratio</tt><big>(</big><em>pdf</em>, <em>cache</em>, <em>warmup=None</em>, <em>measure=None</em>, <em>seed=None</em>, <em>target=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#numeric_per_content_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.numeric_per_content_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
+<code class="descname">numeric_per_content_cache_hit_ratio</code><span class="sig-paren">(</span><em>pdf</em>, <em>cache</em>, <em>warmup=None</em>, <em>measure=None</em>, <em>seed=None</em>, <em>target=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#numeric_per_content_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.numeric_per_content_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
 <dd><p>Numerically compute the per-content cache hit ratio of a cache under IRM
 stationary demand with a given pdf.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -503,7 +601,7 @@ the cache hit ratio of only the specified item.</p>
 
 <dl class="function">
 <dt id="icarus.tools.cacheperf.numeric_cache_hit_ratio">
-<tt class="descname">numeric_cache_hit_ratio</tt><big>(</big><em>pdf</em>, <em>cache</em>, <em>warmup=None</em>, <em>measure=None</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#numeric_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.numeric_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
+<code class="descname">numeric_cache_hit_ratio</code><span class="sig-paren">(</span><em>pdf</em>, <em>cache</em>, <em>warmup=None</em>, <em>measure=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#numeric_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.numeric_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
 <dd><p>Numerically compute the cache hit ratio of a cache under IRM
 stationary demand with a given pdf.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -546,8 +644,54 @@ set to 30 times the content population</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="icarus.tools.cacheperf.numeric_cache_hit_ratio_2_layers">
+<code class="descname">numeric_cache_hit_ratio_2_layers</code><span class="sig-paren">(</span><em>pdf</em>, <em>l1_cache</em>, <em>l2_cache</em>, <em>warmup=None</em>, <em>measure=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#numeric_cache_hit_ratio_2_layers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.numeric_cache_hit_ratio_2_layers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numerically compute the cache hit ratio of a two-layer cache under IRM
+stationary demand with a given pdf.</p>
+<p>Differently from the numeric_cache_hit_ratio function, this function
+allows users to compute the hits at layer 1, layer 2 and overall.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pdf</strong> : array-like</p>
+<blockquote>
+<div><p>The probability density function of an item being requested</p>
+</div></blockquote>
+<p><strong>cache</strong> : Cache</p>
+<blockquote>
+<div><p>The cache object (i.e. the instance of a class subclassing
+icarus.Cache)</p>
+</div></blockquote>
+<p><strong>warmup</strong> : int, optional</p>
+<blockquote>
+<div><p>The number of warmup requests to generate. If not specified, it is set
+to 10 times the content population</p>
+</div></blockquote>
+<p><strong>measure</strong> : int, optional</p>
+<blockquote>
+<div><p>The number of measured requests to generate. If not specified, it is
+set to 30 times the content population</p>
+</div></blockquote>
+<p><strong>seed</strong> : int, optional</p>
+<blockquote>
+<div><p>The seed used to generate random numbers</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_hit_ratio</strong> : dict</p>
+<blockquote class="last">
+<div><p>Dictionary with keys &#8220;l1_hits&#8221;, &#8220;l2_hits&#8221; and &#8220;total_hits&#8221;</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="icarus.tools.cacheperf.trace_driven_cache_hit_ratio">
-<tt class="descname">trace_driven_cache_hit_ratio</tt><big>(</big><em>workload</em>, <em>cache</em>, <em>warmup_ratio=0.25</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#trace_driven_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.trace_driven_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
+<code class="descname">trace_driven_cache_hit_ratio</code><span class="sig-paren">(</span><em>workload</em>, <em>cache</em>, <em>warmup_ratio=0.25</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/cacheperf.html#trace_driven_cache_hit_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.cacheperf.trace_driven_cache_hit_ratio" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute cache hit ratio of a cache under an arbitrary trace-driven
 workload.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -586,11 +730,26 @@ cache hit/miss results are discarded)</p>
 <p>Provides statistical utilities functions used by the simulator</p>
 <dl class="class">
 <dt id="icarus.tools.stats.DiscreteDist">
-<em class="property">class </em><tt class="descname">DiscreteDist</tt><big>(</big><em>pdf</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/stats.html#DiscreteDist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.DiscreteDist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<em class="property">class </em><code class="descname">DiscreteDist</code><span class="sig-paren">(</span><em>pdf</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/stats.html#DiscreteDist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.DiscreteDist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Implements a discrete distribution with finite population.</p>
 <p>The support must be a finite discrete set of contiguous integers
 {1, ..., N}. This definition of discrete distribution.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.tools.stats.DiscreteDist.cdf" title="icarus.tools.stats.DiscreteDist.cdf"><code class="xref py py-obj docutils literal"><span class="pre">cdf</span></code></a></td>
+<td>Return the Cumulative Density Function (CDF)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.tools.stats.DiscreteDist.pdf" title="icarus.tools.stats.DiscreteDist.pdf"><code class="xref py py-obj docutils literal"><span class="pre">pdf</span></code></a></td>
+<td>Return the Probability Density Function (PDF)</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -598,14 +757,14 @@ cache hit/miss results are discarded)</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.tools.stats.DiscreteDist.rv" title="icarus.tools.stats.DiscreteDist.rv"><tt class="xref py py-obj docutils literal"><span class="pre">rv</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.tools.stats.DiscreteDist.rv" title="icarus.tools.stats.DiscreteDist.rv"><code class="xref py py-obj docutils literal"><span class="pre">rv</span></code></a>()</td>
 <td>Get rand value from the distribution</td>
 </tr>
 </tbody>
 </table>
 <dl class="attribute">
 <dt id="icarus.tools.stats.DiscreteDist.cdf">
-<tt class="descname">cdf</tt><a class="reference internal" href="../_modules/icarus/tools/stats.html#DiscreteDist.cdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.DiscreteDist.cdf" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cdf</code><a class="headerlink" href="#icarus.tools.stats.DiscreteDist.cdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the Cumulative Density Function (CDF)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -623,7 +782,7 @@ cache hit/miss results are discarded)</p>
 
 <dl class="attribute">
 <dt id="icarus.tools.stats.DiscreteDist.pdf">
-<tt class="descname">pdf</tt><a class="reference internal" href="../_modules/icarus/tools/stats.html#DiscreteDist.pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.DiscreteDist.pdf" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pdf</code><a class="headerlink" href="#icarus.tools.stats.DiscreteDist.pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the Probability Density Function (PDF)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -642,7 +801,7 @@ distribution</p>
 
 <dl class="method">
 <dt id="icarus.tools.stats.DiscreteDist.rv">
-<tt class="descname">rv</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/tools/stats.html#DiscreteDist.rv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.DiscreteDist.rv" title="Permalink to this definition">¶</a></dt>
+<code class="descname">rv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/stats.html#DiscreteDist.rv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.DiscreteDist.rv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get rand value from the distribution</p>
 </dd></dl>
 
@@ -650,10 +809,28 @@ distribution</p>
 
 <dl class="class">
 <dt id="icarus.tools.stats.TruncatedZipfDist">
-<em class="property">class </em><tt class="descname">TruncatedZipfDist</tt><big>(</big><em>alpha=1.0</em>, <em>n=1000</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/stats.html#TruncatedZipfDist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.TruncatedZipfDist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.tools.stats.DiscreteDist" title="icarus.tools.stats.DiscreteDist"><tt class="xref py py-class docutils literal"><span class="pre">icarus.tools.stats.DiscreteDist</span></tt></a></p>
+<em class="property">class </em><code class="descname">TruncatedZipfDist</code><span class="sig-paren">(</span><em>alpha=1.0</em>, <em>n=1000</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/stats.html#TruncatedZipfDist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.TruncatedZipfDist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.tools.stats.DiscreteDist" title="icarus.tools.stats.DiscreteDist"><code class="xref py py-class docutils literal"><span class="pre">icarus.tools.stats.DiscreteDist</span></code></a></p>
 <p>Implements a truncated Zipf distribution, i.e. a Zipf distribution with
 a finite population, which can hence take values of alpha &gt; 0.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.tools.stats.TruncatedZipfDist.alpha" title="icarus.tools.stats.TruncatedZipfDist.alpha"><code class="xref py py-obj docutils literal"><span class="pre">alpha</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">cdf</span></code></td>
+<td>Return the Cumulative Density Function (CDF)</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">pdf</span></code></td>
+<td>Return the Probability Density Function (PDF)</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -661,21 +838,21 @@ a finite population, which can hence take values of alpha &gt; 0.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">rv</span></tt>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">rv</span></code>()</td>
 <td>Get rand value from the distribution</td>
 </tr>
 </tbody>
 </table>
 <dl class="attribute">
 <dt id="icarus.tools.stats.TruncatedZipfDist.alpha">
-<tt class="descname">alpha</tt><a class="reference internal" href="../_modules/icarus/tools/stats.html#TruncatedZipfDist.alpha"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.TruncatedZipfDist.alpha" title="Permalink to this definition">¶</a></dt>
+<code class="descname">alpha</code><a class="headerlink" href="#icarus.tools.stats.TruncatedZipfDist.alpha" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="function">
 <dt id="icarus.tools.stats.means_confidence_interval">
-<tt class="descname">means_confidence_interval</tt><big>(</big><em>data</em>, <em>confidence=0.95</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/stats.html#means_confidence_interval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.means_confidence_interval" title="Permalink to this definition">¶</a></dt>
+<code class="descname">means_confidence_interval</code><span class="sig-paren">(</span><em>data</em>, <em>confidence=0.95</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/stats.html#means_confidence_interval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.means_confidence_interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the confidence interval for a given set of means.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -713,7 +890,7 @@ Available: <a class="reference external" href="http://heather.cs.ucdavis.edu/pro
 
 <dl class="function">
 <dt id="icarus.tools.stats.proportions_confidence_interval">
-<tt class="descname">proportions_confidence_interval</tt><big>(</big><em>data</em>, <em>confidence</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/stats.html#proportions_confidence_interval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.proportions_confidence_interval" title="Permalink to this definition">¶</a></dt>
+<code class="descname">proportions_confidence_interval</code><span class="sig-paren">(</span><em>data</em>, <em>confidence</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/stats.html#proportions_confidence_interval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.proportions_confidence_interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the confidence interval of a proportion.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -742,7 +919,7 @@ Available: <a class="reference external" href="http://heather.cs.ucdavis.edu/pro
 
 <dl class="function">
 <dt id="icarus.tools.stats.cdf">
-<tt class="descname">cdf</tt><big>(</big><em>data</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/stats.html#cdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.cdf" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cdf</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/stats.html#cdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.cdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the empirical CDF of a set of 1D data</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -771,7 +948,7 @@ More specifically cdf[i] is the probability that x &lt; x[i]</p>
 
 <dl class="function">
 <dt id="icarus.tools.stats.pdf">
-<tt class="descname">pdf</tt><big>(</big><em>data</em>, <em>n_bins</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/stats.html#pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.pdf" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pdf</code><span class="sig-paren">(</span><em>data</em>, <em>n_bins</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/stats.html#pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.stats.pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the empirical PDF of a set of 1D data</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -785,7 +962,7 @@ More specifically cdf[i] is the probability that x &lt; x[i]</p>
 <blockquote>
 <div><p>The number of bins</p>
 </div></blockquote>
-<p><strong>Returns</strong> :</p>
+<p><strong>Returns</strong></p>
 <p><strong>x</strong> : array</p>
 <blockquote>
 <div><p>The center point of all bins</p>
@@ -806,7 +983,7 @@ More specifically cdf[i] is the probability that x &lt; x[i]</p>
 <p>Functions for importing and analyzing traffic traces</p>
 <dl class="function">
 <dt id="icarus.tools.traces.frequencies">
-<tt class="descname">frequencies</tt><big>(</big><em>data</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/traces.html#frequencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.frequencies" title="Permalink to this definition">¶</a></dt>
+<code class="descname">frequencies</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/traces.html#frequencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.frequencies" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract frequencies from traces. Returns array of sorted frequencies</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -834,8 +1011,50 @@ function given a set of data, e.g. content request traces.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="icarus.tools.traces.one_timers">
+<code class="descname">one_timers</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/traces.html#one_timers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.one_timers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return fraction of contents requested only once (i.e., one-timers)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : array-like</p>
+<blockquote>
+<div><p>An array of generic data (i.e. URLs of web pages)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>one_timers</strong> : float</p>
+<blockquote class="last">
+<div><p>Fraction of content objects requested only once.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="icarus.tools.traces.trace_stats">
+<code class="descname">trace_stats</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/traces.html#trace_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.trace_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print full stats of a trace</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : array-like</p>
+<blockquote class="last">
+<div><p>An array of generic data (i.e. URLs of web pages)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="icarus.tools.traces.zipf_fit">
-<tt class="descname">zipf_fit</tt><big>(</big><em>obs_freqs</em>, <em>need_sorting=False</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/traces.html#zipf_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.zipf_fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">zipf_fit</code><span class="sig-paren">(</span><em>obs_freqs</em>, <em>need_sorting=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/traces.html#zipf_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.zipf_fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the value of the Zipf&#8217;s distribution alpha parameter that best
 fits the data provided and the p-value of the fit test.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -872,7 +1091,7 @@ sort it. If False, assume that the array is already sorted</p>
 
 <dl class="function">
 <dt id="icarus.tools.traces.parse_url_list">
-<tt class="descname">parse_url_list</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/traces.html#parse_url_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.parse_url_list" title="Permalink to this definition">¶</a></dt>
+<code class="descname">parse_url_list</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/traces.html#parse_url_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.parse_url_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse traces from a text file where each line contains a URL requested
 without timestamp or counters</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -898,7 +1117,7 @@ attributes of an entry of the trace</p>
 
 <dl class="function">
 <dt id="icarus.tools.traces.parse_wikibench">
-<tt class="descname">parse_wikibench</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/traces.html#parse_wikibench"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.parse_wikibench" title="Permalink to this definition">¶</a></dt>
+<code class="descname">parse_wikibench</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/traces.html#parse_wikibench"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.parse_wikibench" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses traces from the Wikibench dataset</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -923,7 +1142,7 @@ attributes of an entry of the trace</p>
 
 <dl class="function">
 <dt id="icarus.tools.traces.parse_squid">
-<tt class="descname">parse_squid</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/traces.html#parse_squid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.parse_squid" title="Permalink to this definition">¶</a></dt>
+<code class="descname">parse_squid</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/traces.html#parse_squid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.parse_squid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses traces from a Squid log file.
 Parse a Squid log file.</p>
 <p>Squid is an HTTP reverse proxy. Its logs contains traces of all HTTP
@@ -956,7 +1175,7 @@ attributes of an entry of the trace</p>
 
 <dl class="function">
 <dt id="icarus.tools.traces.parse_youtube_umass">
-<tt class="descname">parse_youtube_umass</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/traces.html#parse_youtube_umass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.parse_youtube_umass" title="Permalink to this definition">¶</a></dt>
+<code class="descname">parse_youtube_umass</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/traces.html#parse_youtube_umass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.parse_youtube_umass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse YouTube collected at UMass campus network <a href="#id2"><span class="problematic" id="id3"><span id="id1"></span>[1]_</span></a>.</p>
 <p>These data were collected at UMass campus network over a a measurement
 period between June 2007 and March 2008.</p>
@@ -995,14 +1214,14 @@ attributes of an entry of the trace</p>
 <p class="rubric">References</p>
 <dl class="docutils">
 <dt>..[1] Michael Zink, Kyoungwon Suh, Yu Gu and Jim Kurose,</dt>
-<dd>Watch Global Cache Local: YouTube Network Traces at a Campus Network - 
+<dd>Watch Global Cache Local: YouTube Network Traces at a Campus Network -
 Measurements and Implications, in Proc. of IEEE MMCN&#8216;08</dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="icarus.tools.traces.parse_common_log_format">
-<tt class="descname">parse_common_log_format</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/icarus/tools/traces.html#parse_common_log_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.parse_common_log_format" title="Permalink to this definition">¶</a></dt>
+<code class="descname">parse_common_log_format</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/tools/traces.html#parse_common_log_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.tools.traces.parse_common_log_format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse files saved in the Common Log Format (CLF)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1043,7 +1262,7 @@ behavior of caches and statistical utilities.</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -1052,16 +1271,13 @@ behavior of caches and statistical utilities.</p>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="../np-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
-          <li><a href="icarus.html" >icarus package</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="icarus.html" >icarus package</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
   </body>
 </html>

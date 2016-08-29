@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus.execution package &mdash; Icarus 0.5.0 documentation</title>
+    <title>icarus.execution package &mdash; Icarus 0.6.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.0',
+        VERSION:     '0.6.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,12 +23,12 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.5.0 documentation" href="../index.html" />
+    <link rel="top" title="Icarus 0.6.0 documentation" href="../index.html" />
     <link rel="up" title="icarus package" href="icarus.html" />
     <link rel="prev" title="icarus package" href="icarus.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -38,16 +38,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../np-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="icarus.html" title="icarus package"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
-          <li><a href="icarus.html" accesskey="U">icarus package</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="icarus.html" accesskey="U">icarus package</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -68,17 +65,14 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="icarus.html"
                         title="previous chapter">icarus package</a></p>
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -87,7 +81,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="icarus-execution-package">
 <h1>icarus.execution package<a class="headerlink" href="#icarus-execution-package" title="Permalink to this headline">¶</a></h1>
@@ -105,8 +99,8 @@ latency, path stretch and link load.</p>
 inheriting from the <cite>DataCollector</cite> class and override all required methods.</p>
 <dl class="class">
 <dt id="icarus.execution.collectors.DataCollector">
-<em class="property">class </em><tt class="descname">DataCollector</tt><big>(</big><em>view</em>, <em>**params</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<em class="property">class </em><code class="descname">DataCollector</code><span class="sig-paren">(</span><em>view</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Object collecting notifications about simulation events and measuring
 relevant metrics.</p>
 <p class="rubric">Methods</p>
@@ -116,35 +110,35 @@ relevant metrics.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.cache_hit" title="icarus.execution.collectors.DataCollector.cache_hit"><tt class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></tt></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.cache_hit" title="icarus.execution.collectors.DataCollector.cache_hit"><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.cache_miss" title="icarus.execution.collectors.DataCollector.cache_miss"><tt class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></tt></a>(node)</td>
-<td>Reports that the cache at node <em>node</em> has been looked up for  requested content but there was a cache miss.</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.cache_miss" title="icarus.execution.collectors.DataCollector.cache_miss"><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code></a>(node)</td>
+<td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.content_hop" title="icarus.execution.collectors.DataCollector.content_hop"><tt class="xref py py-obj docutils literal"><span class="pre">content_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.content_hop" title="icarus.execution.collectors.DataCollector.content_hop"><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.end_session" title="icarus.execution.collectors.DataCollector.end_session"><tt class="xref py py-obj docutils literal"><span class="pre">end_session</span></tt></a>([success])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.end_session" title="icarus.execution.collectors.DataCollector.end_session"><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code></a>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.request_hop" title="icarus.execution.collectors.DataCollector.request_hop"><tt class="xref py py-obj docutils literal"><span class="pre">request_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.request_hop" title="icarus.execution.collectors.DataCollector.request_hop"><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.results" title="icarus.execution.collectors.DataCollector.results"><tt class="xref py py-obj docutils literal"><span class="pre">results</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.results" title="icarus.execution.collectors.DataCollector.results"><code class="xref py py-obj docutils literal"><span class="pre">results</span></code></a>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.server_hit" title="icarus.execution.collectors.DataCollector.server_hit"><tt class="xref py py-obj docutils literal"><span class="pre">server_hit</span></tt></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.server_hit" title="icarus.execution.collectors.DataCollector.server_hit"><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.start_session" title="icarus.execution.collectors.DataCollector.start_session"><tt class="xref py py-obj docutils literal"><span class="pre">start_session</span></tt></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.start_session" title="icarus.execution.collectors.DataCollector.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="icarus.execution.collectors.DataCollector.cache_hit">
-<tt class="descname">cache_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.cache_hit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cache_hit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.cache_hit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the requested content has been served by the cache at
 node <em>node</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -163,8 +157,8 @@ node <em>node</em>.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.DataCollector.cache_miss">
-<tt class="descname">cache_miss</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.cache_miss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.cache_miss" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reports that the cache at node <em>node</em> has been looked up for 
+<code class="descname">cache_miss</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.cache_miss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.cache_miss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the cache at node <em>node</em> has been looked up for
 requested content but there was a cache miss.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -182,7 +176,7 @@ requested content but there was a cache miss.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.DataCollector.content_hop">
-<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.content_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">content_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.content_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -196,11 +190,12 @@ requested content but there was a cache miss.</p>
 <blockquote>
 <div><p>Destination node</p>
 </div></blockquote>
-<p><strong>main_path</strong> : bool</p>
+<p><strong>main_path</strong> : bool, optional</p>
 <blockquote class="last">
-<div><p>If True, indicates that this link is being traversed by content
+<div><p>If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
-calculate latency correctly in multicast cases</p>
+calculate latency correctly in multicast cases. Default value is
+<em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -210,9 +205,9 @@ calculate latency correctly in multicast cases</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.DataCollector.end_session">
-<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.end_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">end_session</code><span class="sig-paren">(</span><em>success=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.end_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the session is closed, i.e. the content has been
-successfully delivered to the receiver or a failure blocked the 
+successfully delivered to the receiver or a failure blocked the
 execution of the request</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -230,7 +225,7 @@ execution of the request</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.DataCollector.request_hop">
-<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.request_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">request_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.request_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -244,11 +239,11 @@ execution of the request</p>
 <blockquote>
 <div><p>Destination node</p>
 </div></blockquote>
-<p><strong>main_path</strong> : bool</p>
+<p><strong>main_path</strong> : bool, optional</p>
 <blockquote class="last">
-<div><p>If True, indicates that link link is on the main path that will
+<div><p>If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
-correctly in multicast cases.</p>
+correctly in multicast cases. Default value is <em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -258,7 +253,7 @@ correctly in multicast cases.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.DataCollector.results">
-<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.results" title="Permalink to this definition">¶</a></dt>
+<code class="descname">results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the aggregated results measured by the collector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -276,7 +271,7 @@ correctly in multicast cases.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.DataCollector.server_hit">
-<tt class="descname">server_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.server_hit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">server_hit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.server_hit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the requested content has been served by the server at
 node <em>node</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -295,7 +290,7 @@ node <em>node</em>.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.DataCollector.start_session">
-<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">start_session</code><span class="sig-paren">(</span><em>timestamp</em>, <em>receiver</em>, <em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector.start_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notifies the collector that a new network session started.</p>
 <p>A session refers to the retrieval of a content from a receiver, from
 the issuing of a content request to the delivery of the content.</p>
@@ -325,8 +320,8 @@ the issuing of a content request to the delivery of the content.</p>
 
 <dl class="class">
 <dt id="icarus.execution.collectors.CollectorProxy">
-<em class="property">class </em><tt class="descname">CollectorProxy</tt><big>(</big><em>view</em>, <em>collectors</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<em class="property">class </em><code class="descname">CollectorProxy</code><span class="sig-paren">(</span><em>view</em>, <em>collectors</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
 <p>This class acts as a proxy for all concrete collectors towards the
 network controller.</p>
 <p>An instance of this class registers itself with the network controller and
@@ -339,40 +334,40 @@ dispatching events of interests to concrete collectors.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.cache_hit" title="icarus.execution.collectors.CollectorProxy.cache_hit"><tt class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></tt></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.cache_hit" title="icarus.execution.collectors.CollectorProxy.cache_hit"><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.cache_miss" title="icarus.execution.collectors.CollectorProxy.cache_miss"><tt class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></tt></a>(node)</td>
-<td>Reports that the cache at node <em>node</em> has been looked up for  requested content but there was a cache miss.</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.cache_miss" title="icarus.execution.collectors.CollectorProxy.cache_miss"><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code></a>(node)</td>
+<td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.content_hop" title="icarus.execution.collectors.CollectorProxy.content_hop"><tt class="xref py py-obj docutils literal"><span class="pre">content_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.content_hop" title="icarus.execution.collectors.CollectorProxy.content_hop"><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.end_session" title="icarus.execution.collectors.CollectorProxy.end_session"><tt class="xref py py-obj docutils literal"><span class="pre">end_session</span></tt></a>([success])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.end_session" title="icarus.execution.collectors.CollectorProxy.end_session"><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code></a>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.request_hop" title="icarus.execution.collectors.CollectorProxy.request_hop"><tt class="xref py py-obj docutils literal"><span class="pre">request_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.request_hop" title="icarus.execution.collectors.CollectorProxy.request_hop"><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.results" title="icarus.execution.collectors.CollectorProxy.results"><tt class="xref py py-obj docutils literal"><span class="pre">results</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.results" title="icarus.execution.collectors.CollectorProxy.results"><code class="xref py py-obj docutils literal"><span class="pre">results</span></code></a>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.server_hit" title="icarus.execution.collectors.CollectorProxy.server_hit"><tt class="xref py py-obj docutils literal"><span class="pre">server_hit</span></tt></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.server_hit" title="icarus.execution.collectors.CollectorProxy.server_hit"><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.start_session" title="icarus.execution.collectors.CollectorProxy.start_session"><tt class="xref py py-obj docutils literal"><span class="pre">start_session</span></tt></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.start_session" title="icarus.execution.collectors.CollectorProxy.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
 </table>
 <dl class="attribute">
 <dt id="icarus.execution.collectors.CollectorProxy.EVENTS">
-<tt class="descname">EVENTS</tt><em class="property"> = ('start_session', 'end_session', 'cache_hit', 'cache_miss', 'server_hit', 'request_hop', 'content_hop', 'results')</em><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.EVENTS" title="Permalink to this definition">¶</a></dt>
+<code class="descname">EVENTS</code><em class="property"> = ('start_session', 'end_session', 'cache_hit', 'cache_miss', 'server_hit', 'request_hop', 'content_hop', 'results')</em><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.EVENTS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.CollectorProxy.cache_hit">
-<tt class="descname">cache_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.cache_hit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cache_hit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.cache_hit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the requested content has been served by the cache at
 node <em>node</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -391,8 +386,8 @@ node <em>node</em>.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.CollectorProxy.cache_miss">
-<tt class="descname">cache_miss</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.cache_miss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.cache_miss" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reports that the cache at node <em>node</em> has been looked up for 
+<code class="descname">cache_miss</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.cache_miss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.cache_miss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the cache at node <em>node</em> has been looked up for
 requested content but there was a cache miss.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -410,7 +405,7 @@ requested content but there was a cache miss.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.CollectorProxy.content_hop">
-<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.content_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">content_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.content_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -424,11 +419,12 @@ requested content but there was a cache miss.</p>
 <blockquote>
 <div><p>Destination node</p>
 </div></blockquote>
-<p><strong>main_path</strong> : bool</p>
+<p><strong>main_path</strong> : bool, optional</p>
 <blockquote class="last">
-<div><p>If True, indicates that this link is being traversed by content
+<div><p>If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
-calculate latency correctly in multicast cases</p>
+calculate latency correctly in multicast cases. Default value is
+<em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -438,9 +434,9 @@ calculate latency correctly in multicast cases</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.CollectorProxy.end_session">
-<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.end_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">end_session</code><span class="sig-paren">(</span><em>success=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.end_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the session is closed, i.e. the content has been
-successfully delivered to the receiver or a failure blocked the 
+successfully delivered to the receiver or a failure blocked the
 execution of the request</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -458,7 +454,7 @@ execution of the request</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.CollectorProxy.request_hop">
-<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.request_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">request_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.request_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -472,11 +468,11 @@ execution of the request</p>
 <blockquote>
 <div><p>Destination node</p>
 </div></blockquote>
-<p><strong>main_path</strong> : bool</p>
+<p><strong>main_path</strong> : bool, optional</p>
 <blockquote class="last">
-<div><p>If True, indicates that link link is on the main path that will
+<div><p>If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
-correctly in multicast cases.</p>
+correctly in multicast cases. Default value is <em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -486,7 +482,7 @@ correctly in multicast cases.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.CollectorProxy.results">
-<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.results" title="Permalink to this definition">¶</a></dt>
+<code class="descname">results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the aggregated results measured by the collector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -504,7 +500,7 @@ correctly in multicast cases.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.CollectorProxy.server_hit">
-<tt class="descname">server_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.server_hit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">server_hit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.server_hit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the requested content has been served by the server at
 node <em>node</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -523,7 +519,7 @@ node <em>node</em>.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.CollectorProxy.start_session">
-<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.start_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">start_session</code><span class="sig-paren">(</span><em>timestamp</em>, <em>receiver</em>, <em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy.start_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notifies the collector that a new network session started.</p>
 <p>A session refers to the retrieval of a content from a receiver, from
 the issuing of a content request to the delivery of the content.</p>
@@ -553,8 +549,8 @@ the issuing of a content request to the delivery of the content.</p>
 
 <dl class="class">
 <dt id="icarus.execution.collectors.CacheHitRatioCollector">
-<em class="property">class </em><tt class="descname">CacheHitRatioCollector</tt><big>(</big><em>view</em>, <em>off_path_hits=False</em>, <em>per_node=True</em>, <em>content_hits=False</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<em class="property">class </em><code class="descname">CacheHitRatioCollector</code><span class="sig-paren">(</span><em>view</em>, <em>off_path_hits=False</em>, <em>per_node=True</em>, <em>content_hits=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
 <p>Collector measuring the cache hit ratio, i.e. the portion of content
 requests served by a cache.</p>
 <p class="rubric">Methods</p>
@@ -564,35 +560,35 @@ requests served by a cache.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.cache_hit" title="icarus.execution.collectors.CacheHitRatioCollector.cache_hit"><tt class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></tt></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.cache_hit" title="icarus.execution.collectors.CacheHitRatioCollector.cache_hit"><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></tt>(node)</td>
-<td>Reports that the cache at node <em>node</em> has been looked up for  requested content but there was a cache miss.</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code>(node)</td>
+<td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">content_hop</span></tt>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">end_session</span></tt>([success])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">request_hop</span></tt>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.results" title="icarus.execution.collectors.CacheHitRatioCollector.results"><tt class="xref py py-obj docutils literal"><span class="pre">results</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.results" title="icarus.execution.collectors.CacheHitRatioCollector.results"><code class="xref py py-obj docutils literal"><span class="pre">results</span></code></a>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.server_hit" title="icarus.execution.collectors.CacheHitRatioCollector.server_hit"><tt class="xref py py-obj docutils literal"><span class="pre">server_hit</span></tt></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.server_hit" title="icarus.execution.collectors.CacheHitRatioCollector.server_hit"><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.start_session" title="icarus.execution.collectors.CacheHitRatioCollector.start_session"><tt class="xref py py-obj docutils literal"><span class="pre">start_session</span></tt></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.start_session" title="icarus.execution.collectors.CacheHitRatioCollector.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="icarus.execution.collectors.CacheHitRatioCollector.cache_hit">
-<tt class="descname">cache_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.cache_hit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cache_hit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.cache_hit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the requested content has been served by the cache at
 node <em>node</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -611,12 +607,12 @@ node <em>node</em>.</p>
 
 <dl class="attribute">
 <dt id="icarus.execution.collectors.CacheHitRatioCollector.name">
-<tt class="descname">name</tt><em class="property"> = 'CACHE_HIT_RATIO'</em><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.name" title="Permalink to this definition">¶</a></dt>
+<code class="descname">name</code><em class="property"> = 'CACHE_HIT_RATIO'</em><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.CacheHitRatioCollector.results">
-<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.results" title="Permalink to this definition">¶</a></dt>
+<code class="descname">results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the aggregated results measured by the collector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -634,7 +630,7 @@ node <em>node</em>.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.CacheHitRatioCollector.server_hit">
-<tt class="descname">server_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.server_hit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">server_hit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.server_hit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the requested content has been served by the server at
 node <em>node</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -653,7 +649,7 @@ node <em>node</em>.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.CacheHitRatioCollector.start_session">
-<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">start_session</code><span class="sig-paren">(</span><em>timestamp</em>, <em>receiver</em>, <em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector.start_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notifies the collector that a new network session started.</p>
 <p>A session refers to the retrieval of a content from a receiver, from
 the issuing of a content request to the delivery of the content.</p>
@@ -683,8 +679,8 @@ the issuing of a content request to the delivery of the content.</p>
 
 <dl class="class">
 <dt id="icarus.execution.collectors.LinkLoadCollector">
-<em class="property">class </em><tt class="descname">LinkLoadCollector</tt><big>(</big><em>view</em>, <em>sr=10</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<em class="property">class </em><code class="descname">LinkLoadCollector</code><span class="sig-paren">(</span><em>view</em>, <em>req_size=150</em>, <em>content_size=1500</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
 <p>Data collector measuring the link load</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
@@ -693,35 +689,35 @@ the issuing of a content request to the delivery of the content.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></tt>(node)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></tt>(node)</td>
-<td>Reports that the cache at node <em>node</em> has been looked up for  requested content but there was a cache miss.</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code>(node)</td>
+<td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.content_hop" title="icarus.execution.collectors.LinkLoadCollector.content_hop"><tt class="xref py py-obj docutils literal"><span class="pre">content_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.content_hop" title="icarus.execution.collectors.LinkLoadCollector.content_hop"><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">end_session</span></tt>([success])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.request_hop" title="icarus.execution.collectors.LinkLoadCollector.request_hop"><tt class="xref py py-obj docutils literal"><span class="pre">request_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.request_hop" title="icarus.execution.collectors.LinkLoadCollector.request_hop"><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.results" title="icarus.execution.collectors.LinkLoadCollector.results"><tt class="xref py py-obj docutils literal"><span class="pre">results</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.results" title="icarus.execution.collectors.LinkLoadCollector.results"><code class="xref py py-obj docutils literal"><span class="pre">results</span></code></a>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">server_hit</span></tt>(node)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.start_session" title="icarus.execution.collectors.LinkLoadCollector.start_session"><tt class="xref py py-obj docutils literal"><span class="pre">start_session</span></tt></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.start_session" title="icarus.execution.collectors.LinkLoadCollector.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="icarus.execution.collectors.LinkLoadCollector.content_hop">
-<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.content_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">content_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.content_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -735,11 +731,12 @@ the issuing of a content request to the delivery of the content.</p>
 <blockquote>
 <div><p>Destination node</p>
 </div></blockquote>
-<p><strong>main_path</strong> : bool</p>
+<p><strong>main_path</strong> : bool, optional</p>
 <blockquote class="last">
-<div><p>If True, indicates that this link is being traversed by content
+<div><p>If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
-calculate latency correctly in multicast cases</p>
+calculate latency correctly in multicast cases. Default value is
+<em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -749,12 +746,12 @@ calculate latency correctly in multicast cases</p>
 
 <dl class="attribute">
 <dt id="icarus.execution.collectors.LinkLoadCollector.name">
-<tt class="descname">name</tt><em class="property"> = 'LINK_LOAD'</em><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.name" title="Permalink to this definition">¶</a></dt>
+<code class="descname">name</code><em class="property"> = 'LINK_LOAD'</em><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.LinkLoadCollector.request_hop">
-<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.request_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">request_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.request_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -768,11 +765,11 @@ calculate latency correctly in multicast cases</p>
 <blockquote>
 <div><p>Destination node</p>
 </div></blockquote>
-<p><strong>main_path</strong> : bool</p>
+<p><strong>main_path</strong> : bool, optional</p>
 <blockquote class="last">
-<div><p>If True, indicates that link link is on the main path that will
+<div><p>If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
-correctly in multicast cases.</p>
+correctly in multicast cases. Default value is <em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -782,7 +779,7 @@ correctly in multicast cases.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.LinkLoadCollector.results">
-<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.results" title="Permalink to this definition">¶</a></dt>
+<code class="descname">results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the aggregated results measured by the collector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -800,7 +797,7 @@ correctly in multicast cases.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.LinkLoadCollector.start_session">
-<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">start_session</code><span class="sig-paren">(</span><em>timestamp</em>, <em>receiver</em>, <em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector.start_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notifies the collector that a new network session started.</p>
 <p>A session refers to the retrieval of a content from a receiver, from
 the issuing of a content request to the delivery of the content.</p>
@@ -830,8 +827,8 @@ the issuing of a content request to the delivery of the content.</p>
 
 <dl class="class">
 <dt id="icarus.execution.collectors.LatencyCollector">
-<em class="property">class </em><tt class="descname">LatencyCollector</tt><big>(</big><em>view</em>, <em>cdf=False</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<em class="property">class </em><code class="descname">LatencyCollector</code><span class="sig-paren">(</span><em>view</em>, <em>cdf=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
 <p>Data collector measuring latency, i.e. the delay taken to delivery a
 content.</p>
 <p class="rubric">Methods</p>
@@ -841,35 +838,35 @@ content.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></tt>(node)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></tt>(node)</td>
-<td>Reports that the cache at node <em>node</em> has been looked up for  requested content but there was a cache miss.</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code>(node)</td>
+<td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.content_hop" title="icarus.execution.collectors.LatencyCollector.content_hop"><tt class="xref py py-obj docutils literal"><span class="pre">content_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.content_hop" title="icarus.execution.collectors.LatencyCollector.content_hop"><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.end_session" title="icarus.execution.collectors.LatencyCollector.end_session"><tt class="xref py py-obj docutils literal"><span class="pre">end_session</span></tt></a>([success])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.end_session" title="icarus.execution.collectors.LatencyCollector.end_session"><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code></a>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.request_hop" title="icarus.execution.collectors.LatencyCollector.request_hop"><tt class="xref py py-obj docutils literal"><span class="pre">request_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.request_hop" title="icarus.execution.collectors.LatencyCollector.request_hop"><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.results" title="icarus.execution.collectors.LatencyCollector.results"><tt class="xref py py-obj docutils literal"><span class="pre">results</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.results" title="icarus.execution.collectors.LatencyCollector.results"><code class="xref py py-obj docutils literal"><span class="pre">results</span></code></a>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">server_hit</span></tt>(node)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.start_session" title="icarus.execution.collectors.LatencyCollector.start_session"><tt class="xref py py-obj docutils literal"><span class="pre">start_session</span></tt></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.start_session" title="icarus.execution.collectors.LatencyCollector.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="icarus.execution.collectors.LatencyCollector.content_hop">
-<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.content_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">content_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.content_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -883,11 +880,12 @@ content.</p>
 <blockquote>
 <div><p>Destination node</p>
 </div></blockquote>
-<p><strong>main_path</strong> : bool</p>
+<p><strong>main_path</strong> : bool, optional</p>
 <blockquote class="last">
-<div><p>If True, indicates that this link is being traversed by content
+<div><p>If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
-calculate latency correctly in multicast cases</p>
+calculate latency correctly in multicast cases. Default value is
+<em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -897,9 +895,9 @@ calculate latency correctly in multicast cases</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.LatencyCollector.end_session">
-<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.end_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">end_session</code><span class="sig-paren">(</span><em>success=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.end_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the session is closed, i.e. the content has been
-successfully delivered to the receiver or a failure blocked the 
+successfully delivered to the receiver or a failure blocked the
 execution of the request</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -917,12 +915,12 @@ execution of the request</p>
 
 <dl class="attribute">
 <dt id="icarus.execution.collectors.LatencyCollector.name">
-<tt class="descname">name</tt><em class="property"> = 'LATENCY'</em><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.name" title="Permalink to this definition">¶</a></dt>
+<code class="descname">name</code><em class="property"> = 'LATENCY'</em><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.LatencyCollector.request_hop">
-<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.request_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">request_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.request_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -936,11 +934,11 @@ execution of the request</p>
 <blockquote>
 <div><p>Destination node</p>
 </div></blockquote>
-<p><strong>main_path</strong> : bool</p>
+<p><strong>main_path</strong> : bool, optional</p>
 <blockquote class="last">
-<div><p>If True, indicates that link link is on the main path that will
+<div><p>If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
-correctly in multicast cases.</p>
+correctly in multicast cases. Default value is <em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -950,7 +948,7 @@ correctly in multicast cases.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.LatencyCollector.results">
-<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.results" title="Permalink to this definition">¶</a></dt>
+<code class="descname">results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the aggregated results measured by the collector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -968,7 +966,7 @@ correctly in multicast cases.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.LatencyCollector.start_session">
-<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">start_session</code><span class="sig-paren">(</span><em>timestamp</em>, <em>receiver</em>, <em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector.start_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notifies the collector that a new network session started.</p>
 <p>A session refers to the retrieval of a content from a receiver, from
 the issuing of a content request to the delivery of the content.</p>
@@ -998,8 +996,8 @@ the issuing of a content request to the delivery of the content.</p>
 
 <dl class="class">
 <dt id="icarus.execution.collectors.PathStretchCollector">
-<em class="property">class </em><tt class="descname">PathStretchCollector</tt><big>(</big><em>view</em>, <em>cdf=False</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<em class="property">class </em><code class="descname">PathStretchCollector</code><span class="sig-paren">(</span><em>view</em>, <em>cdf=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
 <p>Collector measuring the path stretch, i.e. the ratio between the actual
 path length and the shortest path length.</p>
 <p class="rubric">Methods</p>
@@ -1009,35 +1007,35 @@ path length and the shortest path length.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></tt>(node)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></tt>(node)</td>
-<td>Reports that the cache at node <em>node</em> has been looked up for  requested content but there was a cache miss.</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code>(node)</td>
+<td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.content_hop" title="icarus.execution.collectors.PathStretchCollector.content_hop"><tt class="xref py py-obj docutils literal"><span class="pre">content_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.content_hop" title="icarus.execution.collectors.PathStretchCollector.content_hop"><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.end_session" title="icarus.execution.collectors.PathStretchCollector.end_session"><tt class="xref py py-obj docutils literal"><span class="pre">end_session</span></tt></a>([success])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.end_session" title="icarus.execution.collectors.PathStretchCollector.end_session"><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code></a>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.request_hop" title="icarus.execution.collectors.PathStretchCollector.request_hop"><tt class="xref py py-obj docutils literal"><span class="pre">request_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.request_hop" title="icarus.execution.collectors.PathStretchCollector.request_hop"><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.results" title="icarus.execution.collectors.PathStretchCollector.results"><tt class="xref py py-obj docutils literal"><span class="pre">results</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.results" title="icarus.execution.collectors.PathStretchCollector.results"><code class="xref py py-obj docutils literal"><span class="pre">results</span></code></a>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">server_hit</span></tt>(node)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.start_session" title="icarus.execution.collectors.PathStretchCollector.start_session"><tt class="xref py py-obj docutils literal"><span class="pre">start_session</span></tt></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.start_session" title="icarus.execution.collectors.PathStretchCollector.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="icarus.execution.collectors.PathStretchCollector.content_hop">
-<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.content_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">content_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.content_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1051,11 +1049,12 @@ path length and the shortest path length.</p>
 <blockquote>
 <div><p>Destination node</p>
 </div></blockquote>
-<p><strong>main_path</strong> : bool</p>
+<p><strong>main_path</strong> : bool, optional</p>
 <blockquote class="last">
-<div><p>If True, indicates that this link is being traversed by content
+<div><p>If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
-calculate latency correctly in multicast cases</p>
+calculate latency correctly in multicast cases. Default value is
+<em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -1065,9 +1064,9 @@ calculate latency correctly in multicast cases</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.PathStretchCollector.end_session">
-<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.end_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">end_session</code><span class="sig-paren">(</span><em>success=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.end_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the session is closed, i.e. the content has been
-successfully delivered to the receiver or a failure blocked the 
+successfully delivered to the receiver or a failure blocked the
 execution of the request</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1085,12 +1084,12 @@ execution of the request</p>
 
 <dl class="attribute">
 <dt id="icarus.execution.collectors.PathStretchCollector.name">
-<tt class="descname">name</tt><em class="property"> = 'PATH_STRETCH'</em><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.name" title="Permalink to this definition">¶</a></dt>
+<code class="descname">name</code><em class="property"> = 'PATH_STRETCH'</em><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.PathStretchCollector.request_hop">
-<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.request_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">request_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.request_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1104,11 +1103,11 @@ execution of the request</p>
 <blockquote>
 <div><p>Destination node</p>
 </div></blockquote>
-<p><strong>main_path</strong> : bool</p>
+<p><strong>main_path</strong> : bool, optional</p>
 <blockquote class="last">
-<div><p>If True, indicates that link link is on the main path that will
+<div><p>If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
-correctly in multicast cases.</p>
+correctly in multicast cases. Default value is <em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -1118,7 +1117,7 @@ correctly in multicast cases.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.PathStretchCollector.results">
-<tt class="descname">results</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.results" title="Permalink to this definition">¶</a></dt>
+<code class="descname">results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the aggregated results measured by the collector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1136,7 +1135,7 @@ correctly in multicast cases.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.PathStretchCollector.start_session">
-<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">start_session</code><span class="sig-paren">(</span><em>timestamp</em>, <em>receiver</em>, <em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector.start_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notifies the collector that a new network session started.</p>
 <p>A session refers to the retrieval of a content from a receiver, from
 the issuing of a content request to the delivery of the content.</p>
@@ -1166,8 +1165,8 @@ the issuing of a content request to the delivery of the content.</p>
 
 <dl class="class">
 <dt id="icarus.execution.collectors.TestCollector">
-<em class="property">class </em><tt class="descname">TestCollector</tt><big>(</big><em>view</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><tt class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></tt></a></p>
+<em class="property">class </em><code class="descname">TestCollector</code><span class="sig-paren">(</span><em>view</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
 <p>Collector used for test cases only.</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
@@ -1176,38 +1175,38 @@ the issuing of a content request to the delivery of the content.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.cache_hit" title="icarus.execution.collectors.TestCollector.cache_hit"><tt class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></tt></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.cache_hit" title="icarus.execution.collectors.TestCollector.cache_hit"><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.cache_miss" title="icarus.execution.collectors.TestCollector.cache_miss"><tt class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></tt></a>(node)</td>
-<td>Reports that the cache at node <em>node</em> has been looked up for  requested content but there was a cache miss.</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.cache_miss" title="icarus.execution.collectors.TestCollector.cache_miss"><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code></a>(node)</td>
+<td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.content_hop" title="icarus.execution.collectors.TestCollector.content_hop"><tt class="xref py py-obj docutils literal"><span class="pre">content_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.content_hop" title="icarus.execution.collectors.TestCollector.content_hop"><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.end_session" title="icarus.execution.collectors.TestCollector.end_session"><tt class="xref py py-obj docutils literal"><span class="pre">end_session</span></tt></a>([success])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.end_session" title="icarus.execution.collectors.TestCollector.end_session"><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code></a>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.request_hop" title="icarus.execution.collectors.TestCollector.request_hop"><tt class="xref py py-obj docutils literal"><span class="pre">request_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.request_hop" title="icarus.execution.collectors.TestCollector.request_hop"><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">results</span></tt>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">results</span></code>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.server_hit" title="icarus.execution.collectors.TestCollector.server_hit"><tt class="xref py py-obj docutils literal"><span class="pre">server_hit</span></tt></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.server_hit" title="icarus.execution.collectors.TestCollector.server_hit"><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.session_summary" title="icarus.execution.collectors.TestCollector.session_summary"><tt class="xref py py-obj docutils literal"><span class="pre">session_summary</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.session_summary" title="icarus.execution.collectors.TestCollector.session_summary"><code class="xref py py-obj docutils literal"><span class="pre">session_summary</span></code></a>()</td>
 <td>Return a summary of latest session</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.start_session" title="icarus.execution.collectors.TestCollector.start_session"><tt class="xref py py-obj docutils literal"><span class="pre">start_session</span></tt></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.start_session" title="icarus.execution.collectors.TestCollector.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="icarus.execution.collectors.TestCollector.cache_hit">
-<tt class="descname">cache_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.cache_hit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cache_hit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.cache_hit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the requested content has been served by the cache at
 node <em>node</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1226,8 +1225,8 @@ node <em>node</em>.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.TestCollector.cache_miss">
-<tt class="descname">cache_miss</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.cache_miss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.cache_miss" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reports that the cache at node <em>node</em> has been looked up for 
+<code class="descname">cache_miss</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.cache_miss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.cache_miss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that the cache at node <em>node</em> has been looked up for
 requested content but there was a cache miss.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1245,7 +1244,7 @@ requested content but there was a cache miss.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.TestCollector.content_hop">
-<tt class="descname">content_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.content_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">content_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.content_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1259,11 +1258,12 @@ requested content but there was a cache miss.</p>
 <blockquote>
 <div><p>Destination node</p>
 </div></blockquote>
-<p><strong>main_path</strong> : bool</p>
+<p><strong>main_path</strong> : bool, optional</p>
 <blockquote class="last">
-<div><p>If True, indicates that this link is being traversed by content
+<div><p>If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
-calculate latency correctly in multicast cases</p>
+calculate latency correctly in multicast cases. Default value is
+<em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -1273,9 +1273,9 @@ calculate latency correctly in multicast cases</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.TestCollector.end_session">
-<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.end_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">end_session</code><span class="sig-paren">(</span><em>success=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.end_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the session is closed, i.e. the content has been
-successfully delivered to the receiver or a failure blocked the 
+successfully delivered to the receiver or a failure blocked the
 execution of the request</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1293,12 +1293,12 @@ execution of the request</p>
 
 <dl class="attribute">
 <dt id="icarus.execution.collectors.TestCollector.name">
-<tt class="descname">name</tt><em class="property"> = 'TEST'</em><a class="headerlink" href="#icarus.execution.collectors.TestCollector.name" title="Permalink to this definition">¶</a></dt>
+<code class="descname">name</code><em class="property"> = 'TEST'</em><a class="headerlink" href="#icarus.execution.collectors.TestCollector.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.TestCollector.request_hop">
-<tt class="descname">request_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.request_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">request_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.request_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1312,11 +1312,11 @@ execution of the request</p>
 <blockquote>
 <div><p>Destination node</p>
 </div></blockquote>
-<p><strong>main_path</strong> : bool</p>
+<p><strong>main_path</strong> : bool, optional</p>
 <blockquote class="last">
-<div><p>If True, indicates that link link is on the main path that will
+<div><p>If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
-correctly in multicast cases.</p>
+correctly in multicast cases. Default value is <em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -1326,7 +1326,7 @@ correctly in multicast cases.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.TestCollector.server_hit">
-<tt class="descname">server_hit</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.server_hit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">server_hit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.server_hit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the requested content has been served by the server at
 node <em>node</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1345,7 +1345,7 @@ node <em>node</em>.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.TestCollector.session_summary">
-<tt class="descname">session_summary</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.session_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.session_summary" title="Permalink to this definition">¶</a></dt>
+<code class="descname">session_summary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.session_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.session_summary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a summary of latest session</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1363,7 +1363,7 @@ node <em>node</em>.</p>
 
 <dl class="method">
 <dt id="icarus.execution.collectors.TestCollector.start_session">
-<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">start_session</code><span class="sig-paren">(</span><em>timestamp</em>, <em>receiver</em>, <em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.start_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notifies the collector that a new network session started.</p>
 <p>A session refers to the retrieval of a content from a receiver, from
 the issuing of a content request to the delivery of the content.</p>
@@ -1401,7 +1401,7 @@ the experiment by iterating through the event provided by an event generator
 and providing them to a strategy instance.</p>
 <dl class="function">
 <dt id="icarus.execution.engine.exec_experiment">
-<tt class="descname">exec_experiment</tt><big>(</big><em>topology</em>, <em>workload</em>, <em>netconf</em>, <em>strategy</em>, <em>cache_policy</em>, <em>collectors</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/engine.html#exec_experiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.engine.exec_experiment" title="Permalink to this definition">¶</a></dt>
+<code class="descname">exec_experiment</code><span class="sig-paren">(</span><em>topology</em>, <em>workload</em>, <em>netconf</em>, <em>strategy</em>, <em>cache_policy</em>, <em>collectors</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/engine.html#exec_experiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.engine.exec_experiment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute the simulation of a specific scenario.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1433,7 +1433,7 @@ to use and a list of initialization attributes</p>
 <div><p>Cache policy definition. It is tree describing the name of the cache
 policy to use and a list of initialization attributes</p>
 </div></blockquote>
-<p><strong>collectors: dict</strong> :</p>
+<p><strong>collectors: dict</strong></p>
 <blockquote>
 <div><p>The collectors to be used. It is a dictionary in which keys are the
 names of collectors to use and values are dictionaries of attributes
@@ -1458,7 +1458,7 @@ for the collector they refer to.</p>
 <p>This module contains classes providing an abstraction of the network shown to
 the strategy implementation. The network is modelled using an MVC design
 pattern.</p>
-<p>A strategy performs actions on the network by calling methods of the 
+<p>A strategy performs actions on the network by calling methods of the
 <cite>NetworkController</cite>, that in turns updates  the <cite>NetworkModel</cite> instance that
 updates the <cite>NetworkView</cite> instance. The strategy can get updated information
 about the network status by calling methods of the <cite>NetworkView</cite> instance.</p>
@@ -1466,8 +1466,8 @@ about the network status by calling methods of the <cite>NetworkView</cite> inst
 of all relevant events.</p>
 <dl class="class">
 <dt id="icarus.execution.network.NetworkModel">
-<em class="property">class </em><tt class="descname">NetworkModel</tt><big>(</big><em>topology</em>, <em>cache_policy</em>, <em>shortest_path=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<em class="property">class </em><code class="descname">NetworkModel</code><span class="sig-paren">(</span><em>topology</em>, <em>cache_policy</em>, <em>shortest_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Models the internal state of the network.</p>
 <p>This object should never be edited by strategies directly, but only through
 calls to the network controller.</p>
@@ -1475,8 +1475,8 @@ calls to the network controller.</p>
 
 <dl class="class">
 <dt id="icarus.execution.network.NetworkView">
-<em class="property">class </em><tt class="descname">NetworkView</tt><big>(</big><em>model</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<em class="property">class </em><code class="descname">NetworkView</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Network view</p>
 <p>This class provides an interface that strategies and data collectors can
 use to know updated information about the status of the network.
@@ -1489,50 +1489,56 @@ characteristics of links and currently cached objects in nodes.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.all_pairs_shortest_paths" title="icarus.execution.network.NetworkView.all_pairs_shortest_paths"><tt class="xref py py-obj docutils literal"><span class="pre">all_pairs_shortest_paths</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.all_pairs_shortest_paths" title="icarus.execution.network.NetworkView.all_pairs_shortest_paths"><code class="xref py py-obj docutils literal"><span class="pre">all_pairs_shortest_paths</span></code></a>()</td>
 <td>Return all pairs shortest paths</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cache_dump" title="icarus.execution.network.NetworkView.cache_dump"><tt class="xref py py-obj docutils literal"><span class="pre">cache_dump</span></tt></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cache_dump" title="icarus.execution.network.NetworkView.cache_dump"><code class="xref py py-obj docutils literal"><span class="pre">cache_dump</span></code></a>(node)</td>
 <td>Returns the dump of the content of a cache in a specific node</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cache_lookup" title="icarus.execution.network.NetworkView.cache_lookup"><tt class="xref py py-obj docutils literal"><span class="pre">cache_lookup</span></tt></a>(node,&nbsp;content)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cache_lookup" title="icarus.execution.network.NetworkView.cache_lookup"><code class="xref py py-obj docutils literal"><span class="pre">cache_lookup</span></code></a>(node,&nbsp;content)</td>
 <td>Check if the cache of a node has a content object, without changing the internal state of the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cache_nodes" title="icarus.execution.network.NetworkView.cache_nodes"><tt class="xref py py-obj docutils literal"><span class="pre">cache_nodes</span></tt></a>([size])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cache_nodes" title="icarus.execution.network.NetworkView.cache_nodes"><code class="xref py py-obj docutils literal"><span class="pre">cache_nodes</span></code></a>([size])</td>
 <td>Returns a list of nodes with caching capability</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.content_locations" title="icarus.execution.network.NetworkView.content_locations"><tt class="xref py py-obj docutils literal"><span class="pre">content_locations</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cluster" title="icarus.execution.network.NetworkView.cluster"><code class="xref py py-obj docutils literal"><span class="pre">cluster</span></code></a>(v)</td>
+<td>Return cluster to which a node belongs, if any</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.content_locations" title="icarus.execution.network.NetworkView.content_locations"><code class="xref py py-obj docutils literal"><span class="pre">content_locations</span></code></a>(k)</td>
 <td>Return a set of all current locations of a specific content.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.content_source" title="icarus.execution.network.NetworkView.content_source"><tt class="xref py py-obj docutils literal"><span class="pre">content_source</span></tt></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.content_source" title="icarus.execution.network.NetworkView.content_source"><code class="xref py py-obj docutils literal"><span class="pre">content_source</span></code></a>(k)</td>
 <td>Return the node identifier where the content is persistently stored.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.has_cache" title="icarus.execution.network.NetworkView.has_cache"><tt class="xref py py-obj docutils literal"><span class="pre">has_cache</span></tt></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.has_cache" title="icarus.execution.network.NetworkView.has_cache"><code class="xref py py-obj docutils literal"><span class="pre">has_cache</span></code></a>(node)</td>
 <td>Check if a node has a content cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.link_delay" title="icarus.execution.network.NetworkView.link_delay"><tt class="xref py py-obj docutils literal"><span class="pre">link_delay</span></tt></a>(u,&nbsp;v)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.link_delay" title="icarus.execution.network.NetworkView.link_delay"><code class="xref py py-obj docutils literal"><span class="pre">link_delay</span></code></a>(u,&nbsp;v)</td>
 <td>Return the delay of link <em>(u, v)</em>.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.link_type" title="icarus.execution.network.NetworkView.link_type"><tt class="xref py py-obj docutils literal"><span class="pre">link_type</span></tt></a>(u,&nbsp;v)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.link_type" title="icarus.execution.network.NetworkView.link_type"><code class="xref py py-obj docutils literal"><span class="pre">link_type</span></code></a>(u,&nbsp;v)</td>
 <td>Return the type of link <em>(u, v)</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.shortest_path" title="icarus.execution.network.NetworkView.shortest_path"><tt class="xref py py-obj docutils literal"><span class="pre">shortest_path</span></tt></a>(s,&nbsp;t)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.local_cache_lookup" title="icarus.execution.network.NetworkView.local_cache_lookup"><code class="xref py py-obj docutils literal"><span class="pre">local_cache_lookup</span></code></a>(node,&nbsp;content)</td>
+<td>Check if the local cache of a node has a content object, without changing the internal state of the cache.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.shortest_path" title="icarus.execution.network.NetworkView.shortest_path"><code class="xref py py-obj docutils literal"><span class="pre">shortest_path</span></code></a>(s,&nbsp;t)</td>
 <td>Return the shortest path from <em>s</em> to <em>t</em></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.topology" title="icarus.execution.network.NetworkView.topology"><tt class="xref py py-obj docutils literal"><span class="pre">topology</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.topology" title="icarus.execution.network.NetworkView.topology"><code class="xref py py-obj docutils literal"><span class="pre">topology</span></code></a>()</td>
 <td>Return the network topology</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="icarus.execution.network.NetworkView.all_pairs_shortest_paths">
-<tt class="descname">all_pairs_shortest_paths</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.all_pairs_shortest_paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.all_pairs_shortest_paths" title="Permalink to this definition">¶</a></dt>
+<code class="descname">all_pairs_shortest_paths</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.all_pairs_shortest_paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.all_pairs_shortest_paths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return all pairs shortest paths</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkView.cache_dump">
-<tt class="descname">cache_dump</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.cache_dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.cache_dump" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cache_dump</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.cache_dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.cache_dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the dump of the content of a cache in a specific node</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1556,13 +1562,13 @@ characteristics of links and currently cached objects in nodes.</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkView.cache_lookup">
-<tt class="descname">cache_lookup</tt><big>(</big><em>node</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.cache_lookup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.cache_lookup" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cache_lookup</code><span class="sig-paren">(</span><em>node</em>, <em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.cache_lookup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.cache_lookup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the cache of a node has a content object, without changing
 the internal state of the cache.</p>
 <p>This method is meant to be used by data collectors to calculate
 metrics. It should not be used by strategies to look up for contents
 during the simulation. Instead they should use
-NetworkController.get_content</p>
+<cite>NetworkController.get_content</cite></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1590,13 +1596,13 @@ If the node does not have a cache, return <em>None</em></p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkView.cache_nodes">
-<tt class="descname">cache_nodes</tt><big>(</big><em>size=False</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.cache_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.cache_nodes" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cache_nodes</code><span class="sig-paren">(</span><em>size=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.cache_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.cache_nodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of nodes with caching capability</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size: bool, opt</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size: bool, opt</strong></p>
 <blockquote>
 <div><p>If <em>True</em> return dict mapping nodes with size</p>
 </div></blockquote>
@@ -1615,8 +1621,33 @@ and their size.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="icarus.execution.network.NetworkView.cluster">
+<code class="descname">cluster</code><span class="sig-paren">(</span><em>v</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.cluster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.cluster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return cluster to which a node belongs, if any</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>v</strong> : any hashable type</p>
+<blockquote>
+<div><p>Node</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cluster</strong> : int</p>
+<blockquote class="last">
+<div><p>Cluster to which the node belongs, None if the topology is not
+clustered or the node does not belong to any cluster</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="icarus.execution.network.NetworkView.content_locations">
-<tt class="descname">content_locations</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.content_locations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.content_locations" title="Permalink to this definition">¶</a></dt>
+<code class="descname">content_locations</code><span class="sig-paren">(</span><em>k</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.content_locations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.content_locations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a set of all current locations of a specific content.</p>
 <p>This include both persistent content sources and temporary caches.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1641,7 +1672,7 @@ and their size.</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkView.content_source">
-<tt class="descname">content_source</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.content_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.content_source" title="Permalink to this definition">¶</a></dt>
+<code class="descname">content_source</code><span class="sig-paren">(</span><em>k</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.content_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.content_source" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the node identifier where the content is persistently stored.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1655,7 +1686,8 @@ and their size.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
 <blockquote class="last">
-<div><p>The node persistently storing the given content</p>
+<div><p>The node persistently storing the given content or None if the
+source is unavailable</p>
 </div></blockquote>
 </td>
 </tr>
@@ -1665,7 +1697,7 @@ and their size.</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkView.has_cache">
-<tt class="descname">has_cache</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.has_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.has_cache" title="Permalink to this definition">¶</a></dt>
+<code class="descname">has_cache</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.has_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.has_cache" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a node has a content cache.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1689,7 +1721,7 @@ and their size.</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkView.link_delay">
-<tt class="descname">link_delay</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.link_delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.link_delay" title="Permalink to this definition">¶</a></dt>
+<code class="descname">link_delay</code><span class="sig-paren">(</span><em>u</em>, <em>v</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.link_delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.link_delay" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the delay of link <em>(u, v)</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1717,7 +1749,7 @@ and their size.</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkView.link_type">
-<tt class="descname">link_type</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.link_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.link_type" title="Permalink to this definition">¶</a></dt>
+<code class="descname">link_type</code><span class="sig-paren">(</span><em>u</em>, <em>v</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.link_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.link_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the type of link <em>(u, v)</em>.</p>
 <p>Type can be either <em>internal</em> or <em>external</em></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1745,8 +1777,45 @@ and their size.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="icarus.execution.network.NetworkView.local_cache_lookup">
+<code class="descname">local_cache_lookup</code><span class="sig-paren">(</span><em>node</em>, <em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.local_cache_lookup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.local_cache_lookup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the local cache of a node has a content object, without
+changing the internal state of the cache.</p>
+<p>The local cache is an area of the cache of a node reserved for
+uncoordinated caching. This is currently used only by hybrid
+hash-routing strategies.</p>
+<p>This method is meant to be used by data collectors to calculate
+metrics. It should not be used by strategies to look up for contents
+during the simulation. Instead they should use
+<cite>NetworkController.get_content_local_cache</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote>
+<div><p>The node identifier</p>
+</div></blockquote>
+<p><strong>content</strong> : any hashable type</p>
+<blockquote>
+<div><p>The content identifier</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>has_content</strong> : bool</p>
+<blockquote class="last">
+<div><p><em>True</em> if the cache of the node has the content, <em>False</em> otherwise.
+If the node does not have a cache, return <em>None</em></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="icarus.execution.network.NetworkView.shortest_path">
-<tt class="descname">shortest_path</tt><big>(</big><em>s</em>, <em>t</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.shortest_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.shortest_path" title="Permalink to this definition">¶</a></dt>
+<code class="descname">shortest_path</code><span class="sig-paren">(</span><em>s</em>, <em>t</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.shortest_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.shortest_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the shortest path from <em>s</em> to <em>t</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1775,7 +1844,7 @@ included)</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkView.topology">
-<tt class="descname">topology</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.topology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.topology" title="Permalink to this definition">¶</a></dt>
+<code class="descname">topology</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView.topology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView.topology" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the network topology</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1799,8 +1868,8 @@ Changes to this object will lead to inconsistent network state.</p>
 
 <dl class="class">
 <dt id="icarus.execution.network.NetworkController">
-<em class="property">class </em><tt class="descname">NetworkController</tt><big>(</big><em>model</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<em class="property">class </em><code class="descname">NetworkController</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Network controller</p>
 <p>This class is in charge of executing operations on the network model on
 behalf of a strategy implementation. It is also in charge of notifying
@@ -1812,57 +1881,69 @@ data collectors of relevant events.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.attach_collector" title="icarus.execution.network.NetworkController.attach_collector"><tt class="xref py py-obj docutils literal"><span class="pre">attach_collector</span></tt></a>(collector)</td>
-<td>Attaches a data collector to which all events will be reported.</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.attach_collector" title="icarus.execution.network.NetworkController.attach_collector"><code class="xref py py-obj docutils literal"><span class="pre">attach_collector</span></code></a>(collector)</td>
+<td>Attach a data collector to which all events will be reported.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.detach_collector" title="icarus.execution.network.NetworkController.detach_collector"><tt class="xref py py-obj docutils literal"><span class="pre">detach_collector</span></tt></a>()</td>
-<td>Detaches the data collector.</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.detach_collector" title="icarus.execution.network.NetworkController.detach_collector"><code class="xref py py-obj docutils literal"><span class="pre">detach_collector</span></code></a>()</td>
+<td>Detach the data collector.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.end_session" title="icarus.execution.network.NetworkController.end_session"><tt class="xref py py-obj docutils literal"><span class="pre">end_session</span></tt></a>([success])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.end_session" title="icarus.execution.network.NetworkController.end_session"><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code></a>([success])</td>
 <td>Close a session</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_content_hop" title="icarus.execution.network.NetworkController.forward_content_hop"><tt class="xref py py-obj docutils literal"><span class="pre">forward_content_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_content_hop" title="icarus.execution.network.NetworkController.forward_content_hop"><code class="xref py py-obj docutils literal"><span class="pre">forward_content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Forward a content over link  u -&gt; v.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_content_path" title="icarus.execution.network.NetworkController.forward_content_path"><tt class="xref py py-obj docutils literal"><span class="pre">forward_content_path</span></tt></a>(u,&nbsp;v[,&nbsp;path,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_content_path" title="icarus.execution.network.NetworkController.forward_content_path"><code class="xref py py-obj docutils literal"><span class="pre">forward_content_path</span></code></a>(u,&nbsp;v[,&nbsp;path,&nbsp;main_path])</td>
 <td>Forward a content from node <em>s</em> to node <em>t</em> over the provided path.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_request_hop" title="icarus.execution.network.NetworkController.forward_request_hop"><tt class="xref py py-obj docutils literal"><span class="pre">forward_request_hop</span></tt></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_request_hop" title="icarus.execution.network.NetworkController.forward_request_hop"><code class="xref py py-obj docutils literal"><span class="pre">forward_request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Forward a request over link  u -&gt; v.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_request_path" title="icarus.execution.network.NetworkController.forward_request_path"><tt class="xref py py-obj docutils literal"><span class="pre">forward_request_path</span></tt></a>(s,&nbsp;t[,&nbsp;path,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_request_path" title="icarus.execution.network.NetworkController.forward_request_path"><code class="xref py py-obj docutils literal"><span class="pre">forward_request_path</span></code></a>(s,&nbsp;t[,&nbsp;path,&nbsp;main_path])</td>
 <td>Forward a request from node <em>s</em> to node <em>t</em> over the provided path.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.get_content" title="icarus.execution.network.NetworkController.get_content"><tt class="xref py py-obj docutils literal"><span class="pre">get_content</span></tt></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.get_content" title="icarus.execution.network.NetworkController.get_content"><code class="xref py py-obj docutils literal"><span class="pre">get_content</span></code></a>(node)</td>
 <td>Get a content from a server or a cache.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.put_content" title="icarus.execution.network.NetworkController.put_content"><tt class="xref py py-obj docutils literal"><span class="pre">put_content</span></tt></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.get_content_local_cache" title="icarus.execution.network.NetworkController.get_content_local_cache"><code class="xref py py-obj docutils literal"><span class="pre">get_content_local_cache</span></code></a>(node)</td>
+<td>Get content from local cache of node (if any)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.put_content" title="icarus.execution.network.NetworkController.put_content"><code class="xref py py-obj docutils literal"><span class="pre">put_content</span></code></a>(node)</td>
 <td>Store content in the specified node.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.remove_content" title="icarus.execution.network.NetworkController.remove_content"><tt class="xref py py-obj docutils literal"><span class="pre">remove_content</span></tt></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.put_content_local_cache" title="icarus.execution.network.NetworkController.put_content_local_cache"><code class="xref py py-obj docutils literal"><span class="pre">put_content_local_cache</span></code></a>(node)</td>
+<td>Put content into local cache of node (if any)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.remove_content" title="icarus.execution.network.NetworkController.remove_content"><code class="xref py py-obj docutils literal"><span class="pre">remove_content</span></code></a>(node)</td>
 <td>Remove the content being handled from the cache</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.remove_link" title="icarus.execution.network.NetworkController.remove_link"><tt class="xref py py-obj docutils literal"><span class="pre">remove_link</span></tt></a>(u,&nbsp;v)</td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.remove_link" title="icarus.execution.network.NetworkController.remove_link"><code class="xref py py-obj docutils literal"><span class="pre">remove_link</span></code></a>(u,&nbsp;v[,&nbsp;recompute_paths])</td>
+<td>Remove a link from the topology and update the network model.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.remove_node" title="icarus.execution.network.NetworkController.remove_node"><tt class="xref py py-obj docutils literal"><span class="pre">remove_node</span></tt></a>(v)</td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.remove_node" title="icarus.execution.network.NetworkController.remove_node"><code class="xref py py-obj docutils literal"><span class="pre">remove_node</span></code></a>(v[,&nbsp;recompute_paths])</td>
+<td>Remove a node from the topology and update the network model.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.restore_link" title="icarus.execution.network.NetworkController.restore_link"><tt class="xref py py-obj docutils literal"><span class="pre">restore_link</span></tt></a>(u,&nbsp;v)</td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.reserve_local_cache" title="icarus.execution.network.NetworkController.reserve_local_cache"><code class="xref py py-obj docutils literal"><span class="pre">reserve_local_cache</span></code></a>([ratio])</td>
+<td>Reserve a fraction of cache as local.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.restore_node" title="icarus.execution.network.NetworkController.restore_node"><tt class="xref py py-obj docutils literal"><span class="pre">restore_node</span></tt></a>(v)</td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.restore_link" title="icarus.execution.network.NetworkController.restore_link"><code class="xref py py-obj docutils literal"><span class="pre">restore_link</span></code></a>(u,&nbsp;v[,&nbsp;recompute_paths])</td>
+<td>Restore a previously-removed link and update the network model</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.start_session" title="icarus.execution.network.NetworkController.start_session"><tt class="xref py py-obj docutils literal"><span class="pre">start_session</span></tt></a>(timestamp,&nbsp;receiver,&nbsp;content,&nbsp;log)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.restore_node" title="icarus.execution.network.NetworkController.restore_node"><code class="xref py py-obj docutils literal"><span class="pre">restore_node</span></code></a>(v[,&nbsp;recompute_paths])</td>
+<td>Restore a previously-removed node and update the network model.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.rewire_link" title="icarus.execution.network.NetworkController.rewire_link"><code class="xref py py-obj docutils literal"><span class="pre">rewire_link</span></code></a>(u,&nbsp;v,&nbsp;up,&nbsp;vp[,&nbsp;recompute_paths])</td>
+<td>Rewire an existing link to new endpoints</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.start_session" title="icarus.execution.network.NetworkController.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content,&nbsp;log)</td>
 <td>Instruct the controller to start a new session (i.e.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.attach_collector">
-<tt class="descname">attach_collector</tt><big>(</big><em>collector</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.attach_collector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.attach_collector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Attaches a data collector to which all events will be reported.</p>
+<code class="descname">attach_collector</code><span class="sig-paren">(</span><em>collector</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.attach_collector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.attach_collector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attach a data collector to which all events will be reported.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1879,13 +1960,13 @@ data collectors of relevant events.</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.detach_collector">
-<tt class="descname">detach_collector</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.detach_collector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.detach_collector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Detaches the data collector.</p>
+<code class="descname">detach_collector</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.detach_collector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.detach_collector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detach the data collector.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.end_session">
-<tt class="descname">end_session</tt><big>(</big><em>success=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.end_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">end_session</code><span class="sig-paren">(</span><em>success=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.end_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Close a session</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1903,7 +1984,7 @@ data collectors of relevant events.</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.forward_content_hop">
-<tt class="descname">forward_content_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.forward_content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.forward_content_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">forward_content_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.forward_content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.forward_content_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward a content over link  u -&gt; v.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1914,8 +1995,15 @@ data collectors of relevant events.</p>
 <div><p>Origin node</p>
 </div></blockquote>
 <p><strong>v</strong> : any hashable type</p>
-<blockquote class="last">
+<blockquote>
 <div><p>Destination node</p>
+</div></blockquote>
+<p><strong>main_path</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p>If <em>True</em>, indicates that this link is being traversed by content
+that will be delivered to the receiver. This is needed to
+calculate latency correctly in multicast cases. Default value is
+<em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -1925,7 +2013,7 @@ data collectors of relevant events.</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.forward_content_path">
-<tt class="descname">forward_content_path</tt><big>(</big><em>u</em>, <em>v</em>, <em>path=None</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.forward_content_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.forward_content_path" title="Permalink to this definition">¶</a></dt>
+<code class="descname">forward_content_path</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>path=None</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.forward_content_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.forward_content_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward a content from node <em>s</em> to node <em>t</em> over the provided path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1940,8 +2028,15 @@ data collectors of relevant events.</p>
 <div><p>Destination node</p>
 </div></blockquote>
 <p><strong>path</strong> : list, optional</p>
-<blockquote class="last">
+<blockquote>
 <div><p>The path to use. If not provided, shortest path is used</p>
+</div></blockquote>
+<p><strong>main_path</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p>If <em>True</em>, indicates that this path is being traversed by content
+that will be delivered to the receiver. This is needed to
+calculate latency correctly in multicast cases. Default value is
+<em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -1951,7 +2046,7 @@ data collectors of relevant events.</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.forward_request_hop">
-<tt class="descname">forward_request_hop</tt><big>(</big><em>u</em>, <em>v</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.forward_request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.forward_request_hop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">forward_request_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.forward_request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.forward_request_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward a request over link  u -&gt; v.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1962,8 +2057,14 @@ data collectors of relevant events.</p>
 <div><p>Origin node</p>
 </div></blockquote>
 <p><strong>v</strong> : any hashable type</p>
-<blockquote class="last">
+<blockquote>
 <div><p>Destination node</p>
+</div></blockquote>
+<p><strong>main_path</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p>If <em>True</em>, indicates that link link is on the main path that will
+lead to hit a content. It is normally used to calculate latency
+correctly in multicast cases. Default value is <em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -1973,7 +2074,7 @@ data collectors of relevant events.</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.forward_request_path">
-<tt class="descname">forward_request_path</tt><big>(</big><em>s</em>, <em>t</em>, <em>path=None</em>, <em>main_path=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.forward_request_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.forward_request_path" title="Permalink to this definition">¶</a></dt>
+<code class="descname">forward_request_path</code><span class="sig-paren">(</span><em>s</em>, <em>t</em>, <em>path=None</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.forward_request_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.forward_request_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward a request from node <em>s</em> to node <em>t</em> over the provided path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1988,8 +2089,14 @@ data collectors of relevant events.</p>
 <div><p>Destination node</p>
 </div></blockquote>
 <p><strong>path</strong> : list, optional</p>
-<blockquote class="last">
+<blockquote>
 <div><p>The path to use. If not provided, shortest path is used</p>
+</div></blockquote>
+<p><strong>main_path</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p>If <em>True</em>, indicates that link path is on the main path that will
+lead to hit a content. It is normally used to calculate latency
+correctly in multicast cases. Default value is <em>True</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -1999,7 +2106,7 @@ data collectors of relevant events.</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.get_content">
-<tt class="descname">get_content</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.get_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.get_content" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_content</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.get_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.get_content" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a content from a server or a cache.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2022,8 +2129,28 @@ data collectors of relevant events.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="icarus.execution.network.NetworkController.get_content_local_cache">
+<code class="descname">get_content_local_cache</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.get_content_local_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.get_content_local_cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get content from local cache of node (if any)</p>
+<p>Get content from a local cache of a node. Local cache must be
+initialized with the <cite>reserve_local_cache</cite> method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The node to query</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="icarus.execution.network.NetworkController.put_content">
-<tt class="descname">put_content</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.put_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.put_content" title="Permalink to this definition">¶</a></dt>
+<code class="descname">put_content</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.put_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.put_content" title="Permalink to this definition">¶</a></dt>
 <dd><p>Store content in the specified node.</p>
 <p>The node must have a cache stack and the actual insertion of the
 content is executed according to the caching policy. If the caching
@@ -2050,8 +2177,28 @@ inserted.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="icarus.execution.network.NetworkController.put_content_local_cache">
+<code class="descname">put_content_local_cache</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.put_content_local_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.put_content_local_cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Put content into local cache of node (if any)</p>
+<p>Put content into a local cache of a node. Local cache must be
+initialized with the <cite>reserve_local_cache</cite> method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>The node to query</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="icarus.execution.network.NetworkController.remove_content">
-<tt class="descname">remove_content</tt><big>(</big><em>node</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.remove_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.remove_content" title="Permalink to this definition">¶</a></dt>
+<code class="descname">remove_content</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.remove_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.remove_content" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove the content being handled from the cache</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2075,27 +2222,183 @@ inserted.</p>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.remove_link">
-<tt class="descname">remove_link</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.remove_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.remove_link" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">remove_link</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>recompute_paths=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.remove_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.remove_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a link from the topology and update the network model.</p>
+<p>Note well. With great power comes great responsibility. Be careful when
+using this method. In fact as a result of link removal, network
+partitions and other corner cases might occur. Ensure that the
+implementation of strategies using this method deal with all potential
+corner cases appropriately.</p>
+<p>Also, note that, for these changes to be effective, the strategy must
+use fresh data provided by the network view and not storing local copies
+of network state because they won&#8217;t be updated by this method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote>
+<div><p>Destination node</p>
+</div></blockquote>
+<p><strong>recompute_paths: bool, optional</strong></p>
+<blockquote class="last">
+<div><p>If True, recompute all shortest paths</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.remove_node">
-<tt class="descname">remove_node</tt><big>(</big><em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.remove_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.remove_node" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">remove_node</code><span class="sig-paren">(</span><em>v</em>, <em>recompute_paths=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.remove_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.remove_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a node from the topology and update the network model.</p>
+<p>Note well. With great power comes great responsibility. Be careful when
+using this method. In fact, as a result of node removal, network
+partitions and other corner cases might occur. Ensure that the
+implementation of strategies using this method deal with all potential
+corner cases appropriately.</p>
+<p>It should be noted that when this method is called, all links connected
+to the node to be removed are removed as well. These links are however
+restored when the node is restored. However, if a link attached to this
+node was previously removed using the remove_link method, restoring the
+node won&#8217;t restore that link as well. It will need to be restored with a
+call to restore_link.</p>
+<p>This method is normally quite safe when applied to remove cache nodes or
+routers if this does not cause partitions. If used to remove content
+sources or receiver, special attention is required. In particular, if
+a source is removed, the content items stored by that source will no
+longer be available if not cached elsewhere.</p>
+<p>Also, note that, for these changes to be effective, the strategy must
+use fresh data provided by the network view and not storing local copies
+of network state because they won&#8217;t be updated by this method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>v</strong> : any hashable type</p>
+<blockquote>
+<div><p>Node to remove</p>
+</div></blockquote>
+<p><strong>recompute_paths: bool, optional</strong></p>
+<blockquote class="last">
+<div><p>If True, recompute all shortest paths</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.reserve_local_cache">
+<code class="descname">reserve_local_cache</code><span class="sig-paren">(</span><em>ratio=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.reserve_local_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.reserve_local_cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reserve a fraction of cache as local.</p>
+<p>This method reserves a fixed fraction of the cache of each caching node
+to act as local uncoodinated cache. Methods <cite>get_content</cite> and
+<cite>put_content</cite> will only operated to the coordinated cache. The reserved
+local cache can be accessed with methods <cite>get_content_local_cache</cite> and
+<cite>put_content_local_cache</cite>.</p>
+<p>This function is currently used only by hybrid hash-routing strategies.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>ratio</strong> : float</p>
+<blockquote class="last">
+<div><p>The ratio of cache space to be reserved as local cache.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.restore_link">
-<tt class="descname">restore_link</tt><big>(</big><em>u</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.restore_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.restore_link" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">restore_link</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>recompute_paths=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.restore_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.restore_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore a previously-removed link and update the network model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
+<blockquote>
+<div><p>Origin node</p>
+</div></blockquote>
+<p><strong>v</strong> : any hashable type</p>
+<blockquote>
+<div><p>Destination node</p>
+</div></blockquote>
+<p><strong>recompute_paths: bool, optional</strong></p>
+<blockquote class="last">
+<div><p>If True, recompute all shortest paths</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.restore_node">
-<tt class="descname">restore_node</tt><big>(</big><em>v</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.restore_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.restore_node" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">restore_node</code><span class="sig-paren">(</span><em>v</em>, <em>recompute_paths=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.restore_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.restore_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore a previously-removed node and update the network model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>v</strong> : any hashable type</p>
+<blockquote>
+<div><p>Node to restore</p>
+</div></blockquote>
+<p><strong>recompute_paths: bool, optional</strong></p>
+<blockquote class="last">
+<div><p>If True, recompute all shortest paths</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.execution.network.NetworkController.rewire_link">
+<code class="descname">rewire_link</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>up</em>, <em>vp</em>, <em>recompute_paths=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.rewire_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.rewire_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rewire an existing link to new endpoints</p>
+<p>This method can be used to model mobility patters, e.g., changing
+attachment points of sources and/or receivers.</p>
+<p>Note well. With great power comes great responsibility. Be careful when
+using this method. In fact as a result of link rewiring, network
+partitions and other corner cases might occur. Ensure that the
+implementation of strategies using this method deal with all potential
+corner cases appropriately.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u, v</strong> : any hashable type</p>
+<blockquote>
+<div><p>Endpoints of link before rewiring</p>
+</div></blockquote>
+<p><strong>up, vp</strong> : any hashable type</p>
+<blockquote class="last">
+<div><p>Endpoints of link after rewiring</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="icarus.execution.network.NetworkController.start_session">
-<tt class="descname">start_session</tt><big>(</big><em>timestamp</em>, <em>receiver</em>, <em>content</em>, <em>log</em><big>)</big><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.start_session" title="Permalink to this definition">¶</a></dt>
+<code class="descname">start_session</code><span class="sig-paren">(</span><em>timestamp</em>, <em>receiver</em>, <em>content</em>, <em>log</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController.start_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instruct the controller to start a new session (i.e. the retrieval
 of a content).</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2140,7 +2443,7 @@ of a content).</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -2150,18 +2453,15 @@ of a content).</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../np-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="icarus.html" title="icarus package"
              >previous</a> |</li>
-        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li>
-          <li><a href="icarus.html" >icarus package</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="icarus.html" >icarus package</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
   </body>
 </html>

@@ -1,25 +1,13 @@
 icarus.models package
 =====================
 
-Submodules
-----------
+Subpackages
+-----------
 
-icarus.models.cache module
---------------------------
+.. toctree::
 
-.. automodule:: icarus.models.cache
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-icarus.models.strategy module
------------------------------
-
-.. automodule:: icarus.models.strategy
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+    icarus.models.cache
+    icarus.models.strategy
 
 Module contents
 ---------------

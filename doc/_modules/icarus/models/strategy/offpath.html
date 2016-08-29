@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>icarus.models.strategy.offpath &mdash; Icarus 0.6.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.6.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Icarus 0.6.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for icarus.models.strategy.offpath</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Implementations of all off-path strategies&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+
+<span class="kn">from</span> <span class="nn">icarus.registry</span> <span class="k">import</span> <span class="n">register_strategy</span>
+<span class="kn">from</span> <span class="nn">icarus.util</span> <span class="k">import</span> <span class="n">inheritdoc</span><span class="p">,</span> <span class="n">path_links</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">Strategy</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+       <span class="s1">&#39;NearestReplicaRouting&#39;</span>
+           <span class="p">]</span>
+
+
+<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;NRR&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="NearestReplicaRouting"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.offpath.NearestReplicaRouting">[docs]</a><span class="k">class</span> <span class="nc">NearestReplicaRouting</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Ideal Nearest Replica Routing (NRR) strategy.</span>
+
+<span class="sd">    In this strategy, a request is forwarded to the topologically closest node</span>
+<span class="sd">    holding a copy of the requested item. This strategy is ideal, as it is</span>
+<span class="sd">    implemented assuming that each node knows the nearest replica of a content</span>
+<span class="sd">    without any signaling</span>
+
+<span class="sd">    On the return path, content can be caching according to a variety of</span>
+<span class="sd">    metacaching policies. LCE and LCD are currently supported.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="n">metacaching</span><span class="p">,</span> <span class="n">implementation</span><span class="o">=</span><span class="s1">&#39;ideal&#39;</span><span class="p">,</span>
+                 <span class="n">radius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        view : NetworkView</span>
+<span class="sd">            An instance of the network view</span>
+<span class="sd">        controller : NetworkController</span>
+<span class="sd">            An instance of the network controller</span>
+<span class="sd">        metacaching : str (LCE | LCD)</span>
+<span class="sd">            Metacaching policy used</span>
+<span class="sd">        implementation : str, optional</span>
+<span class="sd">            The implementation of the nearest replica discovery. Currently on</span>
+<span class="sd">            ideal routing is implemented, in which each node has omniscient</span>
+<span class="sd">            knowledge of the location of each content.</span>
+<span class="sd">        radius : int, optional</span>
+<span class="sd">            Radius used by nodes to discover the location of a content. Not</span>
+<span class="sd">            used by ideal routing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NearestReplicaRouting</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">metacaching</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;LCE&#39;</span><span class="p">,</span> <span class="s1">&#39;LCD&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Metacaching policy </span><span class="si">%s</span><span class="s2"> not supported&quot;</span> <span class="o">%</span> <span class="n">metacaching</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">implementation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;ideal&#39;</span><span class="p">,</span> <span class="s1">&#39;approx_1&#39;</span><span class="p">,</span> <span class="s1">&#39;approx_2&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Implementation </span><span class="si">%s</span><span class="s2"> not supported&quot;</span> <span class="o">%</span> <span class="n">implementation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metacaching</span> <span class="o">=</span> <span class="n">metacaching</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">=</span> <span class="n">implementation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">all_pairs_dijkstra_path_length</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">topology</span><span class="p">(),</span>
+                                                          <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;delay&#39;</span><span class="p">)</span>
+
+    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+<div class="viewcode-block" id="NearestReplicaRouting.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.offpath.NearestReplicaRouting.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+        <span class="c1"># get all required data</span>
+        <span class="n">locations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_locations</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">nearest_replica</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance</span><span class="p">[</span><span class="n">receiver</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
+        <span class="c1"># Route request to nearest replica</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">start_session</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;ideal&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">forward_request_path</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="n">nearest_replica</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;approx_1&#39;</span><span class="p">:</span>
+            <span class="c1"># Floods actual request packets</span>
+            <span class="n">paths</span> <span class="o">=</span> <span class="p">{</span><span class="n">loc</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="n">loc</span><span class="p">)[:</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">])</span>
+                     <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">locations</span><span class="p">}</span>
+            <span class="c1"># TODO: Continue</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Not implemented&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;approx_2&#39;</span><span class="p">:</span>
+            <span class="c1"># Floods meta-request packets</span>
+            <span class="c1"># TODO: Continue</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Not implemented&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Should never reach this block anyway</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Implementation </span><span class="si">%s</span><span class="s2"> not supported&quot;</span>
+                             <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">implementation</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_content</span><span class="p">(</span><span class="n">nearest_replica</span><span class="p">)</span>
+        <span class="c1"># Now we need to return packet and we have options</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="n">nearest_replica</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">metacaching</span> <span class="o">==</span> <span class="s1">&#39;LCE&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">path_links</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">forward_content_hop</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">has_cache</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">cache_lookup</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">put_content</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">metacaching</span> <span class="o">==</span> <span class="s1">&#39;LCD&#39;</span><span class="p">:</span>
+            <span class="n">copied</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">path_links</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">forward_content_hop</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">copied</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">!=</span> <span class="n">receiver</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">has_cache</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">put_content</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                    <span class="n">copied</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Metacaching policy </span><span class="si">%s</span><span class="s1"> not supported&#39;</span>
+                             <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">metacaching</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
+    </div>
+  </body>
+</html>

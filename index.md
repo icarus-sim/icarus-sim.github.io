@@ -18,10 +18,11 @@ You can download a stable release in a `zip` or `tar.gz` format using the links 
 
 **Latest version:**
 
- * Version 0.5.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.5.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.5.0.tar.gz)\]
+ * Version 0.6.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.6.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.6.0.tar.gz)\]
 
 **Older versions:**
 
+ * Version 0.5.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.5.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.5.0.tar.gz)\]
  * Version 0.4.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.4.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.4.0.tar.gz)\]
  * Version 0.3.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.3.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.3.0.tar.gz)\]
  * Version 0.2.1: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.2.1.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.2.1.tar.gz)\]
@@ -45,7 +46,7 @@ dependencies. To run it, executes the following commands
 
 The script, after being launched, will ask you for superuser password.
 
-Finally, it is advisable to add Icarus path to the PYTHONPATH environment variable. This makes it possible to launch Icarus from outside the Icarus root directory or call Icarus APIs from other programs:
+Finally, it is advisable to add Icarus path to the `PYTHONPATH` environment variable. This makes it possible to launch Icarus from outside the Icarus root directory or call Icarus APIs from other programs:
 
     $ cd <YOUR ICARUS FOLDER>
     $ export PYTHONPATH=`pwd`:$PYTHONPATH
@@ -61,7 +62,7 @@ Icarus dependencies are:
   from the [Python website](http://www.python.org) or, possibly, from the package
   manager of your operating system.
 * The following Python packages:
-   * **numpy** (versin 1.6 onwards)
+   * **numpy** (version 1.6 onwards)
    * **scipy** (version 0.12 onwards)
    * **matplotlib** (version 1.2 onwards)
    * **networkx** (version 1.6 onwards)
@@ -137,7 +138,7 @@ If you desire further information about Icarus, you can find it in the following
 
  * In this ([pdf](https://lorenzosaino.github.io/publications/icarus-simutools14.pdf), [slides](https://lorenzosaino.github.io/publications/icarus-simutools14-slides.pdf)),
    which describes the overall architecture of the Icarus simulator, the motivations for its design,
-   the models implemented and shows some snippets of codes on how to use the modelling tools.
+   the models implemented and shows some snippets of codes on how to use the modeling tools.
  * In the [API reference](http://icarus-sim.github.io/doc/), which documents all packages, modules, classes, methods
    and functions included in the Icarus simulator.
  * In the [source code](https://www.github.com/icarus-sim/icarus), which is well organized and thoroughly documented.

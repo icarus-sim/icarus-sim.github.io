@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>icarus package &mdash; Icarus 0.5.0 documentation</title>
+    <title>icarus package &mdash; Icarus 0.6.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.0',
+        VERSION:     '0.6.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,12 +23,12 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.5.0 documentation" href="../index.html" />
+    <link rel="top" title="Icarus 0.6.0 documentation" href="../index.html" />
     <link rel="next" title="icarus.execution package" href="icarus.execution.html" />
     <link rel="prev" title="Icarus: Caching Simulator for Information Centric Networking (ICN)" href="../index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -38,18 +38,15 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../np-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="icarus.execution.html" title="icarus.execution package"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../index.html" title="Icarus: Caching Simulator for Information Centric Networking (ICN)"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.6.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -73,17 +70,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="icarus.execution.html"
                         title="next chapter">icarus.execution package</a></p>
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -92,7 +86,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="icarus-package">
 <h1>icarus package<a class="headerlink" href="#icarus-package" title="Permalink to this headline">¶</a></h1>
@@ -113,11 +107,35 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="icarus.models.html">icarus.models package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="icarus.models.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="icarus.models.html#module-icarus.models.cache">icarus.models.cache module</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="icarus.models.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="icarus.models.cache.html">icarus.models.cache package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="icarus.models.cache.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="icarus.models.cache.html#module-icarus.models.cache.policies">icarus.models.cache.policies module</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="icarus.models.html#module-icarus.models.strategy">icarus.models.strategy module</a><ul class="simple">
+<li class="toctree-l4"><a class="reference internal" href="icarus.models.cache.html#module-icarus.models.cache.systems">icarus.models.cache.systems module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="icarus.models.cache.html#module-icarus.models.cache">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="icarus.models.strategy.html">icarus.models.strategy package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="icarus.models.strategy.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="icarus.models.strategy.html#module-icarus.models.strategy.base">icarus.models.strategy.base module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="icarus.models.strategy.html#module-icarus.models.strategy.hashrouting">icarus.models.strategy.hashrouting module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="icarus.models.strategy.html#module-icarus.models.strategy.offpath">icarus.models.strategy.offpath module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="icarus.models.strategy.html#module-icarus.models.strategy.onpath">icarus.models.strategy.onpath module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="icarus.models.strategy.html#module-icarus.models.strategy">Module contents</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="icarus.models.html#module-icarus.models">Module contents</a></li>
@@ -135,6 +153,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="icarus.scenarios.html">icarus.scenarios package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="icarus.scenarios.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icarus.scenarios.html#module-icarus.scenarios.algorithms">icarus.scenarios.algorithms module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="icarus.scenarios.html#module-icarus.scenarios.cacheplacement">icarus.scenarios.cacheplacement module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="icarus.scenarios.html#module-icarus.scenarios.contentplacement">icarus.scenarios.contentplacement module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="icarus.scenarios.html#module-icarus.scenarios.topology">icarus.scenarios.topology module</a><ul class="simple">
@@ -167,8 +186,8 @@
 user-provided settings.</p>
 <dl class="class">
 <dt id="icarus.orchestration.Orchestrator">
-<em class="property">class </em><tt class="descname">Orchestrator</tt><big>(</big><em>settings</em>, <em>summary_freq=4</em><big>)</big><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<em class="property">class </em><code class="descname">Orchestrator</code><span class="sig-paren">(</span><em>settings</em>, <em>summary_freq=4</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Orchestrator.</p>
 <p>It is responsible for orchestrating the execution of all experiments and
 aggregate results.</p>
@@ -179,20 +198,20 @@ aggregate results.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.orchestration.Orchestrator.experiment_callback" title="icarus.orchestration.Orchestrator.experiment_callback"><tt class="xref py py-obj docutils literal"><span class="pre">experiment_callback</span></tt></a>(args)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.orchestration.Orchestrator.experiment_callback" title="icarus.orchestration.Orchestrator.experiment_callback"><code class="xref py py-obj docutils literal"><span class="pre">experiment_callback</span></code></a>(args)</td>
 <td>Callback method called by run_scenario</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.orchestration.Orchestrator.run" title="icarus.orchestration.Orchestrator.run"><tt class="xref py py-obj docutils literal"><span class="pre">run</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.orchestration.Orchestrator.run" title="icarus.orchestration.Orchestrator.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
 <td>Run the orchestrator.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.orchestration.Orchestrator.stop" title="icarus.orchestration.Orchestrator.stop"><tt class="xref py py-obj docutils literal"><span class="pre">stop</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.orchestration.Orchestrator.stop" title="icarus.orchestration.Orchestrator.stop"><code class="xref py py-obj docutils literal"><span class="pre">stop</span></code></a>()</td>
 <td>Stop the execution of the orchestrator</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="icarus.orchestration.Orchestrator.experiment_callback">
-<tt class="descname">experiment_callback</tt><big>(</big><em>args</em><big>)</big><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator.experiment_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator.experiment_callback" title="Permalink to this definition">¶</a></dt>
+<code class="descname">experiment_callback</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator.experiment_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator.experiment_callback" title="Permalink to this definition">¶</a></dt>
 <dd><p>Callback method called by run_scenario</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -210,7 +229,7 @@ aggregate results.</p>
 
 <dl class="method">
 <dt id="icarus.orchestration.Orchestrator.run">
-<tt class="descname">run</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator.run" title="Permalink to this definition">¶</a></dt>
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the orchestrator.</p>
 <p>This call is blocking, whether multiple processes are used or not. This
 methods returns only after all experiments are executed.</p>
@@ -218,7 +237,7 @@ methods returns only after all experiments are executed.</p>
 
 <dl class="method">
 <dt id="icarus.orchestration.Orchestrator.stop">
-<tt class="descname">stop</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator.stop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/orchestration.html#Orchestrator.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.Orchestrator.stop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stop the execution of the orchestrator</p>
 </dd></dl>
 
@@ -226,7 +245,7 @@ methods returns only after all experiments are executed.</p>
 
 <dl class="function">
 <dt id="icarus.orchestration.run_scenario">
-<tt class="descname">run_scenario</tt><big>(</big><em>settings</em>, <em>params</em>, <em>curr_exp</em>, <em>n_exp</em><big>)</big><a class="reference internal" href="../_modules/icarus/orchestration.html#run_scenario"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.run_scenario" title="Permalink to this definition">¶</a></dt>
+<code class="descname">run_scenario</code><span class="sig-paren">(</span><em>settings</em>, <em>params</em>, <em>curr_exp</em>, <em>n_exp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/orchestration.html#run_scenario"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.orchestration.run_scenario" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a single scenario experiment</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -270,7 +289,7 @@ seconds)</p>
 <p>Registry keeping track of all registered pluggable components</p>
 <dl class="function">
 <dt id="icarus.registry.register_cache_placement">
-<tt class="descname">register_cache_placement</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_cache_placement" title="Permalink to this definition">¶</a></dt>
+<code class="descname">register_cache_placement</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#icarus.registry.register_cache_placement" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that register a class or a function to a register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -288,7 +307,7 @@ seconds)</p>
 
 <dl class="function">
 <dt id="icarus.registry.register_cache_policy">
-<tt class="descname">register_cache_policy</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_cache_policy" title="Permalink to this definition">¶</a></dt>
+<code class="descname">register_cache_policy</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#icarus.registry.register_cache_policy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that register a class or a function to a register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -306,7 +325,7 @@ seconds)</p>
 
 <dl class="function">
 <dt id="icarus.registry.register_content_placement">
-<tt class="descname">register_content_placement</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_content_placement" title="Permalink to this definition">¶</a></dt>
+<code class="descname">register_content_placement</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#icarus.registry.register_content_placement" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that register a class or a function to a register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -324,7 +343,7 @@ seconds)</p>
 
 <dl class="function">
 <dt id="icarus.registry.register_data_collector">
-<tt class="descname">register_data_collector</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_data_collector" title="Permalink to this definition">¶</a></dt>
+<code class="descname">register_data_collector</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#icarus.registry.register_data_collector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that register a class or a function to a register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -342,7 +361,7 @@ seconds)</p>
 
 <dl class="function">
 <dt id="icarus.registry.register_decorator">
-<tt class="descname">register_decorator</tt><big>(</big><em>register</em><big>)</big><a class="reference internal" href="../_modules/icarus/registry.html#register_decorator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.registry.register_decorator" title="Permalink to this definition">¶</a></dt>
+<code class="descname">register_decorator</code><span class="sig-paren">(</span><em>register</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/registry.html#register_decorator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.registry.register_decorator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a decorator that register a class or function to a specified
 register</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -367,7 +386,7 @@ register</p>
 
 <dl class="function">
 <dt id="icarus.registry.register_results_reader">
-<tt class="descname">register_results_reader</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_results_reader" title="Permalink to this definition">¶</a></dt>
+<code class="descname">register_results_reader</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#icarus.registry.register_results_reader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that register a class or a function to a register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -385,7 +404,7 @@ register</p>
 
 <dl class="function">
 <dt id="icarus.registry.register_results_writer">
-<tt class="descname">register_results_writer</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_results_writer" title="Permalink to this definition">¶</a></dt>
+<code class="descname">register_results_writer</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#icarus.registry.register_results_writer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that register a class or a function to a register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -403,7 +422,7 @@ register</p>
 
 <dl class="function">
 <dt id="icarus.registry.register_strategy">
-<tt class="descname">register_strategy</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_strategy" title="Permalink to this definition">¶</a></dt>
+<code class="descname">register_strategy</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#icarus.registry.register_strategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that register a class or a function to a register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -421,7 +440,7 @@ register</p>
 
 <dl class="function">
 <dt id="icarus.registry.register_topology_factory">
-<tt class="descname">register_topology_factory</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_topology_factory" title="Permalink to this definition">¶</a></dt>
+<code class="descname">register_topology_factory</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#icarus.registry.register_topology_factory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that register a class or a function to a register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -439,7 +458,7 @@ register</p>
 
 <dl class="function">
 <dt id="icarus.registry.register_workload">
-<tt class="descname">register_workload</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#icarus.registry.register_workload" title="Permalink to this definition">¶</a></dt>
+<code class="descname">register_workload</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#icarus.registry.register_workload" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that register a class or a function to a register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -461,7 +480,7 @@ register</p>
 <p>Launches a simulation campaign and save results.</p>
 <dl class="function">
 <dt id="icarus.run.run">
-<tt class="descname">run</tt><big>(</big><em>config_file</em>, <em>output</em>, <em>config_override</em><big>)</big><a class="reference internal" href="../_modules/icarus/run.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.run.run" title="Permalink to this definition">¶</a></dt>
+<code class="descname">run</code><span class="sig-paren">(</span><em>config_file</em>, <em>output</em>, <em>config_override</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/run.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.run.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run function. It starts the simulator.
 experiments</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -488,7 +507,7 @@ experiments</p>
 
 <dl class="function">
 <dt id="icarus.run.handler">
-<tt class="descname">handler</tt><big>(</big><em>settings</em>, <em>orch</em>, <em>output</em>, <em>signum=None</em>, <em>frame=None</em><big>)</big><a class="reference internal" href="../_modules/icarus/run.html#handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.run.handler" title="Permalink to this definition">¶</a></dt>
+<code class="descname">handler</code><span class="sig-paren">(</span><em>settings</em>, <em>orch</em>, <em>output</em>, <em>signum=None</em>, <em>frame=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/run.html#handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.run.handler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Signal handler</p>
 <p>This function is called when the simulator receive SIGTERM, SIGHUP, SIGKILL
 or SIGQUIT from the OS.</p>
@@ -521,9 +540,21 @@ or SIGQUIT from the OS.</p>
 <span class="target" id="module-icarus.util"></span><p>Utility functions</p>
 <dl class="class">
 <dt id="icarus.util.Settings">
-<em class="property">class </em><tt class="descname">Settings</tt><a class="reference internal" href="../_modules/icarus/util.html#Settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<em class="property">class </em><code class="descname">Settings</code><a class="reference internal" href="../_modules/icarus/util.html#Settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Object storing all settings</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Settings.frozen" title="icarus.util.Settings.frozen"><code class="xref py py-obj docutils literal"><span class="pre">frozen</span></code></a></td>
+<td>Return whether the object is frozen or not.</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -531,35 +562,35 @@ or SIGQUIT from the OS.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Settings.freeze" title="icarus.util.Settings.freeze"><tt class="xref py py-obj docutils literal"><span class="pre">freeze</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Settings.freeze" title="icarus.util.Settings.freeze"><code class="xref py py-obj docutils literal"><span class="pre">freeze</span></code></a>()</td>
 <td>Freeze the objects.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.util.Settings.get" title="icarus.util.Settings.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(name)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.util.Settings.get" title="icarus.util.Settings.get"><code class="xref py py-obj docutils literal"><span class="pre">get</span></code></a>(name)</td>
 <td>Return value of settings with given name</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Settings.read_from" title="icarus.util.Settings.read_from"><tt class="xref py py-obj docutils literal"><span class="pre">read_from</span></tt></a>(path[,&nbsp;freeze])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Settings.read_from" title="icarus.util.Settings.read_from"><code class="xref py py-obj docutils literal"><span class="pre">read_from</span></code></a>(path[,&nbsp;freeze])</td>
 <td>Initialize settings by reading from a file</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.util.Settings.set" title="icarus.util.Settings.set"><tt class="xref py py-obj docutils literal"><span class="pre">set</span></tt></a>(name,&nbsp;value)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.util.Settings.set" title="icarus.util.Settings.set"><code class="xref py py-obj docutils literal"><span class="pre">set</span></code></a>(name,&nbsp;value)</td>
 <td>Sets a given value for a settings with given name</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="icarus.util.Settings.freeze">
-<tt class="descname">freeze</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Settings.freeze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings.freeze" title="Permalink to this definition">¶</a></dt>
+<code class="descname">freeze</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#Settings.freeze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings.freeze" title="Permalink to this definition">¶</a></dt>
 <dd><p>Freeze the objects. No settings can be added or modified any more</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="icarus.util.Settings.frozen">
-<tt class="descname">frozen</tt><a class="reference internal" href="../_modules/icarus/util.html#Settings.frozen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings.frozen" title="Permalink to this definition">¶</a></dt>
+<code class="descname">frozen</code><a class="headerlink" href="#icarus.util.Settings.frozen" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return whether the object is frozen or not.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="icarus.util.Settings.get">
-<tt class="descname">get</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Settings.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings.get" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#Settings.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return value of settings with given name</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -583,7 +614,7 @@ or SIGQUIT from the OS.</p>
 
 <dl class="method">
 <dt id="icarus.util.Settings.read_from">
-<tt class="descname">read_from</tt><big>(</big><em>path</em>, <em>freeze=False</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Settings.read_from"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings.read_from" title="Permalink to this definition">¶</a></dt>
+<code class="descname">read_from</code><span class="sig-paren">(</span><em>path</em>, <em>freeze=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#Settings.read_from"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings.read_from" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize settings by reading from a file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -605,7 +636,7 @@ or SIGQUIT from the OS.</p>
 
 <dl class="method">
 <dt id="icarus.util.Settings.set">
-<tt class="descname">set</tt><big>(</big><em>name</em>, <em>value</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Settings.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings.set" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set</code><span class="sig-paren">(</span><em>name</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#Settings.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Settings.set" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets a given value for a settings with given name</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -629,8 +660,8 @@ or SIGQUIT from the OS.</p>
 
 <dl class="class">
 <dt id="icarus.util.AnyValue">
-<em class="property">class </em><tt class="descname">AnyValue</tt><a class="reference internal" href="../_modules/icarus/util.html#AnyValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.AnyValue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<em class="property">class </em><code class="descname">AnyValue</code><a class="reference internal" href="../_modules/icarus/util.html#AnyValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.AnyValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Pseudo-value that returns True when compared to any other object.</p>
 <p>This object can be used for example to store parameters in resultsets.</p>
 <p>One concrete usage example is the following: let&#8217;s assume that a user runs
@@ -646,8 +677,8 @@ the result related to that strategy.</p>
 
 <dl class="class">
 <dt id="icarus.util.SequenceNumber">
-<em class="property">class </em><tt class="descname">SequenceNumber</tt><big>(</big><em>initval=1</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#SequenceNumber"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.SequenceNumber" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<em class="property">class </em><code class="descname">SequenceNumber</code><span class="sig-paren">(</span><em>initval=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#SequenceNumber"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.SequenceNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>This class models an increasing sequence number.</p>
 <p>It is used to assign a sequence number for an experiment in a thread-safe
 manner.</p>
@@ -658,17 +689,17 @@ manner.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.SequenceNumber.assign" title="icarus.util.SequenceNumber.assign"><tt class="xref py py-obj docutils literal"><span class="pre">assign</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.SequenceNumber.assign" title="icarus.util.SequenceNumber.assign"><code class="xref py py-obj docutils literal"><span class="pre">assign</span></code></a>()</td>
 <td>Assigns a new sequence number.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.util.SequenceNumber.current" title="icarus.util.SequenceNumber.current"><tt class="xref py py-obj docutils literal"><span class="pre">current</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.util.SequenceNumber.current" title="icarus.util.SequenceNumber.current"><code class="xref py py-obj docutils literal"><span class="pre">current</span></code></a>()</td>
 <td>Return the latest sequence number assigned</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="icarus.util.SequenceNumber.assign">
-<tt class="descname">assign</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#SequenceNumber.assign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.SequenceNumber.assign" title="Permalink to this definition">¶</a></dt>
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#SequenceNumber.assign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.SequenceNumber.assign" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assigns a new sequence number.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -686,7 +717,7 @@ manner.</p>
 
 <dl class="method">
 <dt id="icarus.util.SequenceNumber.current">
-<tt class="descname">current</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#SequenceNumber.current"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.SequenceNumber.current" title="Permalink to this definition">¶</a></dt>
+<code class="descname">current</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#SequenceNumber.current"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.SequenceNumber.current" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the latest sequence number assigned</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -706,7 +737,7 @@ manner.</p>
 
 <dl class="function">
 <dt id="icarus.util.config_logging">
-<tt class="descname">config_logging</tt><big>(</big><em>log_level='INFO'</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#config_logging"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.config_logging" title="Permalink to this definition">¶</a></dt>
+<code class="descname">config_logging</code><span class="sig-paren">(</span><em>log_level='INFO'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#config_logging"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.config_logging" title="Permalink to this definition">¶</a></dt>
 <dd><p>Configure logging level</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -724,7 +755,7 @@ manner.</p>
 
 <dl class="function">
 <dt id="icarus.util.inheritdoc">
-<tt class="descname">inheritdoc</tt><big>(</big><em>cls</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#inheritdoc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.inheritdoc" title="Permalink to this definition">¶</a></dt>
+<code class="descname">inheritdoc</code><span class="sig-paren">(</span><em>cls</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#inheritdoc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.inheritdoc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that inherits docstring from the overridden method of the
 superclass.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -744,7 +775,7 @@ superclass.</p>
 (with the same name of the method to which this decorator is applied) whose
 docstring is to be replicated. It is possible to implement more complex
 decorators which identify the superclass automatically. There are examples
-available in the Web (e.g. <a class="reference external" href="http://code.activestate.com/recipes/576862/">http://code.activestate.com/recipes/576862/</a>),
+available in the Web (e.g., <a class="reference external" href="http://code.activestate.com/recipes/576862/">http://code.activestate.com/recipes/576862/</a>),
 however, the increased complexity leads to issues of interactions with
 other decorators.
 This implementation is simple, easy to understand and works well with
@@ -753,7 +784,7 @@ Icarus code.</p>
 
 <dl class="function">
 <dt id="icarus.util.timestr">
-<tt class="descname">timestr</tt><big>(</big><em>sec</em>, <em>with_seconds=True</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#timestr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.timestr" title="Permalink to this definition">¶</a></dt>
+<code class="descname">timestr</code><span class="sig-paren">(</span><em>sec</em>, <em>with_seconds=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#timestr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.timestr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a time interval in seconds and returns it formatted in a string.</p>
 <p>The returned string includes days, hours, minutes and seconds as
 appropriate.</p>
@@ -783,7 +814,7 @@ appropriate.</p>
 
 <dl class="function">
 <dt id="icarus.util.iround">
-<tt class="descname">iround</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#iround"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.iround" title="Permalink to this definition">¶</a></dt>
+<code class="descname">iround</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#iround"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.iround" title="Permalink to this definition">¶</a></dt>
 <dd><p>Round float to closest integer</p>
 <p>This code was taken from here:
 <a class="reference external" href="http://www.daniweb.com/software-development/python/threads/299459/round-to-nearest-integer">http://www.daniweb.com/software-development/python/threads/299459/round-to-nearest-integer</a></p>
@@ -809,7 +840,7 @@ appropriate.</p>
 
 <dl class="function">
 <dt id="icarus.util.step_cdf">
-<tt class="descname">step_cdf</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#step_cdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.step_cdf" title="Permalink to this definition">¶</a></dt>
+<code class="descname">step_cdf</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#step_cdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.step_cdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert an empirical CDF in set of points representing steps.</p>
 <p>Normally this is conversion is done for plotting purposes.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -842,12 +873,24 @@ appropriate.</p>
 
 <dl class="class">
 <dt id="icarus.util.Tree">
-<em class="property">class </em><tt class="descname">Tree</tt><big>(</big><em>data=None</em>, <em>**attr</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/collections.html#collections.defaultdict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">collections.defaultdict</span></tt></a></p>
+<em class="property">class </em><code class="descname">Tree</code><span class="sig-paren">(</span><em>data=None</em>, <em>**attr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#Tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/collections.html#collections.defaultdict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">collections.defaultdict</span></code></a></p>
 <p>Tree data structure</p>
 <p>This class models a tree data structure that is mainly used to store
 experiment parameters and results in a hierarchical form that makes it
 easier to search and filter data in them.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Tree.empty" title="icarus.util.Tree.empty"><code class="xref py py-obj docutils literal"><span class="pre">empty</span></code></a></td>
+<td>Return True if the tree is empty, False otherwise</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -855,86 +898,111 @@ easier to search and filter data in them.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">clear</span></tt>(()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;D.)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">clear</span></code>(()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;D.)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">copy</span></tt>(()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D.)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code>(()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D.)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">fromkeys</span></tt>(...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Tree.dict" title="icarus.util.Tree.dict"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a>([str_keys])</td>
+<td>Convert the tree in nested dictionaries</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">fromkeys</span></code>(...)</td>
 <td>v defaults to None.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt>((k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;...)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get</span></code>((k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;...)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Tree.getval" title="icarus.util.Tree.getval"><tt class="xref py py-obj docutils literal"><span class="pre">getval</span></tt></a>(path)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.util.Tree.getval" title="icarus.util.Tree.getval"><code class="xref py py-obj docutils literal"><span class="pre">getval</span></code></a>(path)</td>
 <td>Get the value at a specific path, None if not there</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_key</span></tt>((k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">has_key</span></code>((k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">items</span></tt>(()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D&#8217;s&nbsp;(key,&nbsp;value)&nbsp;pairs,&nbsp;...)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">items</span></code>(()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D&#8217;s&nbsp;(key,&nbsp;value)&nbsp;pairs,&nbsp;...)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">iteritems</span></tt>(()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;(key,&nbsp;...)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">iteritems</span></code>(()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;(key,&nbsp;...)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">iterkeys</span></tt>(()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;keys&nbsp;of&nbsp;D)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">iterkeys</span></code>(()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;keys&nbsp;of&nbsp;D)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">itervalues</span></tt>(...)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">itervalues</span></code>(...)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">keys</span></tt>(()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D&#8217;s&nbsp;keys)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">keys</span></code>(()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D&#8217;s&nbsp;keys)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.util.Tree.match" title="icarus.util.Tree.match"><tt class="xref py py-obj docutils literal"><span class="pre">match</span></tt></a>(condition)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Tree.match" title="icarus.util.Tree.match"><code class="xref py py-obj docutils literal"><span class="pre">match</span></code></a>(condition)</td>
 <td>Check if the tree matches a given condition.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Tree.paths" title="icarus.util.Tree.paths"><tt class="xref py py-obj docutils literal"><span class="pre">paths</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.util.Tree.paths" title="icarus.util.Tree.paths"><code class="xref py py-obj docutils literal"><span class="pre">paths</span></code></a>()</td>
 <td>Return a dictionary mapping all paths to final (non-tree) values and the values.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">pop</span></tt>((k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;...)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">pop</span></code>((k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;...)</td>
 <td>If key is not found, d is returned if given, otherwise KeyError is raised</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">popitem</span></tt>(()&nbsp;-&gt;&nbsp;(k,&nbsp;v),&nbsp;...)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">popitem</span></code>(()&nbsp;-&gt;&nbsp;(k,&nbsp;v),&nbsp;...)</td>
 <td>2-tuple; but raise KeyError if D is empty.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.util.Tree.pprint" title="icarus.util.Tree.pprint"><tt class="xref py py-obj docutils literal"><span class="pre">pprint</span></tt></a>()</td>
-<td>Pretty print the tree</td>
-</tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">setdefault</span></tt>((k[,d])&nbsp;-&gt;&nbsp;D.get(k,d),&nbsp;...)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">setdefault</span></code>((k[,d])&nbsp;-&gt;&nbsp;D.get(k,d),&nbsp;...)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.util.Tree.setval" title="icarus.util.Tree.setval"><tt class="xref py py-obj docutils literal"><span class="pre">setval</span></tt></a>(path,&nbsp;val)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.util.Tree.setval" title="icarus.util.Tree.setval"><code class="xref py py-obj docutils literal"><span class="pre">setval</span></code></a>(path,&nbsp;val)</td>
 <td>Set a value at a specific path</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Tree.update" title="icarus.util.Tree.update"><tt class="xref py py-obj docutils literal"><span class="pre">update</span></tt></a>(e)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.util.Tree.update" title="icarus.util.Tree.update"><code class="xref py py-obj docutils literal"><span class="pre">update</span></code></a>(e)</td>
 <td>Update tree from e, similarly to dict.update</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">values</span></tt>(()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D&#8217;s&nbsp;values)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">values</span></code>(()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D&#8217;s&nbsp;values)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">viewitems</span></tt>(...)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">viewitems</span></code>(...)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">viewkeys</span></tt>(...)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">viewkeys</span></code>(...)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">viewvalues</span></tt>(...)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">viewvalues</span></code>(...)</td>
 <td></td>
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="icarus.util.Tree.dict">
+<code class="descname">dict</code><span class="sig-paren">(</span><em>str_keys=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#Tree.dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the tree in nested dictionaries</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>str_key</strong> : bool, optional</p>
+<blockquote>
+<div><p>Convert keys to string. This is useful for example to dump a dict
+into a JSON object that requires keys to be strings</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>d</strong> : dict</p>
+<blockquote class="last">
+<div><p>A nested dict representation of the tree</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="icarus.util.Tree.empty">
-<tt class="descname">empty</tt><a class="reference internal" href="../_modules/icarus/util.html#Tree.empty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.empty" title="Permalink to this definition">¶</a></dt>
+<code class="descname">empty</code><a class="headerlink" href="#icarus.util.Tree.empty" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if the tree is empty, False otherwise</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="icarus.util.Tree.getval">
-<tt class="descname">getval</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Tree.getval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.getval" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getval</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#Tree.getval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.getval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the value at a specific path, None if not there</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -958,7 +1026,7 @@ easier to search and filter data in them.</p>
 
 <dl class="method">
 <dt id="icarus.util.Tree.match">
-<tt class="descname">match</tt><big>(</big><em>condition</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Tree.match"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.match" title="Permalink to this definition">¶</a></dt>
+<code class="descname">match</code><span class="sig-paren">(</span><em>condition</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#Tree.match"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.match" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the tree matches a given condition.</p>
 <p>The condition is another tree. This method iterates to all the values
 of the condition and verify that all values of the condition tree are
@@ -990,7 +1058,7 @@ in this tree.</p>
 
 <dl class="method">
 <dt id="icarus.util.Tree.paths">
-<tt class="descname">paths</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Tree.paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.paths" title="Permalink to this definition">¶</a></dt>
+<code class="descname">paths</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#Tree.paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.paths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a dictionary mapping all paths to final (non-tree) values
 and the values.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1008,26 +1076,8 @@ and the values.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="icarus.util.Tree.pprint">
-<tt class="descname">pprint</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Tree.pprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.pprint" title="Permalink to this definition">¶</a></dt>
-<dd><p>Pretty print the tree</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pprint</strong> : str</p>
-<blockquote class="last">
-<div><p>A pretty string representation of the tree</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
 <dt id="icarus.util.Tree.setval">
-<tt class="descname">setval</tt><big>(</big><em>path</em>, <em>val</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Tree.setval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.setval" title="Permalink to this definition">¶</a></dt>
+<code class="descname">setval</code><span class="sig-paren">(</span><em>path</em>, <em>val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#Tree.setval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.setval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set a value at a specific path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1049,17 +1099,29 @@ and the values.</p>
 
 <dl class="method">
 <dt id="icarus.util.Tree.update">
-<tt class="descname">update</tt><big>(</big><em>e</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#Tree.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.update" title="Permalink to this definition">¶</a></dt>
+<code class="descname">update</code><span class="sig-paren">(</span><em>e</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#Tree.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.Tree.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update tree from e, similarly to dict.update</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>e</strong> : Tree</p>
+<blockquote class="last">
+<div><p>The tree to update from</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="function">
 <dt id="icarus.util.can_import">
-<tt class="descname">can_import</tt><big>(</big><em>statement</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#can_import"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.can_import" title="Permalink to this definition">¶</a></dt>
+<code class="descname">can_import</code><span class="sig-paren">(</span><em>statement</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#can_import"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.can_import" title="Permalink to this definition">¶</a></dt>
 <dd><p>Try executing an import statement and return True if succeeds or False
-othrwise</p>
+otherwise</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1082,7 +1144,7 @@ othrwise</p>
 
 <dl class="function">
 <dt id="icarus.util.path_links">
-<tt class="descname">path_links</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#path_links"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.path_links" title="Permalink to this definition">¶</a></dt>
+<code class="descname">path_links</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#path_links"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.path_links" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a path expressed as list of nodes into a path expressed as a
 list of edges.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1107,7 +1169,7 @@ list of edges.</p>
 
 <dl class="function">
 <dt id="icarus.util.multicast_tree">
-<tt class="descname">multicast_tree</tt><big>(</big><em>shortest_paths</em>, <em>source</em>, <em>destinations</em><big>)</big><a class="reference internal" href="../_modules/icarus/util.html#multicast_tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.multicast_tree" title="Permalink to this definition">¶</a></dt>
+<code class="descname">multicast_tree</code><span class="sig-paren">(</span><em>shortest_paths</em>, <em>source</em>, <em>destinations</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#multicast_tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.multicast_tree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a multicast tree expressed as a set of edges, without any
 ordering</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1132,6 +1194,29 @@ ordering</p>
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="icarus.util.apportionment">
+<code class="descname">apportionment</code><span class="sig-paren">(</span><em>n</em>, <em>fracs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/util.html#apportionment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.util.apportionment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocate items to buckets according to a given proportion.</p>
+<p>This function uses the Largest remainder method with the Hare quota.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n</strong> : int</p>
+<blockquote>
+<div><p>Number of items to allocate to buckets</p>
+</div></blockquote>
+<p><strong>fracs</strong> : list of float</p>
+<blockquote class="last">
+<div><p>Proportion of items to allocate to each bucket</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 <div class="section" id="module-icarus">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-icarus" title="Permalink to this headline">¶</a></h2>
@@ -1144,7 +1229,7 @@ ordering</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -1154,20 +1239,17 @@ ordering</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../np-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="icarus.execution.html" title="icarus.execution package"
              >next</a> |</li>
         <li class="right" >
           <a href="../index.html" title="Icarus: Caching Simulator for Information Centric Networking (ICN)"
              >previous</a> |</li>
-        <li><a href="../index.html">Icarus 0.5.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.6.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2014, Lorenzo Saino, Ioannis Psaras.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
   </body>
 </html>
