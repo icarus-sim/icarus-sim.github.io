@@ -5,8 +5,8 @@ titlehead: Icarus - ICN Caching Simulator
 tagline: Caching simulator for Information Centric Networking (ICN)
 ---
 
-Icarus is a Python-based discrete-event simulator for evaluating caching
-performance in Information Centric Networks (ICN).
+Icarus is a Python-based discrete-event simulator for evaluating the performance
+of networks of caches like Information Centric Networks (ICN).
 
 Icarus is not bound to any specific ICN architecture. Its design allows users
 to implement and evaluate new caching policies or caching and routing strategy
@@ -168,11 +168,14 @@ in *Proc. of the 3rd ACM SIGCOMM workshop on Information Centric Networking (ICN
 
 All the code, data and documentation required is made available in the [icarus-sim/hashrouting-icn13-results](http://github.com/icarus-sim/hashrouting-icn13-results) repository.
 
+### Contacts
+If you have any questions about Icarus, feel free to ask the mailing list
+[icarus@ee.ucl.ac.uk](mailto:icarus@ee.ucl.ac.uk).
+You can also [register to the mailing list](http://mailman.ee.ucl.ac.uk/mailman/listinfo/icarus)
+or [browse the archives](http://mailman.ee.ucl.ac.uk/pipermail/icarus/).
+
 ### License
 Icarus is licensed under the terms of the [GNU GPLv2 license](http://www.gnu.org/licenses/gpl-2.0.html).
-
-### Contacts
-For further information about the Icarus simulator, please contact [Lorenzo Saino](https://lorenzosaino.github.io).
 
 ### Acknowledgments
 This work received funding from the UK EPSRC, under grant agreement no. EP/K019589/1 ([COMIT project](http://www.ee.ucl.ac.uk/comit-project/)), the EU-Japan initiative, under EU FP7 grant agreement no. 608518 and NICT contract no. 167 ([GreenICN project](http://www.greenicn.org/)) and from the EU FP7 program, under grant agreements 318488 ([Flamingo Network of Excellence project](http://www.fp7-flamingo.eu/)).
