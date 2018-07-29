@@ -1,32 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>icarus.models.strategy.hashrouting &mdash; Icarus 0.6.0 documentation</title>
-    
+    <title>icarus.models.strategy.hashrouting &#8212; Icarus 0.7.0 documentation</title>
     <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../../',
-        VERSION:     '0.6.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.6.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" /> 
-  </head>
-  <body role="document">
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -36,20 +25,22 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Icarus 0.7.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -91,7 +82,7 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cache_nodes</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">cache_nodes</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_cache_nodes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_nodes</span><span class="p">)</span>
         <span class="c1"># Allocate results of hash function to caching nodes</span>
@@ -134,8 +125,8 @@
                                   <span class="s1">&#39;This class is meant to be extended by other classes.&#39;</span><span class="p">)</span>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HASHROUTING&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="Hashrouting"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.Hashrouting">[docs]</a><span class="k">class</span> <span class="nc">Hashrouting</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">):</span>
+<div class="viewcode-block" id="Hashrouting"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.Hashrouting">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HASHROUTING&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Hashrouting</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Unified implementation of the three basic hash-routing schemes:</span>
 <span class="sd">    symmetric, asymmetric and multicast.</span>
 
@@ -172,11 +163,11 @@
 <span class="sd">        routing : str (SYMM | ASYMM | MULTICAST)</span>
 <span class="sd">            Content routing option</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Hashrouting</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Hashrouting</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">routing</span> <span class="o">=</span> <span class="n">routing</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="Hashrouting.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.Hashrouting.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="Hashrouting.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.Hashrouting.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">authoritative_cache</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
@@ -238,8 +229,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_EDGE_CACHE&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingEdge"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingEdge">[docs]</a><span class="k">class</span> <span class="nc">HashroutingEdge</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingEdge"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingEdge">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_EDGE_CACHE&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">HashroutingEdge</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hybrid hash-routing and edge caching.</span>
 
 <span class="sd">    According to this strategy a fraction of the caching space in each cache is</span>
@@ -274,7 +265,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">edge_cache_ratio</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">edge_cache_ratio</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;edge_cache_ratio must be between 0 and 1&#39;</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingEdge</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingEdge</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">routing</span> <span class="o">=</span> <span class="n">routing</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">reserve_local_cache</span><span class="p">(</span><span class="n">edge_cache_ratio</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">proxy</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
@@ -282,8 +273,8 @@
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span><span class="o">.</span><span class="n">cache_nodes</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxy</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;There are receivers connected to a proxy without cache&#39;</span><span class="p">)</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingEdge.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingEdge.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingEdge.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingEdge.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">authoritative_cache</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
@@ -355,8 +346,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_ON_PATH&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingOnPath"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingOnPath">[docs]</a><span class="k">class</span> <span class="nc">HashroutingOnPath</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingOnPath"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingOnPath">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_ON_PATH&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">HashroutingOnPath</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hybrid hash-routing and on-path caching.</span>
 
 <span class="sd">    This strategy differs from HashroutingEdge for the fact that in</span>
@@ -387,12 +378,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">on_path_cache_ratio</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">on_path_cache_ratio</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;on_path_cache_ratio must be between 0 and 1&#39;</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingOnPath</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingOnPath</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">routing</span> <span class="o">=</span> <span class="n">routing</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">reserve_local_cache</span><span class="p">(</span><span class="n">on_path_cache_ratio</span><span class="p">)</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingOnPath.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingOnPath.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingOnPath.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingOnPath.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">authoritative_cache</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
@@ -477,8 +468,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_CLUSTER&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingClustered"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingClustered">[docs]</a><span class="k">class</span> <span class="nc">HashroutingClustered</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingClustered"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingClustered">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_CLUSTER&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">HashroutingClustered</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hash-routing with clustering of the network.</span>
 
 <span class="sd">    According to ths strategy, nodes of the network are divided in a number of</span>
@@ -507,7 +498,7 @@
 <span class="sd">        inter_routing : str</span>
 <span class="sd">            Inter-cluster content routing scheme. Only supported LCE</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingClustered</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingClustered</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">intra_routing</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;SYMM&#39;</span><span class="p">,</span> <span class="s1">&#39;ASYMM&#39;</span><span class="p">,</span> <span class="s1">&#39;MULTICAST&#39;</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Intra-cluster routing policy </span><span class="si">%s</span><span class="s1"> not supported&#39;</span>
                              <span class="o">%</span> <span class="n">intra_routing</span><span class="p">)</span>
@@ -516,8 +507,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cluster_topology</span> <span class="o">=</span> <span class="n">extract_cluster_level_topology</span><span class="p">(</span><span class="n">view</span><span class="o">.</span><span class="n">topology</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cluster_sp</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">all_pairs_shortest_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cluster_topology</span><span class="p">)</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingClustered.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingClustered.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingClustered.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingClustered.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="c1"># handle (and log if required) actual request</span>
@@ -627,8 +618,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_SYMM&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingSymmetric"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingSymmetric">[docs]</a><span class="k">class</span> <span class="nc">HashroutingSymmetric</span><span class="p">(</span><span class="n">Hashrouting</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingSymmetric"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingSymmetric">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_SYMM&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">HashroutingSymmetric</span><span class="p">(</span><span class="n">Hashrouting</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hash-routing with symmetric routing (HR SYMM)</span>
 
 <span class="sd">    According to this strategy, each content is routed following the same path</span>
@@ -647,11 +638,11 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingSymmetric</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="s1">&#39;SYMM&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingSymmetric</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="s1">&#39;SYMM&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_ASYMM&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingAsymmetric"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingAsymmetric">[docs]</a><span class="k">class</span> <span class="nc">HashroutingAsymmetric</span><span class="p">(</span><span class="n">Hashrouting</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingAsymmetric"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingAsymmetric">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_ASYMM&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">HashroutingAsymmetric</span><span class="p">(</span><span class="n">Hashrouting</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hash-routing with asymmetric routing (HR ASYMM)</span>
 
 <span class="sd">    According to this strategy, each content fetched from an original source,</span>
@@ -672,11 +663,11 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingAsymmetric</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="s1">&#39;ASYMM&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingAsymmetric</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="s1">&#39;ASYMM&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_MULTICAST&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingMulticast"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingMulticast">[docs]</a><span class="k">class</span> <span class="nc">HashroutingMulticast</span><span class="p">(</span><span class="n">Hashrouting</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingMulticast"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingMulticast">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_MULTICAST&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">HashroutingMulticast</span><span class="p">(</span><span class="n">Hashrouting</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hash-routing implementation with multicast delivery of content packets.</span>
 
 <span class="sd">    In this strategy, if there is a cache miss, when contents return in</span>
@@ -698,11 +689,11 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingMulticast</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="s1">&#39;MULTICAST&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingMulticast</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="s1">&#39;MULTICAST&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_HYBRID_AM&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingHybridAM"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingHybridAM">[docs]</a><span class="k">class</span> <span class="nc">HashroutingHybridAM</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingHybridAM"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingHybridAM">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_HYBRID_AM&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">HashroutingHybridAM</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hash-routing implementation with hybrid asymmetric-multicast delivery of</span>
 <span class="sd">    content packets.</span>
 
@@ -737,11 +728,11 @@
 <span class="sd">            path stretch required to deliver a content is above max_stretch</span>
 <span class="sd">            asymmetric delivery is used, otherwise multicast delivery is used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingHybridAM</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingHybridAM</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_stretch</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">diameter</span><span class="p">(</span><span class="n">view</span><span class="o">.</span><span class="n">topology</span><span class="p">())</span> <span class="o">*</span> <span class="n">max_stretch</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingHybridAM.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingHybridAM.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingHybridAM.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingHybridAM.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">authoritative_cache</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
@@ -784,8 +775,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_HYBRID_SM&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingHybridSM"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingHybridSM">[docs]</a><span class="k">class</span> <span class="nc">HashroutingHybridSM</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingHybridSM"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingHybridSM">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;HR_HYBRID_SM&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">HashroutingHybridSM</span><span class="p">(</span><span class="n">BaseHashrouting</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hash-routing implementation with hybrid symmetric-multicast delivery of</span>
 <span class="sd">    content packets.</span>
 
@@ -804,10 +795,10 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingHybridSM</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HashroutingHybridSM</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="HashroutingHybridSM.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingHybridSM.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="HashroutingHybridSM.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.hashrouting.HashroutingHybridSM.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">authoritative_cache</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
@@ -876,13 +867,13 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Icarus 0.7.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
+        &#169; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
 </html>

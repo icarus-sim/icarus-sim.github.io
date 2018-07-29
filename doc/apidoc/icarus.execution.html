@@ -1,33 +1,22 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>icarus.execution package &mdash; Icarus 0.6.0 documentation</title>
-    
+    <title>icarus.execution package &#8212; Icarus 0.7.0 documentation</title>
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.6.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.6.0 documentation" href="../index.html" />
-    <link rel="up" title="icarus package" href="icarus.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="icarus package" href="icarus.html" /> 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -40,8 +29,8 @@
         <li class="right" >
           <a href="icarus.html" title="icarus package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="icarus.html" accesskey="U">icarus package</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.7.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="icarus.html" accesskey="U">icarus package</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -67,12 +56,14 @@
                         title="previous chapter">icarus package</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -100,7 +91,7 @@ inheriting from the <cite>DataCollector</cite> class and override all required m
 <dl class="class">
 <dt id="icarus.execution.collectors.DataCollector">
 <em class="property">class </em><code class="descname">DataCollector</code><span class="sig-paren">(</span><em>view</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DataCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DataCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Object collecting notifications about simulation events and measuring
 relevant metrics.</p>
 <p class="rubric">Methods</p>
@@ -110,28 +101,28 @@ relevant metrics.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.cache_hit" title="icarus.execution.collectors.DataCollector.cache_hit"><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.cache_hit" title="icarus.execution.collectors.DataCollector.cache_hit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.cache_miss" title="icarus.execution.collectors.DataCollector.cache_miss"><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.cache_miss" title="icarus.execution.collectors.DataCollector.cache_miss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_miss</span></code></a>(node)</td>
 <td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.content_hop" title="icarus.execution.collectors.DataCollector.content_hop"><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.content_hop" title="icarus.execution.collectors.DataCollector.content_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.end_session" title="icarus.execution.collectors.DataCollector.end_session"><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code></a>([success])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.end_session" title="icarus.execution.collectors.DataCollector.end_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_session</span></code></a>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.request_hop" title="icarus.execution.collectors.DataCollector.request_hop"><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.request_hop" title="icarus.execution.collectors.DataCollector.request_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.results" title="icarus.execution.collectors.DataCollector.results"><code class="xref py py-obj docutils literal"><span class="pre">results</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.results" title="icarus.execution.collectors.DataCollector.results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">results</span></code></a>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.server_hit" title="icarus.execution.collectors.DataCollector.server_hit"><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.server_hit" title="icarus.execution.collectors.DataCollector.server_hit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.start_session" title="icarus.execution.collectors.DataCollector.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DataCollector.start_session" title="icarus.execution.collectors.DataCollector.start_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
@@ -145,10 +136,11 @@ node <em>node</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The node whose cache served the content</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node whose cache served the content</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -164,10 +156,11 @@ requested content but there was a cache miss.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The node whose cache served the content</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node whose cache served the content</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -182,21 +175,20 @@ requested content but there was a cache miss.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that this link is being traversed by content
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
 calculate latency correctly in multicast cases. Default value is
 <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -213,10 +205,11 @@ execution of the request</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>success</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last"><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -231,20 +224,19 @@ execution of the request</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that link link is on the main path that will
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
 correctly in multicast cases. Default value is <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -259,10 +251,11 @@ correctly in multicast cases. Default value is <em>True</em></p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
-<blockquote class="last">
-<div><p>Dictionary mapping metric with results.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>results</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary mapping metric with results.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -278,10 +271,11 @@ node <em>node</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The server node which served the content</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The server node which served the content</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -298,18 +292,17 @@ the issuing of a content request to the delivery of the content.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
-<blockquote>
-<div><p>The timestamp of the event</p>
-</div></blockquote>
-<p><strong>receiver</strong> : any hashable type</p>
-<blockquote>
-<div><p>The receiver node requesting a content</p>
-</div></blockquote>
-<p><strong>content</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The content identifier requested by the receiver</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>timestamp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The timestamp of the event</p>
+</dd>
+<dt><strong>receiver</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The receiver node requesting a content</p>
+</dd>
+<dt><strong>content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The content identifier requested by the receiver</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -321,7 +314,7 @@ the issuing of a content request to the delivery of the content.</p>
 <dl class="class">
 <dt id="icarus.execution.collectors.CollectorProxy">
 <em class="property">class </em><code class="descname">CollectorProxy</code><span class="sig-paren">(</span><em>view</em>, <em>collectors</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CollectorProxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CollectorProxy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal notranslate"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
 <p>This class acts as a proxy for all concrete collectors towards the
 network controller.</p>
 <p>An instance of this class registers itself with the network controller and
@@ -334,28 +327,28 @@ dispatching events of interests to concrete collectors.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.cache_hit" title="icarus.execution.collectors.CollectorProxy.cache_hit"><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.cache_hit" title="icarus.execution.collectors.CollectorProxy.cache_hit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.cache_miss" title="icarus.execution.collectors.CollectorProxy.cache_miss"><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.cache_miss" title="icarus.execution.collectors.CollectorProxy.cache_miss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_miss</span></code></a>(node)</td>
 <td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.content_hop" title="icarus.execution.collectors.CollectorProxy.content_hop"><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.content_hop" title="icarus.execution.collectors.CollectorProxy.content_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.end_session" title="icarus.execution.collectors.CollectorProxy.end_session"><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code></a>([success])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.end_session" title="icarus.execution.collectors.CollectorProxy.end_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_session</span></code></a>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.request_hop" title="icarus.execution.collectors.CollectorProxy.request_hop"><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.request_hop" title="icarus.execution.collectors.CollectorProxy.request_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.results" title="icarus.execution.collectors.CollectorProxy.results"><code class="xref py py-obj docutils literal"><span class="pre">results</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.results" title="icarus.execution.collectors.CollectorProxy.results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">results</span></code></a>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.server_hit" title="icarus.execution.collectors.CollectorProxy.server_hit"><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.server_hit" title="icarus.execution.collectors.CollectorProxy.server_hit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.start_session" title="icarus.execution.collectors.CollectorProxy.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CollectorProxy.start_session" title="icarus.execution.collectors.CollectorProxy.start_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
@@ -374,10 +367,11 @@ node <em>node</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The node whose cache served the content</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node whose cache served the content</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -393,10 +387,11 @@ requested content but there was a cache miss.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The node whose cache served the content</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node whose cache served the content</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -411,21 +406,20 @@ requested content but there was a cache miss.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that this link is being traversed by content
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
 calculate latency correctly in multicast cases. Default value is
 <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -442,10 +436,11 @@ execution of the request</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>success</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last"><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -460,20 +455,19 @@ execution of the request</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that link link is on the main path that will
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
 correctly in multicast cases. Default value is <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -488,10 +482,11 @@ correctly in multicast cases. Default value is <em>True</em></p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
-<blockquote class="last">
-<div><p>Dictionary mapping metric with results.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>results</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary mapping metric with results.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -507,10 +502,11 @@ node <em>node</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The server node which served the content</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The server node which served the content</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -527,18 +523,17 @@ the issuing of a content request to the delivery of the content.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
-<blockquote>
-<div><p>The timestamp of the event</p>
-</div></blockquote>
-<p><strong>receiver</strong> : any hashable type</p>
-<blockquote>
-<div><p>The receiver node requesting a content</p>
-</div></blockquote>
-<p><strong>content</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The content identifier requested by the receiver</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>timestamp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The timestamp of the event</p>
+</dd>
+<dt><strong>receiver</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The receiver node requesting a content</p>
+</dd>
+<dt><strong>content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The content identifier requested by the receiver</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -550,7 +545,7 @@ the issuing of a content request to the delivery of the content.</p>
 <dl class="class">
 <dt id="icarus.execution.collectors.CacheHitRatioCollector">
 <em class="property">class </em><code class="descname">CacheHitRatioCollector</code><span class="sig-paren">(</span><em>view</em>, <em>off_path_hits=False</em>, <em>per_node=True</em>, <em>content_hits=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#CacheHitRatioCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.CacheHitRatioCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal notranslate"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
 <p>Collector measuring the cache hit ratio, i.e. the portion of content
 requests served by a cache.</p>
 <p class="rubric">Methods</p>
@@ -560,28 +555,28 @@ requests served by a cache.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.cache_hit" title="icarus.execution.collectors.CacheHitRatioCollector.cache_hit"><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.cache_hit" title="icarus.execution.collectors.CacheHitRatioCollector.cache_hit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code>(node)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_miss</span></code>(node)</td>
 <td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">content_hop</span></code>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code>([success])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_session</span></code>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">request_hop</span></code>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.results" title="icarus.execution.collectors.CacheHitRatioCollector.results"><code class="xref py py-obj docutils literal"><span class="pre">results</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.results" title="icarus.execution.collectors.CacheHitRatioCollector.results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">results</span></code></a>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.server_hit" title="icarus.execution.collectors.CacheHitRatioCollector.server_hit"><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.server_hit" title="icarus.execution.collectors.CacheHitRatioCollector.server_hit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.start_session" title="icarus.execution.collectors.CacheHitRatioCollector.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.CacheHitRatioCollector.start_session" title="icarus.execution.collectors.CacheHitRatioCollector.start_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
@@ -595,10 +590,11 @@ node <em>node</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The node whose cache served the content</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node whose cache served the content</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -618,10 +614,11 @@ node <em>node</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
-<blockquote class="last">
-<div><p>Dictionary mapping metric with results.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>results</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary mapping metric with results.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -637,10 +634,11 @@ node <em>node</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The server node which served the content</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The server node which served the content</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -657,18 +655,17 @@ the issuing of a content request to the delivery of the content.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
-<blockquote>
-<div><p>The timestamp of the event</p>
-</div></blockquote>
-<p><strong>receiver</strong> : any hashable type</p>
-<blockquote>
-<div><p>The receiver node requesting a content</p>
-</div></blockquote>
-<p><strong>content</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The content identifier requested by the receiver</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>timestamp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The timestamp of the event</p>
+</dd>
+<dt><strong>receiver</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The receiver node requesting a content</p>
+</dd>
+<dt><strong>content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The content identifier requested by the receiver</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -680,7 +677,7 @@ the issuing of a content request to the delivery of the content.</p>
 <dl class="class">
 <dt id="icarus.execution.collectors.LinkLoadCollector">
 <em class="property">class </em><code class="descname">LinkLoadCollector</code><span class="sig-paren">(</span><em>view</em>, <em>req_size=150</em>, <em>content_size=1500</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LinkLoadCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LinkLoadCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal notranslate"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
 <p>Data collector measuring the link load</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
@@ -689,28 +686,28 @@ the issuing of a content request to the delivery of the content.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code>(node)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_hit</span></code>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code>(node)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_miss</span></code>(node)</td>
 <td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.content_hop" title="icarus.execution.collectors.LinkLoadCollector.content_hop"><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.content_hop" title="icarus.execution.collectors.LinkLoadCollector.content_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code>([success])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_session</span></code>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.request_hop" title="icarus.execution.collectors.LinkLoadCollector.request_hop"><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.request_hop" title="icarus.execution.collectors.LinkLoadCollector.request_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.results" title="icarus.execution.collectors.LinkLoadCollector.results"><code class="xref py py-obj docutils literal"><span class="pre">results</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.results" title="icarus.execution.collectors.LinkLoadCollector.results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">results</span></code></a>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code>(node)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_hit</span></code>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.start_session" title="icarus.execution.collectors.LinkLoadCollector.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LinkLoadCollector.start_session" title="icarus.execution.collectors.LinkLoadCollector.start_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
@@ -723,21 +720,20 @@ the issuing of a content request to the delivery of the content.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that this link is being traversed by content
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
 calculate latency correctly in multicast cases. Default value is
 <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -757,20 +753,19 @@ calculate latency correctly in multicast cases. Default value is
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that link link is on the main path that will
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
 correctly in multicast cases. Default value is <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -785,10 +780,11 @@ correctly in multicast cases. Default value is <em>True</em></p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
-<blockquote class="last">
-<div><p>Dictionary mapping metric with results.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>results</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary mapping metric with results.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -805,18 +801,17 @@ the issuing of a content request to the delivery of the content.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
-<blockquote>
-<div><p>The timestamp of the event</p>
-</div></blockquote>
-<p><strong>receiver</strong> : any hashable type</p>
-<blockquote>
-<div><p>The receiver node requesting a content</p>
-</div></blockquote>
-<p><strong>content</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The content identifier requested by the receiver</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>timestamp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The timestamp of the event</p>
+</dd>
+<dt><strong>receiver</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The receiver node requesting a content</p>
+</dd>
+<dt><strong>content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The content identifier requested by the receiver</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -828,7 +823,7 @@ the issuing of a content request to the delivery of the content.</p>
 <dl class="class">
 <dt id="icarus.execution.collectors.LatencyCollector">
 <em class="property">class </em><code class="descname">LatencyCollector</code><span class="sig-paren">(</span><em>view</em>, <em>cdf=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#LatencyCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.LatencyCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal notranslate"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
 <p>Data collector measuring latency, i.e. the delay taken to delivery a
 content.</p>
 <p class="rubric">Methods</p>
@@ -838,28 +833,28 @@ content.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code>(node)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_hit</span></code>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code>(node)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_miss</span></code>(node)</td>
 <td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.content_hop" title="icarus.execution.collectors.LatencyCollector.content_hop"><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.content_hop" title="icarus.execution.collectors.LatencyCollector.content_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.end_session" title="icarus.execution.collectors.LatencyCollector.end_session"><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code></a>([success])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.end_session" title="icarus.execution.collectors.LatencyCollector.end_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_session</span></code></a>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.request_hop" title="icarus.execution.collectors.LatencyCollector.request_hop"><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.request_hop" title="icarus.execution.collectors.LatencyCollector.request_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.results" title="icarus.execution.collectors.LatencyCollector.results"><code class="xref py py-obj docutils literal"><span class="pre">results</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.results" title="icarus.execution.collectors.LatencyCollector.results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">results</span></code></a>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code>(node)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_hit</span></code>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.start_session" title="icarus.execution.collectors.LatencyCollector.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.LatencyCollector.start_session" title="icarus.execution.collectors.LatencyCollector.start_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
@@ -872,21 +867,20 @@ content.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that this link is being traversed by content
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
 calculate latency correctly in multicast cases. Default value is
 <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -903,10 +897,11 @@ execution of the request</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>success</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last"><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -926,20 +921,19 @@ execution of the request</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that link link is on the main path that will
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
 correctly in multicast cases. Default value is <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -954,10 +948,11 @@ correctly in multicast cases. Default value is <em>True</em></p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
-<blockquote class="last">
-<div><p>Dictionary mapping metric with results.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>results</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary mapping metric with results.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -974,18 +969,17 @@ the issuing of a content request to the delivery of the content.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
-<blockquote>
-<div><p>The timestamp of the event</p>
-</div></blockquote>
-<p><strong>receiver</strong> : any hashable type</p>
-<blockquote>
-<div><p>The receiver node requesting a content</p>
-</div></blockquote>
-<p><strong>content</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The content identifier requested by the receiver</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>timestamp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The timestamp of the event</p>
+</dd>
+<dt><strong>receiver</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The receiver node requesting a content</p>
+</dd>
+<dt><strong>content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The content identifier requested by the receiver</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -997,7 +991,7 @@ the issuing of a content request to the delivery of the content.</p>
 <dl class="class">
 <dt id="icarus.execution.collectors.PathStretchCollector">
 <em class="property">class </em><code class="descname">PathStretchCollector</code><span class="sig-paren">(</span><em>view</em>, <em>cdf=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#PathStretchCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.PathStretchCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal notranslate"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
 <p>Collector measuring the path stretch, i.e. the ratio between the actual
 path length and the shortest path length.</p>
 <p class="rubric">Methods</p>
@@ -1007,28 +1001,28 @@ path length and the shortest path length.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code>(node)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_hit</span></code>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code>(node)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_miss</span></code>(node)</td>
 <td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.content_hop" title="icarus.execution.collectors.PathStretchCollector.content_hop"><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.content_hop" title="icarus.execution.collectors.PathStretchCollector.content_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.end_session" title="icarus.execution.collectors.PathStretchCollector.end_session"><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code></a>([success])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.end_session" title="icarus.execution.collectors.PathStretchCollector.end_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_session</span></code></a>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.request_hop" title="icarus.execution.collectors.PathStretchCollector.request_hop"><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.request_hop" title="icarus.execution.collectors.PathStretchCollector.request_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.results" title="icarus.execution.collectors.PathStretchCollector.results"><code class="xref py py-obj docutils literal"><span class="pre">results</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.results" title="icarus.execution.collectors.PathStretchCollector.results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">results</span></code></a>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code>(node)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_hit</span></code>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.start_session" title="icarus.execution.collectors.PathStretchCollector.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.PathStretchCollector.start_session" title="icarus.execution.collectors.PathStretchCollector.start_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
@@ -1041,21 +1035,20 @@ path length and the shortest path length.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that this link is being traversed by content
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
 calculate latency correctly in multicast cases. Default value is
 <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1072,10 +1065,11 @@ execution of the request</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>success</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last"><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1095,20 +1089,19 @@ execution of the request</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that link link is on the main path that will
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
 correctly in multicast cases. Default value is <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1123,10 +1116,11 @@ correctly in multicast cases. Default value is <em>True</em></p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>results</strong> : dict</p>
-<blockquote class="last">
-<div><p>Dictionary mapping metric with results.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>results</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary mapping metric with results.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1143,18 +1137,17 @@ the issuing of a content request to the delivery of the content.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
-<blockquote>
-<div><p>The timestamp of the event</p>
-</div></blockquote>
-<p><strong>receiver</strong> : any hashable type</p>
-<blockquote>
-<div><p>The receiver node requesting a content</p>
-</div></blockquote>
-<p><strong>content</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The content identifier requested by the receiver</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>timestamp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The timestamp of the event</p>
+</dd>
+<dt><strong>receiver</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The receiver node requesting a content</p>
+</dd>
+<dt><strong>content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The content identifier requested by the receiver</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1164,10 +1157,10 @@ the issuing of a content request to the delivery of the content.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="icarus.execution.collectors.TestCollector">
-<em class="property">class </em><code class="descname">TestCollector</code><span class="sig-paren">(</span><em>view</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
-<p>Collector used for test cases only.</p>
+<dt id="icarus.execution.collectors.DummyCollector">
+<em class="property">class </em><code class="descname">DummyCollector</code><span class="sig-paren">(</span><em>view</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DummyCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DummyCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#icarus.execution.collectors.DataCollector" title="icarus.execution.collectors.DataCollector"><code class="xref py py-class docutils literal notranslate"><span class="pre">icarus.execution.collectors.DataCollector</span></code></a></p>
+<p>Dummy collector to be used for test cases only.</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -1175,48 +1168,49 @@ the issuing of a content request to the delivery of the content.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.cache_hit" title="icarus.execution.collectors.TestCollector.cache_hit"><code class="xref py py-obj docutils literal"><span class="pre">cache_hit</span></code></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DummyCollector.cache_hit" title="icarus.execution.collectors.DummyCollector.cache_hit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the cache at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.cache_miss" title="icarus.execution.collectors.TestCollector.cache_miss"><code class="xref py py-obj docutils literal"><span class="pre">cache_miss</span></code></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DummyCollector.cache_miss" title="icarus.execution.collectors.DummyCollector.cache_miss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_miss</span></code></a>(node)</td>
 <td>Reports that the cache at node <em>node</em> has been looked up for requested content but there was a cache miss.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.content_hop" title="icarus.execution.collectors.TestCollector.content_hop"><code class="xref py py-obj docutils literal"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DummyCollector.content_hop" title="icarus.execution.collectors.DummyCollector.content_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a content has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.end_session" title="icarus.execution.collectors.TestCollector.end_session"><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code></a>([success])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DummyCollector.end_session" title="icarus.execution.collectors.DummyCollector.end_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_session</span></code></a>([success])</td>
 <td>Reports that the session is closed, i.e.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.request_hop" title="icarus.execution.collectors.TestCollector.request_hop"><code class="xref py py-obj docutils literal"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DummyCollector.request_hop" title="icarus.execution.collectors.DummyCollector.request_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Reports that a request has traversed the link <em>(u, v)</em></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">results</span></code>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">results</span></code>()</td>
 <td>Returns the aggregated results measured by the collector.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.server_hit" title="icarus.execution.collectors.TestCollector.server_hit"><code class="xref py py-obj docutils literal"><span class="pre">server_hit</span></code></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DummyCollector.server_hit" title="icarus.execution.collectors.DummyCollector.server_hit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_hit</span></code></a>(node)</td>
 <td>Reports that the requested content has been served by the server at node <em>node</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.session_summary" title="icarus.execution.collectors.TestCollector.session_summary"><code class="xref py py-obj docutils literal"><span class="pre">session_summary</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.collectors.DummyCollector.session_summary" title="icarus.execution.collectors.DummyCollector.session_summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">session_summary</span></code></a>()</td>
 <td>Return a summary of latest session</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.TestCollector.start_session" title="icarus.execution.collectors.TestCollector.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.collectors.DummyCollector.start_session" title="icarus.execution.collectors.DummyCollector.start_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content)</td>
 <td>Notifies the collector that a new network session started.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
-<dt id="icarus.execution.collectors.TestCollector.cache_hit">
-<code class="descname">cache_hit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.cache_hit" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.execution.collectors.DummyCollector.cache_hit">
+<code class="descname">cache_hit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DummyCollector.cache_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DummyCollector.cache_hit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the requested content has been served by the cache at
 node <em>node</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The node whose cache served the content</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node whose cache served the content</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1224,18 +1218,19 @@ node <em>node</em>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="icarus.execution.collectors.TestCollector.cache_miss">
-<code class="descname">cache_miss</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.cache_miss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.cache_miss" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.execution.collectors.DummyCollector.cache_miss">
+<code class="descname">cache_miss</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DummyCollector.cache_miss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DummyCollector.cache_miss" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the cache at node <em>node</em> has been looked up for
 requested content but there was a cache miss.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The node whose cache served the content</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node whose cache served the content</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1243,28 +1238,27 @@ requested content but there was a cache miss.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="icarus.execution.collectors.TestCollector.content_hop">
-<code class="descname">content_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.content_hop" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.execution.collectors.DummyCollector.content_hop">
+<code class="descname">content_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DummyCollector.content_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DummyCollector.content_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a content has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that this link is being traversed by content
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
 calculate latency correctly in multicast cases. Default value is
 <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1272,8 +1266,8 @@ calculate latency correctly in multicast cases. Default value is
 </dd></dl>
 
 <dl class="method">
-<dt id="icarus.execution.collectors.TestCollector.end_session">
-<code class="descname">end_session</code><span class="sig-paren">(</span><em>success=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.end_session" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.execution.collectors.DummyCollector.end_session">
+<code class="descname">end_session</code><span class="sig-paren">(</span><em>success=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DummyCollector.end_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DummyCollector.end_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the session is closed, i.e. the content has been
 successfully delivered to the receiver or a failure blocked the
 execution of the request</p>
@@ -1281,10 +1275,11 @@ execution of the request</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>success</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last"><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1292,32 +1287,31 @@ execution of the request</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="icarus.execution.collectors.TestCollector.name">
-<code class="descname">name</code><em class="property"> = 'TEST'</em><a class="headerlink" href="#icarus.execution.collectors.TestCollector.name" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.execution.collectors.DummyCollector.name">
+<code class="descname">name</code><em class="property"> = 'DUMMY'</em><a class="headerlink" href="#icarus.execution.collectors.DummyCollector.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="icarus.execution.collectors.TestCollector.request_hop">
-<code class="descname">request_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.request_hop" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.execution.collectors.DummyCollector.request_hop">
+<code class="descname">request_hop</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>main_path=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DummyCollector.request_hop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DummyCollector.request_hop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that a request has traversed the link <em>(u, v)</em></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that link link is on the main path that will
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
 correctly in multicast cases. Default value is <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1325,18 +1319,19 @@ correctly in multicast cases. Default value is <em>True</em></p>
 </dd></dl>
 
 <dl class="method">
-<dt id="icarus.execution.collectors.TestCollector.server_hit">
-<code class="descname">server_hit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.server_hit" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.execution.collectors.DummyCollector.server_hit">
+<code class="descname">server_hit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DummyCollector.server_hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DummyCollector.server_hit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reports that the requested content has been served by the server at
 node <em>node</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The server node which served the content</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The server node which served the content</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1344,17 +1339,18 @@ node <em>node</em>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="icarus.execution.collectors.TestCollector.session_summary">
-<code class="descname">session_summary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.session_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.session_summary" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.execution.collectors.DummyCollector.session_summary">
+<code class="descname">session_summary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DummyCollector.session_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DummyCollector.session_summary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a summary of latest session</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>session</strong> : dict</p>
-<blockquote class="last">
-<div><p>Summary of session</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>session</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Summary of session</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1362,8 +1358,8 @@ node <em>node</em>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="icarus.execution.collectors.TestCollector.start_session">
-<code class="descname">start_session</code><span class="sig-paren">(</span><em>timestamp</em>, <em>receiver</em>, <em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#TestCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.TestCollector.start_session" title="Permalink to this definition">¶</a></dt>
+<dt id="icarus.execution.collectors.DummyCollector.start_session">
+<code class="descname">start_session</code><span class="sig-paren">(</span><em>timestamp</em>, <em>receiver</em>, <em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/collectors.html#DummyCollector.start_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.collectors.DummyCollector.start_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notifies the collector that a new network session started.</p>
 <p>A session refers to the retrieval of a content from a receiver, from
 the issuing of a content request to the delivery of the content.</p>
@@ -1371,18 +1367,17 @@ the issuing of a content request to the delivery of the content.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
-<blockquote>
-<div><p>The timestamp of the event</p>
-</div></blockquote>
-<p><strong>receiver</strong> : any hashable type</p>
-<blockquote>
-<div><p>The receiver node requesting a content</p>
-</div></blockquote>
-<p><strong>content</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The content identifier requested by the receiver</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>timestamp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The timestamp of the event</p>
+</dd>
+<dt><strong>receiver</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The receiver node requesting a content</p>
+</dd>
+<dt><strong>content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The content identifier requested by the receiver</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1407,44 +1402,41 @@ and providing them to a strategy instance.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The FNSS Topology object modelling the network topology on which
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The FNSS Topology object modelling the network topology on which
 experiments are run.</p>
-</div></blockquote>
-<p><strong>workload</strong> : iterable</p>
-<blockquote>
-<div><p>An iterable object whose elements are (time, event) tuples, where time
+</dd>
+<dt><strong>workload</strong> <span class="classifier-delimiter">:</span> <span class="classifier">iterable</span></dt>
+<dd><p class="first last">An iterable object whose elements are (time, event) tuples, where time
 is a float type indicating the timestamp of the event to be executed
 and event is a dictionary storing all the attributes of the event to
 execute</p>
-</div></blockquote>
-<p><strong>netconf</strong> : dict</p>
-<blockquote>
-<div><p>Dictionary of attributes to inizialize the network model</p>
-</div></blockquote>
-<p><strong>strategy</strong> : tree</p>
-<blockquote>
-<div><p>Strategy definition. It is tree describing the name of the strategy
+</dd>
+<dt><strong>netconf</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary of attributes to inizialize the network model</p>
+</dd>
+<dt><strong>strategy</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tree</span></dt>
+<dd><p class="first last">Strategy definition. It is tree describing the name of the strategy
 to use and a list of initialization attributes</p>
-</div></blockquote>
-<p><strong>cache_policy</strong> : tree</p>
-<blockquote>
-<div><p>Cache policy definition. It is tree describing the name of the cache
+</dd>
+<dt><strong>cache_policy</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tree</span></dt>
+<dd><p class="first last">Cache policy definition. It is tree describing the name of the cache
 policy to use and a list of initialization attributes</p>
-</div></blockquote>
-<p><strong>collectors: dict</strong></p>
-<blockquote>
-<div><p>The collectors to be used. It is a dictionary in which keys are the
+</dd>
+<dt><strong>collectors: dict</strong></dt>
+<dd><p class="first last">The collectors to be used. It is a dictionary in which keys are the
 names of collectors to use and values are dictionaries of attributes
 for the collector they refer to.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>results</strong> : Tree</p>
-<blockquote class="last">
-<div><p>A tree with the aggregated simulation results from all collectors</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>results</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Tree</span></dt>
+<dd><p class="first last">A tree with the aggregated simulation results from all collectors</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1467,7 +1459,7 @@ of all relevant events.</p>
 <dl class="class">
 <dt id="icarus.execution.network.NetworkModel">
 <em class="property">class </em><code class="descname">NetworkModel</code><span class="sig-paren">(</span><em>topology</em>, <em>cache_policy</em>, <em>shortest_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Models the internal state of the network.</p>
 <p>This object should never be edited by strategies directly, but only through
 calls to the network controller.</p>
@@ -1476,7 +1468,7 @@ calls to the network controller.</p>
 <dl class="class">
 <dt id="icarus.execution.network.NetworkView">
 <em class="property">class </em><code class="descname">NetworkView</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Network view</p>
 <p>This class provides an interface that strategies and data collectors can
 use to know updated information about the status of the network.
@@ -1489,43 +1481,43 @@ characteristics of links and currently cached objects in nodes.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.all_pairs_shortest_paths" title="icarus.execution.network.NetworkView.all_pairs_shortest_paths"><code class="xref py py-obj docutils literal"><span class="pre">all_pairs_shortest_paths</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.all_pairs_shortest_paths" title="icarus.execution.network.NetworkView.all_pairs_shortest_paths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_pairs_shortest_paths</span></code></a>()</td>
 <td>Return all pairs shortest paths</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cache_dump" title="icarus.execution.network.NetworkView.cache_dump"><code class="xref py py-obj docutils literal"><span class="pre">cache_dump</span></code></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cache_dump" title="icarus.execution.network.NetworkView.cache_dump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_dump</span></code></a>(node)</td>
 <td>Returns the dump of the content of a cache in a specific node</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cache_lookup" title="icarus.execution.network.NetworkView.cache_lookup"><code class="xref py py-obj docutils literal"><span class="pre">cache_lookup</span></code></a>(node,&nbsp;content)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cache_lookup" title="icarus.execution.network.NetworkView.cache_lookup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_lookup</span></code></a>(node,&nbsp;content)</td>
 <td>Check if the cache of a node has a content object, without changing the internal state of the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cache_nodes" title="icarus.execution.network.NetworkView.cache_nodes"><code class="xref py py-obj docutils literal"><span class="pre">cache_nodes</span></code></a>([size])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cache_nodes" title="icarus.execution.network.NetworkView.cache_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_nodes</span></code></a>([size])</td>
 <td>Returns a list of nodes with caching capability</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cluster" title="icarus.execution.network.NetworkView.cluster"><code class="xref py py-obj docutils literal"><span class="pre">cluster</span></code></a>(v)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.cluster" title="icarus.execution.network.NetworkView.cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cluster</span></code></a>(v)</td>
 <td>Return cluster to which a node belongs, if any</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.content_locations" title="icarus.execution.network.NetworkView.content_locations"><code class="xref py py-obj docutils literal"><span class="pre">content_locations</span></code></a>(k)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.content_locations" title="icarus.execution.network.NetworkView.content_locations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">content_locations</span></code></a>(k)</td>
 <td>Return a set of all current locations of a specific content.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.content_source" title="icarus.execution.network.NetworkView.content_source"><code class="xref py py-obj docutils literal"><span class="pre">content_source</span></code></a>(k)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.content_source" title="icarus.execution.network.NetworkView.content_source"><code class="xref py py-obj docutils literal notranslate"><span class="pre">content_source</span></code></a>(k)</td>
 <td>Return the node identifier where the content is persistently stored.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.has_cache" title="icarus.execution.network.NetworkView.has_cache"><code class="xref py py-obj docutils literal"><span class="pre">has_cache</span></code></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.has_cache" title="icarus.execution.network.NetworkView.has_cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_cache</span></code></a>(node)</td>
 <td>Check if a node has a content cache.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.link_delay" title="icarus.execution.network.NetworkView.link_delay"><code class="xref py py-obj docutils literal"><span class="pre">link_delay</span></code></a>(u,&nbsp;v)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.link_delay" title="icarus.execution.network.NetworkView.link_delay"><code class="xref py py-obj docutils literal notranslate"><span class="pre">link_delay</span></code></a>(u,&nbsp;v)</td>
 <td>Return the delay of link <em>(u, v)</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.link_type" title="icarus.execution.network.NetworkView.link_type"><code class="xref py py-obj docutils literal"><span class="pre">link_type</span></code></a>(u,&nbsp;v)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.link_type" title="icarus.execution.network.NetworkView.link_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">link_type</span></code></a>(u,&nbsp;v)</td>
 <td>Return the type of link <em>(u, v)</em>.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.local_cache_lookup" title="icarus.execution.network.NetworkView.local_cache_lookup"><code class="xref py py-obj docutils literal"><span class="pre">local_cache_lookup</span></code></a>(node,&nbsp;content)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.local_cache_lookup" title="icarus.execution.network.NetworkView.local_cache_lookup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_cache_lookup</span></code></a>(node,&nbsp;content)</td>
 <td>Check if the local cache of a node has a content object, without changing the internal state of the cache.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.shortest_path" title="icarus.execution.network.NetworkView.shortest_path"><code class="xref py py-obj docutils literal"><span class="pre">shortest_path</span></code></a>(s,&nbsp;t)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.shortest_path" title="icarus.execution.network.NetworkView.shortest_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shortest_path</span></code></a>(s,&nbsp;t)</td>
 <td>Return the shortest path from <em>s</em> to <em>t</em></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.topology" title="icarus.execution.network.NetworkView.topology"><code class="xref py py-obj docutils literal"><span class="pre">topology</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkView.topology" title="icarus.execution.network.NetworkView.topology"><code class="xref py py-obj docutils literal notranslate"><span class="pre">topology</span></code></a>()</td>
 <td>Return the network topology</td>
 </tr>
 </tbody>
@@ -1544,16 +1536,18 @@ characteristics of links and currently cached objects in nodes.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote>
-<div><p>The node identifier</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node identifier</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dump</strong> : list</p>
-<blockquote class="last">
-<div><p>List of contents currently in the cache</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>dump</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of contents currently in the cache</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1573,21 +1567,22 @@ during the simulation. Instead they should use
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote>
-<div><p>The node identifier</p>
-</div></blockquote>
-<p><strong>content</strong> : any hashable type</p>
-<blockquote>
-<div><p>The content identifier</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node identifier</p>
+</dd>
+<dt><strong>content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The content identifier</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>has_content</strong> : bool</p>
-<blockquote class="last">
-<div><p><em>True</em> if the cache of the node has the content, <em>False</em> otherwise.
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>has_content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last"><em>True</em> if the cache of the node has the content, <em>False</em> otherwise.
 If the node does not have a cache, return <em>None</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1602,18 +1597,20 @@ If the node does not have a cache, return <em>None</em></p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size: bool, opt</strong></p>
-<blockquote>
-<div><p>If <em>True</em> return dict mapping nodes with size</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>size: bool, opt</strong></dt>
+<dd><p class="first last">If <em>True</em> return dict mapping nodes with size</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_nodes</strong> : list or dict</p>
-<blockquote class="last">
-<div><p>If size parameter is False or not specified, it is a list of nodes
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>cache_nodes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or dict</span></dt>
+<dd><p class="first last">If size parameter is False or not specified, it is a list of nodes
 with caches. Otherwise it is a dict mapping nodes with a cache
 and their size.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1628,17 +1625,19 @@ and their size.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Node</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Node</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cluster</strong> : int</p>
-<blockquote class="last">
-<div><p>Cluster to which the node belongs, None if the topology is not
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>cluster</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Cluster to which the node belongs, None if the topology is not
 clustered or the node does not belong to any cluster</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1654,16 +1653,18 @@ clustered or the node does not belong to any cluster</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
-<blockquote>
-<div><p>The content identifier</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>k</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The content identifier</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>nodes</strong> : set</p>
-<blockquote class="last">
-<div><p>A set of all nodes currently storing the given content</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>nodes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">set</span></dt>
+<dd><p class="first last">A set of all nodes currently storing the given content</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1678,17 +1679,19 @@ clustered or the node does not belong to any cluster</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> : any hashable type</p>
-<blockquote>
-<div><p>The content identifier</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>k</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The content identifier</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The node persistently storing the given content or None if the
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node persistently storing the given content or None if the
 source is unavailable</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1703,16 +1706,18 @@ source is unavailable</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote>
-<div><p>The node identifier</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node identifier</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>has_cache</strong> : bool,</p>
-<blockquote class="last">
-<div><p><em>True</em> if the node has a cache, <em>False</em> otherwise</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>has_cache</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool,</span></dt>
+<dd><p class="first last"><em>True</em> if the node has a cache, <em>False</em> otherwise</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1727,20 +1732,21 @@ source is unavailable</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delay</strong> : float</p>
-<blockquote class="last">
-<div><p>The link delay</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>delay</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The link delay</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1756,20 +1762,21 @@ source is unavailable</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>link_type</strong> : str</p>
-<blockquote class="last">
-<div><p>The link type</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>link_type</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The link type</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1792,21 +1799,22 @@ during the simulation. Instead they should use
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote>
-<div><p>The node identifier</p>
-</div></blockquote>
-<p><strong>content</strong> : any hashable type</p>
-<blockquote>
-<div><p>The content identifier</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node identifier</p>
+</dd>
+<dt><strong>content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The content identifier</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>has_content</strong> : bool</p>
-<blockquote class="last">
-<div><p><em>True</em> if the cache of the node has the content, <em>False</em> otherwise.
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>has_content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last"><em>True</em> if the cache of the node has the content, <em>False</em> otherwise.
 If the node does not have a cache, return <em>None</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1821,21 +1829,22 @@ If the node does not have a cache, return <em>None</em></p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>s</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>t</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>shortest_path</strong> : list</p>
-<blockquote class="last">
-<div><p>List of nodes of the shortest path (origin and destination
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>shortest_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of nodes of the shortest path (origin and destination
 included)</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1850,10 +1859,11 @@ included)</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
-<blockquote class="last">
-<div><p>The topology object</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">fnss.Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1869,7 +1879,7 @@ Changes to this object will lead to inconsistent network state.</p>
 <dl class="class">
 <dt id="icarus.execution.network.NetworkController">
 <em class="property">class </em><code class="descname">NetworkController</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/execution/network.html#NetworkController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.execution.network.NetworkController" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Network controller</p>
 <p>This class is in charge of executing operations on the network model on
 behalf of a strategy implementation. It is also in charge of notifying
@@ -1881,61 +1891,61 @@ data collectors of relevant events.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.attach_collector" title="icarus.execution.network.NetworkController.attach_collector"><code class="xref py py-obj docutils literal"><span class="pre">attach_collector</span></code></a>(collector)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.attach_collector" title="icarus.execution.network.NetworkController.attach_collector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">attach_collector</span></code></a>(collector)</td>
 <td>Attach a data collector to which all events will be reported.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.detach_collector" title="icarus.execution.network.NetworkController.detach_collector"><code class="xref py py-obj docutils literal"><span class="pre">detach_collector</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.detach_collector" title="icarus.execution.network.NetworkController.detach_collector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detach_collector</span></code></a>()</td>
 <td>Detach the data collector.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.end_session" title="icarus.execution.network.NetworkController.end_session"><code class="xref py py-obj docutils literal"><span class="pre">end_session</span></code></a>([success])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.end_session" title="icarus.execution.network.NetworkController.end_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_session</span></code></a>([success])</td>
 <td>Close a session</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_content_hop" title="icarus.execution.network.NetworkController.forward_content_hop"><code class="xref py py-obj docutils literal"><span class="pre">forward_content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_content_hop" title="icarus.execution.network.NetworkController.forward_content_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward_content_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Forward a content over link  u -&gt; v.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_content_path" title="icarus.execution.network.NetworkController.forward_content_path"><code class="xref py py-obj docutils literal"><span class="pre">forward_content_path</span></code></a>(u,&nbsp;v[,&nbsp;path,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_content_path" title="icarus.execution.network.NetworkController.forward_content_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward_content_path</span></code></a>(u,&nbsp;v[,&nbsp;path,&nbsp;main_path])</td>
 <td>Forward a content from node <em>s</em> to node <em>t</em> over the provided path.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_request_hop" title="icarus.execution.network.NetworkController.forward_request_hop"><code class="xref py py-obj docutils literal"><span class="pre">forward_request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_request_hop" title="icarus.execution.network.NetworkController.forward_request_hop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward_request_hop</span></code></a>(u,&nbsp;v[,&nbsp;main_path])</td>
 <td>Forward a request over link  u -&gt; v.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_request_path" title="icarus.execution.network.NetworkController.forward_request_path"><code class="xref py py-obj docutils literal"><span class="pre">forward_request_path</span></code></a>(s,&nbsp;t[,&nbsp;path,&nbsp;main_path])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.forward_request_path" title="icarus.execution.network.NetworkController.forward_request_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward_request_path</span></code></a>(s,&nbsp;t[,&nbsp;path,&nbsp;main_path])</td>
 <td>Forward a request from node <em>s</em> to node <em>t</em> over the provided path.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.get_content" title="icarus.execution.network.NetworkController.get_content"><code class="xref py py-obj docutils literal"><span class="pre">get_content</span></code></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.get_content" title="icarus.execution.network.NetworkController.get_content"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_content</span></code></a>(node)</td>
 <td>Get a content from a server or a cache.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.get_content_local_cache" title="icarus.execution.network.NetworkController.get_content_local_cache"><code class="xref py py-obj docutils literal"><span class="pre">get_content_local_cache</span></code></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.get_content_local_cache" title="icarus.execution.network.NetworkController.get_content_local_cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_content_local_cache</span></code></a>(node)</td>
 <td>Get content from local cache of node (if any)</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.put_content" title="icarus.execution.network.NetworkController.put_content"><code class="xref py py-obj docutils literal"><span class="pre">put_content</span></code></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.put_content" title="icarus.execution.network.NetworkController.put_content"><code class="xref py py-obj docutils literal notranslate"><span class="pre">put_content</span></code></a>(node)</td>
 <td>Store content in the specified node.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.put_content_local_cache" title="icarus.execution.network.NetworkController.put_content_local_cache"><code class="xref py py-obj docutils literal"><span class="pre">put_content_local_cache</span></code></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.put_content_local_cache" title="icarus.execution.network.NetworkController.put_content_local_cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">put_content_local_cache</span></code></a>(node)</td>
 <td>Put content into local cache of node (if any)</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.remove_content" title="icarus.execution.network.NetworkController.remove_content"><code class="xref py py-obj docutils literal"><span class="pre">remove_content</span></code></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.remove_content" title="icarus.execution.network.NetworkController.remove_content"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_content</span></code></a>(node)</td>
 <td>Remove the content being handled from the cache</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.remove_link" title="icarus.execution.network.NetworkController.remove_link"><code class="xref py py-obj docutils literal"><span class="pre">remove_link</span></code></a>(u,&nbsp;v[,&nbsp;recompute_paths])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.remove_link" title="icarus.execution.network.NetworkController.remove_link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_link</span></code></a>(u,&nbsp;v[,&nbsp;recompute_paths])</td>
 <td>Remove a link from the topology and update the network model.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.remove_node" title="icarus.execution.network.NetworkController.remove_node"><code class="xref py py-obj docutils literal"><span class="pre">remove_node</span></code></a>(v[,&nbsp;recompute_paths])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.remove_node" title="icarus.execution.network.NetworkController.remove_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_node</span></code></a>(v[,&nbsp;recompute_paths])</td>
 <td>Remove a node from the topology and update the network model.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.reserve_local_cache" title="icarus.execution.network.NetworkController.reserve_local_cache"><code class="xref py py-obj docutils literal"><span class="pre">reserve_local_cache</span></code></a>([ratio])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.reserve_local_cache" title="icarus.execution.network.NetworkController.reserve_local_cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reserve_local_cache</span></code></a>([ratio])</td>
 <td>Reserve a fraction of cache as local.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.restore_link" title="icarus.execution.network.NetworkController.restore_link"><code class="xref py py-obj docutils literal"><span class="pre">restore_link</span></code></a>(u,&nbsp;v[,&nbsp;recompute_paths])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.restore_link" title="icarus.execution.network.NetworkController.restore_link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restore_link</span></code></a>(u,&nbsp;v[,&nbsp;recompute_paths])</td>
 <td>Restore a previously-removed link and update the network model</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.restore_node" title="icarus.execution.network.NetworkController.restore_node"><code class="xref py py-obj docutils literal"><span class="pre">restore_node</span></code></a>(v[,&nbsp;recompute_paths])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.restore_node" title="icarus.execution.network.NetworkController.restore_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restore_node</span></code></a>(v[,&nbsp;recompute_paths])</td>
 <td>Restore a previously-removed node and update the network model.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.rewire_link" title="icarus.execution.network.NetworkController.rewire_link"><code class="xref py py-obj docutils literal"><span class="pre">rewire_link</span></code></a>(u,&nbsp;v,&nbsp;up,&nbsp;vp[,&nbsp;recompute_paths])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.rewire_link" title="icarus.execution.network.NetworkController.rewire_link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rewire_link</span></code></a>(u,&nbsp;v,&nbsp;up,&nbsp;vp[,&nbsp;recompute_paths])</td>
 <td>Rewire an existing link to new endpoints</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.start_session" title="icarus.execution.network.NetworkController.start_session"><code class="xref py py-obj docutils literal"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content,&nbsp;log)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.execution.network.NetworkController.start_session" title="icarus.execution.network.NetworkController.start_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_session</span></code></a>(timestamp,&nbsp;receiver,&nbsp;content,&nbsp;log)</td>
 <td>Instruct the controller to start a new session (i.e.</td>
 </tr>
 </tbody>
@@ -1948,10 +1958,11 @@ data collectors of relevant events.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>collector</strong> : DataCollector</p>
-<blockquote class="last">
-<div><p>The data collector</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>collector</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataCollector</span></dt>
+<dd><p class="first last">The data collector</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1972,10 +1983,11 @@ data collectors of relevant events.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>success</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>success</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last"><em>True</em> if the session was completed successfully, <em>False</em> otherwise</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1990,21 +2002,20 @@ data collectors of relevant events.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that this link is being traversed by content
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that this link is being traversed by content
 that will be delivered to the receiver. This is needed to
 calculate latency correctly in multicast cases. Default value is
 <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2019,25 +2030,23 @@ calculate latency correctly in multicast cases. Default value is
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>s</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>t</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>path</strong> : list, optional</p>
-<blockquote>
-<div><p>The path to use. If not provided, shortest path is used</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that this path is being traversed by content
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list, optional</span></dt>
+<dd><p class="first last">The path to use. If not provided, shortest path is used</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that this path is being traversed by content
 that will be delivered to the receiver. This is needed to
 calculate latency correctly in multicast cases. Default value is
 <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2052,20 +2061,19 @@ calculate latency correctly in multicast cases. Default value is
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that link link is on the main path that will
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that link link is on the main path that will
 lead to hit a content. It is normally used to calculate latency
 correctly in multicast cases. Default value is <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2080,24 +2088,22 @@ correctly in multicast cases. Default value is <em>True</em></p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>s</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>t</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>path</strong> : list, optional</p>
-<blockquote>
-<div><p>The path to use. If not provided, shortest path is used</p>
-</div></blockquote>
-<p><strong>main_path</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, indicates that link path is on the main path that will
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list, optional</span></dt>
+<dd><p class="first last">The path to use. If not provided, shortest path is used</p>
+</dd>
+<dt><strong>main_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, indicates that link path is on the main path that will
 lead to hit a content. It is normally used to calculate latency
 correctly in multicast cases. Default value is <em>True</em></p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2112,16 +2118,18 @@ correctly in multicast cases. Default value is <em>True</em></p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote>
-<div><p>The node where the content is retrieved</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node where the content is retrieved</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>content</strong> : bool</p>
-<blockquote class="last">
-<div><p>True if the content is available, False otherwise</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">True if the content is available, False otherwise</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2138,10 +2146,11 @@ initialized with the <cite>reserve_local_cache</cite> method.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The node to query</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node to query</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2160,16 +2169,18 @@ inserted.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote>
-<div><p>The node where the content is inserted</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node where the content is inserted</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>evicted</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The evicted object or <em>None</em> if no contents were evicted.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>evicted</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The evicted object or <em>None</em> if no contents were evicted.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2186,10 +2197,11 @@ initialized with the <cite>reserve_local_cache</cite> method.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>The node to query</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node to query</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2204,16 +2216,18 @@ initialized with the <cite>reserve_local_cache</cite> method.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>node</strong> : any hashable type</p>
-<blockquote>
-<div><p>The node where the cached content is removed</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The node where the cached content is removed</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>removed</strong> : bool</p>
-<blockquote class="last">
-<div><p><em>True</em> if the entry was in the cache, <em>False</em> if it was not.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>removed</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last"><em>True</em> if the entry was in the cache, <em>False</em> if it was not.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2231,23 +2245,22 @@ implementation of strategies using this method deal with all potential
 corner cases appropriately.</p>
 <p>Also, note that, for these changes to be effective, the strategy must
 use fresh data provided by the network view and not storing local copies
-of network state because they won&#8217;t be updated by this method.</p>
+of network state because they won’t be updated by this method.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>recompute_paths: bool, optional</strong></p>
-<blockquote class="last">
-<div><p>If True, recompute all shortest paths</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>recompute_paths: bool, optional</strong></dt>
+<dd><p class="first last">If True, recompute all shortest paths</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2267,7 +2280,7 @@ corner cases appropriately.</p>
 to the node to be removed are removed as well. These links are however
 restored when the node is restored. However, if a link attached to this
 node was previously removed using the remove_link method, restoring the
-node won&#8217;t restore that link as well. It will need to be restored with a
+node won’t restore that link as well. It will need to be restored with a
 call to restore_link.</p>
 <p>This method is normally quite safe when applied to remove cache nodes or
 routers if this does not cause partitions. If used to remove content
@@ -2276,19 +2289,19 @@ a source is removed, the content items stored by that source will no
 longer be available if not cached elsewhere.</p>
 <p>Also, note that, for these changes to be effective, the strategy must
 use fresh data provided by the network view and not storing local copies
-of network state because they won&#8217;t be updated by this method.</p>
+of network state because they won’t be updated by this method.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Node to remove</p>
-</div></blockquote>
-<p><strong>recompute_paths: bool, optional</strong></p>
-<blockquote class="last">
-<div><p>If True, recompute all shortest paths</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Node to remove</p>
+</dd>
+<dt><strong>recompute_paths: bool, optional</strong></dt>
+<dd><p class="first last">If True, recompute all shortest paths</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2309,10 +2322,11 @@ local cache can be accessed with methods <cite>get_content_local_cache</cite> an
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>ratio</strong> : float</p>
-<blockquote class="last">
-<div><p>The ratio of cache space to be reserved as local cache.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>ratio</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The ratio of cache space to be reserved as local cache.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2327,18 +2341,17 @@ local cache can be accessed with methods <cite>get_content_local_cache</cite> an
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u</strong> : any hashable type</p>
-<blockquote>
-<div><p>Origin node</p>
-</div></blockquote>
-<p><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Destination node</p>
-</div></blockquote>
-<p><strong>recompute_paths: bool, optional</strong></p>
-<blockquote class="last">
-<div><p>If True, recompute all shortest paths</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Origin node</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Destination node</p>
+</dd>
+<dt><strong>recompute_paths: bool, optional</strong></dt>
+<dd><p class="first last">If True, recompute all shortest paths</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2353,14 +2366,14 @@ local cache can be accessed with methods <cite>get_content_local_cache</cite> an
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Node to restore</p>
-</div></blockquote>
-<p><strong>recompute_paths: bool, optional</strong></p>
-<blockquote class="last">
-<div><p>If True, recompute all shortest paths</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Node to restore</p>
+</dd>
+<dt><strong>recompute_paths: bool, optional</strong></dt>
+<dd><p class="first last">If True, recompute all shortest paths</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2382,14 +2395,14 @@ corner cases appropriately.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>u, v</strong> : any hashable type</p>
-<blockquote>
-<div><p>Endpoints of link before rewiring</p>
-</div></blockquote>
-<p><strong>up, vp</strong> : any hashable type</p>
-<blockquote class="last">
-<div><p>Endpoints of link after rewiring</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u, v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Endpoints of link before rewiring</p>
+</dd>
+<dt><strong>up, vp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">Endpoints of link after rewiring</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2405,23 +2418,21 @@ of a content).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>timestamp</strong> : int</p>
-<blockquote>
-<div><p>The timestamp of the event</p>
-</div></blockquote>
-<p><strong>receiver</strong> : any hashable type</p>
-<blockquote>
-<div><p>The receiver node requesting a content</p>
-</div></blockquote>
-<p><strong>content</strong> : any hashable type</p>
-<blockquote>
-<div><p>The content identifier requested by the receiver</p>
-</div></blockquote>
-<p><strong>log</strong> : bool</p>
-<blockquote class="last">
-<div><p><em>True</em> if this session needs to be reported to the collector,
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>timestamp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The timestamp of the event</p>
+</dd>
+<dt><strong>receiver</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The receiver node requesting a content</p>
+</dd>
+<dt><strong>content</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any hashable type</span></dt>
+<dd><p class="first last">The content identifier requested by the receiver</p>
+</dd>
+<dt><strong>log</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last"><em>True</em> if this session needs to be reported to the collector,
 <em>False</em> otherwise</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -2455,13 +2466,13 @@ of a content).</p>
         <li class="right" >
           <a href="icarus.html" title="icarus package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="icarus.html" >icarus package</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.7.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="icarus.html" >icarus package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
+        &#169; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
 </html>

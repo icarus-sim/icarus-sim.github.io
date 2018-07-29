@@ -1,32 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>icarus.results package &mdash; Icarus 0.6.0 documentation</title>
-    
+    <title>icarus.results package &#8212; Icarus 0.7.0 documentation</title>
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.6.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.6.0 documentation" href="../index.html" />
-    <link rel="up" title="icarus package" href="icarus.html" /> 
-  </head>
-  <body role="document">
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -36,8 +25,8 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="icarus.html" accesskey="U">icarus package</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.7.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="icarus.html" accesskey="U">icarus package</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -56,12 +45,14 @@
 
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -89,24 +80,22 @@ of the data contained in the resultset and save the plot in given directory.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rs</strong> : ResultSet</p>
-<blockquote>
-<div><p>Result set</p>
-</div></blockquote>
-<p><strong>desc</strong> : dict</p>
-<blockquote>
-<div><p>The plot descriptor (more info below)</p>
-</div></blockquote>
-<p><strong>filename</strong> : str</p>
-<blockquote>
-<div><p>The name used to save the file. The file format is determined by the
-extension of the file. For example, if this filename is &#8216;foo.pdf&#8217;, the
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>rs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ResultSet</span></dt>
+<dd><p class="first last">Result set</p>
+</dd>
+<dt><strong>desc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">The plot descriptor (more info below)</p>
+</dd>
+<dt><strong>filename</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The name used to save the file. The file format is determined by the
+extension of the file. For example, if this filename is ‘foo.pdf’, the
 file will be saved in pdf format.</p>
-</div></blockquote>
-<p><strong>plotdir</strong> : str</p>
-<blockquote class="last">
-<div><p>The directory in which the plot will be saved.</p>
-</div></blockquote>
+</dd>
+<dt><strong>plotdir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The directory in which the plot will be saved.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -116,61 +105,53 @@ file will be saved in pdf format.</p>
 to make the plot.</p>
 <dl class="docutils">
 <dt>The dictionary can contain the following keys:</dt>
-<dd><ul class="first last">
+<dd><ul class="first last simple">
 <li><dl class="first docutils">
-<dt>title</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional.</span><dd><p class="first last">The title of the graph</p>
-</dd>
+<dt>title <span class="classifier-delimiter">:</span> <span class="classifier">str, optional.</span></dt>
+<dd>The title of the graph</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>xlabel</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span><dd><p class="first last">The x label</p>
-</dd>
+<dt>xlabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>The x label</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>ylabel</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span><dd><p class="first last">The y label</p>
-</dd>
+<dt>ylabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>The y label</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>errorbar</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span><dd><p class="first last">If <em>True</em> error bars will be plotted. Default value is <em>True</em></p>
-</dd>
+<dt>errorbar <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>If <em>True</em> error bars will be plotted. Default value is <em>True</em></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>confidence</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span><dd><p class="first last">The confidence used to plot error bars. Default value is 0.95</p>
-</dd>
+<dt>confidence <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd>The confidence used to plot error bars. Default value is 0.95</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>xparam</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">iterable</span><dd><p class="first last">Path to the value of the x axis metric, e.g. [&#8216;workload&#8217;, &#8216;alpha&#8217;]</p>
-</dd>
+<dt>xparam <span class="classifier-delimiter">:</span> <span class="classifier">iterable</span></dt>
+<dd>Path to the value of the x axis metric, e.g. [‘workload’, ‘alpha’]</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>xvals</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list</span><dd><p class="first last">Range of x values, e.g. [0.6, 0.7, 0.8, 0.9]</p>
-</dd>
+<dt>xvals <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd>Range of x values, e.g. [0.6, 0.7, 0.8, 0.9]</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>filter</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">A dictionary of values to filter in the resultset.
-Example: {&#8216;network_cache&#8217;: 0.004, &#8216;topology_name&#8217;: &#8216;GEANT&#8217;}
+<dt>filter <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>A dictionary of values to filter in the resultset.
+Example: {‘network_cache’: 0.004, ‘topology_name’: ‘GEANT’}
 If not specified or None, no filtering is executed on the results
-and possibly heterogeneous results may be plotted together</p>
-</dd>
+and possibly heterogeneous results may be plotted together</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>ymetrics</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples</span><dd><p class="first last">List of metrics to be shown on the graph. The i-th metric of the list
+<dt>ymetrics <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples</span></dt>
+<dd>List of metrics to be shown on the graph. The i-th metric of the list
 is the metric that the i-th line on the graph will represent. If
 all lines are for the same metric, then all elements of the list are
 equal.
@@ -178,113 +159,98 @@ Each single metric (i.e. each element of the list) is a tuple modeling
 the path to identify a specific metric into an entry of a result set.
 Normally, it is a 2-value list where the first value is the name of
 the collector which measured the metric and the second value is the
-metric name. Example values could be (&#8216;CACHE_HIT_RATIO&#8217;, &#8216;MEAN&#8217;),
-(&#8216;LINK_LOAD&#8217;, &#8216;MEAN_INTERNAL&#8217;) or (&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;).
+metric name. Example values could be (‘CACHE_HIT_RATIO’, ‘MEAN’),
+(‘LINK_LOAD’, ‘MEAN_INTERNAL’) or (‘LATENCY’, ‘MEAN’).
 For example, if in a graph of N lines all lines of the graph show mean
-latency, then ymetrics = [(&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;)]*5.</p>
-</dd>
+latency, then ymetrics = [(‘LATENCY’, ‘MEAN’)]*5.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>ycondnames</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span><dd><p class="first last">List of condition names specific to each line of the graph. Different
+<dt>ycondnames <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span></dt>
+<dd>List of condition names specific to each line of the graph. Different
 from the conditions expressed in the filter parameter, which are
 global, these conditions are specific to one bar. Ech condition name,
 different from the filter parameter is a path to a condition to be
-checked, e.g. (&#8216;topology&#8217;, &#8216;name&#8217;). Values to be matched for this
+checked, e.g. (‘topology’, ‘name’). Values to be matched for this
 conditions are specified in ycondvals. This list must be as long as
 the number of lines to plot. If not specified, all lines are filtered
 by the conditions of filter parameter only, but in this case all
-ymetrics should be different.</p>
-</dd>
+ymetrics should be different.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>ycondvals</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span><dd><p class="first last">List of values that the conditions of ycondnames must meet. This list
+<dt>ycondvals <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span></dt>
+<dd>List of values that the conditions of ycondnames must meet. This list
 must be as long as the number of lines to plot. If not specified,
 all lines are filtered by the conditions of filter parameter only,
-but in this case all ymetrics should be different.</p>
-</dd>
+but in this case all ymetrics should be different.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>xscale</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">(&#8216;linear&#8217; | &#8216;log&#8217;), optional</span><dd><p class="first last">The scale of x axis. Default value is &#8216;linear&#8217;</p>
-</dd>
+<dt>xscale <span class="classifier-delimiter">:</span> <span class="classifier">(‘linear’ | ‘log’), optional</span></dt>
+<dd>The scale of x axis. Default value is ‘linear’</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>yscale</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">(&#8216;linear&#8217; | &#8216;log&#8217;), optional</span><dd><p class="first last">The scale of y axis. Default value is &#8216;linear&#8217;</p>
-</dd>
+<dt>yscale <span class="classifier-delimiter">:</span> <span class="classifier">(‘linear’ | ‘log’), optional</span></dt>
+<dd>The scale of y axis. Default value is ‘linear’</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>xticks</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list, optional</span><dd><p class="first last">Values to display as x-axis ticks.</p>
-</dd>
+<dt>xticks <span class="classifier-delimiter">:</span> <span class="classifier">list, optional</span></dt>
+<dd>Values to display as x-axis ticks.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>yticks</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list, optional</span><dd><p class="first last">Values to display as y-axis ticks.</p>
-</dd>
+<dt>yticks <span class="classifier-delimiter">:</span> <span class="classifier">list, optional</span></dt>
+<dd>Values to display as y-axis ticks.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>line_style</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">Dictionary mapping each value of yvals with a line style</p>
-</dd>
+<dt>line_style <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>Dictionary mapping each value of yvals with a line style</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>plot_args</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">Additional args to be provided to the Pyplot errorbar function.
+<dt>plot_args <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>Additional args to be provided to the Pyplot errorbar function.
 Example parameters that can be specified here are <em>linewidth</em> and
-<em>elinewidth</em></p>
-</dd>
+<em>elinewidth</em></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">Dictionary mapping each value of yvals with a legend label. If not
+<dt>legend <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>Dictionary mapping each value of yvals with a legend label. If not
 specified, it is not plotted. If you wish to plot it with the
 name of the line, set it to put yvals or ymetrics, depending on which
-one is used</p>
-</dd>
+one is used</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend_loc</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span><dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
-</dd>
+<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>Legend location, e.g. ‘upper left’</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend_args</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">Optional legend arguments, such as ncol</p>
-</dd>
+<dt>legend_args <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>Optional legend arguments, such as ncol</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>plotempty</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span><dd><p class="first last">If <em>True</em>, plot and save graph even if empty. Default is <em>True</em></p>
-</dd>
+<dt>plotempty <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>If <em>True</em>, plot and save graph even if empty. Default is <em>True</em></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>xmin, xmax: float, optional</dt>
-<dd><p class="first last">The limits of the x axis. If not specified, they&#8217;re set to the min and
-max values of xvals</p>
-</dd>
+<dd>The limits of the x axis. If not specified, they’re set to the min and
+max values of xvals</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>ymin, ymax: float, optional</dt>
-<dd><p class="first last">The limits of the y axis. If not specified, they&#8217;re automatically
-selected by Matplotlib</p>
-</dd>
+<dd>The limits of the y axis. If not specified, they’re automatically
+selected by Matplotlib</dd>
 </dl>
 </li>
 </ul>
@@ -302,24 +268,22 @@ directory.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rs</strong> : ResultSet</p>
-<blockquote>
-<div><p>Result set</p>
-</div></blockquote>
-<p><strong>desc</strong> : dict</p>
-<blockquote>
-<div><p>The plot descriptor (more info below)</p>
-</div></blockquote>
-<p><strong>filename</strong> : str</p>
-<blockquote>
-<div><p>The name used to save the file. The file format is determined by the
-extension of the file. For example, if this filename is &#8216;foo.pdf&#8217;, the
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>rs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ResultSet</span></dt>
+<dd><p class="first last">Result set</p>
+</dd>
+<dt><strong>desc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">The plot descriptor (more info below)</p>
+</dd>
+<dt><strong>filename</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The name used to save the file. The file format is determined by the
+extension of the file. For example, if this filename is ‘foo.pdf’, the
 file will be saved in pdf format.</p>
-</div></blockquote>
-<p><strong>plotdir</strong> : str</p>
-<blockquote class="last">
-<div><p>The directory in which the plot will be saved.</p>
-</div></blockquote>
+</dd>
+<dt><strong>plotdir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The directory in which the plot will be saved.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -329,68 +293,59 @@ file will be saved in pdf format.</p>
 to make the plot.</p>
 <dl class="docutils">
 <dt>The dictionary can contain the following keys:</dt>
-<dd><ul class="first last">
+<dd><ul class="first last simple">
 <li><dl class="first docutils">
-<dt>title</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional.</span><dd><p class="first last">The title of the graph</p>
-</dd>
+<dt>title <span class="classifier-delimiter">:</span> <span class="classifier">str, optional.</span></dt>
+<dd>The title of the graph</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>xlabel</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span><dd><p class="first last">The x label</p>
-</dd>
+<dt>xlabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>The x label</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>ylabel</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span><dd><p class="first last">The y label</p>
-</dd>
+<dt>ylabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>The y label</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>errorbar</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span><dd><p class="first last">If <em>True</em> error bars will be plotted. Default value is <em>True</em></p>
-</dd>
+<dt>errorbar <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>If <em>True</em> error bars will be plotted. Default value is <em>True</em></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>confidence</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span><dd><p class="first last">The confidence used to plot error bars. Default value is 0.95</p>
-</dd>
+<dt>confidence <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd>The confidence used to plot error bars. Default value is 0.95</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>filter</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">tree or dict of dicts, optional</span><dd><p class="first last">A tree or nested dictionary of values to include from the resultset.
-Example: {&#8216;cache_placement&#8217;: {&#8216;network_cache&#8217;: 0.004},
-&#8216;topology&#8217;: {&#8216;name&#8217;, &#8216;GEANT&#8217;}}.
+<dt>filter <span class="classifier-delimiter">:</span> <span class="classifier">tree or dict of dicts, optional</span></dt>
+<dd>A tree or nested dictionary of values to include from the resultset.
+Example: {‘cache_placement’: {‘network_cache’: 0.004},
+‘topology’: {‘name’, ‘GEANT’}}.
 If not specified or None, no filtering is executed on the results
-and possibly heterogeneous results may be plotted together.</p>
-</dd>
+and possibly heterogeneous results may be plotted together.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>xparam</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span><dd><p class="first last">The path of the x axis metric, e.g. (&#8216;workload&#8217;, &#8216;alpha&#8217;)</p>
-</dd>
+<dt>xparam <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span></dt>
+<dd>The path of the x axis metric, e.g. (‘workload’, ‘alpha’)</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>xvals</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list</span><dd><p class="first last">Range of x values, e.g. [0.6, 0.7, 0.8, 0.9]</p>
-</dd>
+<dt>xvals <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd>Range of x values, e.g. [0.6, 0.7, 0.8, 0.9]</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>xticks</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list, optional</span><dd><p class="first last">Names to display as ticks. If not specified, xvals is used instead</p>
-</dd>
+<dt>xticks <span class="classifier-delimiter">:</span> <span class="classifier">list, optional</span></dt>
+<dd>Names to display as ticks. If not specified, xvals is used instead</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>ymetrics</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples</span><dd><p class="first last">List of metrics to be shown on the graph. The i-th metric of the list
+<dt>ymetrics <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples</span></dt>
+<dd>List of metrics to be shown on the graph. The i-th metric of the list
 is the metric that the i-th bar on the graph will represent. If
 all bars are for the same metric, then all elements of the list are
 equal.
@@ -398,39 +353,36 @@ Each single metric (i.e. each element of the list) is a tuple modeling
 the path to identify a specific metric into an entry of a result set.
 Normally, it is a 2-value list where the first value is the name of
 the collector which measured the metric and the second value is the
-metric name. Example values could be (&#8216;CACHE_HIT_RATIO&#8217;, &#8216;MEAN&#8217;),
-(&#8216;LINK_LOAD&#8217;, &#8216;MEAN_INTERNAL&#8217;) or (&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;).
+metric name. Example values could be (‘CACHE_HIT_RATIO’, ‘MEAN’),
+(‘LINK_LOAD’, ‘MEAN_INTERNAL’) or (‘LATENCY’, ‘MEAN’).
 For example, if in a graph of N bars all bar of the graph show mean
-latency, then ymetrics = [(&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;)]*5.</p>
-</dd>
+latency, then ymetrics = [(‘LATENCY’, ‘MEAN’)]*5.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>ycondnames</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span><dd><p class="first last">List of condition names specific to each bar of the graph. Different
+<dt>ycondnames <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span></dt>
+<dd>List of condition names specific to each bar of the graph. Different
 from the conditions expressed in the filter parameter, which are
 global, these conditions are specific to one bar. Ech condition name,
 different from the filter parameter is a path to a condition to be
-checked, e.g. (&#8216;topology&#8217;, &#8216;name&#8217;). Values to be matched for this
+checked, e.g. (‘topology’, ‘name’). Values to be matched for this
 conditions are specified in ycondvals. This list must be as long as
 the number of bars to plot. If not specified, all bars are filtered
 by the conditions of filter parameter only, but in this case all
-ymetrics should be different.</p>
-</dd>
+ymetrics should be different.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>ycondvals</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list of values, optional</span><dd><p class="first last">List of values that the conditions of ycondnames must meet. This list
+<dt>ycondvals <span class="classifier-delimiter">:</span> <span class="classifier">list of values, optional</span></dt>
+<dd>List of values that the conditions of ycondnames must meet. This list
 must be as long as the number of bars to plot. If not specified,
 all bars are filtered by the conditions of filter parameter only,
-but in this case all ymetrics should be different.</p>
-</dd>
+but in this case all ymetrics should be different.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>placement</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">(grouped | stacked | [x, y, ...])</span><dd><p class="first last">Defines how to place bars in the plot. If grouped, defaults, all
+<dt>placement <span class="classifier-delimiter">:</span> <span class="classifier">(grouped | stacked | [x, y, …])</span></dt>
+<dd>Defines how to place bars in the plot. If grouped, defaults, all
 bars for a specific xval are grouped next to each other, if stacked,
 they are plot on top of each other. It is also possible to specify a
 custom grouped+stacked placement with a list of integers, in which
@@ -439,62 +391,53 @@ an items is the number of metrics stacked on the column. For example
 [4,2,3] means plotting 4 + 2 + 3 = 9 metrics: 4 stacked in the first
 column, 2 stacked on the second and 3 stacked on the third
 If <em>True</em>, draw all bars of a group stacked on top of each other.
-Default value is <em>False</em>.</p>
-</dd>
+Default value is <em>False</em>.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>group_width</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">float, default: 0.4</span><dd><p class="first last">Width of a group of bars</p>
-</dd>
+<dt>group_width <span class="classifier-delimiter">:</span> <span class="classifier">float, default: 0.4</span></dt>
+<dd>Width of a group of bars</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>bar_color</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">Dictionary mapping each value of yvals with a bar color</p>
-</dd>
+<dt>bar_color <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>Dictionary mapping each value of yvals with a bar color</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>bar_hatch</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">Dictionary mapping each value of yvals with a bar hatch. If set to
+<dt>bar_hatch <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>Dictionary mapping each value of yvals with a bar hatch. If set to
 None all bars will be plotted without hatch. If not set, hatches will
-be plotted randomly</p>
-</dd>
+be plotted randomly</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">Dictionary mapping each value of yvals with a legend label. If not
+<dt>legend <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>Dictionary mapping each value of yvals with a legend label. If not
 specified, it is not plotted. If you wish to plot it with the
 name of the line, set it to put yvals or ymetrics, depending on which
-one is used</p>
-</dd>
+one is used</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend_loc</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span><dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
-</dd>
+<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>Legend location, e.g. ‘upper left’</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend_args</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">Optional legend arguments, such as ncol</p>
-</dd>
+<dt>legend_args <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>Optional legend arguments, such as ncol</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>plotempty</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span><dd><p class="first last">If <em>True</em>, plot and save graph even if empty. Default is <em>True</em></p>
-</dd>
+<dt>plotempty <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>If <em>True</em>, plot and save graph even if empty. Default is <em>True</em></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>ymax: float, optional</dt>
-<dd><p class="first last">The upper limit of the y axis. If not specified, it is automatically
-selected by Matplotlib</p>
-</dd>
+<dd>The upper limit of the y axis. If not specified, it is automatically
+selected by Matplotlib</dd>
 </dl>
 </li>
 </ul>
@@ -512,24 +455,22 @@ directory.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rs</strong> : ResultSet</p>
-<blockquote>
-<div><p>Result set</p>
-</div></blockquote>
-<p><strong>desc</strong> : dict</p>
-<blockquote>
-<div><p>The plot descriptor (more info below)</p>
-</div></blockquote>
-<p><strong>filename</strong> : str</p>
-<blockquote>
-<div><p>The name used to save the file. The file format is determined by the
-extension of the file. For example, if this filename is &#8216;foo.pdf&#8217;, the
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>rs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ResultSet</span></dt>
+<dd><p class="first last">Result set</p>
+</dd>
+<dt><strong>desc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">The plot descriptor (more info below)</p>
+</dd>
+<dt><strong>filename</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The name used to save the file. The file format is determined by the
+extension of the file. For example, if this filename is ‘foo.pdf’, the
 file will be saved in pdf format.</p>
-</div></blockquote>
-<p><strong>plotdir</strong> : str</p>
-<blockquote class="last">
-<div><p>The directory in which the plot will be saved.</p>
-</div></blockquote>
+</dd>
+<dt><strong>plotdir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The directory in which the plot will be saved.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -539,54 +480,48 @@ file will be saved in pdf format.</p>
 to make the plot.</p>
 <dl class="docutils">
 <dt>The dictionary can contain the following keys:</dt>
-<dd><ul class="first last">
+<dd><ul class="first last simple">
 <li><dl class="first docutils">
-<dt>title</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional.</span><dd><p class="first last">The title of the graph</p>
-</dd>
+<dt>title <span class="classifier-delimiter">:</span> <span class="classifier">str, optional.</span></dt>
+<dd>The title of the graph</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>xlabel</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span><dd><p class="first last">The x label</p>
-</dd>
+<dt>xlabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>The x label</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>ylabel</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span><dd><p class="first last">The y label. The default value is &#8216;Cumulative probability&#8217;</p>
-</dd>
+<dt>ylabel <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>The y label. The default value is ‘Cumulative probability’</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>confidence</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span><dd><p class="first last">The confidence used to plot error bars. Default value is 0.95</p>
-</dd>
+<dt>confidence <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd>The confidence used to plot error bars. Default value is 0.95</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>metric</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list</span><dd><p class="first last">A list of values representing the metric to plot. These values are the
+<dt>metric <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd>A list of values representing the metric to plot. These values are the
 path to identify a specific metric into an entry of a result set.
 Normally, it is a 2-value list where the first value is the name of
 the collector which measured the metric and the second value is the
 metric name. The metric must be a CDF.
-Example values could be [&#8216;LATENCY&#8217;, &#8216;CDF&#8217;].</p>
-</dd>
+Example values could be [‘LATENCY’, ‘CDF’].</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>filter</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">A dictionary of values to filter in the resultset.
-Example: {&#8216;network_cache&#8217;: 0.004, &#8216;topology_name&#8217;: &#8216;GEANT&#8217;}
+<dt>filter <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>A dictionary of values to filter in the resultset.
+Example: {‘network_cache’: 0.004, ‘topology_name’: ‘GEANT’}
 If not specified or None, no filtering is executed on the results
-and possibly heterogeneous results may be plotted together</p>
-</dd>
+and possibly heterogeneous results may be plotted together</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>ymetrics</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples</span><dd><p class="first last">List of metrics to be shown on the graph. The i-th metric of the list
+<dt>ymetrics <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples</span></dt>
+<dd>List of metrics to be shown on the graph. The i-th metric of the list
 is the metric that the i-th line on the graph will represent. If
 all lines are for the same metric, then all elements of the list are
 equal.
@@ -594,87 +529,76 @@ Each single metric (i.e. each element of the list) is a tuple modeling
 the path to identify a specific metric into an entry of a result set.
 Normally, it is a 2-value list where the first value is the name of
 the collector which measured the metric and the second value is the
-metric name. Example values could be (&#8216;CACHE_HIT_RATIO&#8217;, &#8216;MEAN&#8217;),
-(&#8216;LINK_LOAD&#8217;, &#8216;MEAN_INTERNAL&#8217;) or (&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;).
+metric name. Example values could be (‘CACHE_HIT_RATIO’, ‘MEAN’),
+(‘LINK_LOAD’, ‘MEAN_INTERNAL’) or (‘LATENCY’, ‘MEAN’).
 For example, if in a graph of N lines all lines of the graph show mean
-latency, then ymetrics = [(&#8216;LATENCY&#8217;, &#8216;MEAN&#8217;)]*5.</p>
-</dd>
+latency, then ymetrics = [(‘LATENCY’, ‘MEAN’)]*5.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>ycondnames</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span><dd><p class="first last">List of condition names specific to each line of the graph. Different
+<dt>ycondnames <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span></dt>
+<dd>List of condition names specific to each line of the graph. Different
 from the conditions expressed in the filter parameter, which are
 global, these conditions are specific to one bar. Ech condition name,
 different from the filter parameter is a path to a condition to be
-checked, e.g. (&#8216;topology&#8217;, &#8216;name&#8217;). Values to be matched for this
+checked, e.g. (‘topology’, ‘name’). Values to be matched for this
 conditions are specified in ycondvals. This list must be as long as
 the number of lines to plot. If not specified, all lines are filtered
 by the conditions of filter parameter only, but in this case all
-ymetrics should be different.</p>
-</dd>
+ymetrics should be different.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>ycondvals</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span><dd><p class="first last">List of values that the conditions of ycondnames must meet. This list
+<dt>ycondvals <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples, optional</span></dt>
+<dd>List of values that the conditions of ycondnames must meet. This list
 must be as long as the number of lines to plot. If not specified,
 all lines are filtered by the conditions of filter parameter only,
-but in this case all ymetrics should be different.</p>
-</dd>
+but in this case all ymetrics should be different.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>xscale</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span><dd><p class="first last">The scale of x axis. Options allowed are &#8216;linear&#8217; and &#8216;log&#8217;.
-Default value is &#8216;linear&#8217;</p>
-</dd>
+<dt>xscale <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>The scale of x axis. Options allowed are ‘linear’ and ‘log’.
+Default value is ‘linear’</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>yscale</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span><dd><p class="first last">The scale of y axis. Options allowed are &#8216;linear&#8217; and &#8216;log&#8217;.
-Default value is &#8216;linear&#8217;</p>
-</dd>
+<dt>yscale <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>The scale of y axis. Options allowed are ‘linear’ and ‘log’.
+Default value is ‘linear’</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>step</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span><dd><p class="first last">If <em>True</em> draws the CDF with steps. Default value is <em>True</em></p>
-</dd>
+<dt>step <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>If <em>True</em> draws the CDF with steps. Default value is <em>True</em></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>line_style</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">Dictionary mapping each value of yvals with a line style</p>
-</dd>
+<dt>line_style <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>Dictionary mapping each value of yvals with a line style</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">Dictionary mapping each value of yvals with a legend label. If not
+<dt>legend <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>Dictionary mapping each value of yvals with a legend label. If not
 specified, it is not plotted. If you wish to plot it with the
 name of the line, set it to put yvals or ymetrics, depending on which
-one is used</p>
-</dd>
+one is used</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend_loc</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span><dd><p class="first last">Legend location, e.g. &#8216;upper left&#8217;</p>
-</dd>
+<dt>legend_loc <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>Legend location, e.g. ‘upper left’</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>legend_args</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span><dd><p class="first last">Optional legend arguments, such as ncol</p>
-</dd>
+<dt>legend_args <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd>Optional legend arguments, such as ncol</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>plotempty</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span><dd><p class="first last">If <em>True</em>, plot and save graph even if empty. Default is <em>True</em></p>
-</dd>
+<dt>plotempty <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>If <em>True</em>, plot and save graph even if empty. Default is <em>True</em></dd>
 </dl>
 </li>
 </ul>
@@ -689,7 +613,7 @@ one is used</p>
 <dl class="class">
 <dt id="icarus.results.readwrite.ResultSet">
 <em class="property">class </em><code class="descname">ResultSet</code><span class="sig-paren">(</span><em>attr=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/results/readwrite.html#ResultSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.ResultSet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class can be used to store results from different experiments,
 accessed and filtered.</p>
 <p>A result set is basically a list of results, one per each experiment. Each
@@ -710,17 +634,20 @@ be shared by different processes.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.results.readwrite.ResultSet.add" title="icarus.results.readwrite.ResultSet.add"><code class="xref py py-obj docutils literal"><span class="pre">add</span></code></a>(parameters,&nbsp;results)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.results.readwrite.ResultSet.add" title="icarus.results.readwrite.ResultSet.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(parameters,&nbsp;results)</td>
 <td>Add a result to the result set.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.results.readwrite.ResultSet.dump" title="icarus.results.readwrite.ResultSet.dump"><code class="xref py py-obj docutils literal"><span class="pre">dump</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.results.readwrite.ResultSet.dump" title="icarus.results.readwrite.ResultSet.dump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dump</span></code></a>()</td>
 <td>Dump all results in a list</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.results.readwrite.ResultSet.filter" title="icarus.results.readwrite.ResultSet.filter"><code class="xref py py-obj docutils literal"><span class="pre">filter</span></code></a>(condition)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.results.readwrite.ResultSet.filter" title="icarus.results.readwrite.ResultSet.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(condition)</td>
 <td>Return subset of results matching specific conditions</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.results.readwrite.ResultSet.json" title="icarus.results.readwrite.ResultSet.json"><code class="xref py py-obj docutils literal"><span class="pre">json</span></code></a>([indent])</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.results.readwrite.ResultSet.json" title="icarus.results.readwrite.ResultSet.json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json</span></code></a>([indent])</td>
 <td>Return a JSON representation of the resultset</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.results.readwrite.ResultSet.prettyprint" title="icarus.results.readwrite.ResultSet.prettyprint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prettyprint</span></code></a>()</td>
+<td>Return a human-readable text representation of the resultset.</td>
 </tr>
 </tbody>
 </table>
@@ -732,14 +659,14 @@ be shared by different processes.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parameters</strong> : Tree</p>
-<blockquote>
-<div><p>Tree of experiment parameters</p>
-</div></blockquote>
-<p><strong>results</strong> : Tree</p>
-<blockquote class="last">
-<div><p>Tree of experiment results</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>parameters</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Tree</span></dt>
+<dd><p class="first last">Tree of experiment parameters</p>
+</dd>
+<dt><strong>results</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Tree</span></dt>
+<dd><p class="first last">Tree of experiment results</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -759,12 +686,13 @@ can search correctly in them.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>results</strong> : list</p>
-<blockquote class="last">
-<div><p>A list of 2-value tuples where the first value is the dictionary
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>results</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">A list of 2-value tuples where the first value is the dictionary
 of experiment parameters and the second value is the dictionary
 of experiment results.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -779,21 +707,23 @@ of experiment results.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>condition</strong> : dict</p>
-<blockquote>
-<div><p>Dictionary listing all parameters and values to be matched in the
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>condition</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary listing all parameters and values to be matched in the
 results set. Each parameter, i.e., each key of the dictionary must
 be an iterable object containing the path in the parameters tree
 to the required parameter</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>filtered_results</strong> : ResultSet</p>
-<blockquote class="last">
-<div><p>List of 2-tuples of filtered results, where the first element is a
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>filtered_results</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ResultSet</span></dt>
+<dd><p class="first last">List of 2-tuples of filtered results, where the first element is a
 tree of all experiment parameters and the second value is
 a tree with experiment results.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -808,20 +738,28 @@ a tree with experiment results.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>indent</strong> : int, optional</p>
-<blockquote>
-<div><p>If non-negative, pretty print the output with specified indentation</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>indent</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">If non-negative, pretty print the output with specified indentation</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>json</strong> : str</p>
-<blockquote class="last">
-<div><p>String contatining the JSON representation of the object</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>json</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">String containing the JSON representation of the object</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="icarus.results.readwrite.ResultSet.prettyprint">
+<code class="descname">prettyprint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/results/readwrite.html#ResultSet.prettyprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.results.readwrite.ResultSet.prettyprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a human-readable text representation of the resultset.</p>
 </dd></dl>
 
 </dd></dl>
@@ -834,14 +772,14 @@ a tree with experiment results.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>results</strong> : ResultSet</p>
-<blockquote>
-<div><p>The set of results</p>
-</div></blockquote>
-<p><strong>path</strong> : str</p>
-<blockquote class="last">
-<div><p>The path of the file to which write</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>results</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ResultSet</span></dt>
+<dd><p class="first last">The set of results</p>
+</dd>
+<dt><strong>path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The path of the file to which write</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -856,16 +794,18 @@ a tree with experiment results.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : str</p>
-<blockquote>
-<div><p>The file path from which results are read</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The file path from which results are read</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>results</strong> : ResultSet</p>
-<blockquote class="last">
-<div><p>The read result set</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>results</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ResultSet</span></dt>
+<dd><p class="first last">The read result set</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -884,18 +824,17 @@ a tree with experiment results.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology to draw</p>
-</div></blockquote>
-<p><strong>plotdir</strong> : string</p>
-<blockquote>
-<div><p>The directory onto which draw plots</p>
-</div></blockquote>
-<p><strong>filename</strong> : string</p>
-<blockquote class="last">
-<div><p>The name of the image file to save</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology to draw</p>
+</dd>
+<dt><strong>plotdir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">The directory onto which draw plots</p>
+</dd>
+<dt><strong>filename</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">The name of the image file to save</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -914,23 +853,21 @@ Sources and caches have variable size proportional to their hit ratios.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology to draw</p>
-</div></blockquote>
-<p><strong>result</strong> : Tree</p>
-<blockquote>
-<div><p>The tree representing the specific experiment result from which metric
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology to draw</p>
+</dd>
+<dt><strong>result</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Tree</span></dt>
+<dd><p class="first last">The tree representing the specific experiment result from which metric
 are read</p>
-</div></blockquote>
-<p><strong>plotdir</strong> : string</p>
-<blockquote>
-<div><p>The directory onto which draw plots</p>
-</div></blockquote>
-<p><strong>filename</strong> : string</p>
-<blockquote class="last">
-<div><p>The name of the image file to save</p>
-</div></blockquote>
+</dd>
+<dt><strong>plotdir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">The directory onto which draw plots</p>
+</dd>
+<dt><strong>filename</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">The name of the image file to save</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -959,13 +896,13 @@ are read</p>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="icarus.html" >icarus package</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.7.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="icarus.html" >icarus package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
+        &#169; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
 </html>

@@ -1,32 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>icarus.models.strategy.onpath &mdash; Icarus 0.6.0 documentation</title>
-    
+    <title>icarus.models.strategy.onpath &#8212; Icarus 0.7.0 documentation</title>
     <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../../',
-        VERSION:     '0.6.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.6.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" /> 
-  </head>
-  <body role="document">
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -36,20 +25,22 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Icarus 0.7.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -84,8 +75,8 @@
            <span class="p">]</span>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;PARTITION&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="Partition"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.Partition">[docs]</a><span class="k">class</span> <span class="nc">Partition</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
+<div class="viewcode-block" id="Partition"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.Partition">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;PARTITION&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Partition</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Partition caching strategy.</span>
 
 <span class="sd">    In this strategy the network is divided into as many partitions as the number</span>
@@ -105,15 +96,15 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Partition</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Partition</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
         <span class="k">if</span> <span class="s1">&#39;cache_assignment&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span><span class="o">.</span><span class="n">graph</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The topology does not have cache assignment &#39;</span>
                              <span class="s1">&#39;information. Have you used the optimal median &#39;</span>
                              <span class="s1">&#39;cache assignment?&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cache_assignment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s1">&#39;cache_assignment&#39;</span><span class="p">]</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="Partition.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.Partition.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="Partition.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.Partition.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">start_session</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">)</span>
         <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_assignment</span><span class="p">[</span><span class="n">receiver</span><span class="p">]</span>
@@ -127,8 +118,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;EDGE&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="Edge"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.Edge">[docs]</a><span class="k">class</span> <span class="nc">Edge</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
+<div class="viewcode-block" id="Edge"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.Edge">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;EDGE&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Edge</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Edge caching strategy.</span>
 
 <span class="sd">    In this strategy only a cache at the edge is looked up before forwarding</span>
@@ -143,10 +134,10 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Edge</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Edge</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="Edge.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.Edge.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="Edge.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.Edge.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
@@ -178,8 +169,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;LCE&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="LeaveCopyEverywhere"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.LeaveCopyEverywhere">[docs]</a><span class="k">class</span> <span class="nc">LeaveCopyEverywhere</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
+<div class="viewcode-block" id="LeaveCopyEverywhere"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.LeaveCopyEverywhere">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;LCE&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">LeaveCopyEverywhere</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Leave Copy Everywhere (LCE) strategy.</span>
 
 <span class="sd">    In this strategy a copy of a content is replicated at any cache on the</span>
@@ -188,10 +179,10 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">LeaveCopyEverywhere</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LeaveCopyEverywhere</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="LeaveCopyEverywhere.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.LeaveCopyEverywhere.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="LeaveCopyEverywhere.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.LeaveCopyEverywhere.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
@@ -216,8 +207,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;LCD&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="LeaveCopyDown"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.LeaveCopyDown">[docs]</a><span class="k">class</span> <span class="nc">LeaveCopyDown</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
+<div class="viewcode-block" id="LeaveCopyDown"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.LeaveCopyDown">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;LCD&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">LeaveCopyDown</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Leave Copy Down (LCD) strategy.</span>
 
 <span class="sd">    According to this strategy, one copy of a content is replicated only in</span>
@@ -233,10 +224,10 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">LeaveCopyDown</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LeaveCopyDown</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="LeaveCopyDown.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.LeaveCopyDown.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="LeaveCopyDown.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.LeaveCopyDown.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
@@ -265,8 +256,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;PROB_CACHE&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="ProbCache"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.ProbCache">[docs]</a><span class="k">class</span> <span class="nc">ProbCache</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
+<div class="viewcode-block" id="ProbCache"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.ProbCache">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;PROB_CACHE&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ProbCache</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;ProbCache strategy [3]_</span>
 
 <span class="sd">    This strategy caches content objects probabilistically on a path with a</span>
@@ -291,12 +282,12 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="n">t_tw</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ProbCache</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ProbCache</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t_tw</span> <span class="o">=</span> <span class="n">t_tw</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cache_size</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">cache_nodes</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="ProbCache.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.ProbCache.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="ProbCache.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.ProbCache.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
@@ -335,8 +326,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;CL4M&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="CacheLessForMore"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.CacheLessForMore">[docs]</a><span class="k">class</span> <span class="nc">CacheLessForMore</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
+<div class="viewcode-block" id="CacheLessForMore"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.CacheLessForMore">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;CL4M&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">CacheLessForMore</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Cache less for more strategy [4]_.</span>
 
 <span class="sd">    This strategy caches items only once in the delivery path, precisely in the</span>
@@ -354,7 +345,7 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="n">use_ego_betw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">CacheLessForMore</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CacheLessForMore</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
         <span class="n">topology</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">use_ego_betw</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">betw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">nx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">ego_graph</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">v</span><span class="p">))[</span><span class="n">v</span><span class="p">])</span>
@@ -362,8 +353,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">betw</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">topology</span><span class="p">)</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="CacheLessForMore.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.CacheLessForMore.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="CacheLessForMore.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.CacheLessForMore.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
@@ -399,8 +390,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
 
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;RAND_BERNOULLI&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="RandomBernoulli"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.RandomBernoulli">[docs]</a><span class="k">class</span> <span class="nc">RandomBernoulli</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomBernoulli"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.RandomBernoulli">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;RAND_BERNOULLI&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">RandomBernoulli</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bernoulli random cache insertion.</span>
 
 <span class="sd">    In this strategy, a content is randomly inserted in a cache on the path</span>
@@ -409,11 +400,11 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">RandomBernoulli</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RandomBernoulli</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">p</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="RandomBernoulli.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.RandomBernoulli.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomBernoulli.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.RandomBernoulli.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
@@ -438,8 +429,8 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">put_content</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">end_session</span><span class="p">()</span></div></div>
 
-<span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;RAND_CHOICE&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="RandomChoice"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.RandomChoice">[docs]</a><span class="k">class</span> <span class="nc">RandomChoice</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomChoice"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.RandomChoice">[docs]</a><span class="nd">@register_strategy</span><span class="p">(</span><span class="s1">&#39;RAND_CHOICE&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">RandomChoice</span><span class="p">(</span><span class="n">Strategy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Random choice strategy</span>
 
 <span class="sd">    This strategy stores the served content exactly in one single cache on the</span>
@@ -448,10 +439,10 @@
 
     <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">RandomChoice</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RandomChoice</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
 
-    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
-<div class="viewcode-block" id="RandomChoice.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.RandomChoice.process_event">[docs]</a>    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomChoice.process_event"><a class="viewcode-back" href="../../../../apidoc/icarus.models.strategy.html#icarus.models.strategy.onpath.RandomChoice.process_event">[docs]</a>    <span class="nd">@inheritdoc</span><span class="p">(</span><span class="n">Strategy</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
         <span class="c1"># get all required data</span>
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">content_source</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
@@ -492,13 +483,13 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Icarus 0.7.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
+        &#169; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
 </html>

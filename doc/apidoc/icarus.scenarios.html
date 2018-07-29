@@ -1,32 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>icarus.scenarios package &mdash; Icarus 0.6.0 documentation</title>
-    
+    <title>icarus.scenarios package &#8212; Icarus 0.7.0 documentation</title>
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.6.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Icarus 0.6.0 documentation" href="../index.html" />
-    <link rel="up" title="icarus package" href="icarus.html" /> 
-  </head>
-  <body role="document">
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -36,8 +25,8 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="icarus.html" accesskey="U">icarus package</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.7.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="icarus.html" accesskey="U">icarus package</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -49,9 +38,7 @@
 <li><a class="reference internal" href="#module-icarus.scenarios.algorithms">icarus.scenarios.algorithms module</a></li>
 <li><a class="reference internal" href="#module-icarus.scenarios.cacheplacement">icarus.scenarios.cacheplacement module</a></li>
 <li><a class="reference internal" href="#module-icarus.scenarios.contentplacement">icarus.scenarios.contentplacement module</a></li>
-<li><a class="reference internal" href="#module-icarus.scenarios.topology">icarus.scenarios.topology module</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#module-icarus.scenarios.topology">icarus.scenarios.topology module</a></li>
 <li><a class="reference internal" href="#module-icarus.scenarios.workload">icarus.scenarios.workload module</a></li>
 <li><a class="reference internal" href="#module-icarus.scenarios">Module contents</a></li>
 </ul>
@@ -60,12 +47,14 @@
 
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -92,20 +81,19 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>distances</strong> : 2-d NumPy array</p>
-<blockquote>
-<div><p>Array of distances between points</p>
-</div></blockquote>
-<p><strong>k</strong> : int</p>
-<blockquote>
-<div><p>Number of clusters</p>
-</div></blockquote>
-<p><strong>n_iter</strong> : int</p>
-<blockquote class="last">
-<div><p>Number of iterations to repeat. Each repetition is executed using a
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>distances</strong> <span class="classifier-delimiter">:</span> <span class="classifier">2-d NumPy array</span></dt>
+<dd><p class="first last">Array of distances between points</p>
+</dd>
+<dt><strong>k</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Number of clusters</p>
+</dd>
+<dt><strong>n_iter</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Number of iterations to repeat. Each repetition is executed using a
 different initial random assignment. Repetiting the experiment allow
 to reach different local optima, possibly achieving a best solution.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -119,21 +107,23 @@ to reach different local optima, possibly achieving a best solution.</p>
 <dt id="icarus.scenarios.algorithms.extract_cluster_level_topology">
 <code class="descname">extract_cluster_level_topology</code><span class="sig-paren">(</span><em>topology</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/scenarios/algorithms.html#extract_cluster_level_topology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.algorithms.extract_cluster_level_topology" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a cluster-level topology.</p>
-<p>Each node in the topology must be have the &#8216;cluster&#8217; attribute</p>
+<p>Each node in the topology must be have the ‘cluster’ attribute</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The router-level topology</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The router-level topology</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote class="last">
-<div><p>The cluster-level topology</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The cluster-level topology</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -167,21 +157,20 @@ to the closest cluster.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology onto which deploy clusters</p>
-</div></blockquote>
-<p><strong>clusters</strong> : list of sets</p>
-<blockquote>
-<div><p>Router-cluster assignment. Each element of a list is a set of node
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology onto which deploy clusters</p>
+</dd>
+<dt><strong>clusters</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of sets</span></dt>
+<dd><p class="first last">Router-cluster assignment. Each element of a list is a set of node
 identifiers. Nodes in the same set belong to the same cluster.
 The length of the list therefore corresponds to the number of clusters.</p>
-</div></blockquote>
-<p><strong>assign_src_rcv</strong> : bool, optional</p>
-<blockquote class="last">
-<div><p>If <em>True</em>, the function labels source and receiver nodes with the
+</dd>
+<dt><strong>assign_src_rcv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If <em>True</em>, the function labels source and receiver nodes with the
 cluster label of the router they are attached to.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -198,23 +187,21 @@ performs clustering using the k-medoids method with the PAM algorithm.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology</p>
-</div></blockquote>
-<p><strong>k</strong> : int</p>
-<blockquote>
-<div><p>The number of clusters</p>
-</div></blockquote>
-<p><strong>distance</strong> : str, optional</p>
-<blockquote>
-<div><p>The link metric used to represent distance between nodes.
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology</p>
+</dd>
+<dt><strong>k</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of clusters</p>
+</dd>
+<dt><strong>distance</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">The link metric used to represent distance between nodes.
 If None, hop count is used instead</p>
-</div></blockquote>
-<p><strong>n_iter</strong> : int, optional</p>
-<blockquote class="last">
-<div><p>The number of iterations</p>
-</div></blockquote>
+</dd>
+<dt><strong>n_iter</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">The number of iterations</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -230,14 +217,14 @@ algorithm.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>distances</strong> : dict of dicts</p>
-<blockquote>
-<div><p>Distance between nodes</p>
-</div></blockquote>
-<p><strong>p</strong> : int</p>
-<blockquote class="last">
-<div><p>Number of facilities</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>distances</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict of dicts</span></dt>
+<dd><p class="first last">Distance between nodes</p>
+</dd>
+<dt><strong>p</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Number of facilities</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -259,14 +246,14 @@ labelled, these functions deploy caching space to the nodes of the topology.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology object</p>
-</div></blockquote>
-<p><strong>cache_budget</strong> : int</p>
-<blockquote class="last">
-<div><p>The cumulative cache budget</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+<dt><strong>cache_budget</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The cumulative cache budget</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -281,14 +268,14 @@ labelled, these functions deploy caching space to the nodes of the topology.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology object</p>
-</div></blockquote>
-<p><strong>cache_budget</strong> : int</p>
-<blockquote class="last">
-<div><p>The cumulative cache budget</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+<dt><strong>cache_budget</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The cumulative cache budget</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -304,14 +291,14 @@ node.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology object</p>
-</div></blockquote>
-<p><strong>cache_budget</strong> : int</p>
-<blockquote class="last">
-<div><p>The cumulative cache budget</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+<dt><strong>cache_budget</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The cumulative cache budget</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -329,30 +316,27 @@ caches of all the same size in a set of selected nodes.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology object</p>
-</div></blockquote>
-<p><strong>cache_budget</strong> : int</p>
-<blockquote>
-<div><p>The cumulative cache budget</p>
-</div></blockquote>
-<p><strong>spread</strong> : float [0, 1], optional</p>
-<blockquote>
-<div><p>The spread factor, The greater it is the more the cache budget is
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+<dt><strong>cache_budget</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The cumulative cache budget</p>
+</dd>
+<dt><strong>spread</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float [0, 1], optional</span></dt>
+<dd><p class="first last">The spread factor, The greater it is the more the cache budget is
 spread among nodes. If it is 1, all candidate nodes are assigned a
 cache, if it is 0, only the node with the highest/lowest centrality
 is assigned a cache</p>
-</div></blockquote>
-<p><strong>metric_dict</strong> : dict, optional</p>
-<blockquote>
-<div><p>The centrality metric according to which nodes are selected. If not
+</dd>
+<dt><strong>metric_dict</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">The centrality metric according to which nodes are selected. If not
 specified, betweenness centrality is selected.</p>
-</div></blockquote>
-<p><strong>target</strong> : (&#8220;top&#8221; | &#8220;bottom&#8221;), optional</p>
-<blockquote class="last">
-<div><p>The subsection of the ranked node on which to the deploy caches.</p>
-</div></blockquote>
+</dd>
+<dt><strong>target</strong> <span class="classifier-delimiter">:</span> <span class="classifier">(“top” | “bottom”), optional</span></dt>
+<dd><p class="first last">The subsection of the ranked node on which to the deploy caches.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -367,18 +351,17 @@ specified, betweenness centrality is selected.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology object</p>
-</div></blockquote>
-<p><strong>cache_budget</strong> : int</p>
-<blockquote>
-<div><p>The cumulative cache budget</p>
-</div></blockquote>
-<p><strong>n_nodes</strong> : int</p>
-<blockquote class="last">
-<div><p>The number of caching nodes to deploy</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+<dt><strong>cache_budget</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The cumulative cache budget</p>
+</dd>
+<dt><strong>n_nodes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of caching nodes to deploy</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -403,26 +386,23 @@ guaranteed to be globally optimal, only locally optimal.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology object</p>
-</div></blockquote>
-<p><strong>cache_budget</strong> : int</p>
-<blockquote>
-<div><p>The cumulative cache budget</p>
-</div></blockquote>
-<p><strong>n_nodes</strong> : int</p>
-<blockquote>
-<div><p>The number of caching nodes to deploy</p>
-</div></blockquote>
-<p><strong>hit_ratio</strong> : float</p>
-<blockquote>
-<div><p>The expected cache hit ratio of a single cache</p>
-</div></blockquote>
-<p><strong>weight</strong> : str</p>
-<blockquote class="last">
-<div><p>The weight attribute</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+<dt><strong>cache_budget</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The cumulative cache budget</p>
+</dd>
+<dt><strong>n_nodes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of caching nodes to deploy</p>
+</dd>
+<dt><strong>hit_ratio</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The expected cache hit ratio of a single cache</p>
+</dd>
+<dt><strong>weight</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The weight attribute</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -441,26 +421,23 @@ assigned to sources.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology object</p>
-</div></blockquote>
-<p><strong>cache_budget</strong> : int</p>
-<blockquote>
-<div><p>The cumulative cache budget</p>
-</div></blockquote>
-<p><strong>n_nodes</strong> : int</p>
-<blockquote>
-<div><p>The number of caching nodes to deploy</p>
-</div></blockquote>
-<p><strong>hit_ratio</strong> : float</p>
-<blockquote>
-<div><p>The expected global cache hit ratio</p>
-</div></blockquote>
-<p><strong>weight</strong> : str, optional</p>
-<blockquote class="last">
-<div><p>The weight attribute. Default is &#8216;delay&#8217;</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+<dt><strong>cache_budget</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The cumulative cache budget</p>
+</dd>
+<dt><strong>n_nodes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of caching nodes to deploy</p>
+</dd>
+<dt><strong>hit_ratio</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The expected global cache hit ratio</p>
+</dd>
+<dt><strong>weight</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">The weight attribute. Default is ‘delay’</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -475,27 +452,24 @@ assigned to sources.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology object</p>
-</div></blockquote>
-<p><strong>cache_budget</strong> : int</p>
-<blockquote>
-<div><p>The cumulative cache budget</p>
-</div></blockquote>
-<p><strong>n_clusters</strong> : int</p>
-<blockquote>
-<div><p>The number of clusters</p>
-</div></blockquote>
-<p><strong>policy</strong> : str (node_const | cluster_const)</p>
-<blockquote>
-<div><p>The expected global cache hit ratio</p>
-</div></blockquote>
-<p><strong>distance</strong> : str</p>
-<blockquote class="last">
-<div><p>The attribute used to quantify distance between pairs of nodes.
-Default is &#8216;delay&#8217;</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+<dt><strong>cache_budget</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The cumulative cache budget</p>
+</dd>
+<dt><strong>n_clusters</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of clusters</p>
+</dd>
+<dt><strong>policy</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str (node_const | cluster_const)</span></dt>
+<dd><p class="first last">The expected global cache hit ratio</p>
+</dd>
+<dt><strong>distance</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The attribute used to quantify distance between pairs of nodes.
+Default is ‘delay’</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -511,35 +485,30 @@ source nodes.</p>
 <dl class="function">
 <dt id="icarus.scenarios.contentplacement.uniform_content_placement">
 <code class="descname">uniform_content_placement</code><span class="sig-paren">(</span><em>topology</em>, <em>contents</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/scenarios/contentplacement.html#uniform_content_placement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.contentplacement.uniform_content_placement" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Places content objects to source nodes randomly following a uniform</dt>
-<dd>distribution.</dd>
-</dl>
+<dd><p>Places content objects to source nodes randomly following a uniform
+distribution.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology object</p>
-</div></blockquote>
-<p><strong>contents</strong> : iterable</p>
-<blockquote>
-<div><blockquote>
-<div><p>Iterable of content objects</p>
-</div></blockquote>
-<dl class="docutils">
-<dt>source_nodes</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">list</span><dd><p class="first last">List of nodes of the topology which are content sources</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+<dt><strong>contents</strong> <span class="classifier-delimiter">:</span> <span class="classifier">iterable</span></dt>
+<dd><p class="first last">Iterable of content objects</p>
+</dd>
+<dt><strong>source_nodes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of nodes of the topology which are content sources</p>
 </dd>
 </dl>
-</div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_placement</strong> : dict</p>
-<blockquote class="last">
-<div><p>Dictionary mapping content objects to source nodes</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>cache_placement</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary mapping content objects to source nodes</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -560,28 +529,29 @@ achieved by using a fix seed value</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : Topology</p>
-<blockquote>
-<div><p>The topology object</p>
-</div></blockquote>
-<p><strong>contents</strong> : iterable</p>
-<blockquote>
-<div><blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+<dt><strong>contents</strong> <span class="classifier-delimiter">:</span> <span class="classifier">iterable</span></dt>
+<dd><blockquote class="first">
 <div><p>Iterable of content objects</p>
 </div></blockquote>
-<dl class="docutils">
-<dt>source_weights</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">dict</span><dd><p class="first last">Dict mapping nodes nodes of the topology which are content sources and
+<dl class="last docutils">
+<dt>source_weights <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dict mapping nodes nodes of the topology which are content sources and
 the weight according to which content placement decision is made.</p>
 </dd>
 </dl>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_placement</strong> : dict</p>
-<blockquote class="last">
-<div><p>Dictionary mapping content objects to source nodes</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>cache_placement</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary mapping content objects to source nodes</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -612,19 +582,19 @@ cache placement algorithm.</li>
 <dl class="class">
 <dt id="icarus.scenarios.topology.IcnTopology">
 <em class="property">class </em><code class="descname">IcnTopology</code><span class="sig-paren">(</span><em>data=None</em>, <em>name=''</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#IcnTopology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.IcnTopology" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">fnss.topologies.topology.Topology</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fnss.topologies.topology.Topology</span></code></p>
 <p>Class modelling an ICN topology</p>
 <p>An ICN topology is a simple FNSS Topology with addition methods that
 return sets of caching nodes, sources and receivers.</p>
-<p class="rubric">Attributes</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
 <tbody valign="top">
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">name</span></code></td>
-<td></td>
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>name</strong></dt>
+<dd></dd>
+</dl>
+</td>
 </tr>
 </tbody>
 </table>
@@ -635,160 +605,160 @@ return sets of caching nodes, sources and receivers.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">add_cycle</span></code>(nodes,&nbsp;**attr)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_cycle</span></code>(nodes,&nbsp;**attr)</td>
 <td>Add a cycle.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">add_edge</span></code>(u,&nbsp;v[,&nbsp;attr_dict])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_edge</span></code>(u,&nbsp;v[,&nbsp;attr_dict])</td>
 <td>Add an edge between u and v.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">add_edges_from</span></code>(ebunch[,&nbsp;attr_dict])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_edges_from</span></code>(ebunch[,&nbsp;attr_dict])</td>
 <td>Add all the edges in ebunch.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">add_node</span></code>(n[,&nbsp;attr_dict])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_node</span></code>(n[,&nbsp;attr_dict])</td>
 <td>Add a single node n and update node attributes.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">add_nodes_from</span></code>(nodes,&nbsp;**attr)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_nodes_from</span></code>(nodes,&nbsp;**attr)</td>
 <td>Add multiple nodes.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">add_path</span></code>(nodes,&nbsp;**attr)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_path</span></code>(nodes,&nbsp;**attr)</td>
 <td>Add a path.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">add_star</span></code>(nodes,&nbsp;**attr)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_star</span></code>(nodes,&nbsp;**attr)</td>
 <td>Add a star.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">add_weighted_edges_from</span></code>(ebunch[,&nbsp;weight])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_weighted_edges_from</span></code>(ebunch[,&nbsp;weight])</td>
 <td>Add all the edges in ebunch as weighted edges with specified weights.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">adjacency_iter</span></code>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacency_iter</span></code>()</td>
 <td>Return an iterator of (node, adjacency dict) tuples for all nodes.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">adjacency_list</span></code>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacency_list</span></code>()</td>
 <td>Return an adjacency list representation of the graph.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">adjlist_dict_factory</span></code></td>
-<td>alias of <a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjlist_dict_factory</span></code></td>
+<td>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">__builtin__.dict</span></code></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">applications</span></code>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">applications</span></code>()</td>
 <td>Return a dictionary of all applications deployed, keyed by node</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">buffers</span></code>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffers</span></code>()</td>
 <td>Return a dictionary of all buffer sizes, keyed by interface</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.scenarios.topology.IcnTopology.cache_nodes" title="icarus.scenarios.topology.IcnTopology.cache_nodes"><code class="xref py py-obj docutils literal"><span class="pre">cache_nodes</span></code></a>()</td>
-<td>Return a dictionary mapping nodes with a cache and respective cache</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.scenarios.topology.IcnTopology.cache_nodes" title="icarus.scenarios.topology.IcnTopology.cache_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_nodes</span></code></a>()</td>
+<td>Return a dictionary mapping nodes with a cache and respective cache size</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">capacities</span></code>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">capacities</span></code>()</td>
 <td>Return a dictionary of all link capacities, keyed by link</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">clear</span></code>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear</span></code>()</td>
 <td>Remove all nodes and edges from the graph.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code>()</td>
 <td>Return a copy of the topology.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">degree</span></code>([nbunch,&nbsp;weight])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">degree</span></code>([nbunch,&nbsp;weight])</td>
 <td>Return the degree of a node or nodes.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">degree_iter</span></code>([nbunch,&nbsp;weight])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">degree_iter</span></code>([nbunch,&nbsp;weight])</td>
 <td>Return an iterator for (node, degree).</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">delays</span></code>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">delays</span></code>()</td>
 <td>Return a dictionary of all link delays, keyed by link</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">edge_attr_dict_factory</span></code></td>
-<td>alias of <a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_attr_dict_factory</span></code></td>
+<td>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">__builtin__.dict</span></code></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">edges</span></code>([nbunch,&nbsp;data,&nbsp;default])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges</span></code>([nbunch,&nbsp;data,&nbsp;default])</td>
 <td>Return a list of edges.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">edges_iter</span></code>([nbunch,&nbsp;data,&nbsp;default])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_iter</span></code>([nbunch,&nbsp;data,&nbsp;default])</td>
 <td>Return an iterator over the edges.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">get_edge_data</span></code>(u,&nbsp;v[,&nbsp;default])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_edge_data</span></code>(u,&nbsp;v[,&nbsp;default])</td>
 <td>Return the attribute dictionary associated with edge (u,v).</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">has_edge</span></code>(u,&nbsp;v)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_edge</span></code>(u,&nbsp;v)</td>
 <td>Return True if the edge (u,v) is in the graph.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">has_node</span></code>(n)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_node</span></code>(n)</td>
 <td>Return True if the graph contains the node n.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">is_directed</span></code>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_directed</span></code>()</td>
 <td>Return True if graph is directed, False otherwise.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">is_multigraph</span></code>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_multigraph</span></code>()</td>
 <td>Return True if graph is a multigraph, False otherwise.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">nbunch_iter</span></code>([nbunch])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">nbunch_iter</span></code>([nbunch])</td>
 <td>Return an iterator of nodes contained in nbunch that are also in the graph.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">neighbors</span></code>(n)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">neighbors</span></code>(n)</td>
 <td>Return a list of the nodes connected to the node n.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">neighbors_iter</span></code>(n)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">neighbors_iter</span></code>(n)</td>
 <td>Return an iterator over all neighbors of node n.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">node_dict_factory</span></code></td>
-<td>alias of <a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_dict_factory</span></code></td>
+<td>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">__builtin__.dict</span></code></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">nodes</span></code>([data])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodes</span></code>([data])</td>
 <td>Return a list of the nodes in the graph.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">nodes_iter</span></code>([data])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodes_iter</span></code>([data])</td>
 <td>Return an iterator over the nodes.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">nodes_with_selfloops</span></code>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodes_with_selfloops</span></code>()</td>
 <td>Return a list of nodes with self loops.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">number_of_edges</span></code>([u,&nbsp;v])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_edges</span></code>([u,&nbsp;v])</td>
 <td>Return the number of edges between two nodes.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">number_of_nodes</span></code>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_nodes</span></code>()</td>
 <td>Return the number of nodes in the graph.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">number_of_selfloops</span></code>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_selfloops</span></code>()</td>
 <td>Return the number of selfloop edges.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">order</span></code>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">order</span></code>()</td>
 <td>Return the number of nodes in the graph.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#icarus.scenarios.topology.IcnTopology.receivers" title="icarus.scenarios.topology.IcnTopology.receivers"><code class="xref py py-obj docutils literal"><span class="pre">receivers</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#icarus.scenarios.topology.IcnTopology.receivers" title="icarus.scenarios.topology.IcnTopology.receivers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">receivers</span></code></a>()</td>
 <td>Return a set of receiver nodes</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">remove_edge</span></code>(u,&nbsp;v)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_edge</span></code>(u,&nbsp;v)</td>
 <td>Remove the edge between u and v.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">remove_edges_from</span></code>(ebunch)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_edges_from</span></code>(ebunch)</td>
 <td>Remove all edges specified in ebunch.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">remove_node</span></code>(n)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_node</span></code>(n)</td>
 <td>Remove node n.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">remove_nodes_from</span></code>(nodes)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_nodes_from</span></code>(nodes)</td>
 <td>Remove multiple nodes.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">selfloop_edges</span></code>([data,&nbsp;default])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">selfloop_edges</span></code>([data,&nbsp;default])</td>
 <td>Return a list of selfloop edges.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">size</span></code>([weight])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">size</span></code>([weight])</td>
 <td>Return the number of edges.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#icarus.scenarios.topology.IcnTopology.sources" title="icarus.scenarios.topology.IcnTopology.sources"><code class="xref py py-obj docutils literal"><span class="pre">sources</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#icarus.scenarios.topology.IcnTopology.sources" title="icarus.scenarios.topology.IcnTopology.sources"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sources</span></code></a>()</td>
 <td>Return a set of source nodes</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">stacks</span></code>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacks</span></code>()</td>
 <td>Return a dictionary of all node stacks, keyed by node</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">subgraph</span></code>(nbunch)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">subgraph</span></code>(nbunch)</td>
 <td>Return the subgraph induced on nodes in nbunch.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">to_directed</span></code>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_directed</span></code>()</td>
 <td>Return a directed representation of the topology.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">to_undirected</span></code>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_undirected</span></code>()</td>
 <td>Return an undirected copy of the topology.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">weights</span></code>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights</span></code>()</td>
 <td>Return a dictionary of all link weights, keyed by link</td>
 </tr>
 </tbody>
@@ -802,10 +772,11 @@ size</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cache_nodes</strong> : dict</p>
-<blockquote class="last">
-<div><p>Dictionary mapping node identifiers and cache size</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>cache_nodes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary mapping node identifiers and cache size</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -820,10 +791,11 @@ size</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>receivers</strong> : set</p>
-<blockquote class="last">
-<div><p>Set of receiver nodes</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>receivers</strong> <span class="classifier-delimiter">:</span> <span class="classifier">set</span></dt>
+<dd><p class="first last">Set of receiver nodes</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -838,10 +810,11 @@ size</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sources</strong> : set</p>
-<blockquote class="last">
-<div><p>Set of source nodes</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>sources</strong> <span class="classifier-delimiter">:</span> <span class="classifier">set</span></dt>
+<dd><p class="first last">Set of source nodes</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -859,24 +832,24 @@ leafs and caches at all intermediate nodes.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>h</strong> : int</p>
-<blockquote>
-<div><p>The height of the tree</p>
-</div></blockquote>
-<p><strong>k</strong> : int</p>
-<blockquote>
-<div><p>The branching factor of the tree</p>
-</div></blockquote>
-<p><strong>delay</strong> : float</p>
-<blockquote>
-<div><p>The link delay in milliseconds</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>h</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The height of the tree</p>
+</dd>
+<dt><strong>k</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The branching factor of the tree</p>
+</dd>
+<dt><strong>delay</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The link delay in milliseconds</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : IcnTopology</p>
-<blockquote class="last">
-<div><p>The topology object</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">IcnTopology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -887,25 +860,26 @@ leafs and caches at all intermediate nodes.</p>
 <dt id="icarus.scenarios.topology.topology_path">
 <code class="descname">topology_path</code><span class="sig-paren">(</span><em>n</em>, <em>delay=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/scenarios/topology.html#topology_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.topology.topology_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a path topology with a receiver on node <cite>0</cite> and a source at node
-&#8216;n-1&#8217;</p>
+‘n-1’</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n</strong> : int (&gt;=3)</p>
-<blockquote>
-<div><p>The number of nodes</p>
-</div></blockquote>
-<p><strong>delay</strong> : float</p>
-<blockquote>
-<div><p>The link delay in milliseconds</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int (&gt;=3)</span></dt>
+<dd><p class="first last">The number of nodes</p>
+</dd>
+<dt><strong>delay</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The link delay in milliseconds</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : IcnTopology</p>
-<blockquote class="last">
-<div><p>The topology object</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">IcnTopology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -925,24 +899,24 @@ only source towards the core network.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n</strong> : int</p>
-<blockquote>
-<div><p>The number of routers in the ring</p>
-</div></blockquote>
-<p><strong>delay_int</strong> : float</p>
-<blockquote>
-<div><p>The internal link delay in milliseconds</p>
-</div></blockquote>
-<p><strong>delay_ext</strong> : float</p>
-<blockquote>
-<div><p>The external link delay in milliseconds</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of routers in the ring</p>
+</dd>
+<dt><strong>delay_int</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The internal link delay in milliseconds</p>
+</dd>
+<dt><strong>delay_ext</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The external link delay in milliseconds</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : IcnTopology</p>
-<blockquote class="last">
-<div><p>The topology object</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">IcnTopology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -960,28 +934,27 @@ Therefore, this topology has in fact 2n + m nodes.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n</strong> : int</p>
-<blockquote>
-<div><p>The number of routers in the ring</p>
-</div></blockquote>
-<p><strong>m</strong> : int</p>
-<blockquote>
-<div><p>The number of sources</p>
-</div></blockquote>
-<p><strong>delay_int</strong> : float</p>
-<blockquote>
-<div><p>The internal link delay in milliseconds</p>
-</div></blockquote>
-<p><strong>delay_ext</strong> : float</p>
-<blockquote>
-<div><p>The external link delay in milliseconds</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of routers in the ring</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of sources</p>
+</dd>
+<dt><strong>delay_int</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The internal link delay in milliseconds</p>
+</dd>
+<dt><strong>delay_ext</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The external link delay in milliseconds</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : IcnTopology</p>
-<blockquote class="last">
-<div><p>The topology object</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">IcnTopology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -996,16 +969,18 @@ Therefore, this topology has in fact 2n + m nodes.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>seed</strong> : int, optional</p>
-<blockquote>
-<div><p>The seed used for random number generation</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>seed</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">The seed used for random number generation</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
-<blockquote class="last">
-<div><p>The topology object</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">fnss.Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1020,16 +995,18 @@ Therefore, this topology has in fact 2n + m nodes.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>seed</strong> : int, optional</p>
-<blockquote>
-<div><p>The seed used for random number generation</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>seed</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">The seed used for random number generation</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
-<blockquote class="last">
-<div><p>The topology object</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">fnss.Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1044,16 +1021,18 @@ Therefore, this topology has in fact 2n + m nodes.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>seed</strong> : int, optional</p>
-<blockquote>
-<div><p>The seed used for random number generation</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>seed</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">The seed used for random number generation</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
-<blockquote class="last">
-<div><p>The topology object</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">fnss.Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1068,16 +1047,18 @@ Therefore, this topology has in fact 2n + m nodes.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>seed</strong> : int, optional</p>
-<blockquote>
-<div><p>The seed used for random number generation</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>seed</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">The seed used for random number generation</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
-<blockquote class="last">
-<div><p>The topology object</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">fnss.Topology</span></dt>
+<dd><p class="first last">The topology object</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1094,18 +1075,17 @@ node. To the routers with highest degree it is also attached a source node.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>asn</strong> : int</p>
-<blockquote>
-<div><p>AS number</p>
-</div></blockquote>
-<p><strong>source_ratio</strong> : float</p>
-<blockquote>
-<div><p>Ratio between number of source nodes (artificially attached) and routers</p>
-</div></blockquote>
-<p><strong>ext_delay</strong> : float</p>
-<blockquote class="last">
-<div><p>Delay on external nodes</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>asn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">AS number</p>
+</dd>
+<dt><strong>source_ratio</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio between number of source nodes (artificially attached) and routers</p>
+</dd>
+<dt><strong>ext_delay</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Delay on external nodes</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1137,7 +1117,7 @@ all content identifiers. This is needed for content placement.</p>
 <dl class="class">
 <dt id="icarus.scenarios.workload.StationaryWorkload">
 <em class="property">class </em><code class="descname">StationaryWorkload</code><span class="sig-paren">(</span><em>topology</em>, <em>n_contents</em>, <em>alpha</em>, <em>beta=0</em>, <em>rate=1.0</em>, <em>n_warmup=100000</em>, <em>n_measured=400000</em>, <em>seed=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/scenarios/workload.html#StationaryWorkload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.workload.StationaryWorkload" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This function generates events on the fly, i.e. instead of creating an
 event schedule to be kept in memory, returns an iterator that generates
 events when needed.</p>
@@ -1163,43 +1143,39 @@ beta where nodes with higher-degree PoPs have a higher request rate</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
-<blockquote>
-<div><p>The topology to which the workload refers</p>
-</div></blockquote>
-<p><strong>n_contents</strong> : int</p>
-<blockquote>
-<div><p>The number of content object</p>
-</div></blockquote>
-<p><strong>alpha</strong> : float</p>
-<blockquote>
-<div><p>The Zipf alpha parameter</p>
-</div></blockquote>
-<p><strong>beta</strong> : float, optional</p>
-<blockquote>
-<div><p>Parameter indicating</p>
-</div></blockquote>
-<p><strong>rate</strong> : float, optional</p>
-<blockquote>
-<div><p>The mean rate of requests per second</p>
-</div></blockquote>
-<p><strong>n_warmup</strong> : int, optional</p>
-<blockquote>
-<div><p>The number of warmup requests (i.e. requests executed to fill cache but
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">fnss.Topology</span></dt>
+<dd><p class="first last">The topology to which the workload refers</p>
+</dd>
+<dt><strong>n_contents</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of content object</p>
+</dd>
+<dt><strong>alpha</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The Zipf alpha parameter</p>
+</dd>
+<dt><strong>beta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Parameter indicating</p>
+</dd>
+<dt><strong>rate</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">The mean rate of requests per second</p>
+</dd>
+<dt><strong>n_warmup</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">The number of warmup requests (i.e. requests executed to fill cache but
 not logged)</p>
-</div></blockquote>
-<p><strong>n_measured</strong> : int, optional</p>
-<blockquote>
-<div><p>The number of logged requests after the warmup</p>
-</div></blockquote>
+</dd>
+<dt><strong>n_measured</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">The number of logged requests after the warmup</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>events</strong> : iterator</p>
-<blockquote class="last">
-<div><p>Iterator of events. Each event is a 2-tuple where the first element is
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>events</strong> <span class="classifier-delimiter">:</span> <span class="classifier">iterator</span></dt>
+<dd><p class="first last">Iterator of events. Each event is a 2-tuple where the first element is
 the timestamp at which the event occurs and the second element is a
 dictionary of event attributes.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1214,7 +1190,7 @@ dictionary of event attributes.</p>
 <dl class="class">
 <dt id="icarus.scenarios.workload.GlobetraffWorkload">
 <em class="property">class </em><code class="descname">GlobetraffWorkload</code><span class="sig-paren">(</span><em>topology</em>, <em>reqs_file</em>, <em>contents_file</em>, <em>beta=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/scenarios/workload.html#GlobetraffWorkload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.workload.GlobetraffWorkload" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Parse requests from GlobeTraff workload generator</p>
 <p>All requests are mapped to receivers uniformly unless a positive <em>beta</em>
 parameter is specified.</p>
@@ -1234,30 +1210,29 @@ beta where nodes with higher-degree PoPs have a higher request rate</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
-<blockquote>
-<div><p>The topology to which the workload refers</p>
-</div></blockquote>
-<p><strong>reqs_file</strong> : str</p>
-<blockquote>
-<div><p>The GlobeTraff request file</p>
-</div></blockquote>
-<p><strong>contents_file</strong> : str</p>
-<blockquote>
-<div><p>The GlobeTraff content file</p>
-</div></blockquote>
-<p><strong>beta</strong> : float, optional</p>
-<blockquote>
-<div><p>Spatial skewness of requests rates</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">fnss.Topology</span></dt>
+<dd><p class="first last">The topology to which the workload refers</p>
+</dd>
+<dt><strong>reqs_file</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The GlobeTraff request file</p>
+</dd>
+<dt><strong>contents_file</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The GlobeTraff content file</p>
+</dd>
+<dt><strong>beta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Spatial skewness of requests rates</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>events</strong> : iterator</p>
-<blockquote class="last">
-<div><p>Iterator of events. Each event is a 2-tuple where the first element is
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>events</strong> <span class="classifier-delimiter">:</span> <span class="classifier">iterator</span></dt>
+<dd><p class="first last">Iterator of events. Each event is a 2-tuple where the first element is
 the timestamp at which the event occurs and the second element is a
 dictionary of event attributes.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1272,7 +1247,7 @@ dictionary of event attributes.</p>
 <dl class="class">
 <dt id="icarus.scenarios.workload.TraceDrivenWorkload">
 <em class="property">class </em><code class="descname">TraceDrivenWorkload</code><span class="sig-paren">(</span><em>topology</em>, <em>reqs_file</em>, <em>contents_file</em>, <em>n_contents</em>, <em>n_warmup</em>, <em>n_measured</em>, <em>rate=1.0</em>, <em>beta=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/scenarios/workload.html#TraceDrivenWorkload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.workload.TraceDrivenWorkload" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Parse requests from a generic request trace.</p>
 <dl class="docutils">
 <dt>This workload requires two text files:</dt>
@@ -1303,47 +1278,42 @@ beta where nodes with higher-degree PoPs have a higher request rate</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>topology</strong> : fnss.Topology</p>
-<blockquote>
-<div><p>The topology to which the workload refers</p>
-</div></blockquote>
-<p><strong>reqs_file</strong> : str</p>
-<blockquote>
-<div><p>The path to the requests file</p>
-</div></blockquote>
-<p><strong>contents_file</strong> : str</p>
-<blockquote>
-<div><p>The path to the contents file</p>
-</div></blockquote>
-<p><strong>n_contents</strong> : int</p>
-<blockquote>
-<div><p>The number of content object (i.e. the number of lines of contents_file)</p>
-</div></blockquote>
-<p><strong>n_warmup</strong> : int</p>
-<blockquote>
-<div><p>The number of warmup requests (i.e. requests executed to fill cache but
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>topology</strong> <span class="classifier-delimiter">:</span> <span class="classifier">fnss.Topology</span></dt>
+<dd><p class="first last">The topology to which the workload refers</p>
+</dd>
+<dt><strong>reqs_file</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The path to the requests file</p>
+</dd>
+<dt><strong>contents_file</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The path to the contents file</p>
+</dd>
+<dt><strong>n_contents</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of content object (i.e. the number of lines of contents_file)</p>
+</dd>
+<dt><strong>n_warmup</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of warmup requests (i.e. requests executed to fill cache but
 not logged)</p>
-</div></blockquote>
-<p><strong>n_measured</strong> : int</p>
-<blockquote>
-<div><p>The number of logged requests after the warmup</p>
-</div></blockquote>
-<p><strong>rate</strong> : float, optional</p>
-<blockquote>
-<div><p>The network-wide mean rate of requests per second</p>
-</div></blockquote>
-<p><strong>beta</strong> : float, optional</p>
-<blockquote>
-<div><p>Spatial skewness of requests rates</p>
-</div></blockquote>
+</dd>
+<dt><strong>n_measured</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of logged requests after the warmup</p>
+</dd>
+<dt><strong>rate</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">The network-wide mean rate of requests per second</p>
+</dd>
+<dt><strong>beta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Spatial skewness of requests rates</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>events</strong> : iterator</p>
-<blockquote class="last">
-<div><p>Iterator of events. Each event is a 2-tuple where the first element is
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>events</strong> <span class="classifier-delimiter">:</span> <span class="classifier">iterator</span></dt>
+<dd><p class="first last">Iterator of events. Each event is a 2-tuple where the first element is
 the timestamp at which the event occurs and the second element is a
 dictionary of event attributes.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1358,7 +1328,7 @@ dictionary of event attributes.</p>
 <dl class="class">
 <dt id="icarus.scenarios.workload.YCSBWorkload">
 <em class="property">class </em><code class="descname">YCSBWorkload</code><span class="sig-paren">(</span><em>workload</em>, <em>n_contents</em>, <em>n_warmup</em>, <em>n_measured</em>, <em>alpha=0.99</em>, <em>seed=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/icarus/scenarios/workload.html#YCSBWorkload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#icarus.scenarios.workload.YCSBWorkload" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Yahoo! Cloud Serving Benchmark (YCSB)</p>
 <p>The YCSB is a set of reference workloads used to benchmark databases and,
 more generally any storage/caching systems. It comprises five workloads:</p>
@@ -1423,13 +1393,13 @@ most relevant for caching systems.</p>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.6.0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="icarus.html" >icarus package</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Icarus 0.7.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="icarus.html" >icarus package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
+        &#169; Copyright 2016, Lorenzo Saino, Ioannis Psaras.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
 </html>
