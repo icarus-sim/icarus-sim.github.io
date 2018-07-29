@@ -12,128 +12,110 @@ Icarus is not bound to any specific ICN architecture. Its design allows users
 to implement and evaluate new caching policies or caching and routing strategy
 with few lines of code.
 
+## Download and installation
+You can download the latest stable or development release in a zip or tar format using the links below.
 
-### Download
-You can download a stable release in a `zip` or `tar.gz` format using the links below.
+* **Stable (v0.7.0)** \[[zip](https://github.com/icarus-sim/icarus/archive/v0.7.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.7.0.tar.gz)\]
+* **Development** \[[zip](https://github.com/icarus-sim/icarus/archive/v0.7.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.7.0.tar.gz)\]
 
-**Latest version:**
+You can get a list of all releases [here](https://github.com/icarus-sim/icarus/releases).
 
- * Version 0.6.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.6.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.6.0.tar.gz)\]
+Alternatively you can get the latest development version by cloning the [icarus-sim/icarus](https://github.com/icarus-sim/icarus) Git repository.
 
-**Older versions:**
+To install Icarus you need Python installed on your machine with version 2.7.9+ or 3.4+.
+After downloading or cloning the repository, run from the main directory of Icarus:
 
- * Version 0.5.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.5.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.5.0.tar.gz)\]
- * Version 0.4.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.4.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.4.0.tar.gz)\]
- * Version 0.3.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.3.0.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.3.0.tar.gz)\]
- * Version 0.2.1: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.2.1.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.2.1.tar.gz)\]
- * Version 0.2.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.2.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.2.tar.gz)\]
- * Version 0.1.1: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.1.1.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.1.1.tar.gz)\]
- * Version 0.1.0: \[[zip](https://github.com/icarus-sim/icarus/archive/v0.1.zip)\] \[[tar.gz](https://github.com/icarus-sim/icarus/archive/v0.1.tar.gz)\]
+    $ make install
 
-You can also get the development branch from the Github repository using Git. Just open a shell, `cd` to the directory where you want to download the simulator and type:
+This downloads and installs all required dependencies and installs Icarus in _editable_ mode.
+This means that you can make changes directly on the source code to have effect on your installation.
 
-    $ git clone https://github.com/icarus-sim/icarus.git
+## Usage
+You can use Icarus in three different ways:
+ * Run simulations using models provided by Icarus
+ * Process and analyze results from those simulations
+ * Use Icarus modeling tools into your own code.
 
-### Installation
+You can a set of simulations by executing:
 
-#### Ubuntu 13.10+
-If you use Ubuntu (version 13.10+) you can run the script `ubuntusetup.sh`
-located in the `scripts` folder which will take of installing all the
-dependencies. To run it, executes the following commands
-
-    $ cd <YOUR ICARUS FOLDER>
-    $ sh scripts/ubuntusetup.sh
-
-The script, after being launched, will ask you for superuser password.
-
-Finally, it is advisable to add Icarus path to the `PYTHONPATH` environment variable. This makes it possible to launch Icarus from outside the Icarus root directory or call Icarus APIs from other programs:
-
-    $ cd <YOUR ICARUS FOLDER>
-    $ export PYTHONPATH=`pwd`:$PYTHONPATH
-
-Note however that setting the PYTHONPATH this way does not persist across reboots. To make it persist you should add the export instruction to a script that your machine executes at boot or login time, e.g. `.bashrc` (if you use Bash).
-
-#### Other operating systems
-If you have other operating systems, you can install all dependencies manually.
-
-Icarus dependencies are:
-
-* **Python interpreter (2.7.x)**: you can either download it
-  from the [Python website](http://www.python.org) or, possibly, from the package
-  manager of your operating system.
-* The following Python packages:
-   * **numpy** (version 1.6 onwards)
-   * **scipy** (version 0.12 onwards)
-   * **matplotlib** (version 1.2 onwards)
-   * **networkx** (version 1.6 onwards)
-   * **fnss** (version 0.5.1 onwards)
-
-All these packages can be installed using either [`easy_install`](http://pythonhosted.org/setuptools/easy_install.html) or [`pip`](http://www.pip-installer.org/en/latest/) utilities.
-
-If you use `pip` run:
-
-    $ pip install numpy scipy matplotlib networkx fnss
-
-If you use `easy_install` run:
-
-    $ easy_install numpy scipy matplotlib networkx fnss
-
-You may need to run `pip` or `easy_install` as superuser. The installation of these packages, especially `numpy` and `scipy` may also require to install additional libraries.
-
-#### Virtual machine
-You can also run Icarus within a virtual machine. [This repository](https://github.com/icarus-sim/icarus-vm) contains scripts and documentation to set up a virtual machine with Icarus and all its dependencies.
-
-
-### Usage
-
-#### Run simulations
-To use Icarus with the currently implemented topologies and models of caching policies and strategies you need to do the following.
-
-First, create a configuration file with all the desired parameters of your simulation. You can modify the file `config.py`, which is a well documented example configuration. You can even use the configuration file as it is just to get started. Alternatively, have a look at the `examples` folder which contains examples of configuration files for various uses.
-
-Second, run Icarus by running the script `icarus.py` using the following syntax
-
-    $ python icarus.py --results RESULTS_FILE CONF_FILE
+    $ icarus run --results <RESULTS_FILE> <CONF_FILE>
 
 where:
 
  * `RESULTS_FILE` is the [pickle](http://docs.python.org/3/library/pickle.html) file in which results will be saved,
- * `CONF_FILE` is the configuration file
+ * `CONF_FILE` is the configuration file describing the experiments to run.
 
-Example usage could be:
+To learn how to set up the configuration file, you may want to look at `config.py`
+and possibly modify it according to your requirements.
+Alternatively, you can look at the `examples` folder which
+contains examples of configuration files for various use cases.
 
-    $ python icarus.py --results results.pickle config.py
+Once simulations complete you can print the content of your results file into a
+human readable format, running:
 
-After saved results in pickle format you can extract results in a human readable format
-using the `printresults.py` script from the `scripts` folder. Example usage could be:
+    $ icarus results print <RESULTS_PICKLE_FILE> > <OUTPUT_TEXT_FILE>
 
-    $ python scripts/printresults.py results.pickle > results.txt
-
-Icarus also provides a set of helper functions for plotting results. Have a look at the `examples`
-folder for plot examples.
+Icarus also provides a set of helper functions for plotting results.
+Look at the [examples](https://github.com/icarus-sim/icarus/tree/master/examples) folder for plot examples.
 
 By executing the steps illustrated above it is possible to run simulations using the
-topologies, cache eviction policies, strategies and result collectors readily available on
+topologies, cache policies, strategies and result collectors readily available on
 Icarus. Icarus makes it easy to implement new models to use in simulations.
 
-To implement new models, please refer to the description of the simulator
-provided in this paper:
+To implement new models, please refer to the description of the simulator provided in this paper:
 
 L.Saino, I. Psaras and G. Pavlou, Icarus: a Caching Simulator for Information Centric
 Networking (ICN), in Proc. of SIMUTOOLS'14, Lisbon, Portugal, March 2014.
 \[[PDF](https://lorenzosaino.github.io/publications/icarus-simutools14.pdf)\],
 \[[Slides](https://lorenzosaino.github.io/publications/icarus-simutools14-slides.pdf)\],
-\[[BibTex](https://lorenzosaino.github.io/publications/icarus-simutools14.bib)\]
+\[[BibTex](https://lorenzosaino.github.io/publications/icarus-simutools14-bib.txt)\]
 
 Otherwise, please browse the source code. It is very well documented and easy to
 understand.
 
-#### Modeling tools
-Icarus provides utilities for modeling the performance of caches and
-work with traffic traces. The code is included in the `icarus.tools` package.
+Finally, Icarus provides utilities for modeling the performance of caches and
+work with traffic traces. The code is included in the [`icarus.tools`](http://icarus-sim.github.io/doc/apidoc/icarus.tools.html) package.
 These tools are described in detail in [this paper](https://lorenzosaino.github.io/publications/icarus-simutools14.pdf).
 
-### Documentation
+### Docker container
+This repository contains a Dockerfile that can be used to build a container running Icarus.
+You need Docker installed on your machine to do so.
+
+You can build a container image with Icarus running:
+
+	docker build [--build-arg py=<python-version>] -t icarus .
+
+where `python-version` is the version of Python you want to use, e.g. `3.6`.
+
+You can now spin a container giving you shell access, which you could use to
+poke around the container and explore the code by running:
+
+	docket run --rm -it icarus
+
+Finally you can run any Icarus command with:
+
+	docker run icarus <COMMAND>
+
+To run a simulation with Icarus it is advisable to mount in the container
+the directories where the config file is located and where you intend
+to store results and access them from the container.
+
+For example, to use config.py and store the result file in the root of the project
+you could run the container with the following command:
+
+	docker run -v `pwd`:/data icarus icarus run -r /data/results.pickle /data/config.py
+
+## Development
+Running `make install` creates a fully functional development environment.
+You can run all test cases with:
+
+    $ make test
+
+and build HTML documentation with:
+
+    $ make doc
+
+## Documentation
 If you desire further information about Icarus, you can find it in the following places:
 
  * In this ([pdf](https://lorenzosaino.github.io/publications/icarus-simutools14.pdf), [slides](https://lorenzosaino.github.io/publications/icarus-simutools14-slides.pdf)),
@@ -143,7 +125,7 @@ If you desire further information about Icarus, you can find it in the following
    and functions included in the Icarus simulator.
  * In the [source code](https://www.github.com/icarus-sim/icarus), which is well organized and thoroughly documented.
 
-### Citing
+## Citing
 If you use Icarus for your paper, please refer to the following publication:
 
     @inproceedings{icarus-simutools14,
@@ -158,7 +140,9 @@ If you use Icarus for your paper, please refer to the following publication:
        address = {ICST, Brussels, Belgium, Belgium},
     }
 
-### Reproduce hash-routing results
+## Reproduce results
+
+### Hash-routing [ACM ICN'13]
 The Icarus simulator can be used to reproduce the results and plot the graphs presented in the paper:
 
 L.Saino, I. Psaras and G. Pavlou, Hash-routing Schemes for Information Centric Networking,
@@ -168,14 +152,14 @@ in *Proc. of the 3rd ACM SIGCOMM workshop on Information Centric Networking (ICN
 
 All the code, data and documentation required is made available in the [icarus-sim/hashrouting-icn13-results](http://github.com/icarus-sim/hashrouting-icn13-results) repository.
 
-### Contacts
+## Contacts
 If you have any questions about Icarus, feel free to ask the mailing list
 [icarus@ee.ucl.ac.uk](mailto:icarus@ee.ucl.ac.uk).
 You can also [register to the mailing list](http://mailman.ee.ucl.ac.uk/mailman/listinfo/icarus)
 or [browse the archives](http://mailman.ee.ucl.ac.uk/pipermail/icarus/).
 
-### License
+## License
 Icarus is licensed under the terms of the [GNU GPLv2 license](http://www.gnu.org/licenses/gpl-2.0.html).
 
-### Acknowledgments
+## Acknowledgments
 This work received funding from the UK EPSRC, under grant agreement no. EP/K019589/1 ([COMIT project](http://www.ee.ucl.ac.uk/comit-project/)), the EU-Japan initiative, under EU FP7 grant agreement no. 608518 and NICT contract no. 167 ([GreenICN project](http://www.greenicn.org/)) and from the EU FP7 program, under grant agreements 318488 ([Flamingo Network of Excellence project](http://www.fp7-flamingo.eu/)).
